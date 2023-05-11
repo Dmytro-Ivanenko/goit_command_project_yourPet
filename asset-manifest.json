@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/css/main.f74381b1.css",
-    "main.js": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/main.72067cd1.js",
-    "static/js/755.8759c206.chunk.js": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/755.8759c206.chunk.js",
-    "index.html": "/Dmytro-Ivanenko/goit_command_project_yourPet/index.html",
-    "main.f74381b1.css.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/css/main.f74381b1.css.map",
-    "main.72067cd1.js.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/main.72067cd1.js.map",
-    "755.8759c206.chunk.js.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/755.8759c206.chunk.js.map"
+    "main.css": "/goit_command_project_yourPet/static/css/main.f74381b1.css",
+    "main.js": "/goit_command_project_yourPet/static/js/main.2c30eee6.js",
+    "static/js/755.8759c206.chunk.js": "/goit_command_project_yourPet/static/js/755.8759c206.chunk.js",
+    "index.html": "/goit_command_project_yourPet/index.html",
+    "main.f74381b1.css.map": "/goit_command_project_yourPet/static/css/main.f74381b1.css.map",
+    "main.2c30eee6.js.map": "/goit_command_project_yourPet/static/js/main.2c30eee6.js.map",
+    "755.8759c206.chunk.js.map": "/goit_command_project_yourPet/static/js/755.8759c206.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f74381b1.css",
-    "static/js/main.72067cd1.js"
+    "static/js/main.2c30eee6.js"
   ]
 }
