@@ -5,13 +5,14 @@ import { Routes, Route } from 'react-router-dom';
 // import PublicRoute from '';
 
 const SharedLayout = lazy(() => import('./components/SharedLayout/SharedLayout'));
+const MainPage = lazy(() => import('./pages/MainPage/MainPage'));
 //імпортуйте тут свої компоненти
 
 const UserRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<SharedLayout />}>
-                {/* <Route path="main" element={<MainPage />} /> */}
+                <Route index element={<MainPage />} />
                 {/* <Route path="news" element={<NewsPage />} /> */}
                 {/* <Route path="notices" element={<NoticesPage />}>
                     <Route path="sell" element={<NoticesCategoryList />} />
