@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/css/main.7acaea2f.css",
-    "main.js": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/main.07d3183d.js",
+    "main.css": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/css/main.c3d5249d.css",
+    "main.js": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/main.e64006c2.js",
     "index.html": "/Dmytro-Ivanenko/goit_command_project_yourPet/index.html",
-    "main.7acaea2f.css.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/main.07d3183d.js.map"
+    "main.c3d5249d.css.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/css/main.c3d5249d.css.map",
+    "main.e64006c2.js.map": "/Dmytro-Ivanenko/goit_command_project_yourPet/static/js/main.e64006c2.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.c3d5249d.css",
+    "static/js/main.e64006c2.js"
   ]
 }
