@@ -1,0 +1,75 @@
+.form {
+    position: relative;
+    width: 280px;
+    // margin-bottom: 20px;   Вертикальні марджини різні для різних сторінок
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 24px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.input {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 24px;
+
+    font-family: 'Inter';
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+
+    &::placeholder {
+        color: #888888;
+    }
+}
+
+.clearBtn {
+    position: absolute;
+    right: 46px;
+    top: 10px;
+
+    width: 24px;
+    height: 24px;
+    border: none;
+
+    line-height: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.clearBtnIcon {
+    stroke: red;
+}
+
+.submitBtn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    border: none;
+    line-height: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .form {
+        width: 608px;
+    }
+
+    .input {
+        padding: 10px 20px;
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .clearBtn {
+        right: 54px;
+    }
+
+    .submitBtn {
+        right: 20px;
+    }
+}
