@@ -13,7 +13,7 @@ const NoticesPage = lazy(() => import('pages/NoticesPage'));
 // const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
 // const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
 // const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
-// const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
+const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
 
 const UserRoutes = () => {
     return (
@@ -33,10 +33,10 @@ const UserRoutes = () => {
                 </Route> */}
 
                 <Route path="/notices" element={<NoticesPage />}>
-                    {/* <Route path="sell" element={<NoticesCategoriesList />} />
+                    <Route path="sell" element={<NoticesCategoriesList />} />
                     <Route path="lost-found" element={<NoticesCategoriesList />} />
                     <Route path="for-free" element={<NoticesCategoriesList />} />
-                    <Route element={<PrivateRoute />}>
+                    {/* <Route element={<PrivateRoute />}>
                         <Route path="favorite" element={<NoticesCategoriesList />} />
                         <Route path="own" element={<NoticesCategoriesList />} />
                     </Route> */}

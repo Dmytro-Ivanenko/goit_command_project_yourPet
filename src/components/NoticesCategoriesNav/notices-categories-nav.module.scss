@@ -1,0 +1,53 @@
+.wrapper {
+    width: 205px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: flex;
+    border: none;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 14px;
+
+    background-color: #cce4fb;
+    border-radius: 40px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+
+    letter-spacing: 0.04em;
+
+    color: #54adff;
+}
+
+.active {
+    background-color: #54adff;
+    color: #fef9f9;
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        width: 320px;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .wrapper {
+        width: 540px;
+        margin-bottom: 42px;
+    }
+}
