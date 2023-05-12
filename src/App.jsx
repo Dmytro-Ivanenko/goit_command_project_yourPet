@@ -1,7 +1,7 @@
 import React from 'react';
 
-import UserRoutes from './UserRoutes';
+import SharedLayout from 'components/SharedLayout/SharedLayout';
 
 export const App = () => {
-    return <UserRoutes />;
+    return <SharedLayout />;
 };

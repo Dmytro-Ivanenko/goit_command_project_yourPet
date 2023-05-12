@@ -1,31 +1,31 @@
 .container {
-  margin-left: auto;
-  margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 // Mobile
 @media screen and (max-width: 767px) {
-  .container {
-    max-width: 480px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+    .container {
+        max-width: 480px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 // Tablet
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
+    .container {
+        max-width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
 }
 
 // Desktop
-@media screen and (min-width: 1200px) {
-  .container {
-    max-width: 1200px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+@media screen and (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }
