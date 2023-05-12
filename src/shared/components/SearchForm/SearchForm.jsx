@@ -44,14 +44,15 @@ const SearchForm = ({ onSubmit }) => {
                 onChange={handleChange}
                 placeholder="Search"
             />
+
+            <button type="submit" className={query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn}>
+                <SearchIcon width={24} height={24} />
+            </button>
             {query && (
-                <button className={styles.clearBtn} onClick={handleClear}>
+                <button type="button" className={styles.clearBtn} onClick={handleClear}>
                     <CrossIcon className={styles.clearBtnIcon} width={24} height={24} />
                 </button>
             )}
-            <button type="submit" className={styles.submitBtn}>
-                <SearchIcon width={24} height={24} />
-            </button>
         </form>
     );
 };
