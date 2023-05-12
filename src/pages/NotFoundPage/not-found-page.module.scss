@@ -1,0 +1,43 @@
+.title {
+    color: #111111;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 130%;
+    text-align: center;
+}
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 248px;
+    height: 40px;
+    padding: 8px 28px;
+    gap: 12px;
+    background: #54adff;
+    border-radius: 40px;
+    color: #fef9f9;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+}
+
+.digit {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 381.004px;
+    line-height: 130%;
+    color: #54adff;
+}
+.digit_right {
+    transform: rotate(-11.34deg);
+}
+.digit_left {
+    transform: rotate(24.23deg);
+}
