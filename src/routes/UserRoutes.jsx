@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // import PublicRoute from 'routes/PublicRoute';
 // import PrivateRoute from 'routes/PrivateRoute';
-
+// const AddPetPage = lazy(() => import('../pages/AddPet/AddPetPage'));
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 // const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 // const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -14,6 +14,7 @@ const NoticesPage = lazy(() => import('pages/NoticesPage'));
 // const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
 // const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 // const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
+// const AddPetPage = lazy(() => import('../pages/AddPetPage/AddPetPage'));
 
 const UserRoutes = () => {
     return (
