@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import PageTitle from 'shared/components/PageTitle/PageTitle';
+import PageTitle from 'shared/components/PageTitle';
 import SearchForm from 'shared/components/SearchForm';
 
 import styles from './notices-page.module.scss';
