@@ -1,0 +1,167 @@
+.wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    background-color: transparent;
+}
+
+.openBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #c5dff6;
+    color: var(--main-acc);
+
+    &:hover {
+        color: #ffffff;
+        background: var(--gradient);
+    }
+
+    transition: all 200ms linear;
+}
+
+.openBtnLabel {
+    display: none;
+}
+
+.openBtnIcon {
+    stroke: currentColor;
+}
+
+.dropdownContainer {
+    margin-top: 50px;
+    padding: 8px;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+    box-shadow: var(--small-shadow);
+}
+
+.text {
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+
+    letter-spacing: 0.04em;
+
+    color: var(--main-acc);
+}
+
+.submenu {
+    width: 136px;
+    margin-bottom: 8px;
+    padding: 8px;
+    padding-right: 22px;
+    border-radius: 20px;
+    background-color: var(--main-light);
+}
+
+.filterBtn {
+    padding: 0;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--main-light);
+}
+
+.btnLabel {
+    font-family: 'Inter';
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+
+    color: var(--main-acc);
+}
+
+.form {
+    margin-top: 8px;
+    padding-left: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-family: 'Inter';
+
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+
+    color: var(--main-acc);
+}
+
+.input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+
+    display: grid;
+    place-content: center;
+
+    line-height: 0;
+
+    border-radius: 4px;
+    border: 2px solid var(--main-acc);
+
+    appearance: none;
+
+    &::before {
+        content: '';
+        width: 0.85em;
+        height: 0.85em;
+        transform: scale(0);
+
+        box-shadow: inset 1em 1em var(--main-acc);
+
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+
+    &:checked {
+        &::before {
+            transform: scale(1);
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .openBtn {
+        padding: 9px;
+        width: 152px;
+        border: 2px solid var(--main-acc);
+        border-radius: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        background-color: transparent;
+    }
+
+    .openBtnLabel {
+        display: block;
+    }
+}
