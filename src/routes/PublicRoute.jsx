@@ -6,15 +6,7 @@ const PublicRoute = () => {
 
     if (!isLoggedIn && token) {
         return (
-            <div
-                sx={{
-                    height: 'calc(100vh - 144px)',
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
+            <div>
                 <p>Loading...</p>
             </div>
         );
