@@ -1,12 +1,17 @@
 {
   "files": {
     "main.css": "/goit_command_project_yourPet/static/css/main.d10768f8.css",
-    "main.js": "/goit_command_project_yourPet/static/js/main.824185b2.js",
-    "static/js/852.6e9b8636.chunk.js": "/goit_command_project_yourPet/static/js/852.6e9b8636.chunk.js",
-    "static/css/907.a0e8a04d.chunk.css": "/goit_command_project_yourPet/static/css/907.a0e8a04d.chunk.css",
-    "static/js/907.f6f1fd1a.chunk.js": "/goit_command_project_yourPet/static/js/907.f6f1fd1a.chunk.js",
+    "main.js": "/goit_command_project_yourPet/static/js/main.b6250356.js",
+    "static/js/852.c612a39c.chunk.js": "/goit_command_project_yourPet/static/js/852.c612a39c.chunk.js",
+    "static/css/524.4268f5be.chunk.css": "/goit_command_project_yourPet/static/css/524.4268f5be.chunk.css",
+    "static/js/524.5417fa0a.chunk.js": "/goit_command_project_yourPet/static/js/524.5417fa0a.chunk.js",
+    "static/css/173.bf5217e7.chunk.css": "/goit_command_project_yourPet/static/css/173.bf5217e7.chunk.css",
+    "static/js/173.2b71334e.chunk.js": "/goit_command_project_yourPet/static/js/173.2b71334e.chunk.js",
+    "static/css/972.059e90ac.chunk.css": "/goit_command_project_yourPet/static/css/972.059e90ac.chunk.css",
+    "static/js/972.64bdda4a.chunk.js": "/goit_command_project_yourPet/static/js/972.64bdda4a.chunk.js",
     "static/css/703.5608ca5a.chunk.css": "/goit_command_project_yourPet/static/css/703.5608ca5a.chunk.css",
-    "static/js/703.1fb83ea6.chunk.js": "/goit_command_project_yourPet/static/js/703.1fb83ea6.chunk.js",
+    "static/js/703.c5f5a156.chunk.js": "/goit_command_project_yourPet/static/js/703.c5f5a156.chunk.js",
+    "static/js/586.f5cf6a89.chunk.js": "/goit_command_project_yourPet/static/js/586.f5cf6a89.chunk.js",
     "static/media/inter-all-400-normal.woff": "/goit_command_project_yourPet/static/media/inter-all-400-normal.8c804432e8c67741aac0.woff",
     "static/media/manrope-all-700-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-700-normal.d91e7f04fb9989b48d7d.woff",
     "static/media/manrope-all-600-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-600-normal.286bddfb4929556d954f.woff",
@@ -58,15 +63,20 @@
     "static/media/filters.svg": "/goit_command_project_yourPet/static/media/filters.369194da951b5c53677e7c7934f25e57.svg",
     "static/media/cross-small.svg": "/goit_command_project_yourPet/static/media/cross-small.b4fa34af66444619d3ef2189b3a17546.svg",
     "main.d10768f8.css.map": "/goit_command_project_yourPet/static/css/main.d10768f8.css.map",
-    "main.824185b2.js.map": "/goit_command_project_yourPet/static/js/main.824185b2.js.map",
-    "852.6e9b8636.chunk.js.map": "/goit_command_project_yourPet/static/js/852.6e9b8636.chunk.js.map",
-    "907.a0e8a04d.chunk.css.map": "/goit_command_project_yourPet/static/css/907.a0e8a04d.chunk.css.map",
-    "907.f6f1fd1a.chunk.js.map": "/goit_command_project_yourPet/static/js/907.f6f1fd1a.chunk.js.map",
+    "main.b6250356.js.map": "/goit_command_project_yourPet/static/js/main.b6250356.js.map",
+    "852.c612a39c.chunk.js.map": "/goit_command_project_yourPet/static/js/852.c612a39c.chunk.js.map",
+    "524.4268f5be.chunk.css.map": "/goit_command_project_yourPet/static/css/524.4268f5be.chunk.css.map",
+    "524.5417fa0a.chunk.js.map": "/goit_command_project_yourPet/static/js/524.5417fa0a.chunk.js.map",
+    "173.bf5217e7.chunk.css.map": "/goit_command_project_yourPet/static/css/173.bf5217e7.chunk.css.map",
+    "173.2b71334e.chunk.js.map": "/goit_command_project_yourPet/static/js/173.2b71334e.chunk.js.map",
+    "972.059e90ac.chunk.css.map": "/goit_command_project_yourPet/static/css/972.059e90ac.chunk.css.map",
+    "972.64bdda4a.chunk.js.map": "/goit_command_project_yourPet/static/js/972.64bdda4a.chunk.js.map",
     "703.5608ca5a.chunk.css.map": "/goit_command_project_yourPet/static/css/703.5608ca5a.chunk.css.map",
-    "703.1fb83ea6.chunk.js.map": "/goit_command_project_yourPet/static/js/703.1fb83ea6.chunk.js.map"
+    "703.c5f5a156.chunk.js.map": "/goit_command_project_yourPet/static/js/703.c5f5a156.chunk.js.map",
+    "586.f5cf6a89.chunk.js.map": "/goit_command_project_yourPet/static/js/586.f5cf6a89.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d10768f8.css",
-    "static/js/main.824185b2.js"
+    "static/js/main.b6250356.js"
   ]
 }
