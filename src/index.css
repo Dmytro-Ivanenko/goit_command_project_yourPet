@@ -1,0 +1,38 @@
+@import '~modern-normalize/modern-normalize.css';
+:root {
+  --header-acc: #ffc107;
+  --header-font: #111111;
+  --main-back: #fef9f9;
+  --main-light: #cce4fb;
+  --main-acc: #54adff;
+  --grey-font: #888888;
+  --bad-validation: #f43f5e;
+  --good-validation: #00c3ad;
+  --gradient: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+  --small-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  --big-shadow: 7px 13px 14px rgba(116, 177, 232, 0.24);
+}
+
+body {
+  font-family: "Manrope";
+  background-color: var(--main-back);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}/*# sourceMappingURL=index.css.map */

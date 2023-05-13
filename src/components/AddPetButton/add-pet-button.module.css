@@ -1,0 +1,59 @@
+.button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  z-index: 90;
+  right: 0;
+  bottom: -240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--main-acc);
+}
+.button:hover {
+  background: var(--gradient);
+}
+
+.iconBig {
+  stroke: #ffffff;
+}
+
+.iconSmall {
+  display: none;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    width: 129px;
+    height: auto;
+    padding: 8px 15px;
+    border-radius: 40px;
+    position: static;
+    flex-direction: row;
+    gap: 8px;
+  }
+  .iconBig {
+    display: none;
+  }
+  .iconSmall {
+    stroke: #ffffff;
+    display: block;
+  }
+  .label {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+  }
+}/*# sourceMappingURL=add-pet-button.module.css.map */

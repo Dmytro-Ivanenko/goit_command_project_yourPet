@@ -1,15 +1,20 @@
 import React from 'react';
 
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
+import ResponsiveAppBar from 'components/AppBar/AppBar';
 import styles from './sharedLayout.module.scss';
 import UserRoutes from 'routes/UserRoutes';
 
 const SharedLayout = () => {
     return (
-        <div className={styles.container}>
-            <Header />
-            <UserRoutes />
-        </div>
+        <>
+            <ResponsiveAppBar/>
+            <div className={styles.container}>
+                {/* <Header /> */}
+                <UserRoutes />
+            </div>
+        </>
+       
     );
 };
 

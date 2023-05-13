@@ -1,0 +1,18 @@
+.list {
+  width: 100%;
+  margin-bottom: 60px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    -moz-column-gap: 32px;
+         column-gap: 32px;
+  }
+}/*# sourceMappingURL=notices-categories-list.module.css.map */
