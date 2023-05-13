@@ -1,10 +1,18 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/operations';
 
 import Header from '../Header/Header';
 import styles from './sharedLayout.module.scss';
 import UserRoutes from 'routes/UserRoutes';
 
 const SharedLayout = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(refreshUser());
+    }, [dispatch]);
+
     return (
         <div className={styles.container}>
             <Header />

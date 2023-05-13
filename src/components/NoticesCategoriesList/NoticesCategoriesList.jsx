@@ -25,7 +25,6 @@ const NoticesCategoriesList = () => {
     useEffect(() => {
         const path = pathname.split('/');
         const category = path[path.length - 1];
-        // console.log(category);
 
         // ======  EXAMPLE GET REQUEST DEPENDING ON CATEGORY ====== //
         // const notices = axios.get('/api/pets', {
@@ -46,7 +45,11 @@ const NoticesCategoriesList = () => {
             }
         };
 
-        setItems(notices());
+        if (notices().length !== 0) {
+            setItems(notices());
+        } else {
+            return;
+        }
 
         const endOffset = itemOffset + PER_PAGE;
         console.log(`Loading items from ${itemOffset} to ${endOffset}`);

@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import PublicRoute from 'routes/PublicRoute';
-// import PrivateRoute from 'routes/PrivateRoute';
+import PrivateRoute from 'routes/PrivateRoute';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
@@ -36,10 +36,10 @@ const UserRoutes = () => {
                     <Route path="sell" element={<NoticesCategoriesList />} />
                     <Route path="lost-found" element={<NoticesCategoriesList />} />
                     <Route path="for-free" element={<NoticesCategoriesList />} />
-                    {/* <Route element={<PrivateRoute />}>
+                    <Route element={<PrivateRoute />}>
                         <Route path="favorite" element={<NoticesCategoriesList />} />
                         <Route path="own" element={<NoticesCategoriesList />} />
-                    </Route> */}
+                    </Route>
                 </Route>
 
                 {/* <Route path="*" element={<NotFoundPage />} /> */}

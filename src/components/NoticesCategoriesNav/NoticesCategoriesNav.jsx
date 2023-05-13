@@ -1,8 +1,10 @@
-// import { useSelector } from 'react-redux';
-// import { selectIsLoggedIn } from 'redux/auth/auth-selectors';
 import { useLocation, Link } from 'react-router-dom';
+
 import categories from './categories';
+import { useAuth } from 'shared/hooks/useAuth';
 import styles from './notices-categories-nav.module.scss';
+
+const { publicCategories, privateCategories } = categories;
 
 const getFullName = (location, category) => {
     const res = category === location ? `${styles.button} ${styles.active}` : styles.button;
@@ -10,11 +12,8 @@ const getFullName = (location, category) => {
     return res;
 };
 
-// const { publicCategories, privateCategories } = categories;
-const { publicCategories } = categories;
-
 const NoticesCategoriesNav = () => {
-    // const { isLoggedIn } = useSelector(selectIsLoggedIn);
+    const { isLoggedIn } = useAuth();
     const { pathname } = useLocation();
 
     return (
@@ -28,17 +27,17 @@ const NoticesCategoriesNav = () => {
                     </li>
                 ))}
             </ul>
-            {/* {isLoggedIn && (
-        <ul className={styles.list}>
-          {privateCategories.map(({ to, text }) => (
-            <li key={to}>
-              <Link to={to} className={getFullName(pathname, to)}>
-                {text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )} */}
+            {isLoggedIn && (
+                <ul className={styles.list}>
+                    {privateCategories.map(({ to, text }) => (
+                        <li key={to}>
+                            <Link to={to} className={getFullName(pathname, to)}>
+                                {text}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
