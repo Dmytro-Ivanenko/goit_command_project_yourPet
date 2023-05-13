@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logIn } from 'redux/auth/operations';
@@ -5,9 +6,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from './Yup';
 
+// Icons
+import { ReactComponent as EyeOpen } from 'images/icons/eye-open.svg';
+import { ReactComponent as EyeClosed } from 'images/icons/eye-closed.svg';
+
 import styles from './LoginForm.module.scss';
 
 const LoginForm = () => {
+    const [showPassword, setShowPassword] = useState(false); // стан для показу / приховування пароля
+
     const dispatch = useDispatch();
     const {
         register,
@@ -24,21 +31,41 @@ const LoginForm = () => {
 
     return (
         <div>
-            <h2>Login</h2>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                <label>
-                    <input placeholder="Email" {...register('email')} />
-                    {errors.email && <p className={styles.errorsMassage}>{errors.email.message}</p>}
-                </label>
-                <label>
-                    <input placeholder="Password" {...register('password')} />
-                    {errors.password && <p className={styles.errorsMassage}>{errors.password.message}</p>}
-                </label>
+            <h2 className={styles.formTitle}>Login</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className={styles.formLabelConteiner}>
+                    <label className={styles.formLabel}>
+                        <input className={styles.formInput} placeholder="Email" {...register('email')} type="email" />
+                        {errors.email && <p className={styles.errorsMassage}>{errors.email.message}</p>}
+                    </label>
+                    <label className={styles.formLabel}>
+                        <div className={styles.formLabelPasswordConteiner}>
+                            <input
+                                className={styles.formInput}
+                                placeholder="Password"
+                                {...register('password')}
+                                type={showPassword ? 'text' : 'password'} // Встановлюємо тип як "password" або "text", залежно від стану
+                            />
+                            <button
+                                className={styles.showPasswordButton}
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? (
+                                    <EyeClosed className={styles.passwordIcon} />
+                                ) : (
+                                    <EyeOpen className={styles.passwordIcon} />
+                                )}
+                            </button>
+                        </div>
+                        {errors.password && <p className={styles.errorsMassage}>{errors.password.message}</p>}
+                    </label>
+                </div>
                 <button className={styles.authBtn} type="submit">
                     Login
                 </button>
                 <p className={styles.authScreenNavigation}>
-                    Don`t have an account?{' '}
+                    Don't have an account?&nbsp;
                     <NavLink to="/register" className={styles.authScreenNavigationLink}>
                         Register
                     </NavLink>

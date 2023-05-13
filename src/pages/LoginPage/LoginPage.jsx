@@ -5,9 +5,7 @@ import styles from './LoginPage.module.scss';
 const LoginPage = () => {
     return (
         <div className={styles.container}>
-            <div className={styles.subContainer}>
-                <LoginForm />
-            </div>
+            <LoginForm />
         </div>
     );
 };

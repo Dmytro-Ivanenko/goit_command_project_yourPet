@@ -1,18 +1,13 @@
 .container {
-    // position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.subContainer {
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     width: 608px;
     height: 481px;
-    background-color: rgb(20, 187, 120);
+    background-color: #fff;
+    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
     border-radius: 40px;
     padding: 60px 75px;
 }
