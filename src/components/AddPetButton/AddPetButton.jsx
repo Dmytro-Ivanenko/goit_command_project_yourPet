@@ -17,8 +17,6 @@ const AddPetButton = () => {
             // unauthorized notification
             console.log('unauthorized');
         }
-
-        navigate('/add-pet');
     };
 
     return (
