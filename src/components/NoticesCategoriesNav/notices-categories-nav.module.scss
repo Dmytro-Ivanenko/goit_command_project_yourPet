@@ -21,7 +21,7 @@
     align-items: center;
     padding: 8px 14px;
 
-    background-color: #cce4fb;
+    background-color: var(--main-light);
     border-radius: 40px;
 
     font-weight: 500;
@@ -30,12 +30,12 @@
 
     letter-spacing: 0.04em;
 
-    color: #54adff;
+    color: var(--main-acc);
 }
 
 .active {
-    background-color: #54adff;
-    color: #fef9f9;
+    background-color: var(--main-acc);
+    color: var(--main-back);
 }
 
 @media screen and (min-width: 768px) {
