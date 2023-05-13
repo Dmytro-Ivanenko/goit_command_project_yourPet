@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/goit_command_project_yourPet/static/css/main.d10768f8.css",
-    "main.js": "/goit_command_project_yourPet/static/js/main.4980a87b.js",
+    "main.js": "/goit_command_project_yourPet/static/js/main.824185b2.js",
     "static/js/852.6e9b8636.chunk.js": "/goit_command_project_yourPet/static/js/852.6e9b8636.chunk.js",
-    "static/css/907.048d47c0.chunk.css": "/goit_command_project_yourPet/static/css/907.048d47c0.chunk.css",
+    "static/css/907.a0e8a04d.chunk.css": "/goit_command_project_yourPet/static/css/907.a0e8a04d.chunk.css",
     "static/js/907.f6f1fd1a.chunk.js": "/goit_command_project_yourPet/static/js/907.f6f1fd1a.chunk.js",
-    "static/css/703.51ced37f.chunk.css": "/goit_command_project_yourPet/static/css/703.51ced37f.chunk.css",
+    "static/css/703.5608ca5a.chunk.css": "/goit_command_project_yourPet/static/css/703.5608ca5a.chunk.css",
     "static/js/703.1fb83ea6.chunk.js": "/goit_command_project_yourPet/static/js/703.1fb83ea6.chunk.js",
     "static/media/inter-all-400-normal.woff": "/goit_command_project_yourPet/static/media/inter-all-400-normal.8c804432e8c67741aac0.woff",
     "static/media/manrope-all-700-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-700-normal.d91e7f04fb9989b48d7d.woff",
@@ -58,15 +58,15 @@
     "static/media/filters.svg": "/goit_command_project_yourPet/static/media/filters.369194da951b5c53677e7c7934f25e57.svg",
     "static/media/cross-small.svg": "/goit_command_project_yourPet/static/media/cross-small.b4fa34af66444619d3ef2189b3a17546.svg",
     "main.d10768f8.css.map": "/goit_command_project_yourPet/static/css/main.d10768f8.css.map",
-    "main.4980a87b.js.map": "/goit_command_project_yourPet/static/js/main.4980a87b.js.map",
+    "main.824185b2.js.map": "/goit_command_project_yourPet/static/js/main.824185b2.js.map",
     "852.6e9b8636.chunk.js.map": "/goit_command_project_yourPet/static/js/852.6e9b8636.chunk.js.map",
-    "907.048d47c0.chunk.css.map": "/goit_command_project_yourPet/static/css/907.048d47c0.chunk.css.map",
+    "907.a0e8a04d.chunk.css.map": "/goit_command_project_yourPet/static/css/907.a0e8a04d.chunk.css.map",
     "907.f6f1fd1a.chunk.js.map": "/goit_command_project_yourPet/static/js/907.f6f1fd1a.chunk.js.map",
-    "703.51ced37f.chunk.css.map": "/goit_command_project_yourPet/static/css/703.51ced37f.chunk.css.map",
+    "703.5608ca5a.chunk.css.map": "/goit_command_project_yourPet/static/css/703.5608ca5a.chunk.css.map",
     "703.1fb83ea6.chunk.js.map": "/goit_command_project_yourPet/static/js/703.1fb83ea6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d10768f8.css",
-    "static/js/main.4980a87b.js"
+    "static/js/main.824185b2.js"
   ]
 }
