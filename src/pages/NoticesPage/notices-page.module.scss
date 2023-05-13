@@ -3,11 +3,29 @@
 }
 
 .controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonWrapper {
     position: relative;
+    height: 40px;
+}
+
+@media screen and (max-width: 767px) {
+    .controls {
+        width: 280px;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (min-width: 768px) {
     .formWrapper {
         margin-bottom: 40px;
+    }
+
+    .buttonWrapper {
+        display: flex;
+        gap: 12px;
     }
 }

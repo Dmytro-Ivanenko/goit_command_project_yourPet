@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import PageTitle from 'shared/components/PageTitle';
 import SearchForm from 'shared/components/SearchForm';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav';
-import NoticesFilters from 'components/NoticesFilters/NoticesFilters';
+import NoticesFilters from 'components/NoticesFilters';
+import AddPetButton from 'components/AddPetButton';
 
 import styles from './notices-page.module.scss';
 
@@ -16,7 +17,10 @@ const NoticesPage = () => {
             </div>
             <div className={styles.controls}>
                 <NoticesCategoriesNav />
-                <NoticesFilters />
+                <div className={styles.buttonWrapper}>
+                    <NoticesFilters />
+                    <AddPetButton />
+                </div>
             </div>
             <Outlet />
         </div>

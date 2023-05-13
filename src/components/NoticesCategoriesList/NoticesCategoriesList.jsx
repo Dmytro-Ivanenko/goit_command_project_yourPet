@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 // import axios from 'axios';
 
 import NoticesCategoryItem from './NoticesCategoryItem/NoticesCategoryItem';
+import NoticesPagination from 'components/NoticesPagination';
 
 // EXAMPLE DATA TO EMULATE BACKEND //
 import itemsSell from './itemsSell';
@@ -12,9 +13,14 @@ import itemsLostFound from './itemsLostFound';
 
 import styles from './notices-categories-list.module.scss';
 
+const PER_PAGE = 4;
+
 const NoticesCategoriesList = () => {
-    const { pathname } = useLocation();
     const [items, setItems] = useState([]);
+    const [currentItems, setCurrentItems] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);
+    const { pathname } = useLocation();
 
     useEffect(() => {
         const path = pathname.split('/');
@@ -41,14 +47,27 @@ const NoticesCategoriesList = () => {
         };
 
         setItems(notices());
-    }, [pathname]);
+
+        const endOffset = itemOffset + PER_PAGE;
+        console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        setCurrentItems(items.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(items.length / PER_PAGE));
+    }, [itemOffset, items, pathname]);
+
+    const handlePageClick = e => {
+        const newOffset = (e.selected * PER_PAGE) % items.length;
+        setItemOffset(newOffset);
+    };
 
     return (
-        <ul className={styles.list}>
-            {items.map(item => (
-                <NoticesCategoryItem item={item} key={item.id} />
-            ))}
-        </ul>
+        <>
+            <ul className={styles.list}>
+                {currentItems.map(item => (
+                    <NoticesCategoryItem item={item} key={item.id} />
+                ))}
+            </ul>
+            <NoticesPagination handlePageClick={handlePageClick} pageCount={pageCount} />
+        </>
     );
 };
 
