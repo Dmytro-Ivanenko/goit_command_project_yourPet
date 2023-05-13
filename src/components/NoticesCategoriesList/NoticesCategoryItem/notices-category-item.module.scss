@@ -90,6 +90,16 @@
     gap: 4px;
     background-color: var(--main-light);
     border-radius: 16px;
+    color: var(--main-acc);
+
+    &:hover {
+        background-color: var(--main-acc);
+        color: var(--main-light);
+    }
+}
+
+.icon {
+    stroke: currentColor;
 }
 
 .label {
@@ -100,6 +110,10 @@
     letter-spacing: 0.04em;
 
     color: var(--header-font);
+
+    .lowerBlockItem:hover & {
+        color: var(--main-light);
+    }
 }
 
 .title {
@@ -132,7 +146,7 @@
     background-color: transparent;
 
     &:hover {
-        background-color: var(--main-acc);
+        background: var(--gradient);
         color: var(--main-back);
 
         & .btnLearnIcon {
