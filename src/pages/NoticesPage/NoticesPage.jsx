@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import PageTitle from 'shared/components/PageTitle';
 import SearchForm from 'shared/components/SearchForm';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav';
-import NoticesFilters from 'components/NoticesFilters/NoticesFilters';
+import NoticesFilters from 'components/NoticesFilters';
 
 import styles from './notices-page.module.scss';
 
