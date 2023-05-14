@@ -10,7 +10,7 @@ import styles from './notices-page.module.scss';
 
 const NoticesPage = () => {
     return (
-        <div>
+        <div className={styles.container}>
             <PageTitle text={'Find your favorite pet'} />
             <div className={styles.formWrapper}>
                 <SearchForm />
