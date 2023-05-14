@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from 'shared/hooks/useAuth';
 // import axios from 'axios';
 
-import NoticesCategoryItem from './NoticesCategoryItem/NoticesCategoryItem';
+import NoticesCategoryItem from './NoticesCategoryItem';
 import NoticesPagination from 'components/NoticesPagination';
+import ModalContainer from 'shared/components/ModalContainer';
+import ModalNotice from 'components/ModalNotice';
 
 // EXAMPLE DATA TO EMULATE BACKEND //
 import itemsSell from './itemsSell';
@@ -20,6 +23,9 @@ const NoticesCategoriesList = () => {
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isLoggedIn } = useAuth();
+
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -62,14 +68,29 @@ const NoticesCategoriesList = () => {
         setItemOffset(newOffset);
     };
 
+    const handleModal = () => {
+        if (!isLoggedIn) {
+            // Unauthorized notification
+            console.log('unathorized');
+            return;
+        }
+
+        setIsModalOpen(prevState => !prevState);
+    };
+
     return (
         <>
             <ul className={styles.list}>
                 {currentItems.map(item => (
-                    <NoticesCategoryItem item={item} key={item.id} />
+                    <NoticesCategoryItem key={item.id} item={item} openModal={handleModal} />
                 ))}
             </ul>
             <NoticesPagination handlePageClick={onPageClick} pageCount={pageCount} />
+            {isModalOpen && (
+                <ModalContainer onClose={handleModal}>
+                    <ModalNotice />
+                </ModalContainer>
+            )}
         </>
     );
 };
