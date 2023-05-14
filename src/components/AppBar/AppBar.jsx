@@ -22,9 +22,9 @@ const pages = [
     { name: 'News', path: '/news' },
     { name: 'Notice', path: '/notices' },
     { name: 'Our Friends', path: '/friends' },
-    { name: 'Login', path: '/login' },
-    { name: 'Registration', path: '/register' },
-    { name: 'UserName', path: '/user' },
+    // { name: 'Log IN', path: '/login' },
+    // { name: 'Registration', path: '/register' },
+    // { name: 'UserName', path: '/user' },
 ];
 
 const settings = ['Profile', 'Logout'];
@@ -35,7 +35,7 @@ function ResponsiveAppBar() {
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
 
-    
+
 
     const padding = {
         desktop: '16px',
@@ -114,8 +114,12 @@ function ResponsiveAppBar() {
                         {pages.map(({ name, path }) => (
                             <Button
                                 key={name}
-                                onClick={()=>handleCloseNavMenu(name)}
-                                sx={{ my: 2, color: isActiveButton===name ? "var(--header-acc)" : "var(--header-font)", display: 'block' }}
+                                onClick={() => handleCloseNavMenu(name)}
+                                sx={{
+                                    my: 2, color: isActiveButton === name ?
+                                    "var(--header-acc)" : "var(--header-font)",
+                                    display: 'block'
+                                }}
                                 component={NavLink}
                                 to={path}
                             >
@@ -184,7 +188,14 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map(({ name, path }) => (
-                                <MenuItem key={name} onClick={handleCloseNavMenu} component={NavLink} to={path}>
+                                <MenuItem key={name}
+                                    onClick={() => handleCloseNavMenu(name)}
+                                    sx={{
+                                        my: 2, color: isActiveButton === name ?
+                                            "var(--header-acc)" : "var(--header-font)",
+                                        display: 'block'
+                                    }}
+                                    component={NavLink} to={path}>
                                     <Typography textAlign="center">{name}</Typography>
                                 </MenuItem>
                             ))}
