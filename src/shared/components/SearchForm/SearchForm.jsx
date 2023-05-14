@@ -26,13 +26,15 @@ const SearchForm = ({ onSubmit }) => {
     };
 
     const handleSubmit = e => {
+        e.preventDefault();
+
         if (state.query.trim() === '') {
             // Notification for empty string
+            console.log('empty');
             setState({ ...initialState });
             return;
         }
 
-        e.preventDefault();
         onSubmit({ ...state });
         setState({ ...initialState });
     };
