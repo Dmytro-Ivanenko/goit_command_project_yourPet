@@ -7,7 +7,7 @@ import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 
 import styles from './notices-category-item.module.scss';
 
-const NoticesCategoryItem = ({ item }) => {
+const NoticesCategoryItem = ({ item, openModal }) => {
     const { category, location, age, sex, title, favorite, image } = item;
 
     return (
@@ -40,7 +40,7 @@ const NoticesCategoryItem = ({ item }) => {
                 </ul>
             </div>
             <h4 className={styles.title}>{title}</h4>
-            <button type="button" className={styles.btnLearn}>
+            <button type="button" className={styles.btnLearn} onClick={openModal}>
                 <span className={styles.btnLearnText}>Learn More</span>
                 <PawprintIcon className={styles.btnLearnIcon} width={24} height={24} />
             </button>
