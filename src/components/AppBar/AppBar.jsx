@@ -9,22 +9,23 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { ReactComponent as Logo } from "../../images/icons/logo.svg";
-import {ReactComponent as User} from "../../images/icons/user.svg";
+import { ReactComponent as Logo } from '../../images/icons/logo.svg';
+import { ReactComponent as User } from '../../images/icons/user.svg';
 
 const pages = [
     { name: 'News', path: '/news' },
     { name: 'Notice', path: '/notices' },
     { name: 'Our Friends', path: '/friends' },
-    { name: "Login", path: "/login" },
+    { name: 'Login', path: '/login' },
     { name: 'Registration', path: '/register' },
-    { name: "UserName", path: '/user' }];
+    { name: 'UserName', path: '/user' },
+];
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -40,21 +41,18 @@ function ResponsiveAppBar() {
         mobile: '20px',
     };
 
-
-
     const containerStyles = {
-        padding: isMobileScreen ? padding.mobile :
-            isTabletScreen ? padding.tablet : padding.desktop,
+        padding: isMobileScreen ? padding.mobile : isTabletScreen ? padding.tablet : padding.desktop,
         // add other styles based on screen width
     };
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
+    const handleOpenUserMenu = event => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -108,7 +106,7 @@ function ResponsiveAppBar() {
                     </Typography>
 
                     {/* Main menu */}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '40px', }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '40px' }}>
                         {pages.map(({ name, path }) => (
                             <Button
                                 key={name}
@@ -125,7 +123,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <User alt="Remy Sharp"/>
+                                <User alt="Remy Sharp" />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -144,7 +142,7 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            {settings.map(setting => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
@@ -161,7 +159,7 @@ function ResponsiveAppBar() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            < MenuIcon style={{ color: "var(--header-acc)" }} />
+                            <MenuIcon style={{ color: 'var(--header-acc)' }} />
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -182,10 +180,7 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map(({ name, path }) => (
-                                <MenuItem key={name}
-                                    onClick={handleCloseNavMenu}
-                                    component={NavLink}
-                                    to={path}>
+                                <MenuItem key={name} onClick={handleCloseNavMenu} component={NavLink} to={path}>
                                     <Typography textAlign="center">{name}</Typography>
                                 </MenuItem>
                             ))}
@@ -194,8 +189,6 @@ function ResponsiveAppBar() {
                 </Toolbar>
             </Container>
         </AppBar>
-
     );
 }
 export default ResponsiveAppBar;
-
