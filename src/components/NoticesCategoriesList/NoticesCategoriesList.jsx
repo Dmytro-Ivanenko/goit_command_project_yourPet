@@ -4,7 +4,7 @@ import { useAuth } from 'shared/hooks/useAuth';
 // import axios from 'axios';
 
 import NoticesCategoryItem from './NoticesCategoryItem';
-import NoticesPagination from 'components/NoticesPagination';
+import Pagination from 'shared/components/Pagination';
 import ModalContainer from 'shared/components/ModalContainer';
 import ModalNotice from 'components/ModalNotice';
 
@@ -85,7 +85,7 @@ const NoticesCategoriesList = () => {
                     <NoticesCategoryItem key={item.id} item={item} openModal={handleModal} />
                 ))}
             </ul>
-            <NoticesPagination handlePageClick={onPageClick} pageCount={pageCount} />
+            <Pagination handlePageClick={onPageClick} pageCount={pageCount} />
             {isModalOpen && (
                 <ModalContainer onClose={handleModal}>
                     <ModalNotice />
