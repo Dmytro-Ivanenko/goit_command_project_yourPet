@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
+import { MobileMenu } from './AppBar.styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 // import Avatar from '@mui/material/Avatar';
@@ -17,6 +18,8 @@ import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';
 import { ReactComponent as User } from '../../images/icons/user.svg';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const pages = [
     { name: 'News', path: '/news' },
@@ -75,8 +78,8 @@ function ResponsiveAppBar() {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="/"
+                        component={NavLink}
+                        to="/main"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -93,8 +96,8 @@ function ResponsiveAppBar() {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
-                        href=""
+                        component={NavLink}
+                        to="/main"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -117,7 +120,7 @@ function ResponsiveAppBar() {
                                 onClick={() => handleCloseNavMenu(name)}
                                 sx={{
                                     my: 2, color: isActiveButton === name ?
-                                    "var(--header-acc)" : "var(--header-font)",
+                                        "var(--header-acc)" : "var(--header-font)",
                                     display: 'block'
                                 }}
                                 component={NavLink}
@@ -169,11 +172,13 @@ function ResponsiveAppBar() {
                         >
                             <MenuIcon style={{ color: 'var(--header-acc)' }} />
                         </IconButton>
-                        <Menu
+                        <MobileMenu
                             id="menu-appbar"
+                            anchorReference="none"
+                            anchorPosition={{ top: 0, left: 0 }}
                             anchorEl={anchorElNav}
                             anchorOrigin={{
-                                vertical: 'bottom',
+                                vertical: 'top',
                                 horizontal: 'left',
                             }}
                             keepMounted
@@ -184,9 +189,25 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: { xs: 'block', sm: 'block', md: 'none' }, width: "100vw", maxWidth: 'none',
+                                maxHeight: 'none',
                             }}
+                            classes={{ paper: 'mobile-menu' }}
+                            className="mobile-menu"
                         >
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
+                                    <Logo width={116} height={20} />
+                                </IconButton>
+                                <IconButton onClick={handleCloseNavMenu}
+                                    sx={{
+                                        color: "var(--header-acc)",
+                                        width: "24px", height: "24px"
+                                    }}>
+                                    <CloseIcon />
+                                </IconButton>
+                            </Box>
+
                             {pages.map(({ name, path }) => (
                                 <MenuItem key={name}
                                     onClick={() => handleCloseNavMenu(name)}
@@ -199,7 +220,7 @@ function ResponsiveAppBar() {
                                     <Typography textAlign="center">{name}</Typography>
                                 </MenuItem>
                             ))}
-                        </Menu>
+                        </MobileMenu>
                     </Box>
                 </Toolbar>
             </Container>
