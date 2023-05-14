@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import PublicRoute from 'routes/PublicRoute';
 import PrivateRoute from 'routes/PrivateRoute';
@@ -33,6 +33,7 @@ const UserRoutes = () => {
                 </Route> */}
 
                 <Route path="/notices" element={<NoticesPage />}>
+                    <Route index element={<Navigate to="/notices/sell" replace />} />
                     <Route path="sell" element={<NoticesCategoriesList />} />
                     <Route path="lost-found" element={<NoticesCategoriesList />} />
                     <Route path="for-free" element={<NoticesCategoriesList />} />
