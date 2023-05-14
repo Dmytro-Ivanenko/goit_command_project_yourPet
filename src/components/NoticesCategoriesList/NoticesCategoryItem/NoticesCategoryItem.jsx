@@ -40,7 +40,7 @@ const NoticesCategoryItem = ({ item }) => {
                 </ul>
             </div>
             <h4 className={styles.title}>{title}</h4>
-            <button className={styles.btnLearn}>
+            <button type="button" className={styles.btnLearn}>
                 <span className={styles.btnLearnText}>Learn More</span>
                 <PawprintIcon className={styles.btnLearnIcon} width={24} height={24} />
             </button>

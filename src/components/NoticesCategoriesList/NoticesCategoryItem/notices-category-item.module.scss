@@ -148,6 +148,7 @@
     &:hover {
         background: var(--gradient);
         color: var(--main-back);
+        border: none;
 
         & .btnLearnIcon {
             display: block;

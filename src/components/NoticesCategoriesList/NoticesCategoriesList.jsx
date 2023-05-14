@@ -13,7 +13,7 @@ import itemsLostFound from './itemsLostFound';
 
 import styles from './notices-categories-list.module.scss';
 
-const PER_PAGE = 4;
+const PER_PAGE = 12;
 
 const NoticesCategoriesList = () => {
     const [items, setItems] = useState([]);
@@ -57,7 +57,7 @@ const NoticesCategoriesList = () => {
         setPageCount(Math.ceil(items.length / PER_PAGE));
     }, [itemOffset, items, pathname]);
 
-    const handlePageClick = e => {
+    const onPageClick = e => {
         const newOffset = (e.selected * PER_PAGE) % items.length;
         setItemOffset(newOffset);
     };
@@ -69,7 +69,7 @@ const NoticesCategoriesList = () => {
                     <NoticesCategoryItem item={item} key={item.id} />
                 ))}
             </ul>
-            <NoticesPagination handlePageClick={handlePageClick} pageCount={pageCount} />
+            <NoticesPagination handlePageClick={onPageClick} pageCount={pageCount} />
         </>
     );
 };

@@ -34,7 +34,6 @@ const NoticesFilters = () => {
     const handleCheckboxChange = e => {
         const { name, value, type, checked } = e.target;
 
-        // console.log(e.target);
         setState(prevState => ({
             ...prevState,
             [name]: type === 'checkbox' ? checked : value,
@@ -44,7 +43,7 @@ const NoticesFilters = () => {
     const { ageLow, ageMed, ageHigh, genderFemale, genderMale } = state;
 
     return (
-        <div className={isOpen ? `${styles.wrapper} ${styles.open}` : styles.wrapper}>
+        <div className={styles.wrapper}>
             <button className={styles.openBtn} type="button" onClick={handleBtnClick}>
                 <span className={styles.openBtnLabel}>Filter</span>
                 <FiltersIcon className={styles.openBtnIcon} width={24} height={24} />
