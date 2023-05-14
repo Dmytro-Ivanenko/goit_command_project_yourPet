@@ -27,13 +27,15 @@ const pages = [
     { name: 'UserName', path: '/user' },
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
+
+    
 
     const padding = {
         desktop: '16px',
@@ -46,6 +48,7 @@ function ResponsiveAppBar() {
         // add other styles based on screen width
     };
 
+    const [isActiveButton, setActiveButton] = useState('');
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -56,8 +59,9 @@ function ResponsiveAppBar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (name) => {
         setAnchorElNav(null);
+        setActiveButton(name);
     };
 
     const handleCloseUserMenu = () => {
@@ -65,7 +69,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: "var(--main-back)" }}>
             <Container maxWidth="xl" sx={containerStyles}>
                 <Toolbar disableGutters sx={{ gap: '8px' }}>
                     <Typography
@@ -110,8 +114,8 @@ function ResponsiveAppBar() {
                         {pages.map(({ name, path }) => (
                             <Button
                                 key={name}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                onClick={()=>handleCloseNavMenu(name)}
+                                sx={{ my: 2, color: isActiveButton===name ? "var(--header-acc)" : "var(--header-font)", display: 'block' }}
                                 component={NavLink}
                                 to={path}
                             >
