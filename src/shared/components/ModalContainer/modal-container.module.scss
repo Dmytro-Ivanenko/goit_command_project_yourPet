@@ -13,12 +13,12 @@
 
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
+    overflow-y: scroll;
 }
 
 .modal {
     min-height: 200px;
     min-width: 200px;
-    padding: 16px 12px;
     border-radius: 20px;
 
     position: absolute;
@@ -49,10 +49,8 @@
 }
 
 @media screen and (min-width: 768px) {
-    .modal {
-        padding-top: 32px;
-        padding-right: 32px;
-        padding-left: 32px;
-        padding-bottom: 24px;
+    .closeBtn {
+        right: 24px;
+        top: 24px;
     }
 }

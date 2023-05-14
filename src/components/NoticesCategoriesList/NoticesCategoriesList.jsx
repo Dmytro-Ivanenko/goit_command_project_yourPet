@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useAuth } from 'shared/hooks/useAuth';
+
 // import axios from 'axios';
 
 import NoticesCategoryItem from './NoticesCategoryItem';
@@ -24,7 +24,6 @@ const NoticesCategoriesList = () => {
     const [pageCount, setPageCount] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { isLoggedIn } = useAuth();
 
     const { pathname } = useLocation();
 
@@ -69,12 +68,6 @@ const NoticesCategoriesList = () => {
     };
 
     const handleModal = () => {
-        if (!isLoggedIn) {
-            // Unauthorized notification
-            console.log('unathorized');
-            return;
-        }
-
         setIsModalOpen(prevState => !prevState);
     };
 
