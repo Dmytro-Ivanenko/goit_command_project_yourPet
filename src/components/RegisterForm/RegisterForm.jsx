@@ -46,16 +46,25 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.formLabelConteiner}>
                     <label className={styles.formLabel}>
-                        <input className={styles.formInput} placeholder="Email" {...register('email')} type="email" />
+                        <input
+                            className={`${styles.formInput} ${errors.email ? styles.error : ''} ${
+                                watch('email') && !errors.email ? styles.success : ''
+                            }`}
+                            placeholder="Email"
+                            {...register('email')}
+                            type="email"
+                        />
                         {errors.email && <p className={styles.errorsMassage}>{errors.email.message}</p>}
                     </label>
                     <label className={styles.formLabel}>
                         <div className={styles.formLabelPasswordConteiner}>
                             <input
-                                className={styles.formInput}
+                                className={`${styles.formInput} ${errors.password1 ? styles.error : ''} ${
+                                    watch('password1') && !errors.password1 ? styles.success : ''
+                                }`}
                                 placeholder="Password"
                                 {...register('password1', { required: true })}
-                                type={showPassword1 ? 'text' : 'password'} // Встановлюємо тип як "password" або "text", залежно від стану
+                                type={showPassword1 ? 'text' : 'password'}
                             />
                             <button
                                 className={styles.showPasswordButton}
@@ -75,10 +84,12 @@ const RegisterForm = () => {
                     <label className={styles.formLabel}>
                         <div className={styles.formLabelPasswordConteiner}>
                             <input
-                                className={styles.formInput}
-                                placeholder="Confirm password "
+                                className={`${styles.formInput} ${errors.password2 ? styles.error : ''} ${
+                                    watch('password2') && !errors.password2 ? styles.success : ''
+                                }`}
+                                placeholder="Confirm password"
                                 {...register('password2', { validate: validatePassword })}
-                                type={showPassword2 ? 'text' : 'password'} // Встановлюємо тип як "password" або "text", залежно від стану
+                                type={showPassword2 ? 'text' : 'password'}
                             />
                             <button
                                 className={styles.showPasswordButton}

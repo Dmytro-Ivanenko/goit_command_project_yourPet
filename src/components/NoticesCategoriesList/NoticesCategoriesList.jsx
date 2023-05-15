@@ -26,7 +26,17 @@ const NoticesCategoriesList = () => {
 
     useEffect(() => {
         const path = pathname.split('/');
-        const category = path[path.length - 1];
+        const pathEnd = path[path.length - 1];
+
+        const getCategory = () => {
+            if (pathEnd === 'sell') {
+                return 'sell';
+            } else if (pathEnd === 'lost-found') {
+                return 'lost/found';
+            } else if (pathEnd === 'for-free') {
+                return 'in good hands';
+            }
+        };
 
         if (prevPathname.current !== pathname) {
             // reset pagination for category change
@@ -46,7 +56,7 @@ const NoticesCategoriesList = () => {
                 }
 
                 // Temporary filtration to resemble different categories
-                const filteredNotices = notices.filter(notice => notice.category === category);
+                const filteredNotices = notices.filter(notice => notice.category === getCategory());
 
                 // Frontend pagination logic, should become obsolete in the future
                 setPageCount(Math.ceil(filteredNotices.length / PER_PAGE));
