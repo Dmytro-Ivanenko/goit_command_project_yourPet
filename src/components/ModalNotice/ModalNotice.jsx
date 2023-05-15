@@ -4,14 +4,14 @@ import dogPicture from 'images/example/dog.jpg';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 
 import styles from './modal-notice.module.scss';
+import { toast } from 'react-toastify';
 
 const ModalNotice = ({ item }) => {
     const { isLoggedIn } = useAuth();
 
     const handleClick = () => {
         if (!isLoggedIn) {
-            // Unauthorized notification
-            console.log('unauthorized');
+            toast.error('Sign in to add your pets.');
             return;
         }
 

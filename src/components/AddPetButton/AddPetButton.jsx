@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'shared/hooks/useAuth';
+import { toast } from 'react-toastify';
 
 import { ReactComponent as PlusIcon } from 'images/icons/plus.svg';
 import { ReactComponent as PlusSmallIcon } from 'images/icons/plus-small.svg';
@@ -11,12 +12,12 @@ const AddPetButton = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        if (isLoggedIn) {
-            navigate('/add-pet');
-        } else {
-            // unauthorized notification
-            console.log('unauthorized');
+        if (!isLoggedIn) {
+            toast.error('Sign in to add your pets.');
+            return;
         }
+
+        navigate('/add-pet');
     };
 
     return (

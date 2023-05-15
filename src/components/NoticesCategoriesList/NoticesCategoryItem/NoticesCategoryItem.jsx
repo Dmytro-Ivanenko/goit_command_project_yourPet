@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { ReactComponent as ClockIcon } from 'images/icons/clock.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
@@ -8,19 +9,16 @@ import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 
 import { calcAge } from 'shared/helpers/calcAge';
-
+import { getNoticeById } from 'services/api/notices';
 import ModalContainer from 'shared/components/ModalContainer';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
-import { getNoticeById } from 'services/api/notices';
-import { toast } from 'react-toastify';
 
 const NoticesCategoryItem = ({ item }) => {
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
 
     const { category, location, date, sex, title, favorite, image, _id } = item;
-
     const age = calcAge(date);
 
     const handleModal = async () => {
