@@ -20,6 +20,7 @@ const LoginForm = () => {
         register,
         handleSubmit,
         reset,
+        watch,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(loginSchema),
@@ -35,13 +36,22 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.formLabelConteiner}>
                     <label className={styles.formLabel}>
-                        <input className={styles.formInput} placeholder="Email" {...register('email')} type="email" />
+                        <input
+                            className={`${styles.formInput} ${errors.email ? styles.error : ''} ${
+                                watch('email') && !errors.email ? styles.success : ''
+                            }`}
+                            placeholder="Email"
+                            {...register('email')}
+                            type="email"
+                        />
                         {errors.email && <p className={styles.errorsMassage}>{errors.email.message}</p>}
                     </label>
                     <label className={styles.formLabel}>
                         <div className={styles.formLabelPasswordConteiner}>
                             <input
-                                className={styles.formInput}
+                                className={`${styles.formInput} ${errors.password ? styles.error : ''} ${
+                                    watch('password') && !errors.password ? styles.success : ''
+                                }`}
                                 placeholder="Password"
                                 {...register('password')}
                                 type={showPassword ? 'text' : 'password'} // Встановлюємо тип як "password" або "text", залежно від стану
