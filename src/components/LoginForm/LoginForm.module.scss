@@ -19,6 +19,7 @@
     right: 0;
     background-color: transparent;
     border: none;
+    margin: 0;
     line-height: 0;
     padding: 10px;
 }
@@ -39,14 +40,29 @@
     }
 }
 
+.formInput.error {
+    border-color: red;
+}
+
+.formInput.success {
+    border-color: green;
+}
+
 .formTitle {
     text-align: center;
     font-style: normal;
     font-weight: 500;
-    font-size: 36px;
-    line-height: 49px;
+    font-size: 24px;
+    line-height: 33px;
     color: var(--header-font);
     margin-bottom: 40px;
+}
+
+@media screen and (min-width: 1280px) {
+    .formTitle {
+        font-size: 36px;
+        line-height: 49px;
+    }
 }
 
 .authBtn {
@@ -63,7 +79,13 @@
     letter-spacing: 0.04em;
     padding: 10.5px 0px;
     border-radius: 40px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+
+    @media screen and (min-width: 1280px) {
+        .authBtn {
+            margin-bottom: 16px;
+        }
+    }
 }
 
 .errorsMassage {
