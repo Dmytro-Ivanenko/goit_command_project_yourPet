@@ -12,6 +12,7 @@ import { getAllNotices } from 'services/api/notices';
 // EXAMPLE DATA TO EMULATE BACKEND //
 
 import styles from './notices-categories-list.module.scss';
+import { toast } from 'react-toastify';
 
 const PER_PAGE = 12;
 
@@ -34,49 +35,32 @@ const NoticesCategoriesList = () => {
         }
 
         const getApiNotices = async () => {
-            const notices = await getAllNotices();
+            try {
+                const notices = await getAllNotices();
 
-            if (notices.length === 0) {
-                setItems(0);
-                setCurrentPage(0);
-                setPageCount(0);
-                return;
+                if (notices.length === 0) {
+                    setItems(0);
+                    setCurrentPage(0);
+                    setPageCount(0);
+                    return;
+                }
+
+                // Temporary filtration to resemble different categories
+                const filteredNotices = notices.filter(notice => notice.category === category);
+
+                // Frontend pagination logic, should become obsolete in the future
+                setPageCount(Math.ceil(filteredNotices.length / PER_PAGE));
+                const startOffset = (currentPage * PER_PAGE) % filteredNotices.length;
+                const endOffset = startOffset + PER_PAGE;
+                const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
+
+                setItems(paginatedNotices);
+            } catch (error) {
+                toast.error(error.message);
             }
-
-            // Temporary filtration to resemble different categories
-            const filteredNotices = notices.filter(notice => notice.category === category);
-
-            // Frontend pagination logic, should become obsolete in the future
-            setPageCount(Math.ceil(filteredNotices.length / PER_PAGE));
-            const startOffset = (currentPage * PER_PAGE) % filteredNotices.length;
-            const endOffset = startOffset + PER_PAGE;
-            const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
-
-            setItems(paginatedNotices);
         };
 
         getApiNotices();
-
-        // const notices = () => {
-        //     if (category === 'sell') {
-        //         return itemsSell;
-        //     } else if (category === 'for-free') {
-        //         return itemsInGoodHands;
-        //     } else if (category === 'lost-found') {
-        //         return itemsLostFound;
-        //     } else {
-        //         return [];
-        //     }
-        // };
-
-        // if (notices().length !== 0) {
-        //     setItems(notices());
-        // } else {
-        //     return;
-        // }
-
-        // setItems(items.slice(newOffset, endOffset));
-        // setPageCount(Math.ceil(items.length / PER_PAGE));
     }, [currentPage, pathname]);
 
     const onPageClick = e => {

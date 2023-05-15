@@ -14,6 +14,7 @@ import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
 import { getNoticeById } from 'services/api/notices';
+import { toast } from 'react-toastify';
 
 const NoticesCategoryItem = ({ item }) => {
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
@@ -23,10 +24,14 @@ const NoticesCategoryItem = ({ item }) => {
     const age = calcAge(date);
 
     const handleModal = async () => {
-        const data = await getNoticeById(_id);
-        console.log(data);
-        data.date = data.date.replaceAll('-', '.');
-        setItemDetailedInfo(data);
+        try {
+            const data = await getNoticeById(_id);
+            console.log(data);
+            data.date = data.date.replaceAll('-', '.');
+            setItemDetailedInfo(data);
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
 
     return (

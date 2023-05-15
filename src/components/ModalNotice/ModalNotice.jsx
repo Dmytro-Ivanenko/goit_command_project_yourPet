@@ -65,7 +65,7 @@ const ModalNotice = ({ item }) => {
                                 <td className={styles.tableLabel}>The sex:</td>
                                 <td className={styles.tableValue}>{sex}</td>
                             </tr>
-                            {category === 'sell' && price && (
+                            {category === 'sell' && price > 0 && (
                                 <tr className={styles.tableRow}>
                                     <td className={styles.tableLabel}>Price</td>
                                     <td className={styles.tableValue}>{price}</td>
