@@ -12,7 +12,7 @@ export const getAllNotices = async () => {
 // };
 
 export const getNoticeById = async id => {
-    const { data } = await axios.get('/pets');
+    const { data } = await axios.get(`/pets/${id}`);
     console.log(data);
     return data;
 };
