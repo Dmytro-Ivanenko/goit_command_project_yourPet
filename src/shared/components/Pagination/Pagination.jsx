@@ -1,8 +1,8 @@
 import ReactPaginate from 'react-paginate';
 
-import styles from './notices-pagination.module.scss';
+import styles from './pagination.module.scss';
 
-function NoticesPagination({ handlePageClick, pageCount }) {
+function Pagination({ handlePageClick, pageCount, currentPage }) {
     return (
         <div className={styles.paginationContainer}>
             <ReactPaginate
@@ -24,9 +24,10 @@ function NoticesPagination({ handlePageClick, pageCount }) {
                 activeClassName={styles.active}
                 renderOnZeroPageCount={null}
                 className={styles.pagination}
+                forcePage={currentPage}
             />
         </div>
     );
 }
 
-export default NoticesPagination;
+export default Pagination;
