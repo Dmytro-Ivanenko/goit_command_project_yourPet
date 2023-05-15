@@ -1,27 +1,32 @@
-import { AuthNavBoxMobile } from 'shared/SharedLayout/SharedLayot.styled';
 
-import { AuthNavBoxDesktop } from 'shared/SharedLayout/SharedLayot.styled';
+import { NavLink } from 'react-router-dom';
 
-import { StyledNavLink } from 'shared/components/StyledLink.styled';
+import { Box } from '@mui/material';
 
-export const AuthNavMobile = () => {
+import styles from './authNav.module.scss';
+
+export const AuthNavMobile = ({closeNavMenu}) => {
   return (
-    <AuthNavBoxMobile
+    <Box className={styles.authNavBoxMobile}
     >
-      <StyledNavLink to="/register">Registration</StyledNavLink>
-      <StyledNavLink to="/login">Log IN</StyledNavLink>
-    </AuthNavBoxMobile>
+      <NavLink onClick={closeNavMenu} className={styles.authNavlink} to="/register">Registration</NavLink>
+      <NavLink onClick={closeNavMenu} className={styles.authNavlink} to="/login">
+        <span className={styles.navLinkText}>Log In</span>
+      </NavLink>
+    </Box>
   );
 };
 
 
 export const AuthNavDesktop = () => {
   return (
-    <AuthNavBoxDesktop
+    <Box className={styles.authNavBoxDesktop}
     >
-      <StyledNavLink to="/register">Sign up</StyledNavLink>
-      <StyledNavLink to="/login">Log in</StyledNavLink>
-    </AuthNavBoxDesktop>
+      <NavLink  className={styles.authNavlink} to="/register">Registration</NavLink>
+      <NavLink  className={styles.authNavlink} to="/login">
+        <span className={styles.navLinkText}>Log In</span>
+      </NavLink>
+    </Box>
   );
 };
 
