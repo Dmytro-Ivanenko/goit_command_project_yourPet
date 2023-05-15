@@ -2,7 +2,7 @@ import ReactPaginate from 'react-paginate';
 
 import styles from './pagination.module.scss';
 
-function Pagination({ handlePageClick, pageCount }) {
+function Pagination({ handlePageClick, pageCount, currentPage }) {
     return (
         <div className={styles.paginationContainer}>
             <ReactPaginate
@@ -24,6 +24,7 @@ function Pagination({ handlePageClick, pageCount }) {
                 activeClassName={styles.active}
                 renderOnZeroPageCount={null}
                 className={styles.pagination}
+                forcePage={currentPage}
             />
         </div>
     );
