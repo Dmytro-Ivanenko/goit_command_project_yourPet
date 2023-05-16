@@ -28,13 +28,13 @@
 }
 
 .title {
-    // width: 231px;
     // margin-left: 20px;
     // margin-bottom: 20px;
-    white-space: nowrap;
-    width: 236px;
-    display: block;
-    height: 66px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* start showing ellipsis when 2rd line is reached */
+    white-space: pre-wrap; /* let the text wrap preserving spaces */
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: 'Manrope';
@@ -94,9 +94,6 @@
         padding-right: 12px;
         padding-bottom: 12px;
     }
-    .title {
-        width: 310px;
-    }
 }
 
 @media screen and (min-width: 1280px) {
@@ -105,9 +102,7 @@
 
         flex-basis: calc((100% - 62px) / 3);
     }
-    .title {
-        width: 370px;
-    }
+
     .img {
         border-radius: 0px;
     }

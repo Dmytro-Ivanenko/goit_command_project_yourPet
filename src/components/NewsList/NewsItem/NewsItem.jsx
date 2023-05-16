@@ -10,6 +10,7 @@ const NewsItem = ({ item }) => {
                 <img className={styles.img} src={imgUrl} alt="news" />
             </div>
             <div className={styles.content}>
+                {' '}
                 <h4 className={styles.title}>{title}</h4>
                 <p className={styles.text}>{text}</p>
                 <div className={styles.flexContainer}>
