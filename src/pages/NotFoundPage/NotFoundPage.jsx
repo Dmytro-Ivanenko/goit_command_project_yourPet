@@ -13,11 +13,17 @@ const NotFoundPage = () => {
     return (
         <div>
             <h1 className={styles.title}>{`Ooops! This page not found :( `}</h1>
-            <p className={styles.digit}>
-                <span className={styles.digit_right}>4</span> 0 <span className={styles.digit_left}>4</span>
-            </p>
+            <div className={styles.digit}>
+                <p className={styles.digit_right}>4</p>
+                <p className={styles.cat}>&#160;</p>
+                <p className={styles.digit_left}>4</p>
+            </div>
+
             <Link to="/" className={styles.btn}>
                 To main page
+                <svg className={styles.icon_paw} width="24px" height="24px">
+                    <use href="../../images/icons/pawprint.svg"></use>
+                </svg>
             </Link>
         </div>
     );
