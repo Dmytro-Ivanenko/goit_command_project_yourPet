@@ -1,6 +1,7 @@
 export const filterNotices = (notices, selectedFilters) => {
+    console.log(selectedFilters);
     return notices.filter(notice => {
-        if (selectedFilters.length === 0) {
+        if (!selectedFilters) {
             return true;
         }
 

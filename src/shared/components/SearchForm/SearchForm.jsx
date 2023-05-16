@@ -23,6 +23,7 @@ const SearchForm = ({ onSubmit }) => {
 
     const handleClear = () => {
         setState({ ...initialState });
+        onSubmit({ ...initialState });
     };
 
     const handleSubmit = e => {
@@ -36,7 +37,6 @@ const SearchForm = ({ onSubmit }) => {
         }
 
         onSubmit({ ...state });
-        setState({ ...initialState });
     };
 
     const { query } = state;
