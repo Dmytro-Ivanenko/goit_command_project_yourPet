@@ -1,14 +1,13 @@
 import { useLocation, Link } from 'react-router-dom';
 
-import categories from './categories';
 import { useAuth } from 'shared/hooks/useAuth';
+import categories from './categories';
 import styles from './notices-categories-nav.module.scss';
 
 const { publicCategories, privateCategories } = categories;
 
 const getFullName = (location, category) => {
     const res = category === location ? `${styles.button} ${styles.active}` : styles.button;
-
     return res;
 };
 

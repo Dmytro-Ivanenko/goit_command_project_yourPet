@@ -5,42 +5,26 @@ import { ReactComponent as ChevronDownIcon } from 'images/icons/chevron-down.svg
 
 import styles from './notices-filters.module.scss';
 
-const initialState = {
-    ageLow: false,
-    ageMed: false,
-    ageHigh: false,
-    genderFemale: false,
-    genderMale: false,
-};
-
-const NoticesFilters = () => {
+const NoticesFilters = ({ onFilter, filters }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [ageOpen, setAgeOpen] = useState(false);
     const [genderOpen, setGenderOpen] = useState(false);
-    const [state, setState] = useState({ ...initialState });
 
     const handleBtnClick = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(prevState => !prevState);
     };
 
     const handleAgeClick = () => {
-        setAgeOpen(!ageOpen);
+        setAgeOpen(prevState => !prevState);
     };
 
     const handleGenderClick = () => {
-        setGenderOpen(!genderOpen);
+        setGenderOpen(prevState => !prevState);
     };
 
     const handleCheckboxChange = e => {
-        const { name, value, type, checked } = e.target;
-
-        setState(prevState => ({
-            ...prevState,
-            [name]: type === 'checkbox' ? checked : value,
-        }));
+        onFilter(e.target);
     };
-
-    const { ageLow, ageMed, ageHigh, genderFemale, genderMale } = state;
 
     return (
         <div className={styles.wrapper}>
@@ -68,8 +52,9 @@ const NoticesFilters = () => {
                                             onChange={handleCheckboxChange}
                                             className={styles.input}
                                             type="checkbox"
-                                            name="ageLow"
-                                            checked={ageLow}
+                                            name="ageYoung"
+                                            value="ageYoung"
+                                            checked={filters.includes('ageYoung')}
                                         />
                                         3-12 m
                                     </label>
@@ -79,7 +64,8 @@ const NoticesFilters = () => {
                                             onChange={handleCheckboxChange}
                                             type="checkbox"
                                             name="ageMed"
-                                            checked={ageMed}
+                                            value="ageMed"
+                                            checked={filters.includes('ageMed')}
                                         />
                                         1 year
                                     </label>
@@ -88,10 +74,11 @@ const NoticesFilters = () => {
                                             className={styles.input}
                                             onChange={handleCheckboxChange}
                                             type="checkbox"
-                                            name="ageHigh"
-                                            checked={ageHigh}
+                                            name="ageOld"
+                                            value="ageOld"
+                                            checked={filters.includes('ageOld')}
                                         />
-                                        2 year
+                                        2 year +
                                     </label>
                                 </form>
                             )}
@@ -112,8 +99,9 @@ const NoticesFilters = () => {
                                             onChange={handleCheckboxChange}
                                             className={styles.input}
                                             type="checkbox"
-                                            name="genderMale"
-                                            checked={genderMale}
+                                            name="male"
+                                            value="male"
+                                            checked={filters.includes('male')}
                                         />
                                         male
                                     </label>
@@ -122,8 +110,9 @@ const NoticesFilters = () => {
                                             onChange={handleCheckboxChange}
                                             className={styles.input}
                                             type="checkbox"
-                                            name="genderFemale"
-                                            checked={genderFemale}
+                                            name="female"
+                                            value="female"
+                                            checked={filters.includes('female')}
                                         />
                                         female
                                     </label>

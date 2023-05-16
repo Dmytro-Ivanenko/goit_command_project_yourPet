@@ -5,12 +5,13 @@ export const calcAge = birthdate => {
     const monthsDiff = currentDate.getMonth() - birthDate.getMonth();
     const totalMonths = yearsDiff * 12 + monthsDiff;
 
-    if (totalMonths >= 3 && totalMonths < 12) {
+    if (totalMonths < 12) {
         return `${totalMonths} m`;
     }
 
-    if (totalMonths >= 12) {
-        const fullYears = Math.floor(totalMonths / 12);
-        return `${fullYears} year`;
+    if (totalMonths >= 12 && totalMonths < 24) {
+        return `1 year`;
     }
+
+    return `${yearsDiff} years`;
 };

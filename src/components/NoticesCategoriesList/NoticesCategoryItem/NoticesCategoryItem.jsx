@@ -8,7 +8,6 @@ import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 
-import { calcAge } from 'shared/helpers/calcAge';
 import { getNoticeById } from 'services/api/notices';
 import ModalContainer from 'shared/components/ModalContainer';
 import ModalNotice from 'components/ModalNotice';
@@ -19,7 +18,6 @@ const NoticesCategoryItem = ({ item }) => {
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
 
     const { category, location, date, sex, title, favorite, image, _id } = item;
-    const age = calcAge(date);
 
     const handleModal = async () => {
         try {
@@ -50,7 +48,7 @@ const NoticesCategoryItem = ({ item }) => {
                         </li>
                         <li className={styles.lowerBlockItem}>
                             <ClockIcon className={styles.icon} width={24} height={24} />
-                            <span className={styles.label}>{age}</span>
+                            <span className={styles.label}>{date}</span>
                         </li>
                         <li className={styles.lowerBlockItem}>
                             {sex === 'female' ? (
