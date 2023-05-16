@@ -1,0 +1,61 @@
+.title {
+    color: #111111;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 130%;
+    text-align: center;
+}
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 248px;
+    height: 40px;
+    padding: 8px 28px;
+    gap: 12px;
+    background: #54adff;
+    border-radius: 40px;
+    color: #fef9f9;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+}
+.icon_paw {
+    fill: #fef9f9;
+}
+.digit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 381.004px;
+    line-height: 130%;
+    color: #54adff;
+}
+.cat {
+    background-image: url('../../images/example/selective-focus-black-white-adorable-cat-with-its-tongue-out.png');
+    background-color: #ffc107;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    width: 292px;
+    height: 292px;
+    background-position: center right;
+}
+.digit_right {
+    transform: rotate(-11.34deg);
+}
+.digit_left {
+    transform: rotate(24.23deg);
+    margin-left: 10px;
+}

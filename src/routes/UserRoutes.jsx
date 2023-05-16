@@ -12,7 +12,7 @@ const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const NoticesPage = lazy(() => import('pages/NoticesPage'));
 // const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
 // const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
-// const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
 
 const UserRoutes = () => {
@@ -43,7 +43,7 @@ const UserRoutes = () => {
                     </Route>
                 </Route>
 
-                {/* <Route path="*" element={<NotFoundPage />} /> */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Suspense>
     );
