@@ -12,6 +12,7 @@ import Loader from 'shared/components/Loader/Loader';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav';
 import NoticesFilters from 'components/NoticesFilters';
 import AddPetButton from 'components/AddPetButton';
+import SelectedFilters from 'components/SelectedFilters';
 import { calcAge } from 'shared/helpers/calcAge';
 
 import styles from './notices-page.module.scss';
@@ -99,6 +100,12 @@ const NoticesPage = () => {
         });
     };
 
+    const handleFilterReset = value => {
+        setSelectedFilters(prevFilters => {
+            return prevFilters.filter(filter => filter !== value);
+        });
+    };
+
     const handleSubmit = formData => {
         setQuery(formData.query);
     };
@@ -115,11 +122,17 @@ const NoticesPage = () => {
             </div>
             <div className={styles.controls}>
                 <NoticesCategoriesNav />
-                <div className={styles.buttonWrapper}>
-                    <NoticesFilters onFilter={handleFilterChange} filters={selectedFilters} />
-                    <AddPetButton />
+                <div className={styles.wrapper}>
+                    <div className={styles.buttonWrapper}>
+                        <NoticesFilters onFilter={handleFilterChange} filters={selectedFilters} />
+                        <AddPetButton />
+                    </div>
+                    {selectedFilters.length > 0 && (
+                        <SelectedFilters filters={selectedFilters} handleReset={handleFilterReset} />
+                    )}
                 </div>
             </div>
+
             {isLoading && <Loader />}
             <Outlet context={items} />
             {pageCount > 1 && (

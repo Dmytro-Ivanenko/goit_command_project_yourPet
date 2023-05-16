@@ -13,8 +13,10 @@ import ModalContainer from 'shared/components/ModalContainer';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
+import { useAuth } from 'shared/hooks/useAuth';
 
 const NoticesCategoryItem = ({ item }) => {
+    const { isLoggedIn } = useAuth();
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
 
     const { category, location, date, sex, title, favorite, image, _id } = item;
@@ -30,6 +32,15 @@ const NoticesCategoryItem = ({ item }) => {
         }
     };
 
+    const handleFavoriteClick = () => {
+        if (!isLoggedIn) {
+            toast.error('Sign in to add to favorites');
+            return;
+        }
+
+        // add to favorite
+    };
+
     return (
         <>
             <li className={styles.item}>
@@ -37,7 +48,10 @@ const NoticesCategoryItem = ({ item }) => {
                     <img className={styles.img} src={image} alt="pet" />
                     <div className={styles.upperBlock}>
                         <p className={styles.upperBlockText}>{category}</p>
-                        <button className={favorite ? `${styles.btn} ${styles.favorite}` : styles.btn}>
+                        <button
+                            onClick={handleFavoriteClick}
+                            className={favorite ? `${styles.btn} ${styles.favorite}` : styles.btn}
+                        >
                             <HeartIcon className={styles.btnIcon} width={24} height={24} />
                         </button>
                     </div>

@@ -53,8 +53,8 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             className={styles.input}
                                             type="checkbox"
                                             name="ageYoung"
-                                            value="ageYoung"
-                                            checked={filters.includes('ageYoung')}
+                                            value="3-12 m"
+                                            checked={filters.includes('3-12 m')}
                                         />
                                         3-12 m
                                     </label>
@@ -64,8 +64,8 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             onChange={handleCheckboxChange}
                                             type="checkbox"
                                             name="ageMed"
-                                            value="ageMed"
-                                            checked={filters.includes('ageMed')}
+                                            value="1 year"
+                                            checked={filters.includes('1 year')}
                                         />
                                         1 year
                                     </label>
@@ -75,8 +75,8 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             onChange={handleCheckboxChange}
                                             type="checkbox"
                                             name="ageOld"
-                                            value="ageOld"
-                                            checked={filters.includes('ageOld')}
+                                            value="2 years +"
+                                            checked={filters.includes('2 years +')}
                                         />
                                         2 year +
                                     </label>
