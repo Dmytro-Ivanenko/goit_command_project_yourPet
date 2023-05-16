@@ -24,7 +24,6 @@ const NoticesPage = () => {
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedFilters, setSelectedFilters] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const query = searchParams.get('query');
@@ -92,7 +91,7 @@ const NoticesPage = () => {
         };
 
         getApiNotices();
-    }, [currentPage, selectedFilters, pathname, query, gender, age]);
+    }, [currentPage, pathname, query, gender, age]);
 
     const handleFilterChange = target => {
         const { value, checked, name } = target;
@@ -120,9 +119,14 @@ const NoticesPage = () => {
     };
 
     const handleFilterReset = value => {
-        setSelectedFilters(prevFilters => {
-            return prevFilters.filter(filter => filter !== value);
-        });
+        if (value === 'male' || value === 'female') {
+            searchParams.delete('gender');
+            setSearchParams(searchParams);
+            return;
+        }
+
+        searchParams.delete('age');
+        setSearchParams(searchParams);
     };
 
     const handleSubmit = ({ query }) => {
@@ -133,6 +137,16 @@ const NoticesPage = () => {
     const handlePageClick = e => {
         setCurrentPage(e.selected);
     };
+
+    const filters = [searchParams.get('age'), searchParams.get('gender')];
+
+    if (searchParams.get('age') === null) {
+        filters.splice(0, 1);
+    }
+
+    if (searchParams.get('gender') === null) {
+        filters.splice(filters.length - 1, 1);
+    }
 
     return (
         <div className={styles.container}>
@@ -147,9 +161,7 @@ const NoticesPage = () => {
                         <NoticesFilters onFilter={handleFilterChange} filters={searchParams} />
                         <AddPetButton />
                     </div>
-                    {selectedFilters.length > 0 && (
-                        <SelectedFilters filters={selectedFilters} handleReset={handleFilterReset} />
-                    )}
+                    {filters.length > 0 && <SelectedFilters filters={filters} handleReset={handleFilterReset} />}
                 </div>
             </div>
 
