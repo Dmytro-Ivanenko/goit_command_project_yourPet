@@ -13,6 +13,7 @@ import { getAllNotices } from 'services/api/notices';
 
 import styles from './notices-categories-list.module.scss';
 import { toast } from 'react-toastify';
+import Loader from 'shared/components/Loader/Loader';
 
 const PER_PAGE = 12;
 
@@ -20,6 +21,7 @@ const NoticesCategoriesList = () => {
     const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
@@ -27,6 +29,8 @@ const NoticesCategoriesList = () => {
     useEffect(() => {
         const path = pathname.split('/');
         const pathEnd = path[path.length - 1];
+
+        setIsLoading(true);
 
         const getCategory = () => {
             if (pathEnd === 'sell') {
@@ -65,6 +69,7 @@ const NoticesCategoriesList = () => {
                 const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
 
                 setItems(paginatedNotices);
+                setIsLoading(false);
             } catch (error) {
                 toast.error(error.message);
             }
@@ -79,14 +84,19 @@ const NoticesCategoriesList = () => {
 
     return (
         <>
-            {items.length > 0 && (
-                <ul className={styles.list}>
-                    {items.map(item => (
-                        <NoticesCategoryItem key={item._id} item={item} />
-                    ))}
-                </ul>
+            {isLoading && <Loader />}
+            {items.length > 0 && !isLoading && (
+                <>
+                    <ul className={styles.list}>
+                        {items.map(item => (
+                            <NoticesCategoryItem key={item._id} item={item} />
+                        ))}
+                    </ul>
+                    {pageCount > 1 && (
+                        <Pagination handlePageClick={onPageClick} pageCount={pageCount} currentPage={currentPage} />
+                    )}
+                </>
             )}
-            <Pagination handlePageClick={onPageClick} pageCount={pageCount} currentPage={currentPage} />
         </>
     );
 };
