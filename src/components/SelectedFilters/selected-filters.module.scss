@@ -1,0 +1,53 @@
+.filtersList {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    list-style: none;
+}
+
+.selectedBtn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+    background: #ffffff;
+    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+}
+
+.selectedLabel {
+    font-family: 'Inter';
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--main-acc);
+}
+
+.selectedIcon {
+    stroke: var(--main-acc);
+}
+
+@media screen and (max-width: 767px) {
+    .filters {
+        margin-top: 80px;
+        max-width: 140px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .filtersList {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .filters {
+        justify-items: flex-start;
+        justify-self: flex-start;
+    }
+}
