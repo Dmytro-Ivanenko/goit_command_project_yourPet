@@ -16,3 +16,37 @@ export const getNoticeById = async id => {
     console.log(data);
     return data;
 };
+
+export const getSellNotices = async (query, gender) => {
+    console.log(gender);
+    const { data } = await axios.get(`/pets/sell`, {
+        params: {
+            query,
+            gender,
+        },
+    });
+    console.log(data);
+    return data;
+};
+
+export const getInGoodHandsNotices = async (query, gender) => {
+    const { data } = await axios.get(`/pets/inGoodHands`, {
+        params: {
+            query,
+            gender,
+        },
+    });
+    console.log(data);
+    return data;
+};
+
+export const getLostNotices = async (query, gender) => {
+    const { data } = await axios.get(`/pets/lost`, {
+        params: {
+            query,
+            gender,
+        },
+    });
+    console.log(data);
+    return data;
+};
