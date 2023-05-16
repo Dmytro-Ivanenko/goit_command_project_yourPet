@@ -2,7 +2,7 @@
     width: 280px;
     height: 456px;
     background-color: #ffffff;
-    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+    box-shadow: var(--small-shadow);
     border-radius: 0px 0px 40px 40px;
 }
 
@@ -30,14 +30,19 @@
 }
 
 .upperBlockText {
+    width: 126px;
     padding: 11px 17px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     font-weight: 500;
     font-size: 14px;
     line-height: 19px;
 
-    color: #111111;
-    background-color: #cce4fb;
+    color: var(--header-font);
+    background-color: var(--main-light);
     border-radius: 0px 16px 16px 0px;
 }
 
@@ -58,16 +63,17 @@
 
     &:hover,
     &:focus {
-        color: #54adff;
+        color: var(--main-acc);
     }
 }
 
 .btnIcon {
+    stroke: var(--main-acc);
     fill: currentColor;
 }
 
 .favorite {
-    color: #54adff;
+    color: var(--main-acc);
 }
 
 .lowerBlock {
@@ -88,8 +94,18 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
-    background-color: #cce4fb;
+    background-color: var(--main-light);
     border-radius: 16px;
+    color: var(--main-acc);
+
+    &:hover {
+        background-color: var(--main-acc);
+        color: var(--main-light);
+    }
+}
+
+.icon {
+    stroke: currentColor;
 }
 
 .label {
@@ -99,7 +115,11 @@
 
     letter-spacing: 0.04em;
 
-    color: #111111;
+    color: var(--header-font);
+
+    .lowerBlockItem:hover & {
+        color: var(--main-light);
+    }
 }
 
 .title {
@@ -115,8 +135,9 @@
     width: 248px;
     height: 38px;
     margin: 0 auto;
-    border: 2px solid #54adff;
+    border: 2px solid var(--main-acc);
     border-radius: 40px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,12 +148,13 @@
     line-height: 22px;
     letter-spacing: 0.04em;
 
-    color: #54adff;
+    color: var(--main-acc);
     background-color: transparent;
 
     &:hover {
-        background-color: #54adff;
-        color: #fef9f9;
+        background: var(--gradient);
+        color: var(--main-back);
+        border: none;
 
         & .btnLearnIcon {
             display: block;
@@ -142,8 +164,7 @@
 
 .btnLearnIcon {
     display: none;
-    stroke: #fef9f9;
-    fill: #fef9f9;
+    stroke: var(--main-back);
 }
 
 @media screen and (min-width: 768px) {

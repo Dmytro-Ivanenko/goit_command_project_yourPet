@@ -1,54 +1,93 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-// import axios from 'axios';
 
-import NoticesCategoryItem from './NoticesCategoryItem/NoticesCategoryItem';
+import NoticesCategoryItem from './NoticesCategoryItem';
+import Pagination from 'shared/components/Pagination';
+import { getAllNotices } from 'services/api/notices';
 
 // EXAMPLE DATA TO EMULATE BACKEND //
-import itemsSell from './itemsSell';
-import itemsInGoodHands from './itemsInGoodHands';
-import itemsLostFound from './itemsLostFound';
+// import itemsSell from './itemsSell';
+// import itemsInGoodHands from './itemsInGoodHands';
+// import itemsLostFound from './itemsLostFound';
 // EXAMPLE DATA TO EMULATE BACKEND //
 
 import styles from './notices-categories-list.module.scss';
+import { toast } from 'react-toastify';
+
+const PER_PAGE = 12;
 
 const NoticesCategoriesList = () => {
-    const { pathname } = useLocation();
     const [items, setItems] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const { pathname } = useLocation();
+    const prevPathname = useRef(pathname);
 
     useEffect(() => {
         const path = pathname.split('/');
-        const category = path[path.length - 1];
-        // console.log(category);
+        const pathEnd = path[path.length - 1];
 
-        // ======  EXAMPLE GET REQUEST DEPENDING ON CATEGORY ====== //
-        // const notices = axios.get('/api/pets', {
-        //   params: {
-        //     category,
-        //   },
-        // });
-
-        const notices = () => {
-            if (category === 'sell') {
-                return itemsSell;
-            } else if (category === 'for-free') {
-                return itemsInGoodHands;
-            } else if (category === 'lost-found') {
-                return itemsLostFound;
-            } else {
-                return [];
+        const getCategory = () => {
+            if (pathEnd === 'sell') {
+                return 'sell';
+            } else if (pathEnd === 'lost-found') {
+                return 'lost/found';
+            } else if (pathEnd === 'for-free') {
+                return 'in good hands';
             }
         };
 
-        setItems(notices());
-    }, [pathname]);
+        if (prevPathname.current !== pathname) {
+            // reset pagination for category change
+            prevPathname.current = pathname;
+            setCurrentPage(0);
+        }
+
+        const getApiNotices = async () => {
+            try {
+                const notices = await getAllNotices();
+
+                if (notices.length === 0) {
+                    setItems(0);
+                    setCurrentPage(0);
+                    setPageCount(0);
+                    return;
+                }
+
+                // Temporary filtration to resemble different categories
+                const filteredNotices = notices.filter(notice => notice.category === getCategory());
+
+                // Frontend pagination logic, should become obsolete in the future
+                setPageCount(Math.ceil(filteredNotices.length / PER_PAGE));
+                const startOffset = (currentPage * PER_PAGE) % filteredNotices.length;
+                const endOffset = startOffset + PER_PAGE;
+                const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
+
+                setItems(paginatedNotices);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        getApiNotices();
+    }, [currentPage, pathname]);
+
+    const onPageClick = e => {
+        setCurrentPage(e.selected);
+    };
 
     return (
-        <ul className={styles.list}>
-            {items.map(item => (
-                <NoticesCategoryItem item={item} key={item.id} />
-            ))}
-        </ul>
+        <>
+            {items.length > 0 && (
+                <ul className={styles.list}>
+                    {items.map(item => (
+                        <NoticesCategoryItem key={item._id} item={item} />
+                    ))}
+                </ul>
+            )}
+            <Pagination handlePageClick={onPageClick} pageCount={pageCount} currentPage={currentPage} />
+        </>
     );
 };
 
