@@ -1,9 +1,47 @@
+.container {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
 .formWrapper {
     margin-bottom: 20px;
 }
 
+.controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonWrapper {
+    position: relative;
+    height: 40px;
+}
+
+@media screen and (max-width: 767px) {
+    .controls {
+        width: 280px;
+        margin: 0 auto;
+    }
+}
+
 @media screen and (min-width: 768px) {
+    .container {
+        padding-top: 80px;
+        padding-bottom: 192px;
+    }
+
     .formWrapper {
         margin-bottom: 40px;
+    }
+
+    .buttonWrapper {
+        display: flex;
+        gap: 12px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .container {
+        padding-bottom: 103px;
     }
 }
