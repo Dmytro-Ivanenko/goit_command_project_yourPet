@@ -1,0 +1,86 @@
+.paginationContainer {
+    width: 100%;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    padding: 8px 12px;
+    border-radius: 45px;
+
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+
+    box-shadow: var(--small-shadow);
+    list-style: none;
+}
+
+.item {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--main-light);
+
+    background-color: transparent;
+}
+
+.link {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Inter';
+    font-size: 16px;
+    line-height: 15px;
+
+    color: var(--main-light);
+    cursor: pointer;
+}
+
+.prevLink {
+    @extend .link;
+
+    &[aria-disabled='true'] {
+        opacity: 0.2;
+        cursor: default;
+    }
+
+    &::after {
+        transform: translateY(-2px);
+        content: url(../../../images/icons/arrow-left.svg);
+    }
+}
+
+.nextLink {
+    @extend .link;
+
+    &[aria-disabled='true'] {
+        opacity: 0.2;
+        cursor: default;
+    }
+
+    &::after {
+        transform: translateY(-2px);
+        content: url(../../../images/icons/arrow-right.svg);
+    }
+}
+
+.active {
+    @extend .item;
+
+    background-color: var(--main-acc);
+    color: var(--main-back);
+    border-color: var(--main-acc);
+}
+
+@media screen and (min-width: 768px) {
+    .item {
+        width: 34px;
+        height: 34px;
+    }
+}
