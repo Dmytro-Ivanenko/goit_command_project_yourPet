@@ -19,7 +19,7 @@ import { useTheme } from '@mui/material/styles';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';
 import { ReactComponent as User } from '../../images/icons/user.svg';
 import CloseIcon from '@mui/icons-material/Close';
-import { useAuth } from 'shared/hooks/useAuth';
+//import { useAuth } from 'shared/hooks/useAuth';
 import styles from './AppBar.module.scss'
 
 import { AuthNavMobile, AuthNavDesktop } from 'components/NavBar/AuthNav';
