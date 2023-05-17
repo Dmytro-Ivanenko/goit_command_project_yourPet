@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "/goit_command_project_yourPet/static/css/main.29d384a0.css",
-    "main.js": "/goit_command_project_yourPet/static/js/main.9b27cb3d.js",
-    "static/js/852.c612a39c.chunk.js": "/goit_command_project_yourPet/static/js/852.c612a39c.chunk.js",
+    "main.js": "/goit_command_project_yourPet/static/js/main.97e929b8.js",
+    "static/css/490.364b403b.chunk.css": "/goit_command_project_yourPet/static/css/490.364b403b.chunk.css",
+    "static/js/490.3642942d.chunk.js": "/goit_command_project_yourPet/static/js/490.3642942d.chunk.js",
     "static/css/524.073eb865.chunk.css": "/goit_command_project_yourPet/static/css/524.073eb865.chunk.css",
     "static/js/524.ae93af48.chunk.js": "/goit_command_project_yourPet/static/js/524.ae93af48.chunk.js",
     "static/css/173.f810b74d.chunk.css": "/goit_command_project_yourPet/static/css/173.f810b74d.chunk.css",
@@ -16,12 +17,15 @@
     "static/js/586.149b2eb6.chunk.js": "/goit_command_project_yourPet/static/js/586.149b2eb6.chunk.js",
     "static/media/inter-all-400-normal.woff": "/goit_command_project_yourPet/static/media/inter-all-400-normal.8c804432e8c67741aac0.woff",
     "static/media/selective-focus-black-white-adorable-cat-with-its-tongue-out.png": "/goit_command_project_yourPet/static/media/selective-focus-black-white-adorable-cat-with-its-tongue-out.7be82e75b544f65bb081.png",
+    "static/media/mainPage-pictures-tablet.jpg": "/goit_command_project_yourPet/static/media/mainPage-pictures-tablet.46f8d2402a3ddd496822.jpg",
+    "static/media/mainPage-pictures-desktop.jpg": "/goit_command_project_yourPet/static/media/mainPage-pictures-desktop.1d56d89dcf0a67952097.jpg",
     "static/media/manrope-all-700-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-700-normal.d91e7f04fb9989b48d7d.woff",
     "static/media/manrope-all-600-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-600-normal.286bddfb4929556d954f.woff",
     "static/media/manrope-all-400-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-400-normal.29812aea39915b828ff1.woff",
     "static/media/manrope-all-500-normal.woff": "/goit_command_project_yourPet/static/media/manrope-all-500-normal.7e934ed09005e51147e2.woff",
     "static/media/inter-latin-ext-400-normal.woff2": "/goit_command_project_yourPet/static/media/inter-latin-ext-400-normal.3a7a76525d98d25962eb.woff2",
     "static/media/inter-latin-400-normal.woff2": "/goit_command_project_yourPet/static/media/inter-latin-400-normal.be7cb18dc7caf47cf7e9.woff2",
+    "static/media/mainPage-pictures-mobile.jpg": "/goit_command_project_yourPet/static/media/mainPage-pictures-mobile.f54543084c6a06e65df3.jpg",
     "static/media/logo.svg": "/goit_command_project_yourPet/static/media/logo.ff0314ccd00c94213bc98aee007e8199.svg",
     "static/media/manrope-latin-700-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-latin-700-normal.19fa7bed40332c82ef91.woff2",
     "static/media/manrope-latin-400-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-latin-400-normal.2cfae0fb4662deefa552.woff2",
@@ -72,8 +76,9 @@
     "static/media/plus-small.svg": "/goit_command_project_yourPet/static/media/plus-small.650a349c690cb7c18bf2c342e62dc09b.svg",
     "static/media/plus.svg": "/goit_command_project_yourPet/static/media/plus.c38c5c6716210f10cb288a5bc889eca6.svg",
     "main.29d384a0.css.map": "/goit_command_project_yourPet/static/css/main.29d384a0.css.map",
-    "main.9b27cb3d.js.map": "/goit_command_project_yourPet/static/js/main.9b27cb3d.js.map",
-    "852.c612a39c.chunk.js.map": "/goit_command_project_yourPet/static/js/852.c612a39c.chunk.js.map",
+    "main.97e929b8.js.map": "/goit_command_project_yourPet/static/js/main.97e929b8.js.map",
+    "490.364b403b.chunk.css.map": "/goit_command_project_yourPet/static/css/490.364b403b.chunk.css.map",
+    "490.3642942d.chunk.js.map": "/goit_command_project_yourPet/static/js/490.3642942d.chunk.js.map",
     "524.073eb865.chunk.css.map": "/goit_command_project_yourPet/static/css/524.073eb865.chunk.css.map",
     "524.ae93af48.chunk.js.map": "/goit_command_project_yourPet/static/js/524.ae93af48.chunk.js.map",
     "173.f810b74d.chunk.css.map": "/goit_command_project_yourPet/static/css/173.f810b74d.chunk.css.map",
@@ -88,6 +93,6 @@
   },
   "entrypoints": [
     "static/css/main.29d384a0.css",
-    "static/js/main.9b27cb3d.js"
+    "static/js/main.97e929b8.js"
   ]
 }
