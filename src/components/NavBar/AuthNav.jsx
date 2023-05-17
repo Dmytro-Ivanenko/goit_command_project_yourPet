@@ -32,10 +32,11 @@ export const AuthNavDesktop = () => {
   return (
     <Box className={styles.authNavBoxDesktop}
     >
-      <StyledNavLink to="/register">Registration</StyledNavLink>
+      
       <StyledNavLink to="/login">
         Log In <PetsOutlinedIcon sx={{ transform: 'rotate(25deg)' }} />
       </StyledNavLink>
+      <StyledNavLink to="/register">Registration</StyledNavLink>
     </Box>
   );
 };
