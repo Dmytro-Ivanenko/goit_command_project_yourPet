@@ -41,7 +41,6 @@ const NoticesPage = () => {
             // reset pagination for category change
             prevPathname.current = pathname;
             setCurrentPage(0);
-            // keep filters between categories
         }
 
         const getApiNotices = async () => {
@@ -63,7 +62,6 @@ const NoticesPage = () => {
                 });
 
                 // Filter by age
-
                 const filteredNotices = filterByAge(notices, age);
 
                 // Frontend pagination logic, should become obsolete in the future

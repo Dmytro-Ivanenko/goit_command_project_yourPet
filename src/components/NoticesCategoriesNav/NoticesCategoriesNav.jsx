@@ -30,7 +30,7 @@ const NoticesCategoriesNav = () => {
                 <ul className={styles.list}>
                     {privateCategories.map(({ to, text }) => (
                         <li key={to}>
-                            <Link to={to} className={getFullName(pathname, to)}>
+                            <Link to={{ pathname: to, search }} className={getFullName(pathname, to)}>
                                 {text}
                             </Link>
                         </li>
