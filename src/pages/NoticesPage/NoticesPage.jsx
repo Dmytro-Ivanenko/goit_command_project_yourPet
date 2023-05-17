@@ -2,9 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { getSellNotices, getLostNotices, getInGoodHandsNotices } from 'services/api/notices';
-import { filterNotices } from './filter';
-
 import PageTitle from 'shared/components/PageTitle';
 import SearchForm from 'shared/components/SearchForm';
 import Pagination from 'shared/components/Pagination';
@@ -14,6 +11,9 @@ import NoticesFilters from 'components/NoticesFilters';
 import AddPetButton from 'components/AddPetButton';
 import SelectedFilters from 'components/SelectedFilters';
 import { calcAge } from 'shared/helpers/calcAge';
+
+import { filterByAge, getFilterValues } from './filter';
+import { getNotices, applySearchParams } from 'shared/helpers';
 
 import styles from './notices-page.module.scss';
 
@@ -29,16 +29,15 @@ const NoticesPage = () => {
     const query = searchParams.get('query');
     const gender = searchParams.get('gender');
     const age = searchParams.get('age');
-    console.log(searchParams);
 
     const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
 
     useEffect(() => {
+        setIsLoading(true);
+
         const path = pathname.split('/');
         const category = path[path.length - 1];
-
-        setIsLoading(true);
 
         if (prevPathname.current !== pathname) {
             // reset pagination for category change
@@ -48,17 +47,7 @@ const NoticesPage = () => {
 
         const getApiNotices = async () => {
             try {
-                const getNotices = async () => {
-                    if (category === 'sell') {
-                        return await getSellNotices(query, gender);
-                    } else if (category === 'lost-found') {
-                        return await getLostNotices(query, gender);
-                    } else if (category === 'for-free') {
-                        return await getInGoodHandsNotices(query, gender);
-                    }
-                };
-
-                const notices = await getNotices();
+                const notices = await getNotices(category, query, gender);
 
                 if (notices.length === 0) {
                     setItems(0);
@@ -75,7 +64,7 @@ const NoticesPage = () => {
                 });
 
                 // Filter by age
-                const filteredNotices = filterNotices(notices, age);
+                const filteredNotices = filterByAge(notices, age);
 
                 // Frontend pagination logic, should become obsolete in the future
                 setPageCount(Math.ceil(filteredNotices.length / PER_PAGE));
@@ -94,28 +83,7 @@ const NoticesPage = () => {
     }, [currentPage, pathname, query, gender, age]);
 
     const handleFilterChange = target => {
-        const { value, checked, name } = target;
-
-        if (name === 'gender') {
-            if (checked) {
-                searchParams.set('gender', value);
-                setSearchParams(searchParams);
-                return;
-            }
-
-            searchParams.delete('gender');
-            setSearchParams(searchParams);
-            return;
-        }
-
-        if (checked) {
-            searchParams.set('age', value);
-            setSearchParams(searchParams);
-            return;
-        }
-
-        searchParams.delete('age');
-        setSearchParams(searchParams);
+        applySearchParams(target, searchParams, setSearchParams);
     };
 
     const handleFilterReset = value => {
@@ -138,15 +106,7 @@ const NoticesPage = () => {
         setCurrentPage(e.selected);
     };
 
-    const filters = [searchParams.get('age'), searchParams.get('gender')];
-
-    if (searchParams.get('age') === null) {
-        filters.splice(0, 1);
-    }
-
-    if (searchParams.get('gender') === null) {
-        filters.splice(filters.length - 1, 1);
-    }
+    const filters = getFilterValues(searchParams);
 
     return (
         <div className={styles.container}>
