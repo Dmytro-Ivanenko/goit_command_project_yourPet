@@ -10,7 +10,7 @@ import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 
 import { getNoticeById } from 'services/api/notices';
-import ModalContainer from 'shared/components/ModalContainer';
+import ModalApproveAction from 'shared/components/ModalApproveAction';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
@@ -133,9 +133,9 @@ const NoticesCategoryItem = ({ item }) => {
                 </button>
             </li>
             {itemDetailedInfo && (
-                <ModalContainer onClose={() => setItemDetailedInfo(null)}>
+                <ModalApproveAction onClose={() => setItemDetailedInfo(null)}>
                     <ModalNotice item={itemDetailedInfo} />
-                </ModalContainer>
+                </ModalApproveAction>
             )}
         </>
     );
