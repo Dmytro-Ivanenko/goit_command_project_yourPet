@@ -26,10 +26,6 @@ const NoticesPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const query = searchParams.get('query');
-    const gender = searchParams.get('gender');
-    const age = searchParams.get('age');
-
     const { pathname, state } = useLocation();
     const prevPathname = useRef(pathname);
 
@@ -51,6 +47,10 @@ const NoticesPage = () => {
 
         const getApiNotices = async () => {
             try {
+                const query = searchParams.get('query');
+                const gender = searchParams.get('gender');
+                const age = searchParams.get('age');
+
                 const notices = await getNotices(category, query, gender);
 
                 if (notices.length === 0) {
@@ -84,7 +84,7 @@ const NoticesPage = () => {
         };
 
         getApiNotices();
-    }, [currentPage, pathname, query, gender, age]);
+    }, [currentPage, pathname, state, setSearchParams, searchParams]);
 
     const handleFilterChange = target => {
         applySearchParams(target, searchParams, setSearchParams);
