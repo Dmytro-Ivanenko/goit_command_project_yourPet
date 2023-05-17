@@ -1,10 +1,8 @@
 import React from 'react';
 
-// import Image from '../../components/Image/Image';
-
-import desktop from '../../images/pictures-desktop.jpg';
-import mobile from '../../images/pictures-mobile.jpg';
-import tablet from '../../images/pictures-tablet.jpg';
+import desktop from '../../images/mainPage-pictures-desktop.jpg';
+import mobile from '../../images/mainPage-pictures-mobile.jpg';
+import tablet from '../../images/mainPage-pictures-tablet.jpg';
 
 import styles from './MainPage.module.scss';
 
@@ -16,9 +14,9 @@ const MainPage = () => {
 
                 <picture>
                     <source srcSet={mobile} media="(max-width: 767px)" />
-                    <source srcSet={tablet} media="(min-width: 768px) and (max-width: 1199px)" />
-                    <source srcSet={desktop} media="(min-width: 1200px)" />
-                    <img src={desktop} alt="Cute puppy" />
+                    <source srcSet={tablet} media="(min-width: 768px) and (max-width: 1279px)" />
+                    <source srcSet={desktop} media="(min-width: 1280px)" />
+                    <img className={styles.imgMainPage} src={desktop} alt="Cute puppy" />
                 </picture>
             </div>
         </>
