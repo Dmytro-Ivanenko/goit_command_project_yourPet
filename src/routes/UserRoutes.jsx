@@ -24,7 +24,7 @@ const UserRoutes = () => {
                 <Route path="/main" element={<MainPage />} />
                 {/* <Route path="/friends" element={<OurFriendsPage />} /> */}
                 <Route path="/news" element={<NewsPage />}>
-                    <Route path="" element={<NewsList />} />
+                    {/* <Route path="" element={<NewsList />} /> */}
                 </Route>
                 <Route element={<PublicRoute />}>
                     <Route path="/login" element={<LoginPage />} />

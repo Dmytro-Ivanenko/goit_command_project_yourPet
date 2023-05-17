@@ -35,9 +35,14 @@ const SearchForm = ({ onSubmit }) => {
             return;
         }
 
-        onSubmit({ ...state });
+        onSubmit(state);
+
         setState({ ...initialState });
     };
+
+    // const handleFocus = () => {
+    //     onFocus();
+    // };
 
     const { query } = state;
 
@@ -50,6 +55,7 @@ const SearchForm = ({ onSubmit }) => {
                 value={query}
                 className={styles.input}
                 onChange={handleChange}
+                // onFocus={handleFocus}
                 placeholder="Search"
             />
 
