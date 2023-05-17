@@ -25,12 +25,12 @@ const UserRoutes = () => {
                 {/* <Route path="/news" element={<NewsPage />} /> */}
                 <Route element={<PublicRoute />}>
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />  
+                    <Route path="/register" element={<RegisterPage />} />
                 </Route>
 
-               {/* {<Route element={<PrivateRoute />}>*/}
-                     <Route path="/user" element={<UserPage />} /> 
-                    <Route path="/add-pet" element={<AddPetPage />} />
+                {/* {<Route element={<PrivateRoute />}>*/}
+                {/* <Route path="/user" element={<UserPage />} />  */}
+                {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
                 {/*  </Route> */}
 
                 <Route path="/notices" element={<NoticesPage />}>
