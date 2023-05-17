@@ -104,6 +104,17 @@
     }
 }
 
+.lowerBlockBtn {
+    @extend .lowerBlockItem;
+
+    border: none;
+
+    &.active {
+        background-color: var(--main-acc);
+        color: var(--main-light);
+    }
+}
+
 .icon {
     stroke: currentColor;
 }
@@ -117,7 +128,8 @@
 
     color: var(--header-font);
 
-    .lowerBlockItem:hover & {
+    .lowerBlockItem:hover &,
+    .lowerBlockBtn.active & {
         color: var(--main-light);
     }
 }

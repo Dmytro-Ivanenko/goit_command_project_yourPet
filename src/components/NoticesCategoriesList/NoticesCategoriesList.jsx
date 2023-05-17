@@ -9,11 +9,13 @@ const NoticesCategoriesList = () => {
 
     return (
         <>
-            <ul className={styles.list}>
-                {items.map(item => (
-                    <NoticesCategoryItem key={item._id} item={item} />
-                ))}
-            </ul>
+            {items && (
+                <ul className={styles.list}>
+                    {items.map(item => (
+                        <NoticesCategoryItem key={item._id} item={item} />
+                    ))}
+                </ul>
+            )}
         </>
     );
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useSearchParams } from 'react-router-dom';
 
 import { ReactComponent as ClockIcon } from 'images/icons/clock.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
@@ -13,9 +14,12 @@ import ModalContainer from 'shared/components/ModalContainer';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
+import { useAuth } from 'shared/hooks/useAuth';
 
 const NoticesCategoryItem = ({ item }) => {
+    const { isLoggedIn } = useAuth();
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const { category, location, date, sex, title, favorite, image, _id } = item;
 
@@ -30,6 +34,45 @@ const NoticesCategoryItem = ({ item }) => {
         }
     };
 
+    const handleFavoriteClick = () => {
+        if (!isLoggedIn) {
+            toast.error('Sign in to add to favorites');
+            return;
+        }
+
+        // add to favorite
+    };
+
+    const handleAgeClick = value => {
+        let paramValue = null;
+
+        if (value.includes('m')) {
+            paramValue = '3-12 m';
+        } else if (value === '1 year') {
+            paramValue = '1 year';
+        } else if (value.includes('years')) {
+            paramValue = '2 years +';
+        }
+
+        if (searchParams.get('age') === paramValue) {
+            searchParams.delete('age');
+        } else {
+            searchParams.set('age', paramValue);
+        }
+
+        setSearchParams(searchParams);
+    };
+
+    const handleGenderClick = value => {
+        if (searchParams.get('gender') === value) {
+            searchParams.delete('gender');
+        } else {
+            searchParams.set('gender', value);
+        }
+
+        setSearchParams(searchParams);
+    };
+
     return (
         <>
             <li className={styles.item}>
@@ -37,7 +80,10 @@ const NoticesCategoryItem = ({ item }) => {
                     <img className={styles.img} src={image} alt="pet" />
                     <div className={styles.upperBlock}>
                         <p className={styles.upperBlockText}>{category}</p>
-                        <button className={favorite ? `${styles.btn} ${styles.favorite}` : styles.btn}>
+                        <button
+                            onClick={handleFavoriteClick}
+                            className={favorite ? `${styles.btn} ${styles.favorite}` : styles.btn}
+                        >
                             <HeartIcon className={styles.btnIcon} width={24} height={24} />
                         </button>
                     </div>
@@ -47,16 +93,36 @@ const NoticesCategoryItem = ({ item }) => {
                             <span className={styles.label}>{location}</span>
                         </li>
                         <li className={styles.lowerBlockItem}>
-                            <ClockIcon className={styles.icon} width={24} height={24} />
-                            <span className={styles.label}>{date}</span>
+                            <button
+                                type="button"
+                                className={
+                                    searchParams.get('age')
+                                        ? `${styles.lowerBlockBtn} ${styles.active}`
+                                        : styles.lowerBlockBtn
+                                }
+                                onClick={() => handleAgeClick(date)}
+                            >
+                                <ClockIcon className={styles.icon} width={24} height={24} />
+                                <span className={styles.label}>{date}</span>
+                            </button>
                         </li>
                         <li className={styles.lowerBlockItem}>
-                            {sex === 'female' ? (
-                                <FemaleIcon className={styles.icon} width={24} height={24} />
-                            ) : (
-                                <MaleIcon className={styles.icon} width={24} height={24} />
-                            )}
-                            <span className={styles.label}>{sex}</span>
+                            <button
+                                type="button"
+                                className={
+                                    searchParams.get('gender')
+                                        ? `${styles.lowerBlockBtn} ${styles.active}`
+                                        : styles.lowerBlockBtn
+                                }
+                                onClick={() => handleGenderClick(sex)}
+                            >
+                                {sex === 'female' ? (
+                                    <FemaleIcon className={styles.icon} width={24} height={24} />
+                                ) : (
+                                    <MaleIcon className={styles.icon} width={24} height={24} />
+                                )}
+                                <span className={styles.label}>{sex}</span>
+                            </button>
                         </li>
                     </ul>
                 </div>
