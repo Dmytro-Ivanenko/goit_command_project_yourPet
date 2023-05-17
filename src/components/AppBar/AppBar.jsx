@@ -19,8 +19,8 @@ import { useTheme } from '@mui/material/styles';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';
 import { ReactComponent as User } from '../../images/icons/user.svg';
 import CloseIcon from '@mui/icons-material/Close';
-//import { useAuth } from 'shared/hooks/useAuth';
-import styles from './AppBar.module.scss'
+import { useAuth } from 'shared/hooks/useAuth';
+import styles from './AppBar.module.scss';
 
 import { AuthNavMobile, AuthNavDesktop } from 'components/NavBar/AuthNav';
 import { UserMenuMobile } from 'components/NavBar/UserMenu';
@@ -39,9 +39,9 @@ function ResponsiveAppBar() {
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
 
-    // const { isLoggedIn } = useAuth();
-    const isLoggedIn = true //temporary
-    console.log('isLoggedIn', isLoggedIn)
+    const { isLoggedIn } = useAuth();
+    // const isLoggedIn = true //temporary
+    // console.log('isLoggedIn', isLoggedIn)
 
     const padding = {
         desktop: '16px',
@@ -64,7 +64,7 @@ function ResponsiveAppBar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = (name) => {
+    const handleCloseNavMenu = name => {
         setAnchorElNav(null);
         setActiveButton(name);
     };
@@ -74,7 +74,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: "var(--main-back)" }}>
+        <AppBar position="static" sx={{ backgroundColor: 'var(--main-back)' }}>
             <Container maxWidth="xl" sx={containerStyles}>
                 <Toolbar disableGutters sx={{ gap: '8px' }}>
                     <Typography
@@ -84,14 +84,13 @@ function ResponsiveAppBar() {
                         to="/main"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', sm: "none", md: 'flex' },
+                            display: { xs: 'none', sm: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                             flexGrow: 1,
-
                         }}
                     >
                         <Logo width={162} height={28} />
@@ -117,15 +116,22 @@ function ResponsiveAppBar() {
                     </Typography>
 
                     {/* Main menu */}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: "none", md: 'none', lg: "flex" }, gap: '40px', alignItems: "center" }}>
+                    <Box
+                        sx={{
+                            flexGrow: 1,
+                            display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' },
+                            gap: '40px',
+                            alignItems: 'center',
+                        }}
+                    >
                         {pages.map(({ name, path }) => (
                             <Button
                                 key={name}
                                 onClick={() => handleCloseNavMenu(name)}
                                 sx={{
-                                    my: 2, color: isActiveButton === name ?
-                                        "var(--header-acc)" : "var(--header-font)",
-                                    display: 'block'
+                                    my: 2,
+                                    color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
+                                    display: 'block',
                                 }}
                                 component={NavLink}
                                 to={path}
@@ -135,41 +141,45 @@ function ResponsiveAppBar() {
                         ))}
                     </Box>
                     {/* User menu descktop */}
-                    {isLoggedIn ? <Box sx={{ flexGrow: 0 }}>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <User alt="Remy Sharp" />
-                                </IconButton>
-                            </Tooltip>
-                            <span className={styles.userName}>Anna</span>
+                    {isLoggedIn ? (
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <Tooltip title="Open settings">
+                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                        <User alt="Remy Sharp" />
+                                    </IconButton>
+                                </Tooltip>
+                                <span className={styles.userName}>Anna</span>
+                            </Box>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map(setting => (
+                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center">{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                         </Box>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map(setting => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box> : <AuthNavDesktop />}
+                    ) : (
+                        <AuthNavDesktop />
+                    )}
 
                     {/* Burger menu */}
-                    <Box sx={{ flexGrow: 0, display: { xs: 'flex', sm: "flex", md: 'flex', lg: "none" } }}>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'none' } }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -197,36 +207,47 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', sm: 'block', md: 'flex', lg: 'none' }, width: "100vw", maxWidth: 'none',
+                                display: { xs: 'block', sm: 'block', md: 'flex', lg: 'none' },
+                                width: '100vw',
+                                maxWidth: 'none',
                                 maxHeight: 'none',
                             }}
                             classes={{ paper: 'mobile-menu' }}
                             className="mobile-menu"
                         >
-                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
                                 <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
                                     <Logo width={116} height={20} />
                                 </IconButton>
-                                <IconButton onClick={handleCloseNavMenu}
+                                <IconButton
+                                    onClick={handleCloseNavMenu}
                                     sx={{
-                                        color: "var(--header-acc)",
-                                        width: "24px", height: "24px"
-                                    }}>
+                                        color: 'var(--header-acc)',
+                                        width: '24px',
+                                        height: '24px',
+                                    }}
+                                >
                                     <CloseIcon />
                                 </IconButton>
                             </Box>
-                            {isLoggedIn ? <UserMenuMobile closeNavMenu={handleCloseNavMenu} /> :
-                                <AuthNavMobile closeNavMenu={handleCloseNavMenu} />}
+                            {isLoggedIn ? (
+                                <UserMenuMobile closeNavMenu={handleCloseNavMenu} />
+                            ) : (
+                                <AuthNavMobile closeNavMenu={handleCloseNavMenu} />
+                            )}
 
                             {pages.map(({ name, path }) => (
-                                <MenuItem key={name}
+                                <MenuItem
+                                    key={name}
                                     onClick={() => handleCloseNavMenu(name)}
                                     sx={{
-                                        my: 2, color: isActiveButton === name ?
-                                            "var(--header-acc)" : "var(--header-font)",
-                                        display: 'block'
+                                        my: 2,
+                                        color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
+                                        display: 'block',
                                     }}
-                                    component={NavLink} to={path}>
+                                    component={NavLink}
+                                    to={path}
+                                >
                                     <Typography textAlign="center">{name}</Typography>
                                 </MenuItem>
                             ))}
