@@ -15,6 +15,12 @@ const SearchForm = ({ onSubmit }) => {
     const handleChange = e => {
         const { name, value } = e.target;
 
+        // Change variation
+        if (!value) {
+            handleClear();
+            return;
+        }
+
         setState(prevState => ({
             ...prevState,
             [name]: value,
@@ -25,6 +31,14 @@ const SearchForm = ({ onSubmit }) => {
         setState({ ...initialState });
         onSubmit({ ...initialState });
     };
+
+    // Blur variation
+    // const handleBlur = e => {
+    //     const { value } = e.target;
+    //     if (!value) {
+    //         handleClear();
+    //     }
+    // };
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -50,6 +64,7 @@ const SearchForm = ({ onSubmit }) => {
                 value={query}
                 className={styles.input}
                 onChange={handleChange}
+                // onBlur={handleBlur}
                 placeholder="Search"
             />
 
