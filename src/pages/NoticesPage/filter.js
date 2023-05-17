@@ -1,4 +1,4 @@
-export const filterNotices = (notices, selectedFilters) => {
+export const filterByAge = (notices, selectedFilters) => {
     return notices.filter(notice => {
         if (!selectedFilters) {
             return true;
@@ -20,14 +20,12 @@ export const filterNotices = (notices, selectedFilters) => {
     });
 };
 
-export const getGender = filters => {
-    if (filters.includes('male') && !filters.includes('female')) {
-        return 'male';
-    }
+export const getFilterValues = searchParams => {
+    return Array.from(searchParams.entries()).reduce((acc, entry) => {
+        if (entry[0] !== 'query') {
+            acc.push(entry[1]);
+        }
 
-    if (!filters.includes('male') && filters.includes('female')) {
-        return 'female';
-    }
-
-    return '';
+        return acc;
+    }, []);
 };

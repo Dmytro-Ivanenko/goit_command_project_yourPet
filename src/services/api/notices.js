@@ -18,7 +18,6 @@ export const getNoticeById = async id => {
 };
 
 export const getSellNotices = async (query, gender) => {
-    console.log(gender);
     const { data } = await axios.get(`/notice/sell`, {
         params: {
             query,
