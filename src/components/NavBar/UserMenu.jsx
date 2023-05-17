@@ -4,7 +4,7 @@ import { logOut } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import { useAuth } from 'shared/hooks/useAuth';
 
-import { Box } from '@mui/material';
+//import { Box } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import { ReactComponent as User } from '../../images/icons/user.svg';
@@ -18,7 +18,7 @@ import { UserName } from './UserMenu.styled';
 import { UserMenuBoxMobile, UserMenuBoxDesktop } from './UserMenu.styled';
 
 export const UserMenuMobile = ({handleOpenUserMenu}) => {
-  const { user } = useAuth();
+ // const { user } = useAuth();
   // const dispatch = useDispatch();
   // const handleLogOut = () => {
   //   dispatch(logOut());
