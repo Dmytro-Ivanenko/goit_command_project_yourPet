@@ -40,7 +40,7 @@ function ResponsiveAppBar() {
     // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
 
     // const { isLoggedIn } = useAuth();
-    const isLoggedIn = true
+    const isLoggedIn = true //temporary
     console.log('isLoggedIn', isLoggedIn)
 
     const padding = {
