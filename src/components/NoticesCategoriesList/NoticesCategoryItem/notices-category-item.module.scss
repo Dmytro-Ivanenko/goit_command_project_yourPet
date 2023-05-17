@@ -89,7 +89,6 @@
 
 .lowerBlockItem {
     width: 80px;
-    height: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,6 +119,7 @@
 }
 
 .label {
+    max-width: 60%;
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
@@ -132,6 +132,10 @@
     .lowerBlockBtn.active & {
         color: var(--main-light);
     }
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .title {
