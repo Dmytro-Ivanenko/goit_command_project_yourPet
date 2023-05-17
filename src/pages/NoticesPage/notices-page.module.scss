@@ -38,6 +38,7 @@
     }
 
     .wrapper {
+        max-width: 320px;
         display: flex;
         justify-content: flex-end;
         align-items: flex-start;
@@ -58,6 +59,7 @@
     }
 
     .wrapper {
+        max-width: 100%;
         align-items: center;
         flex-direction: row-reverse;
     }

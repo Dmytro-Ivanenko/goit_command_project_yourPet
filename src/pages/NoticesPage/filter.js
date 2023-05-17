@@ -1,6 +1,6 @@
 export const filterNotices = (notices, selectedFilters) => {
     return notices.filter(notice => {
-        if (selectedFilters.length === 0) {
+        if (!selectedFilters) {
             return true;
         }
 
@@ -31,5 +31,3 @@ export const getGender = filters => {
 
     return '';
 };
-
-// export default { filterNotices, getGender };
