@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-// import PublicRoute from 'routes/PublicRoute';
-// import PrivateRoute from 'routes/PrivateRoute';
+import PublicRoute from 'routes/PublicRoute';
+import PrivateRoute from 'routes/PrivateRoute';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
