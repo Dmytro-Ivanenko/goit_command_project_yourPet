@@ -27,10 +27,10 @@ const UserRoutes = () => {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                 </Route>
-                <Route element={<PrivateRoute />}>
+                {/* <Route element={<PrivateRoute />}> */}
                     <Route path="/user" element={<UserPage />} />
                     {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
-                </Route>
+                {/* </Route> */}
 
                 <Route path="/notices" element={<NoticesPage />}>
                     <Route index element={<Navigate to="/notices/sell" replace />} />

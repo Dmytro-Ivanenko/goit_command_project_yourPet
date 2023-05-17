@@ -7,14 +7,18 @@ const Userpage = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.wrapUser}>
+                <div className={styles.wrapUser}>
                 <h2 className={styles.title}>My information:</h2>
-                <UserCard />
             </div>
-                <div className={styles.wrapPets} >
-                    <h2 className={styles.title}>My pets:</h2>
-                    <Addpet />
-                </div>
+            <UserCard />
+            </div>
+            <div className={styles.wrapAddPets}>
+                <h2 className={styles.titlePets}>My pets:</h2>
+                <Addpet />
+            </div>
+            <div className={styles.wrapPets}>
                 <Pets/>
+            </div>
         </div>
     )
 }

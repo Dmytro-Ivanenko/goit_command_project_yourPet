@@ -1,5 +1,5 @@
 import styles from './addpet.module.scss';
-import plus from '../../../images/icons/plus-small.svg'
+import plus from '../../../images/icons/plus-small.svg';
 import { Link } from 'react-router-dom';
 
 const Addpet = () => {

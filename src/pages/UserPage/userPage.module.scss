@@ -8,20 +8,29 @@
         align-items: center;
         letter-spacing: 0.04em;
         color: #000000;
+        margin-bottom: 18px;
+                @media only screen and (min-width: 768px) {
+                        margin-bottom: 24px;
+                    }
+        @media only screen and (min-width: 1280px) {
+                margin-bottom: 24px;
+            }
 }
 .wrapPets{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
-    margin-top: 40px;
     width: 280px;
     @media only screen and (min-width: 768px) {
             width: 704px;
-            margin-bottom: 20px;
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
         }
         @media only screen and (min-width: 1280px) {
             display: flex;
+            flex-direction: column;
             width: 821px;
         }
 
@@ -29,13 +38,57 @@
    
 }
 .mainContainer{
-    padding-left: 20px;
-    padding-right: 20px;
     margin-top: 40px;
-    margin-bottom: 137px;
+        @media only screen and (min-width: 768px) {
+                margin-top: 60px;   
+            }
             @media only screen and (min-width: 1280px) {
-                    display: flex;
-                    flex-direction: row;
+                display: flex;
+                margin-top: 62px;
+                }
+}
 
+.wrapUser{
+    @media only screen and (min-width: 1280px) {
+            display: flex;
+            flex-direction: column;
+            margin-right: 32px;
+    
+        }
+}
+.wrapAddPets{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 40px;
+        @media only screen and (min-width: 1280px) {
+                width: 821px;
+                height: 38px;
+                // margin-bottom: 24px;
+                margin-top: 0;
+                
+            }
+}
+.titlePets{
+        font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.04em;
+        color: #000000;
+}
+
+.wrapPets{
+            @media only screen and (min-width: 1280px) {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 27%;
+                left: 36%;
+            
                 }
 }
