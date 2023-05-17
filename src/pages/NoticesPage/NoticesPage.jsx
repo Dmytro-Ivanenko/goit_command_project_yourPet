@@ -10,10 +10,9 @@ import NoticesCategoriesNav from 'components/NoticesCategoriesNav';
 import NoticesFilters from 'components/NoticesFilters';
 import AddPetButton from 'components/AddPetButton';
 import SelectedFilters from 'components/SelectedFilters';
-import { calcAge } from 'shared/helpers/calcAge';
 
 import { filterByAge, getFilterValues } from './filter';
-import { getNotices, applySearchParams } from 'shared/helpers';
+import { getNotices, applySearchParams, calcAge } from 'shared/helpers';
 
 import styles from './notices-page.module.scss';
 
@@ -26,8 +25,11 @@ const NoticesPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const { pathname, state } = useLocation();
+    const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
+    const query = searchParams.get('query');
+    const gender = searchParams.get('gender');
+    const age = searchParams.get('age');
 
     useEffect(() => {
         setIsLoading(true);
@@ -40,17 +42,10 @@ const NoticesPage = () => {
             prevPathname.current = pathname;
             setCurrentPage(0);
             // keep filters between categories
-            if (state) {
-                setSearchParams(state);
-            }
         }
 
         const getApiNotices = async () => {
             try {
-                const query = searchParams.get('query');
-                const gender = searchParams.get('gender');
-                const age = searchParams.get('age');
-
                 const notices = await getNotices(category, query, gender);
 
                 if (notices.length === 0) {
@@ -68,6 +63,7 @@ const NoticesPage = () => {
                 });
 
                 // Filter by age
+
                 const filteredNotices = filterByAge(notices, age);
 
                 // Frontend pagination logic, should become obsolete in the future
@@ -84,7 +80,7 @@ const NoticesPage = () => {
         };
 
         getApiNotices();
-    }, [currentPage, pathname, state, setSearchParams, searchParams]);
+    }, [currentPage, pathname, query, gender, age]);
 
     const handleFilterChange = target => {
         applySearchParams(target, searchParams, setSearchParams);
