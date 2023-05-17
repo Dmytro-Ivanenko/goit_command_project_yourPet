@@ -11,7 +11,7 @@ const getFullName = (location, category) => {
     return res;
 };
 
-const NoticesCategoriesNav = () => {
+const NoticesCategoriesNav = ({ searchParams }) => {
     const { isLoggedIn } = useAuth();
     const { pathname } = useLocation();
 
@@ -20,7 +20,7 @@ const NoticesCategoriesNav = () => {
             <ul className={styles.list}>
                 {publicCategories.map(({ to, text }) => (
                     <li key={to}>
-                        <Link to={to} className={getFullName(pathname, to)}>
+                        <Link state={searchParams} to={to} className={getFullName(pathname, to)}>
                             {text}
                         </Link>
                     </li>

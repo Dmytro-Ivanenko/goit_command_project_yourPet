@@ -54,7 +54,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             type="checkbox"
                                             name="age"
                                             value="3-12 m"
-                                            checked={filters.get('age') === '3-12 m'}
+                                            checked={filters.includes('3-12 m')}
                                         />
                                         3-12 m
                                     </label>
@@ -65,7 +65,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             type="checkbox"
                                             name="age"
                                             value="1 year"
-                                            checked={filters.get('age') === '1 year'}
+                                            checked={filters.includes('1 year')}
                                         />
                                         1 year
                                     </label>
@@ -76,7 +76,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             type="checkbox"
                                             name="age"
                                             value="2 years +"
-                                            checked={filters.get('age') === '2 years +'}
+                                            checked={filters.includes('2 years +')}
                                         />
                                         2 year +
                                     </label>
@@ -101,7 +101,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             type="checkbox"
                                             name="gender"
                                             value="male"
-                                            checked={filters.get('gender') === 'male'}
+                                            checked={filters.includes('male')}
                                         />
                                         male
                                     </label>
@@ -112,7 +112,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             type="checkbox"
                                             name="gender"
                                             value="female"
-                                            checked={filters.get('gender') === 'female'}
+                                            checked={filters.includes('female')}
                                         />
                                         female
                                     </label>

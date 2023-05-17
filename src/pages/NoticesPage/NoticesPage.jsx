@@ -30,7 +30,7 @@ const NoticesPage = () => {
     const gender = searchParams.get('gender');
     const age = searchParams.get('age');
 
-    const { pathname } = useLocation();
+    const { pathname, state } = useLocation();
     const prevPathname = useRef(pathname);
 
     useEffect(() => {
@@ -43,6 +43,10 @@ const NoticesPage = () => {
             // reset pagination for category change
             prevPathname.current = pathname;
             setCurrentPage(0);
+            // keep filters between categories
+            if (state) {
+                setSearchParams(state);
+            }
         }
 
         const getApiNotices = async () => {
@@ -115,10 +119,10 @@ const NoticesPage = () => {
                 <SearchForm onSubmit={handleSubmit} />
             </div>
             <div className={styles.controls}>
-                <NoticesCategoriesNav />
+                <NoticesCategoriesNav searchParams={searchParams} />
                 <div className={styles.wrapper}>
                     <div className={styles.buttonWrapper}>
-                        <NoticesFilters onFilter={handleFilterChange} filters={searchParams} />
+                        <NoticesFilters filters={filters} onFilter={handleFilterChange} />
                         <AddPetButton />
                     </div>
                     {filters.length > 0 && <SelectedFilters filters={filters} handleReset={handleFilterReset} />}
