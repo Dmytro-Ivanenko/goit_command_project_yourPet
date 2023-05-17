@@ -13,14 +13,14 @@ const getFullName = (location, category) => {
 
 const NoticesCategoriesNav = () => {
     const { isLoggedIn } = useAuth();
-    const { pathname } = useLocation();
+    const { pathname, search } = useLocation();
 
     return (
         <div className={styles.wrapper}>
             <ul className={styles.list}>
                 {publicCategories.map(({ to, text }) => (
                     <li key={to}>
-                        <Link to={to} className={getFullName(pathname, to)}>
+                        <Link to={{ pathname: to, search }} className={getFullName(pathname, to)}>
                             {text}
                         </Link>
                     </li>
@@ -30,7 +30,7 @@ const NoticesCategoriesNav = () => {
                 <ul className={styles.list}>
                     {privateCategories.map(({ to, text }) => (
                         <li key={to}>
-                            <Link to={to} className={getFullName(pathname, to)}>
+                            <Link to={{ pathname: to, search }} className={getFullName(pathname, to)}>
                                 {text}
                             </Link>
                         </li>
