@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/goit_command_project_yourPet/static/css/main.29d384a0.css",
-    "main.js": "/goit_command_project_yourPet/static/js/main.97e929b8.js",
+    "main.css": "/goit_command_project_yourPet/static/css/main.eb75ed23.css",
+    "main.js": "/goit_command_project_yourPet/static/js/main.c865c63d.js",
     "static/css/490.364b403b.chunk.css": "/goit_command_project_yourPet/static/css/490.364b403b.chunk.css",
     "static/js/490.3642942d.chunk.js": "/goit_command_project_yourPet/static/js/490.3642942d.chunk.js",
     "static/css/524.073eb865.chunk.css": "/goit_command_project_yourPet/static/css/524.073eb865.chunk.css",
@@ -13,7 +13,7 @@
     "static/css/312.d398c2ae.chunk.css": "/goit_command_project_yourPet/static/css/312.d398c2ae.chunk.css",
     "static/js/312.7af8eac2.chunk.js": "/goit_command_project_yourPet/static/js/312.7af8eac2.chunk.js",
     "static/css/938.00193961.chunk.css": "/goit_command_project_yourPet/static/css/938.00193961.chunk.css",
-    "static/js/938.fb4c7912.chunk.js": "/goit_command_project_yourPet/static/js/938.fb4c7912.chunk.js",
+    "static/js/938.cc9bb9b4.chunk.js": "/goit_command_project_yourPet/static/js/938.cc9bb9b4.chunk.js",
     "static/js/586.149b2eb6.chunk.js": "/goit_command_project_yourPet/static/js/586.149b2eb6.chunk.js",
     "static/media/inter-all-400-normal.woff": "/goit_command_project_yourPet/static/media/inter-all-400-normal.8c804432e8c67741aac0.woff",
     "static/media/selective-focus-black-white-adorable-cat-with-its-tongue-out.png": "/goit_command_project_yourPet/static/media/selective-focus-black-white-adorable-cat-with-its-tongue-out.7be82e75b544f65bb081.png",
@@ -51,7 +51,7 @@
     "static/media/manrope-vietnamese-400-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-vietnamese-400-normal.4bb1be8af765fce74e9b.woff2",
     "static/media/manrope-vietnamese-600-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-vietnamese-600-normal.d86d0619b6cedaee1f68.woff2",
     "static/media/manrope-vietnamese-500-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-vietnamese-500-normal.4a61d2d684e0d20f3a24.woff2",
-    "static/media/pawprint.svg": "/goit_command_project_yourPet/static/media/pawprint.9665b17b7c7a662f73a37820f7257d33.svg",
+    "static/media/pawprint.svg": "/goit_command_project_yourPet/static/media/pawprint.3a5c67275e7310ced18e40cf8e055a86.svg",
     "static/media/inter-vietnamese-400-normal.woff2": "/goit_command_project_yourPet/static/media/inter-vietnamese-400-normal.789afb71d327988e2fc8.woff2",
     "static/media/manrope-cyrillic-ext-500-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-cyrillic-ext-500-normal.2913c5ba6f04bfe45217.woff2",
     "static/media/manrope-cyrillic-ext-600-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-cyrillic-ext-600-normal.7658d2e391c10ee91918.woff2",
@@ -75,8 +75,8 @@
     "static/media/cross-small.svg": "/goit_command_project_yourPet/static/media/cross-small.b4fa34af66444619d3ef2189b3a17546.svg",
     "static/media/plus-small.svg": "/goit_command_project_yourPet/static/media/plus-small.650a349c690cb7c18bf2c342e62dc09b.svg",
     "static/media/plus.svg": "/goit_command_project_yourPet/static/media/plus.c38c5c6716210f10cb288a5bc889eca6.svg",
-    "main.29d384a0.css.map": "/goit_command_project_yourPet/static/css/main.29d384a0.css.map",
-    "main.97e929b8.js.map": "/goit_command_project_yourPet/static/js/main.97e929b8.js.map",
+    "main.eb75ed23.css.map": "/goit_command_project_yourPet/static/css/main.eb75ed23.css.map",
+    "main.c865c63d.js.map": "/goit_command_project_yourPet/static/js/main.c865c63d.js.map",
     "490.364b403b.chunk.css.map": "/goit_command_project_yourPet/static/css/490.364b403b.chunk.css.map",
     "490.3642942d.chunk.js.map": "/goit_command_project_yourPet/static/js/490.3642942d.chunk.js.map",
     "524.073eb865.chunk.css.map": "/goit_command_project_yourPet/static/css/524.073eb865.chunk.css.map",
@@ -88,11 +88,11 @@
     "312.d398c2ae.chunk.css.map": "/goit_command_project_yourPet/static/css/312.d398c2ae.chunk.css.map",
     "312.7af8eac2.chunk.js.map": "/goit_command_project_yourPet/static/js/312.7af8eac2.chunk.js.map",
     "938.00193961.chunk.css.map": "/goit_command_project_yourPet/static/css/938.00193961.chunk.css.map",
-    "938.fb4c7912.chunk.js.map": "/goit_command_project_yourPet/static/js/938.fb4c7912.chunk.js.map",
+    "938.cc9bb9b4.chunk.js.map": "/goit_command_project_yourPet/static/js/938.cc9bb9b4.chunk.js.map",
     "586.149b2eb6.chunk.js.map": "/goit_command_project_yourPet/static/js/586.149b2eb6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.29d384a0.css",
-    "static/js/main.97e929b8.js"
+    "static/css/main.eb75ed23.css",
+    "static/js/main.c865c63d.js"
   ]
 }
