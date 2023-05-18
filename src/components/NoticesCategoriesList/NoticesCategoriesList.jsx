@@ -5,7 +5,7 @@ import NoticesCategoryItem from './NoticesCategoryItem';
 import styles from './notices-categories-list.module.scss';
 
 const NoticesCategoriesList = () => {
-    const items = useOutletContext() || [];
+    const items = useOutletContext();
 
     return (
         <>
