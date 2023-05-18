@@ -19,6 +19,11 @@
 }
 
 @media screen and (max-width: 767px) {
+    .wrapper {
+        min-height: 70px;
+        min-width: 40px;
+    }
+
     .controls {
         width: 280px;
         margin-left: auto;
