@@ -16,7 +16,7 @@ const NewsItem = ({ item }) => {
                 </div>
                 <div className={styles.flexContainer}>
                     <span className={styles.date}>{formatedDate}</span>
-                    <a className={styles.url} target="_blank" href={url}>
+                    <a className={styles.url} target="_blank" rel="noreferrer" href={url}>
                         Read more
                     </a>
                 </div>
