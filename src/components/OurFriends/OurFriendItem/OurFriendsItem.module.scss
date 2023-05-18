@@ -1,0 +1,118 @@
+ul {
+    list-style: none;
+}
+.section {
+    width: 1280px;
+    height: 1268px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.friendsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 32px;
+    }
+}
+  .card__frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 146px;
+      height: 104px;
+  }
+.card__wrap {
+    padding-left: 12px;
+}
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    text-align: center;
+    
+
+}
+
+.card {
+  
+    // padding: 16px 12px;
+
+    background: #ffffff;
+    box-shadow: var(--small-shadow);
+    border-radius: 40px;
+
+    &__title {
+        padding-top: 16px;
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        line-height: 27px;
+        color: var(--main-acc);
+        margin-bottom: 16px;
+    }
+
+    &__wrap {
+        display: flex;
+        gap: 20px;
+    }
+  
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__listItem {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        gap: 5px;
+        line-height: 16px;
+        color: #111111;
+     
+    }
+
+    &__label {
+        font-weight: 600;
+    }
+
+    address {
+        font-style: unset;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .card {
+            width: 336px;
+            height: 275px;
+        }
+        .card__listItem {
+           
+            font-size: 14px;
+        }
+                .card__frame {
+                   
+                    width: 124px;
+                    height: 88px;
+                }
+        width: 336px;
+        height: 275px;
+    }
+
+    @media (min-width: 1280px) {
+        width: 394px;
+        height: 287px;
+    }
+}
