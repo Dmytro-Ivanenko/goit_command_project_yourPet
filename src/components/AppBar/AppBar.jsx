@@ -61,9 +61,9 @@ function ResponsiveAppBar() {
     const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = event => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = event => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = name => {
         setAnchorElNav(null);
@@ -150,7 +150,7 @@ function ResponsiveAppBar() {
                     {isLoggedIn ? (
                         <Box sx={{ flexGrow: 0 }}>
                             <Box component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <IconButton sx={{ p: 0 }}>
                                     <User alt="Remy Sharp" />
                                 </IconButton>
                                 <span className={styles.userNameDesc}>{user.name ? (user.name) : user.email}</span>
