@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import {useDispatch } from "react-redux";
+import { clearAuthHeader } from "../../redux/auth/operations";
 import styles from './userCard.module.scss';
 import avatar from '../../images/Photo default.jpg';
 import logout from '../../images/icons/logout.svg';
 import edit from '../../images/icons/edit.svg'
-import camera from '../../images/icons/camera.svg'
+import camera from '../../images/icons/camera.svg';
+import cross from '../../images/icons/cross-small.svg';
+import logoutBtn from '../../images/icons/logout-white.svg';
 const UserCard = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -11,8 +15,23 @@ const UserCard = () => {
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
 
+const dispatch = useDispatch();
+    
+function openModal() {
+  document.getElementById("modal-backdrop").style.display = "block";
+  document.getElementById("modal").style.display = "block";
+}
+function closeModal() {
+  document.getElementById("modal-backdrop").style.display = "none";
+  document.getElementById("modal").style.display = "none";
+}
+
+const handleLogout = () => {
+    dispatch(clearAuthHeader());
+  };
 
     return (
+        
     <div className={styles.userCard}>
         <div className={styles.containerEditPhoto}>
             <div className={styles.wrap}>
@@ -74,9 +93,28 @@ const UserCard = () => {
                 </button>        
             </div>
         </div>
-        </div>
+            </div>
+        <div id='modal-backdrop' className={styles.modalBackdrop}></div>
+            
+        <div id="modal" className={styles.modal}>
+                <h2 className={styles.titleModal}>Already leaving?</h2>
+                <div className={styles.modalContent}>
+                    <button className={styles.crossButton} onClick={closeModal}>
+                        <img className={styles.icon} src={cross} width="24" height="24" alt="cross" />    
+                    </button>
+                <div className={styles.modalButtons}>
+                    <button className={styles.cancelButton} onClick={closeModal}>Cancel</button>
+                    <div className={styles.wrapBtnLogout}>
+                        <button className={styles.yesButton} onClick={handleLogout}>
+                                <span className={styles.titleBtnYes}>Yes</span>  
+                                <img className={styles.logoutModal} src={logoutBtn} width="24" height="24" alt="logaut" />
+                        </button>        
+                    </div>
+                </div>
+            </div>
+         </div>
          <div className={styles.conteinerLogaut}>
-            <button className={styles.logOut} type='submit'>
+            <button className={styles.logOut} id="logout-button" onClick={openModal}>
                     <img className={styles.icon} src={logout} width="24" height="24" alt="logaut" />Log Out
             </button>  
         </div>    
