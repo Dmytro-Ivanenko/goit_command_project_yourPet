@@ -15,7 +15,7 @@ const NoticesPage = lazy(() => import('pages/NoticesPage'));
 // const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
 
 const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
-// const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
 
@@ -34,7 +34,6 @@ const UserRoutes = () => {
                 <Route path="/user" element={<PrivateRoute redirectTo="/login" component={<UserPage />} />} />
 
                 {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
-
 
                 <Route path="/notices" element={<NoticesPage />}>
                     <Route index element={<Navigate to="/notices/sell" replace />} />
