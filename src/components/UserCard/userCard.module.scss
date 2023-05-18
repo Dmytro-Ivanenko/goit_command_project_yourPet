@@ -1,0 +1,192 @@
+.userCard{
+        width: 280px;
+        height: 517px;
+        background: #FFFFFF;    
+        box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+        border-radius: 20px;
+        @media only screen and (min-width: 768px) {
+            width: 704px;
+            height: 268px;
+            display: flex;
+            flex-direction:row-reverse;
+            justify-content: space-between;
+            
+        }
+}
+
+.userPhoto {
+    margin-left: 49px;
+    margin-right: 49px;
+    padding-top: 20px;
+    border-radius: 40px;
+            @media only screen and (min-width: 1280px) {
+                margin-left: 0;
+                margin-right: 0;
+            
+                }
+}
+
+
+
+.userDetails {
+
+    @media only screen and (min-width: 768px) {
+        padding-left: 20px;
+        padding-top: 20px;
+        }
+    @media only screen and (min-width: 1280px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 0;
+        padding-top: 0;
+        }
+
+}
+
+.userDetails label {
+    font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.04em;    
+        color: #111111;
+}
+
+.userDetails input {
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    position: relative;
+    width: 190px;
+    height: 28px;
+    border: 1px solid #54ADFF;
+    border-radius: 20px;
+    @media only screen and (min-width: 768px) {
+        width: 255px;
+        height: 32px;
+    }
+
+}
+.userData{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    padding-left: 8px;
+    padding-right: 8px;
+    @media only screen and (min-width: 768px) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+}
+
+.logOut{
+    margin-top: 21px;
+    background-color: transparent;
+    border: transparent;
+    font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.04em;  
+        color: #888888;
+            @media only screen and (min-width: 768px) {
+                margin-top: 0;
+                position: absolute;
+                top:51.5%
+            }
+            @media only screen and (min-width: 1280px) {
+               top: 87%;
+               left: 6.5%;  
+            }
+}
+.icon{
+    margin-left: 10px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+.btnEdit{
+    
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    
+}   
+.position{
+    position: relative;
+}
+
+@media (min-width: 1280px) {
+    .userCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 395px;
+        height: 520px;
+        flex-flow: column;
+    }
+
+
+
+    .userDetails {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .userData {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+}
+.editPhoto{
+        font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 22px;
+        letter-spacing: 0.04em;
+        color: #111111;
+}
+.wrapEditPhoto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+
+}
+
+
+input[type="file"]{
+    display: none;
+}
+.wrapImg{
+    display: flex;
+    cursor: pointer;
+}
+.camera{
+    display: flex;
+    justify-content: baseline;
+    margin-right: 8px;
+    margin-top: 5px;
+}
+.spanEdit{
+    padding-top: 7px;
+}

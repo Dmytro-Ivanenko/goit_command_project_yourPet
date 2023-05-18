@@ -7,12 +7,16 @@ import PrivateRoute from 'routes/PrivateRoute';
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+
 // const AddPetPage = lazy(() => import('pages/AddPetPage/AddPetPage'));
-// const UserPage = lazy(() => import('pages/UserPage/UserPage'));
+const UserPage = lazy(() => import('pages/UserPage/UserPage'));
+
 const NoticesPage = lazy(() => import('pages/NoticesPage'));
 // const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
+
 const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
 // const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
+
 const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
 
 const UserRoutes = () => {
@@ -22,15 +26,15 @@ const UserRoutes = () => {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/main" element={<MainPage />} />
                 {/* <Route path="/friends" element={<OurFriendsPage />} /> */}
+
                 <Route path="/news" element={<NewsPage />}></Route>
-                <Route element={<PublicRoute />}>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                </Route>
-                {/* <Route element={<PrivateRoute />}>
-                    <Route path="/user" element={<UserPage />} />
-                    <Route path="/add-pet" element={<AddPetPage />} />
-                </Route> */}
+
+                <Route path="/login" element={<PublicRoute redirectTo="/user" component={<LoginPage />} />} />
+                <Route path="/register" element={<PublicRoute redirectTo="/user" component={<RegisterPage />} />} />
+                <Route path="/user" element={<PrivateRoute redirectTo="/login" component={<UserPage />} />} />
+
+                {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
+
 
                 <Route path="/notices" element={<NoticesPage />}>
                     <Route index element={<Navigate to="/notices/sell" replace />} />
@@ -42,8 +46,7 @@ const UserRoutes = () => {
                         <Route path="own" element={<NoticesCategoriesList />} />
                     </Route>
                 </Route>
-
-                {/* <Route path="*" element={<NotFoundPage />} /> */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Suspense>
     );

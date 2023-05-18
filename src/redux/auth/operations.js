@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://petprojectonrendercom.onrender.com/api';
+// axios.defaults.baseURL = 'http://localhost:4000/api'; // For testing api locally
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -13,7 +14,7 @@ const clearAuthHeader = () => {
 
 export const registration = createAsyncThunk('auth/registration', async (credentials, thunkAPI) => {
     try {
-        const res = await axios.post('/auth/signup', credentials);
+        const res = await axios.post('/auth/register', credentials);
         setAuthHeader(res.data.token);
         return res.data;
     } catch (error) {
