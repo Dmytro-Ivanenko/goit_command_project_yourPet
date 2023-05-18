@@ -10,11 +10,12 @@ import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 
 import { getNoticeById } from 'services/api/notices';
+import { addFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { useAuth } from 'shared/hooks/useAuth';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
-import { useAuth } from 'shared/hooks/useAuth';
 
 const NoticesCategoryItem = ({ item }) => {
     const { isLoggedIn } = useAuth();
@@ -34,13 +35,18 @@ const NoticesCategoryItem = ({ item }) => {
         }
     };
 
-    const handleFavoriteClick = () => {
+    const handleFavoriteClick = async () => {
         if (!isLoggedIn) {
             toast.error('Sign in to add to favorites');
             return;
         }
 
         // add to favorite
+        try {
+            await addFavoriteNotice(item._id);
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
 
     const handleAgeClick = value => {

@@ -45,7 +45,8 @@ const NoticesPage = () => {
 
         const getApiNotices = async () => {
             try {
-                const notices = await getNotices(category, query, gender);
+                const page = currentPage + 1;
+                const notices = await getNotices(category, query, gender, page, PER_PAGE);
 
                 if (notices.length === 0) {
                     setItems(0);
@@ -71,9 +72,10 @@ const NoticesPage = () => {
                 const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
 
                 setItems(paginatedNotices);
-                setIsLoading(false);
             } catch (error) {
                 toast.error(error.message);
+            } finally {
+                setIsLoading(false);
             }
         };
 
