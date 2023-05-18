@@ -15,11 +15,9 @@ const SearchForm = ({ onSubmit, onClear }) => {
     const handleChange = e => {
         const { name, value } = e.target;
 
-
         if (!value) {
             handleClear();
             return;
-
         }
 
         setState(prevState => ({
@@ -32,7 +30,6 @@ const SearchForm = ({ onSubmit, onClear }) => {
         setState({ ...initialState });
 
         onClear({ ...initialState });
-
     };
 
     const handleSubmit = e => {

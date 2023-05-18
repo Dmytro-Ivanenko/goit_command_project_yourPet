@@ -8,7 +8,6 @@ import styles from './news_list.module.scss';
 const PER_PAGE = 12;
 
 const NewsList = ({ list }) => {
-    console.log('LIST prop', list);
     const [items, setItems] = useState(newsSource);
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
@@ -45,7 +44,7 @@ const NewsList = ({ list }) => {
                     <NewsItem key={item.id} item={item} />
                 ))}
             </ul>
-            <Pagination handlePageClick={onPageClick} pageCount={pageCount} />
+            <Pagination onPageClick={onPageClick} pageCount={pageCount} />
         </>
     );
 };
