@@ -16,17 +16,17 @@ export const UserMenuBoxDesktop = styled(Box)`
 `;
 
 export const UserMenuBoxMobile = styled(Box)`
-  @media screen and (max-width:767px) {
-  display: none;
-}
-  @media screen and (min-width:768px) and (max-width: 1279px) {
-    display: flex;
+  @media screen and (max-width:767px) { 
+   display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     padding: 0 15px;
-  }
-  @media screen and (min-width: 1280px) {
+    text-decoration: none;
+    margin-bottom:85px;
+}
+
+  @media screen and (min-width:768px)  {
     display: none;
   }
 `;

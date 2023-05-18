@@ -5,9 +5,6 @@
     border: none;
 
     position: absolute;
-    z-index: 90;
-    right: 0;
-    bottom: -240px;
 
     display: flex;
     flex-direction: column;
@@ -15,10 +12,34 @@
     justify-content: center;
     gap: 4px;
 
-    background: var(--main-acc);
+    background-color: var(--main-acc);
+    transition: background-color var(--timing);
 
-    &:hover {
+    &:hover,
+    &:focus {
+        background-color: transparent;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &::before {
+        content: '';
+
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+
         background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
     }
 }
 
@@ -38,6 +59,14 @@
     color: #ffffff;
 }
 
+@media screen and (max-width: 767px) {
+    .button {
+        z-index: 90;
+        right: 0;
+        bottom: -220px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .button {
         width: 129px;
@@ -45,7 +74,7 @@
         padding: 8px 15px;
         border-radius: 40px;
 
-        position: static;
+        position: relative;
 
         flex-direction: row;
         gap: 8px;

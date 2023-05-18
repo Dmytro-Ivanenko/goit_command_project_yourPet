@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 // import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -31,7 +31,7 @@ const pages = [
     { name: 'Our Friends', path: '/friends' },
 ];
 
-const settings = ['Profile', 'Logout'];
+// const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
     const theme = useTheme();
@@ -39,9 +39,10 @@ function ResponsiveAppBar() {
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
 
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, user } = useAuth();
     // const isLoggedIn = true //temporary
-    // console.log('isLoggedIn', isLoggedIn)
+    console.log('isLoggedIn', isLoggedIn);
+    console.log("user", user);
 
     const padding = {
         desktop: '16px',
@@ -60,9 +61,9 @@ function ResponsiveAppBar() {
     const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = event => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = event => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = name => {
         setAnchorElNav(null);
@@ -132,6 +133,11 @@ function ResponsiveAppBar() {
                                     my: 2,
                                     color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
+                                    fontFamily:"Manrope",
+                                    fontSize:'20px',
+                                    lineHeight: '1.35',
+                                    letterSpacing: '0.04em',
+
                                 }}
                                 component={NavLink}
                                 to={path}
@@ -143,13 +149,11 @@ function ResponsiveAppBar() {
                     {/* User menu descktop */}
                     {isLoggedIn ? (
                         <Box sx={{ flexGrow: 0 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                <Tooltip title="Open settings">
-                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                        <User alt="Remy Sharp" />
-                                    </IconButton>
-                                </Tooltip>
-                                <span className={styles.userName}>Anna</span>
+                            <Box component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
+                                <IconButton sx={{ p: 0 }}>
+                                    <User alt="Remy Sharp" />
+                                </IconButton>
+                                <span className={styles.userNameDesc}>{user.name ? (user.name) : user.email}</span>
                             </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -167,11 +171,11 @@ function ResponsiveAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map(setting => (
+                                {/* {settings.map(setting => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
-                                ))}
+                                ))} */}
                             </Menu>
                         </Box>
                     ) : (
@@ -190,6 +194,7 @@ function ResponsiveAppBar() {
                         >
                             <MenuIcon style={{ color: 'var(--header-acc)' }} />
                         </IconButton>
+                        {/* Mobile menu */}
                         <MobileMenu
                             id="menu-appbar"
                             anchorReference="none"
@@ -211,11 +216,12 @@ function ResponsiveAppBar() {
                                 width: '100vw',
                                 maxWidth: 'none',
                                 maxHeight: 'none',
+                                padding: 0,
                             }}
                             classes={{ paper: 'mobile-menu' }}
                             className="mobile-menu"
                         >
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} className={styles.myCustomBox}>
                                 <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
                                     <Logo width={116} height={20} />
                                 </IconButton>
@@ -244,11 +250,16 @@ function ResponsiveAppBar() {
                                         my: 2,
                                         color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
                                         display: 'block',
+                                        margin: 0,
                                     }}
+                                    className={styles.menuItemMobile}
                                     component={NavLink}
                                     to={path}
                                 >
-                                    <Typography textAlign="center">{name}</Typography>
+                                    <p
+                                        className={styles.menuTextMobile}>
+                                        {name}
+                                    </p>
                                 </MenuItem>
                             ))}
                         </MobileMenu>

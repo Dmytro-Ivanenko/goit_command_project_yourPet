@@ -1,0 +1,41 @@
+.addPet{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 20px;
+        gap: 8px;
+        width: 129px;
+        height: 40px;
+        background: #54ADFF;
+        border-radius: 40px;
+        border: transparent;
+        cursor: pointer;
+}
+.titleBtn{
+        width: 65px;
+        height: 22px;
+        font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.04em;
+        color: #FEF9F9;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+}
+.container{
+@media only screen and (min-width: 1280px) {
+        display: flex;
+        flex-direction: row;
+        width: 129px;
+        height: 40px;
+    }
+}
+.link{
+    text-decoration: none;
+}

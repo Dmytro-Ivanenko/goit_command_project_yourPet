@@ -10,10 +10,9 @@ import NoticesCategoriesNav from 'components/NoticesCategoriesNav';
 import NoticesFilters from 'components/NoticesFilters';
 import AddPetButton from 'components/AddPetButton';
 import SelectedFilters from 'components/SelectedFilters';
-import { calcAge } from 'shared/helpers/calcAge';
 
 import { filterByAge, getFilterValues } from './filter';
-import { getNotices, applySearchParams } from 'shared/helpers';
+import { getNotices, applySearchParams, calcAge } from 'shared/helpers';
 
 import styles from './notices-page.module.scss';
 
@@ -26,12 +25,11 @@ const NoticesPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const { pathname } = useLocation();
+    const prevPathname = useRef(pathname);
     const query = searchParams.get('query');
     const gender = searchParams.get('gender');
     const age = searchParams.get('age');
-
-    const { pathname } = useLocation();
-    const prevPathname = useRef(pathname);
 
     useEffect(() => {
         setIsLoading(true);
@@ -47,7 +45,8 @@ const NoticesPage = () => {
 
         const getApiNotices = async () => {
             try {
-                const notices = await getNotices(category, query, gender);
+                const page = currentPage + 1;
+                const notices = await getNotices(category, query, gender, page, PER_PAGE);
 
                 if (notices.length === 0) {
                     setItems(0);
@@ -73,9 +72,10 @@ const NoticesPage = () => {
                 const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
 
                 setItems(paginatedNotices);
-                setIsLoading(false);
             } catch (error) {
                 toast.error(error.message);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -106,19 +106,24 @@ const NoticesPage = () => {
         setCurrentPage(e.selected);
     };
 
+    const handleClear = () => {
+        searchParams.delete('query', query);
+        setSearchParams(searchParams);
+    };
+
     const filters = getFilterValues(searchParams);
 
     return (
         <div className={styles.container}>
             <PageTitle text={'Find your favorite pet'} />
             <div className={styles.formWrapper}>
-                <SearchForm onSubmit={handleSubmit} />
+                <SearchForm onSubmit={handleSubmit} onClear={handleClear} />
             </div>
             <div className={styles.controls}>
-                <NoticesCategoriesNav />
+                <NoticesCategoriesNav searchParams={searchParams} />
                 <div className={styles.wrapper}>
                     <div className={styles.buttonWrapper}>
-                        <NoticesFilters onFilter={handleFilterChange} filters={searchParams} />
+                        <NoticesFilters filters={filters} onFilter={handleFilterChange} />
                         <AddPetButton />
                     </div>
                     {filters.length > 0 && <SelectedFilters filters={filters} handleReset={handleFilterReset} />}
