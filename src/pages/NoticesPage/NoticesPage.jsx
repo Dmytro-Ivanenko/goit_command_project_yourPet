@@ -13,6 +13,7 @@ import SelectedFilters from 'components/SelectedFilters';
 
 import { filterByAge, getFilterValues } from './filter';
 import { getNotices, applySearchParams, calcAge } from 'shared/helpers';
+import { useAuth } from 'shared/hooks/useAuth';
 
 import styles from './notices-page.module.scss';
 
@@ -24,6 +25,7 @@ const NoticesPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
+    const { isLoggedIn } = useAuth();
 
     const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
@@ -37,6 +39,11 @@ const NoticesPage = () => {
         const path = pathname.split('/');
         const category = path[path.length - 1];
 
+        // should prevent unwanted behavior
+        if ((category === 'favorite' && !isLoggedIn) || (category === 'own' && !isLoggedIn)) {
+            return;
+        }
+
         if (prevPathname.current !== pathname) {
             // reset pagination for category change
             prevPathname.current = pathname;
@@ -49,9 +56,9 @@ const NoticesPage = () => {
                 const notices = await getNotices(category, query, gender, page, PER_PAGE);
 
                 if (notices.length === 0) {
-                    setItems(0);
-                    setCurrentPage(0);
+                    setItems([]);
                     setPageCount(0);
+                    setCurrentPage(0);
                     setIsLoading(false);
                     return;
                 }
@@ -80,7 +87,7 @@ const NoticesPage = () => {
         };
 
         getApiNotices();
-    }, [currentPage, pathname, query, gender, age]);
+    }, [currentPage, pathname, query, gender, age, isLoggedIn]);
 
     const handleFilterChange = target => {
         applySearchParams(target, searchParams, setSearchParams);
