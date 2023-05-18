@@ -9,16 +9,17 @@ const initialState = {
     query: '',
 };
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit, onClear }) => {
     const [state, setState] = useState({ ...initialState });
 
     const handleChange = e => {
         const { name, value } = e.target;
 
-        // Change variation
+
         if (!value) {
             handleClear();
             return;
+
         }
 
         setState(prevState => ({

@@ -11,11 +11,17 @@ const Header = () => {
         dispatch(logOut());
     };
 
+    const checkIfActiveLink = ({ isActive }) => {
+        return isActive ? `${styles.link} ${styles.active}` : ` ${styles.link}`;
+    };
+
     return (
         <div className={styles.header}>
             <NavLink to="/">{'LOGO  (nav to main page)'}</NavLink>
 
-            <NavLink to="/news">News</NavLink>
+            <NavLink className={checkIfActiveLink} to="/news">
+                News
+            </NavLink>
             <NavLink to="/notices">Find pet</NavLink>
             <NavLink to="/friends">Our friends</NavLink>
 
