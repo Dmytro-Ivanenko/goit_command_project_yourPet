@@ -9,11 +9,15 @@ const initialState = {
     query: '',
 };
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit, onClear }) => {
     const [state, setState] = useState({ ...initialState });
 
     const handleChange = e => {
         const { name, value } = e.target;
+
+        if (!value.length) {
+            onClear();
+        }
 
         setState(prevState => ({
             ...prevState,
@@ -23,6 +27,7 @@ const SearchForm = ({ onSubmit }) => {
 
     const handleClear = () => {
         setState({ ...initialState });
+        onClear();
     };
 
     const handleSubmit = e => {
@@ -37,12 +42,8 @@ const SearchForm = ({ onSubmit }) => {
 
         onSubmit(state);
 
-        setState({ ...initialState });
+        // setState({ ...initialState });
     };
-
-    // const handleFocus = () => {
-    //     onFocus();
-    // };
 
     const { query } = state;
 
@@ -55,7 +56,6 @@ const SearchForm = ({ onSubmit }) => {
                 value={query}
                 className={styles.input}
                 onChange={handleChange}
-                // onFocus={handleFocus}
                 placeholder="Search"
             />
 

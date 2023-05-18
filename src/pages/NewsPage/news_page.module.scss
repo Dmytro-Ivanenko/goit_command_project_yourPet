@@ -3,6 +3,16 @@
     padding-bottom: 80px;
 }
 
-.formWrapper {
-    margin-bottom: 20px;
+.errorContainer {
+    position: relative;
+    top: 100%;
+    left: 100%;
+    bottom: 100%;
+    right: 100%;
+}
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #baf7c4;
 }

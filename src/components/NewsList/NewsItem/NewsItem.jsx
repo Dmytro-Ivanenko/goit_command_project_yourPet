@@ -10,13 +10,13 @@ const NewsItem = ({ item }) => {
                 <img className={styles.img} src={imgUrl} alt="news" />
             </div>
             <div className={styles.content}>
-                {' '}
-                <h4 className={styles.title}>{title}</h4>
-                <p className={styles.text}>{text}</p>
+                <div>
+                    <h4 className={styles.title}>{title}</h4>
+                    <p className={styles.text}>{text}</p>
+                </div>
                 <div className={styles.flexContainer}>
-                    {' '}
                     <span className={styles.date}>{formatedDate}</span>
-                    <a className={styles.url} href={url}>
+                    <a className={styles.url} target="_blank" href={url}>
                         Read more
                     </a>
                 </div>
