@@ -25,16 +25,12 @@ const UserRoutes = () => {
                 <Route path="/main" element={<MainPage />} />
                 {/* <Route path="/friends" element={<OurFriendsPage />} /> */}
                 {/* <Route path="/news" element={<NewsPage />} /> */}
-                <Route element={<PublicRoute />}>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                </Route>
 
-                {/* <Route element={<PrivateRoute />}> */}
-                    <Route path="/user" element={<UserPage />} />
-                    {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
-                {/* </Route> */}
+                <Route path="/login" element={<PublicRoute redirectTo="/user" component={<LoginPage />} />} />
+                <Route path="/register" element={<PublicRoute redirectTo="/user" component={<RegisterPage />} />} />
+                <Route path="/user" element={<PrivateRoute redirectTo="/login" component={<UserPage />} />} />
 
+                {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
 
                 <Route path="/notices" element={<NoticesPage />}>
                     <Route index element={<Navigate to="/notices/sell" replace />} />
@@ -46,7 +42,6 @@ const UserRoutes = () => {
                         <Route path="own" element={<NoticesCategoriesList />} />
                     </Route>
                 </Route>
-
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Suspense>
