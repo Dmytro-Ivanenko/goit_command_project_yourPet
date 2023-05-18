@@ -1,4 +1,5 @@
 import { useAuth } from 'shared/hooks/useAuth';
+import { addFavoriteNotice } from 'services/api/favorites';
 
 import dogPicture from 'images/example/dog.jpg';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
@@ -9,14 +10,18 @@ import { toast } from 'react-toastify';
 const ModalNotice = ({ item }) => {
     const { isLoggedIn } = useAuth();
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if (!isLoggedIn) {
-            toast.error('Sign in to add your pets.');
+            toast.error('Sign in to add to favorites.');
             return;
         }
 
         // add to favorite
-        console.log('added');
+        try {
+            await addFavoriteNotice(item._id);
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
 
     const {

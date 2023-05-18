@@ -45,7 +45,8 @@ const NoticesPage = () => {
 
         const getApiNotices = async () => {
             try {
-                const notices = await getNotices(category, query, gender);
+                const page = currentPage + 1;
+                const notices = await getNotices(category, query, gender, page, PER_PAGE);
 
                 if (notices.length === 0) {
                     setItems(0);
@@ -71,9 +72,10 @@ const NoticesPage = () => {
                 const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
 
                 setItems(paginatedNotices);
-                setIsLoading(false);
             } catch (error) {
                 toast.error(error.message);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -104,13 +106,18 @@ const NoticesPage = () => {
         setCurrentPage(e.selected);
     };
 
+    const handleClear = () => {
+        searchParams.delete('query', query);
+        setSearchParams(searchParams);
+    };
+
     const filters = getFilterValues(searchParams);
 
     return (
         <div className={styles.container}>
             <PageTitle text={'Find your favorite pet'} />
             <div className={styles.formWrapper}>
-                <SearchForm onSubmit={handleSubmit} />
+                <SearchForm onSubmit={handleSubmit} onClear={handleClear} />
             </div>
             <div className={styles.controls}>
                 <NoticesCategoriesNav searchParams={searchParams} />
