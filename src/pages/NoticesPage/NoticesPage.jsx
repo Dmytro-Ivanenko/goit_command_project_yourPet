@@ -106,13 +106,18 @@ const NoticesPage = () => {
         setCurrentPage(e.selected);
     };
 
+    const handleClear = () => {
+        searchParams.delete('query', query);
+        setSearchParams(searchParams);
+    };
+
     const filters = getFilterValues(searchParams);
 
     return (
         <div className={styles.container}>
             <PageTitle text={'Find your favorite pet'} />
             <div className={styles.formWrapper}>
-                <SearchForm onSubmit={handleSubmit} />
+                <SearchForm onSubmit={handleSubmit} onClear={handleClear} />
             </div>
             <div className={styles.controls}>
                 <NoticesCategoriesNav searchParams={searchParams} />

@@ -37,10 +37,14 @@ const UserRoutes = () => {
                     <Route path="sell" element={<NoticesCategoriesList />} />
                     <Route path="lost-found" element={<NoticesCategoriesList />} />
                     <Route path="for-free" element={<NoticesCategoriesList />} />
-                    <Route element={<PrivateRoute />}>
-                        <Route path="favorite" element={<NoticesCategoriesList />} />
-                        <Route path="own" element={<NoticesCategoriesList />} />
-                    </Route>
+                    <Route
+                        path="favorite"
+                        element={<PrivateRoute redirectTo="/login" component={<NoticesCategoriesList />} />}
+                    />
+                    <Route
+                        path="own"
+                        element={<PrivateRoute redirectTo="/login" component={<NoticesCategoriesList />} />}
+                    />
                 </Route>
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
