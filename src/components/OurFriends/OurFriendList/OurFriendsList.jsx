@@ -1,8 +1,8 @@
 import React from 'react';
-import css from './OurFriendsList.module.scss';
+//import css from './OurFriendsList.module.scss';
 import OurFriendsItem from '../OurFriendItem/OurFriendsItem';
 
-const OurFriendsList = ({  }) => {
+const OurFriendsList = () => {
     return (<OurFriendsItem/>)
 };
 
