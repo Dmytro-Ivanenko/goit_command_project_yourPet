@@ -8,8 +8,6 @@ import registerSchema from './Yup';
 
 import { toast } from 'react-toastify';
 
-import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
-
 // Icons
 import { ReactComponent as EyeOpen } from 'images/icons/eye-open.svg';
 import { ReactComponent as EyeClosed } from 'images/icons/eye-closed.svg';
@@ -19,7 +17,6 @@ import styles from './RegisterForm.module.scss';
 const RegisterForm = () => {
     const [showPassword1, setShowPassword1] = useState(false); // стан для показу / приховування пароля першого інпута
     const [showPassword2, setShowPassword2] = useState(false); // стан для показу / приховування пароля другого інпута
-    const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
     const dispatch = useDispatch();
     const {
@@ -43,7 +40,6 @@ const RegisterForm = () => {
     const onSubmit = ({ email, password1 }) => {
         dispatch(registration({ email, password: password1 }))
             .then(response => {
-                setRegistrationSuccess(true);
                 reset();
             })
             .catch(error => {
@@ -128,7 +124,6 @@ const RegisterForm = () => {
                     </NavLink>
                 </p>
             </form>
-            {registrationSuccess && <ModalCongrats onClose={() => setRegistrationSuccess(false)} />}
         </div>
     );
 };
