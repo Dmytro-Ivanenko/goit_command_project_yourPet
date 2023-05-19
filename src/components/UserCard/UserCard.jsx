@@ -26,8 +26,8 @@ const initialState = {
 
 const getImgSrc = (oldAvatar, newAvatar) => {
     if (newAvatar) {
-        // аватар який ти збираєшся відправити ще не відображається
-        return newAvatar;
+        const blobUrl = URL.createObjectURL(newAvatar);
+        return blobUrl;
     }
 
     if (oldAvatar) {
@@ -39,12 +39,6 @@ const getImgSrc = (oldAvatar, newAvatar) => {
 
 const UserCard = () => {
     const [state, setState] = useState({ ...initialState });
-    // const [avatar, setAvatar] = useState(null);
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [birthday, setBirthday] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [city, setCity] = useState('');
     const [isFieldShown, setIsFieldShown] = useState(null);
     const { user } = useAuth();
 
@@ -64,17 +58,17 @@ const UserCard = () => {
     };
 
     const handleRedactClick = e => {
-        console.log(e.target);
-        const { name } = e.target.dataset;
-
+        const { name } = e.currentTarget;
         setIsFieldShown(name);
     };
 
     const handleFileSelect = e => {
+        console.log(e.target.files);
         const file = e.target.files[0];
+        const blob = new Blob([file], { type: file.type });
         setState(prevState => ({
             ...prevState,
-            avatar: file,
+            avatar: blob,
         }));
     };
 
@@ -116,13 +110,14 @@ const UserCard = () => {
         phone: oldPhone,
         city: oldCity,
     } = user;
+    const src = getImgSrc(oldAvatar, avatar);
 
     return (
         <div className={styles.userCard}>
             <div className={styles.containerEditPhoto}>
                 <div className={styles.wrap}>
                     <div className={styles.userPhoto}>
-                        <img src={getImgSrc(oldAvatar, avatar)} width="182" height="182" alt="Avatar" />
+                        <img id="img" src={src} width="182" height="182" alt="Avatar" />
                     </div>
                 </div>
                 <div className={styles.wrapEditPhoto}>
@@ -160,14 +155,8 @@ const UserCard = () => {
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldName}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick}>
-                                    <EditIcon
-                                        className={styles.iconEdit}
-                                        width="20"
-                                        height="20"
-                                        alt="edit"
-                                        data-name="name"
-                                    />
+                                <button className={styles.btnEdit} onClick={handleRedactClick} name="name">
+                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
                                 </button>
                             </>
                         )}
@@ -192,14 +181,8 @@ const UserCard = () => {
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldEmail}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick}>
-                                    <EditIcon
-                                        className={styles.iconEdit}
-                                        width="20"
-                                        height="20"
-                                        alt="edit"
-                                        data-name="email"
-                                    />
+                                <button className={styles.btnEdit} onClick={handleRedactClick} name="email">
+                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
                                 </button>
                             </>
                         )}
@@ -224,14 +207,8 @@ const UserCard = () => {
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldBirthday}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick}>
-                                    <EditIcon
-                                        className={styles.iconEdit}
-                                        width="20"
-                                        height="20"
-                                        alt="edit"
-                                        data-name="birthday"
-                                    />
+                                <button className={styles.btnEdit} onClick={handleRedactClick} name="birthday">
+                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
                                 </button>
                             </>
                         )}
@@ -256,14 +233,8 @@ const UserCard = () => {
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldPhone}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick}>
-                                    <EditIcon
-                                        className={styles.iconEdit}
-                                        width="20"
-                                        height="20"
-                                        alt="edit"
-                                        data-name="phone"
-                                    />
+                                <button className={styles.btnEdit} onClick={handleRedactClick} name="phone">
+                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
                                 </button>
                             </>
                         )}
@@ -288,14 +259,8 @@ const UserCard = () => {
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldCity}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick}>
-                                    <EditIcon
-                                        className={styles.iconEdit}
-                                        width="20"
-                                        height="20"
-                                        alt="edit"
-                                        data-name="city"
-                                    />
+                                <button className={styles.btnEdit} onClick={handleRedactClick} name="city">
+                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
                                 </button>
                             </>
                         )}
