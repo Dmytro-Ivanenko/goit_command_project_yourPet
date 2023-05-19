@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://petprojectonrendercom.onrender.com/api';
 // axios.defaults.baseURL = 'http://localhost:4000/api'; // For testing api locally
@@ -18,6 +19,11 @@ export const registration = createAsyncThunk('auth/registration', async (credent
         setAuthHeader(res.data.token);
         return res.data;
     } catch (error) {
+        const { response } = error;
+        if (response.status === 409) {
+            toast.error(response.data.message);
+        }
+
         return thunkAPI.rejectWithValue(error.message);
     }
 });
