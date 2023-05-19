@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { getUserNameFromEmail } from 'shared/helpers/getUserNameFromEmail';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -73,7 +74,8 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
+    const userName = getUserNameFromEmail(user.email);
+    
     return (
         <AppBar position="static" sx={{ backgroundColor: 'var(--main-back)' }}>
             <Container maxWidth="xl" sx={containerStyles}>
@@ -153,7 +155,7 @@ function ResponsiveAppBar() {
                                 <IconButton sx={{ p: 0 }}>
                                     <User alt="Remy Sharp" />
                                 </IconButton>
-                                <span className={styles.userNameDesc}>{user.name ? (user.name) : user.email}</span>
+                                <span className={styles.userNameDesc}>{user.name ? (user.name) : userName}</span>
                             </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -171,11 +173,6 @@ function ResponsiveAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {/* {settings.map(setting => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))} */}
                             </Menu>
                         </Box>
                     ) : (
