@@ -94,11 +94,15 @@ const UserCard = () => {
             }
         });
 
-        setIsFieldShown(null);
-        console.log(formData);
+        // Check if form data is not empty to prevent unnecessary api calls
+        const res = !formData.entries().next().done;
 
-        dispatch(updateUser(formData));
         setState({ ...initialState });
+        setIsFieldShown(null);
+
+        if (res) {
+            dispatch(updateUser(formData));
+        }
     };
 
     const { avatar, name, email, birthday, phone, city } = state;
