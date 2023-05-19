@@ -9,11 +9,16 @@ const initialState = {
     query: '',
 };
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit, onClear }) => {
     const [state, setState] = useState({ ...initialState });
 
     const handleChange = e => {
         const { name, value } = e.target;
+
+        if (!value) {
+            handleClear();
+            return;
+        }
 
         setState(prevState => ({
             ...prevState,
@@ -23,6 +28,8 @@ const SearchForm = ({ onSubmit }) => {
 
     const handleClear = () => {
         setState({ ...initialState });
+
+        onClear({ ...initialState });
     };
 
     const handleSubmit = e => {
@@ -36,7 +43,6 @@ const SearchForm = ({ onSubmit }) => {
         }
 
         onSubmit({ ...state });
-        setState({ ...initialState });
     };
 
     const { query } = state;

@@ -1,0 +1,28 @@
+.list {
+    width: 100%;
+    margin-bottom: 147px;
+    margin-top: 44px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 46px;
+}
+
+@media screen and (min-width: 768px) {
+    .list {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        column-gap: 24px;
+        margin-bottom: 60px;
+        margin-top: 62px;
+    }
+    .listContainer {
+        max-width: 1200px;
+        padding: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 82px;
+    }
+}

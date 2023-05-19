@@ -1,10 +1,19 @@
-import UserCard from "components/UserCard/UserCard";
-import Addpet from "components/UserCard/Addpet/Addpet";
-import Pets from "components/UserCard/Pets/Pets";
-
-import styles from './userPage.module.scss'
+import UserCard from 'components/UserCard/UserCard';
+import Addpet from 'components/UserCard/Addpet/Addpet';
+import Pets from 'components/UserCard/Pets/Pets';
+import styles from './userPage.module.scss';
+import { useLocation } from 'react-router';
+import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
+import { useState } from 'react';
 
 const Userpage = () => {
+    const { state } = useLocation();
+    const [showModal, setShowModal] = useState(state);
+
+    const handleClose = () => {
+        setShowModal(false);
+    };
+
     return (
         
         <div className={styles.mainContainer}>
@@ -21,8 +30,9 @@ const Userpage = () => {
             <div className={styles.wrapPets}>
                 <Pets/>
             </div>
-        </div>
-    )
-}
+            {showModal && <ModalCongrats onClose={handleClose} />}
+        </>
+    );
+};
 
 export default Userpage;
