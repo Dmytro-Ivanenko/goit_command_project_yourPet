@@ -30,7 +30,7 @@ const UserCard = () => {
     }
 
     const handleLogout = () => {
-        dispatch(clearAuthHeader());
+        dispatch(logOut());
     };
 
     return (

@@ -15,12 +15,11 @@ const Userpage = () => {
     };
 
     return (
-        
         <div className={styles.mainContainer}>
             <div className={styles.wrapUser}>
                 <div className={styles.wrapUser}>
-                <h2 className={styles.title}>My information:</h2>
-            </div>
+                    <h2 className={styles.title}>My information:</h2>
+                </div>
                 <UserCard />
             </div>
             <div className={styles.wrapAddPets}>
@@ -28,10 +27,10 @@ const Userpage = () => {
                 <Addpet />
             </div>
             <div className={styles.wrapPets}>
-                <Pets/>
+                <Pets />
             </div>
             {showModal && <ModalCongrats onClose={handleClose} />}
-        </>
+        </div>
     );
 };
 
