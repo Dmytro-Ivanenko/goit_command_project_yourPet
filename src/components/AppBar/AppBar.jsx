@@ -41,8 +41,8 @@ function ResponsiveAppBar() {
 
     const { isLoggedIn, user } = useAuth();
     // const isLoggedIn = true //temporary
-    console.log('isLoggedIn', isLoggedIn);
-    console.log("user", user);
+    // console.log('isLoggedIn', isLoggedIn);
+    // console.log("user", user);
 
     const padding = {
         desktop: '16px',
@@ -133,11 +133,10 @@ function ResponsiveAppBar() {
                                     my: 2,
                                     color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
-                                    fontFamily:"Manrope",
-                                    fontSize:'20px',
+                                    fontFamily: 'Manrope',
+                                    fontSize: '20px',
                                     lineHeight: '1.35',
                                     letterSpacing: '0.04em',
-
                                 }}
                                 component={NavLink}
                                 to={path}
@@ -149,11 +148,15 @@ function ResponsiveAppBar() {
                     {/* User menu descktop */}
                     {isLoggedIn ? (
                         <Box sx={{ flexGrow: 0 }}>
-                            <Box component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
+                            <Box
+                                component={NavLink}
+                                to="/user"
+                                sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
+                            >
                                 <IconButton sx={{ p: 0 }}>
                                     <User alt="Remy Sharp" />
                                 </IconButton>
-                                <span className={styles.userNameDesc}>{user.name ? (user.name) : user.email}</span>
+                                <span className={styles.userNameDesc}>{user.name ? user.name : user.email}</span>
                             </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -221,7 +224,10 @@ function ResponsiveAppBar() {
                             classes={{ paper: 'mobile-menu' }}
                             className="mobile-menu"
                         >
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} className={styles.myCustomBox}>
+                            <Box
+                                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}
+                                className={styles.myCustomBox}
+                            >
                                 <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
                                     <Logo width={116} height={20} />
                                 </IconButton>
@@ -256,10 +262,7 @@ function ResponsiveAppBar() {
                                     component={NavLink}
                                     to={path}
                                 >
-                                    <p
-                                        className={styles.menuTextMobile}>
-                                        {name}
-                                    </p>
+                                    <p className={styles.menuTextMobile}>{name}</p>
                                 </MenuItem>
                             ))}
                         </MobileMenu>
