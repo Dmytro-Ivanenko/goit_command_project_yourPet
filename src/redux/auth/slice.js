@@ -5,7 +5,7 @@ const extraActions = [registration, logIn, logOut, refreshUser, updateUser];
 const getActions = type => extraActions.map(action => action[type]);
 
 const initialState = {
-    user: { name: null, email: null, avatar: null, birthday: null, phone: null, city: null },
+    user: { name: null, email: null, avatar: null, birthday: null, phone: null, city: null, id: null },
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -27,7 +27,15 @@ const authSlice = createSlice({
                 state.isLoggedIn = true;
             })
             .addCase(logOut.fulfilled, state => {
-                state.user = { name: null, email: null };
+                state.user = {
+                    name: null,
+                    email: null,
+                    avatar: null,
+                    birthday: null,
+                    phone: null,
+                    city: null,
+                    id: null,
+                };
                 state.token = null;
                 state.isLoggedIn = false;
             })
