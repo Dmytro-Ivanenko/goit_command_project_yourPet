@@ -44,7 +44,12 @@ const NoticesCategoryItem = ({ item }) => {
         // add to favorite
         try {
             await addFavoriteNotice(item._id);
+            toast.success('Added successfully');
         } catch (error) {
+            if (error.response.status === 409) {
+                return toast.warn('Already in favorites');
+            }
+
             toast.error(error.message);
         }
     };
