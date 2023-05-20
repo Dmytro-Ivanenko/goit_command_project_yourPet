@@ -39,8 +39,6 @@ function ResponsiveAppBar() {
 
 
     const { isLoggedIn, user } = useAuth();
-    console.log('isLoggedIn', isLoggedIn);
-    console.log("user", user);
 
     const padding = {
         desktop: '16px',
@@ -63,7 +61,7 @@ function ResponsiveAppBar() {
     const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
- 
+
 
     const handleCloseNavMenu = name => {
         setAnchorElNav(null);
@@ -72,14 +70,14 @@ function ResponsiveAppBar() {
 
     const handleClickUserMenu = () => {
         setActiveButton('');
-        localStorage.setItem('activeButton','')
+        localStorage.setItem('activeButton', '')
     }
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
     const userName = getUserNameFromEmail(user.email);
-    
+
     return (
         <AppBar position="static" sx={{ backgroundColor: 'var(--main-back)' }}>
             <Container maxWidth="xl" sx={containerStyles}>
@@ -139,8 +137,8 @@ function ResponsiveAppBar() {
                                     my: 2,
                                     color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
-                                    fontFamily:"Manrope",
-                                    fontSize:'20px',
+                                    fontFamily: "Manrope",
+                                    fontSize: '20px',
                                     lineHeight: '1.35',
                                     letterSpacing: '0.04em',
 
@@ -157,7 +155,9 @@ function ResponsiveAppBar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Box onClick={handleClickUserMenu} component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
                                 <IconButton sx={{ p: 0 }}>
-                                    <User alt="Remy Sharp" />
+                                    {user.avatar ? (<img className={styles.userAvatar}
+                                        src={user.avatar} alt="User avatar"></img>) :
+                                        (<User alt="Remy Sharp" />)}
                                 </IconButton>
                                 <span className={styles.userNameDesc}>{user.name ? (user.name) : userName}</span>
                             </Box>
