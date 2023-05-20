@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getUserNameFromEmail } from 'shared/helpers/getUserNameFromEmail';
 import AppBar from '@mui/material/AppBar';
@@ -11,9 +11,7 @@ import Menu from '@mui/material/Menu';
 import { MobileMenu } from './AppBar.styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -32,18 +30,15 @@ const pages = [
     { name: 'Our Friends', path: '/friends' },
 ];
 
-// const settings = ['Profile', 'Logout'];
+
 
 function ResponsiveAppBar() {
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-    // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
+
 
     const { isLoggedIn, user } = useAuth();
-    // const isLoggedIn = true //temporary
-    console.log('isLoggedIn', isLoggedIn);
-    console.log("user", user);
 
     const padding = {
         desktop: '16px',
@@ -55,27 +50,34 @@ function ResponsiveAppBar() {
         padding: isMobileScreen ? padding.mobile : isTabletScreen ? padding.tablet : padding.desktop,
     };
 
-    const [isActiveButton, setActiveButton] = useState('');
+    const [isActiveButton, setActiveButton] = useState(localStorage.getItem('activeButton') || '');
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+
+    useEffect(() => {
+        localStorage.setItem('activeButton', isActiveButton);
+    }, [isActiveButton]);
 
     const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
-    // const handleOpenUserMenu = event => {
-    //     setAnchorElUser(event.currentTarget);
-    // };
+
 
     const handleCloseNavMenu = name => {
         setAnchorElNav(null);
         setActiveButton(name);
     };
 
+    const handleClickUserMenu = () => {
+        setActiveButton('');
+        localStorage.setItem('activeButton', '')
+    }
+
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
     const userName = getUserNameFromEmail(user.email);
-    
+
     return (
         <AppBar position="static" sx={{ backgroundColor: 'var(--main-back)' }}>
             <Container maxWidth="xl" sx={containerStyles}>
@@ -135,8 +137,8 @@ function ResponsiveAppBar() {
                                     my: 2,
                                     color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
-                                    fontFamily:"Manrope",
-                                    fontSize:'20px',
+                                    fontFamily: "Manrope",
+                                    fontSize: '20px',
                                     lineHeight: '1.35',
                                     letterSpacing: '0.04em',
 
@@ -151,9 +153,11 @@ function ResponsiveAppBar() {
                     {/* User menu descktop */}
                     {isLoggedIn ? (
                         <Box sx={{ flexGrow: 0 }}>
-                            <Box component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
+                            <Box onClick={handleClickUserMenu} component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
                                 <IconButton sx={{ p: 0 }}>
-                                    <User alt="Remy Sharp" />
+                                    {user.avatar ? (<img className={styles.userAvatar}
+                                        src={user.avatar} alt="User avatar"></img>) :
+                                        (<User alt="Remy Sharp" />)}
                                 </IconButton>
                                 <span className={styles.userNameDesc}>{user.name ? (user.name) : userName}</span>
                             </Box>
