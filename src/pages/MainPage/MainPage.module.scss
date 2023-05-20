@@ -1,8 +1,5 @@
 // Mobile
 @media screen and (max-width: 767px) {
-    body {
-        background-image: url(../../images/bg-mobile.jpg);
-    }
     .mainPageText {
         font-family: 'Manrope';
         font-weight: 700;
@@ -29,9 +26,6 @@
 
 // Tablet
 @media screen and (min-width: 768px) {
-    body {
-        background-image: url(../../images/bg-tablet.jpg);
-    }
     .mainPageText {
         font-size: 68px;
 
@@ -47,9 +41,6 @@
 
 // Desktop
 @media screen and (min-width: 1280px) {
-    body {
-        background-image: url(../../images/bg-desktop.jpg);
-    }
     .mainPageText {
         font-weight: 800;
         line-height: 1.3;
