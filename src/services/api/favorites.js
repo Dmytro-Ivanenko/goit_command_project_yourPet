@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getFavoriteNotices = async (query, gender, page, limit) => {
-    const { data } = await axios.get(`/notice/favorites`, {
+    const { data } = await axios.get(`/notice/favorites/list`, {
         params: {
             query,
             gender,

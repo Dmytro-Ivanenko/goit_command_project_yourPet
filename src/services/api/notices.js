@@ -44,3 +44,16 @@ export const getLostNotices = async (query, gender, page, limit) => {
     console.log(data);
     return data;
 };
+
+export const getOwnNotices = async (query, gender, page, limit) => {
+    const { data } = await axios.get(`/notice/myAdds`, {
+        params: {
+            query,
+            gender,
+            page,
+            limit,
+        },
+    });
+    console.log(data);
+    return data;
+};
