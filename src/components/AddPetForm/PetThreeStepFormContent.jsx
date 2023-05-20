@@ -1,35 +1,26 @@
-import { useState } from 'react';
 import styles from './addPetForm.module.scss';
 
-const PetThreeStepFormContent = ({ getValue }) => {
-    const [photo, setphoto] = useState('');
-    const [comments, setComments] = useState('');
-
+const PetThreeStepFormContent = ({ data, setData }) => {
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;
 
-        input === 'comments' ? setComments(value) : setphoto(value);
+        setData(prev => ({ ...prev, [input]: value }));
 
-        console.log('input Name', e.target.name);
         console.log(e.target.value);
     };
 
-    const handleBlur = () => {
-        getValue({ photo, comments });
-    };
-
     return (
-        <form className={styles.inputs} onChange={handleChange} onBlur={handleBlur}>
+        <div className={styles.inputs}>
             <label>
                 Add photo
-                <input type="file" value={photo} name="photo" alt="pet`s photo" />
+                <input type="file" required value={data.photo} name="photo" alt="pet`s photo" onChange={handleChange} />
             </label>
             <label>
                 Comments
-                <input type="text" value={comments} name="comments" />
+                <input type="text" required value={data.comments} name="comments" onChange={handleChange} />
             </label>
-        </form>
+        </div>
     );
 };
 export default PetThreeStepFormContent;

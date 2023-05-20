@@ -10,7 +10,22 @@
     flex-direction: column;
 }
 
+.flexContainer {
+    display: flex;
+}
+
 .inputs {
     display: flex;
     flex-direction: column;
+}
+
+.sexRadioBtns {
+    display: flex;
+    flex-wrap: wrap;
+}
+.radioBtnsTitle {
+    flex-basis: 100%;
+}
+.sexRadioLabel {
+    flex-basis: 50%;
 }

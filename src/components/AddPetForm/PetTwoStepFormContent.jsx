@@ -1,48 +1,46 @@
-import { useState } from 'react';
 import styles from './addPetForm.module.scss';
 
-const PetTwoStepFormContent = ({ getValue }) => {
-    const [name, setName] = useState('');
-    const [birth, setbirth] = useState('');
-    const [breed, setBreed] = useState('');
-
+const PetTwoStepFormContent = ({ data, setData }) => {
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;
 
-        switch (input) {
-            case 'name':
-                setName(value);
-                break;
-            case 'birth':
-                setbirth(value);
-                break;
-            case 'breed':
-                setBreed(value);
-        }
-
-        // getValue({ option: e.target.value });
-        console.log('input Name', e.target.name);
-        console.log(e.target.value);
-    };
-
-    const handleBlur = () => {
-        getValue({ name, birth, breed });
+        setData(prev => ({ ...prev, [input]: value }));
     };
 
     return (
-        <div className={styles.inputs} onChange={handleChange} onBlur={handleBlur}>
+        <div className={styles.inputs}>
+            {data.option !== 'pet' && (
+                <label>
+                    Title of add
+                    <input
+                        autoFocus
+                        type="text"
+                        required
+                        value={data.addTitle}
+                        name="addTitle"
+                        onChange={handleChange}
+                    />
+                </label>
+            )}
             <label>
                 Pet's name
-                <input autoFocus type="text" value={name} name="name" />
+                <input
+                    autoFocus={data.option !== 'pet' ? false : true}
+                    type="text"
+                    required
+                    value={data.name}
+                    name="name"
+                    onChange={handleChange}
+                />
             </label>
             <label>
                 Date of birth
-                <input type="text" value={birth} name="birth" />
+                <input type="text" value={data.birth} required name="birth" onChange={handleChange} />
             </label>
             <label>
                 Breed
-                <input type="text" value={breed} name="breed" />
+                <input type="text" value={data.breed} required name="breed" onChange={handleChange} />
             </label>
         </div>
     );
