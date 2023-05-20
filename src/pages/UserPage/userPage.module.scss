@@ -1,94 +1,96 @@
-.title{
-    font-family: 'Manrope';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 27px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.04em;
-        color: #000000;
-        margin-bottom: 18px;
-                @media only screen and (min-width: 768px) {
-                        margin-bottom: 24px;
-                    }
-        @media only screen and (min-width: 1280px) {
-                margin-bottom: 24px;
-            }
+.title {
+    margin-bottom: 18px;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: 0.04em;
+
+    color: #000000;
 }
-.wrapPets{
+
+.wrapPets {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
     width: 280px;
-    @media only screen and (min-width: 768px) {
-            width: 704px;
-            &:not(:last-child) {
-                margin-bottom: 20px;
-            }
-        }
-        @media only screen and (min-width: 1280px) {
-            display: flex;
-            flex-direction: column;
-            width: 821px;
-        }
-
-
-   
-}
-.mainContainer{
-    margin-top: 40px;        
-        @media only screen and (min-width: 768px) {
-                margin-top: 60px;   
-            }
-            @media only screen and (min-width: 1280px) {
-                display: flex;
-                margin-top: 62px;
-                }
 }
 
-.wrapUser{
-    @media only screen and (min-width: 1280px) {
-            display: flex;
-            flex-direction: column;
-            margin-right: 32px;
-    
-        }
+.mainContainer {
+    width: 280px;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 137px;
 }
-.wrapAddPets{
+
+.wrapAddPets {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     margin-top: 40px;
-        @media only screen and (min-width: 1280px) {
-                width: 821px;
-                height: 38px;
-                // margin-bottom: 24px;
-                margin-top: 0;
-                
-            }
-}
-.titlePets{
-        font-family: 'Manrope';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 27px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.04em;
-        color: #000000;
+    margin-bottom: 24px;
 }
 
-.wrapPets{
-            @media only screen and (min-width: 1280px) {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 27%;
-                left: 36%;
-            
-                }
+.titlePets {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+    color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+    .title {
+        margin-bottom: 24px;
+    }
+
+    .wrapPets {
+        width: 704px;
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+
+    .titlePets {
+        font-size: 28px;
+        line-height: 38px;
+    }
+
+    .mainContainer {
+        width: 704px;
+        padding-top: 60px;
+        padding-bottom: 121px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .title {
+        margin-bottom: 24px;
+    }
+
+    .wrapPets {
+        display: flex;
+        flex-direction: column;
+        width: 821px;
+    }
+
+    .mainContainer {
+        width: 100%;
+        display: flex;
+        padding-top: 62px;
+    }
+
+    .wrapUser {
+        margin-right: 32px;
+    }
+
+    .wrapAddPets {
+        width: 821px;
+        height: 38px;
+        margin-top: 0;
+    }
 }

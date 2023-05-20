@@ -1,46 +1,48 @@
 .userCard {
-    width: 280px;
-    height: 517px;
-    background: #ffffff;
-    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
     border-radius: 20px;
-    @media only screen and (min-width: 768px) {
-        width: 704px;
-        height: 268px;
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
+    padding: 20px 8px;
+
+    background: #ffffff;
+    box-shadow: var(--small-shadow);
 }
 
 .userPhoto {
-    margin-left: 49px;
-    margin-right: 49px;
-    padding-top: 20px;
+    margin-bottom: 14px;
+    margin-left: 41px;
+    margin-right: 41px;
     border-radius: 40px;
-    @media only screen and (min-width: 1280px) {
-        margin-left: 0;
-        margin-right: 0;
-    }
+    line-height: 0;
+}
+
+.avatar {
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.confirmBtn {
+    border: none;
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    line-height: 22px;
+
+    letter-spacing: 0.04em;
+
+    color: #111111;
+    background-color: transparent;
 }
 
 .userDetails {
-    @media only screen and (min-width: 768px) {
-        padding-left: 20px;
-        padding-top: 20px;
-    }
-    @media only screen and (min-width: 1280px) {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 0;
-        padding-top: 0;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .userDetails label {
-    font-family: 'Manrope';
-    font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 19px;
@@ -50,70 +52,48 @@
     color: #111111;
 }
 
-.userDetails input {
+.input {
+    padding-right: 40px;
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
     position: relative;
     width: 190px;
     height: 28px;
-    border: 1px solid #54adff;
+    border: 1px solid var(--main-acc);
     border-radius: 20px;
-    @media only screen and (min-width: 768px) {
-        width: 255px;
-        height: 32px;
-    }
 }
+
 .userData {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    &:not(:last-child) {
-        margin-bottom: 10px;
-    }
-    padding-left: 8px;
-    padding-right: 8px;
-    @media only screen and (min-width: 768px) {
-        padding-right: 0;
-        padding-left: 0;
-    }
 }
 
 .logOut {
-    margin-top: 21px;
-    background-color: transparent;
-    border: transparent;
-    font-family: 'Manrope';
-    font-style: normal;
+    width: 110px;
+    margin-top: 11px;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
-    display: flex;
-    align-items: center;
     letter-spacing: 0.04em;
-    color: #888888;
-    @media only screen and (min-width: 768px) {
-        margin-top: 0;
-        position: absolute;
-        top: 51.5%;
-    }
-    @media only screen and (min-width: 1280px) {
-        top: 87%;
-        left: 6.5%;
-    }
-}
-.icon {
-    margin-left: 10px;
-    margin-right: 12px;
-    cursor: pointer;
+
+    background-color: transparent;
+
+    color: var(--grey-font);
 }
 
 .prevValue {
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
-    margin-right: 30px;
     position: absolute;
     top: 0;
     left: 0;
@@ -123,10 +103,9 @@
     width: 160px;
     height: 28px;
     border-radius: 20px;
-    @media only screen and (min-width: 768px) {
-        width: 225px;
-        height: 32px;
-    }
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .btnEdit {
@@ -143,30 +122,7 @@
     position: relative;
 }
 
-@media (min-width: 1280px) {
-    .userCard {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 395px;
-        height: 520px;
-        flex-flow: column;
-    }
-
-    .userDetails {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .userData {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
 .editPhoto {
-    font-family: 'Manrope';
-    font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 22px;
@@ -174,10 +130,11 @@
     color: #111111;
 }
 .wrapEditPhoto {
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 14px;
+    gap: 8px;
 }
 
 input[type='file'] {
@@ -190,8 +147,6 @@ input[type='file'] {
 .camera {
     display: flex;
     justify-content: baseline;
-    margin-right: 8px;
-    margin-top: 5px;
 }
 
 .cameraInput {
@@ -200,35 +155,22 @@ input[type='file'] {
 }
 
 .checkIcon {
-    stroke: #00c3ad;
+    stroke: var(--good-validation);
 }
 
 .spanEdit {
-    padding-top: 7px;
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+
+    color: #111111;
 }
 
+// mobile styles for modal
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 608px;
-    height: 354px;
-    overflow: hidden;
-    background: #ffffff;
-    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+    width: 280px;
+    padding: 30px;
     border-radius: 40px;
-}
-
-.modalContent {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    width: 608px;
-    height: 354px;
-    border-radius: 8px;
 }
 
 .modalButtons {
@@ -236,73 +178,177 @@ input[type='file'] {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 20px;
     gap: 8px;
 }
 
 .cancelButton,
 .yesButton {
-    padding-left: 34px;
-    padding-top: 9px;
-    padding-right: 34px;
-    padding-bottom: 9px;
-    cursor: pointer;
+    padding: 9px 20px;
     font-weight: 700;
     font-size: 16px;
 }
 
 .cancelButton {
-    border-color: #54adff;
+    position: relative;
+    border: 2px solid var(--main-acc);
     border-radius: 40px;
     background-color: #ffffff;
-    color: #54adff;
     background-color: transparent;
+    color: var(--main-acc);
+
+    transition: color var(--timing);
+
+    &:hover,
+    &:focus {
+        color: #ffffff;
+        border-color: transparent;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
 }
 
 .yesButton {
-    background: #54adff;
+    position: relative;
     border-radius: 40px;
     border: none;
-    color: #fef9f9;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    background-color: var(--main-acc);
+    color: var(--main-back);
+
+    transition: background-color var(--timing);
+
+    &:hover,
+    &:focus {
+        background-color: transparent;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
 }
 .titleModal {
-    font-family: 'Manrope';
-    font-style: normal;
+    margin-bottom: 80px;
     font-weight: 500;
-    font-size: 36px;
-    line-height: 49px;
+    font-size: 24px;
+    line-height: 32px;
     text-align: center;
     letter-spacing: 0.04em;
     color: #111111;
-    margin-top: 108px;
 }
-.crossButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateY(100%);
-    background-color: transparent;
-    border: none;
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
+
 .logoutModal {
-    color: #fef9f9;
+    color: var(--main-back);
 }
 
 .titleBtnYes {
     margin-right: 8px;
 }
-.modalBackdrop {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+
+@media screen and (min-width: 768px) {
+    .userCard {
+        padding: 20px;
+        width: 704px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .userDetails label {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    .input {
+        width: 255px;
+        height: 32px;
+    }
+
+    .prevValue {
+        width: 215px;
+        height: 32px;
+    }
+
+    .modal {
+        padding: 108px;
+        width: 608px;
+    }
+
+    .modalButtons {
+        gap: 17px;
+    }
+
+    .cancelButton,
+    .yesButton {
+        padding: 9px 34px;
+    }
+
+    .titleModal {
+        margin-bottom: 48px;
+        font-size: 36px;
+        line-height: 49px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .userCard {
+        width: 395px;
+        padding: 20px 16px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .userPhoto {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .userDetails {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 }

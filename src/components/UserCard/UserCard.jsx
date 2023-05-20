@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { logOut } from 'redux/auth/operations';
 
-import styles from './userCard.module.scss';
-
-import defaultAvatar from 'images/Photo default.jpg';
-import logout from 'images/icons/logout.svg';
-import camera from 'images/icons/camera.svg';
-import cross from 'images/icons/cross-small.svg';
-import logoutBtn from 'images/icons/logout-white.svg';
-import { updateUser } from 'redux/auth/operations';
+import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
+import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
+import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';
 import { ReactComponent as CheckIcon } from 'images/icons/check.svg';
 import { ReactComponent as EditIcon } from 'images/icons/edit.svg';
+import defaultAvatar from 'images/Photo default.jpg';
+import ModalApproveAction from 'shared/components/ModalApproveAction';
+
 import { useAuth } from 'shared/hooks/useAuth';
+import { logOut, updateUser } from 'redux/auth/operations';
+
+import styles from './userCard.module.scss';
 
 const initialState = {
     avatar: null,
@@ -40,18 +39,14 @@ const getImgSrc = (oldAvatar, newAvatar) => {
 const UserCard = () => {
     const [state, setState] = useState({ ...initialState });
     const [isFieldShown, setIsFieldShown] = useState(null);
+    const [isModalShown, setIsModalShown] = useState(false);
     const { user } = useAuth();
 
     const dispatch = useDispatch();
 
-    function openModal() {
-        document.getElementById('modal-backdrop').style.display = 'block';
-        document.getElementById('modal').style.display = 'block';
-    }
-    function closeModal() {
-        document.getElementById('modal-backdrop').style.display = 'none';
-        document.getElementById('modal').style.display = 'none';
-    }
+    const handleModal = () => {
+        setIsModalShown(prevState => !prevState);
+    };
 
     const handleLogout = () => {
         dispatch(logOut());
@@ -119,24 +114,22 @@ const UserCard = () => {
     return (
         <div className={styles.userCard}>
             <div className={styles.containerEditPhoto}>
-                <div className={styles.wrap}>
-                    <div className={styles.userPhoto}>
-                        <img src={src} width="182" height="182" alt="Avatar" />
-                    </div>
+                <div className={styles.userPhoto}>
+                    <img className={styles.avatar} src={src} width="182" height="182" alt="Avatar" />
                 </div>
                 <div className={styles.wrapEditPhoto}>
                     <input type="file" id="file" accept="image/*" onChange={handleFileSelect} />
                     <label htmlFor="file" className={styles.wrapImg}>
-                        <img className={styles.camera} src={camera} width="24" height="24" alt="Camera" />
-                        {avatar ? (
-                            <button type="submit" onClick={handleSubmit}>
-                                <CheckIcon className={styles.checkIcon} width={24} height={24} />
-                                Confirm
-                            </button>
-                        ) : (
-                            <span className={styles.spanEdit}>Edit photo</span>
-                        )}
+                        <CameraIcon className={styles.camera} width={24} height={24} />
                     </label>
+                    {avatar ? (
+                        <button className={styles.confirmBtn} type="submit" onClick={handleSubmit}>
+                            <CheckIcon className={styles.checkIcon} width={24} height={24} />
+                            Confirm
+                        </button>
+                    ) : (
+                        <span className={styles.spanEdit}>Edit photo</span>
+                    )}
                 </div>
             </div>
             <div className={styles.userDetails}>
@@ -144,6 +137,7 @@ const UserCard = () => {
                     <label htmlFor="name">Name:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="text"
                             id="name"
                             name="name"
@@ -160,7 +154,7 @@ const UserCard = () => {
                             <>
                                 <p className={styles.prevValue}>{oldName}</p>
                                 <button className={styles.btnEdit} onClick={handleRedactClick} name="name">
-                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
+                                    <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
                         )}
@@ -170,6 +164,7 @@ const UserCard = () => {
                     <label htmlFor="email">Email:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="email"
                             id="email"
                             name="email"
@@ -186,7 +181,7 @@ const UserCard = () => {
                             <>
                                 <p className={styles.prevValue}>{oldEmail}</p>
                                 <button className={styles.btnEdit} onClick={handleRedactClick} name="email">
-                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
+                                    <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
                         )}
@@ -196,6 +191,7 @@ const UserCard = () => {
                     <label htmlFor="birthday">Birthday:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="text"
                             id="birthday"
                             name="birthday"
@@ -212,7 +208,7 @@ const UserCard = () => {
                             <>
                                 <p className={styles.prevValue}>{oldBirthday}</p>
                                 <button className={styles.btnEdit} onClick={handleRedactClick} name="birthday">
-                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
+                                    <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
                         )}
@@ -222,6 +218,7 @@ const UserCard = () => {
                     <label htmlFor="phone">Phone:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="tel"
                             id="phone"
                             name="phone"
@@ -238,7 +235,7 @@ const UserCard = () => {
                             <>
                                 <p className={styles.prevValue}>{oldPhone}</p>
                                 <button className={styles.btnEdit} onClick={handleRedactClick} name="phone">
-                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
+                                    <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
                         )}
@@ -248,6 +245,7 @@ const UserCard = () => {
                     <label htmlFor="city">City:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="text"
                             id="city"
                             name="city"
@@ -264,46 +262,35 @@ const UserCard = () => {
                             <>
                                 <p className={styles.prevValue}>{oldCity}</p>
                                 <button className={styles.btnEdit} onClick={handleRedactClick} name="city">
-                                    <EditIcon className={styles.iconEdit} width="20" height="20" alt="edit" />
+                                    <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
                         )}
                     </div>
                 </div>
-            </div>
-            <div id="modal-backdrop" className={styles.modalBackdrop}></div>
-
-            <div id="modal" className={styles.modal}>
-                <h2 className={styles.titleModal}>Already leaving?</h2>
-                <div className={styles.modalContent}>
-                    <button className={styles.crossButton} onClick={closeModal}>
-                        <img className={styles.icon} src={cross} width="24" height="24" alt="cross" />
-                    </button>
-                    <div className={styles.modalButtons}>
-                        <button className={styles.cancelButton} onClick={closeModal}>
-                            Cancel
-                        </button>
-                        <div className={styles.wrapBtnLogout}>
-                            <button className={styles.yesButton} onClick={handleLogout}>
-                                <span className={styles.titleBtnYes}>Yes</span>
-                                <img
-                                    className={styles.logoutModal}
-                                    src={logoutBtn}
-                                    width="24"
-                                    height="24"
-                                    alt="logaut"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className={styles.conteinerLogaut}>
-                <button className={styles.logOut} id="logout-button" onClick={openModal}>
-                    <img className={styles.icon} src={logout} width="24" height="24" alt="logaut" />
+                <button className={styles.logOut} onClick={handleModal}>
+                    <LogoutIcon className={styles.icon} width={24} height={24} />
                     Log Out
                 </button>
             </div>
+            {isModalShown && (
+                <ModalApproveAction onClose={handleModal}>
+                    <div className={styles.modal}>
+                        <h2 className={styles.titleModal}>Already leaving?</h2>
+                        <div className={styles.modalContent}>
+                            <div className={styles.modalButtons}>
+                                <button className={styles.cancelButton} onClick={handleModal}>
+                                    Cancel
+                                </button>
+                                <button className={styles.yesButton} onClick={handleLogout}>
+                                    <span className={styles.titleBtnYes}>Yes</span>
+                                    <LogoutWhiteIcon className={styles.logoutModal} width={24} height={24} />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ModalApproveAction>
+            )}
         </div>
     );
 };
