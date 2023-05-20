@@ -1,15 +1,21 @@
 import styles from './addPetForm.module.scss';
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
 import isBtnDisabled from './isBtnDisabled';
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://petprojectonrendercom.onrender.com/api';
 
 const AddPetForm = () => {
+    const fileInputRef = useRef(null);
+
     const [step, setStep] = useState(1);
     const [data, setData] = useState({ option: 'pet' });
 
-    const onClick = e => {
+    const onClick = async e => {
         const btn = e.target.innerHTML;
-
+        console.log('BBTTTNNNNN', e.target);
+        console.log('STTEEEP', step);
         switch (btn) {
             case 'Next':
                 step === 2 ? setStep(3) : setStep(2);
@@ -17,10 +23,32 @@ const AddPetForm = () => {
             case 'Done':
                 e.preventDefault();
                 console.log('DATA ON SUBMITTTT: ', data);
+                // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                // const inputWithFile = fileInputRef.current.files;
+                const file = fileInputRef.current.files[0];
+                const fileType = fileInputRef.current.files[0].type;
+                const fileName = fileInputRef.current.files[0].name;
+
+                // let imageBlob = await new Promise(resolve => fileInputRef.current.toBlob(resolve, fileType));
+
+                let formData = new FormData();
+                // formData.append('firstName', 'John');
+                formData.append('photo', file, fileName);
+
+                let response = await fetch('https://petprojectonrendercom.onrender.com/api/yourPets/', {
+                    method: 'POST',
+                    body: formData,
+                });
+                let result = await response.json();
+                alert(result.message);
+
+                // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
                 break;
             default:
-                setStep(1);
+                return;
         }
+        console.log('fileInputRef', fileInputRef.current);
     };
 
     let title = 'Add pet';
@@ -38,6 +66,8 @@ const AddPetForm = () => {
             title = 'Add pet';
     }
 
+    const submit = async () => {};
+
     return (
         <form className={styles.form} onClick={onClick}>
             <h2 className={styles.title}>{title}</h2>
@@ -46,7 +76,7 @@ const AddPetForm = () => {
                 <span className={styles.spepTitle}>Personal details</span>
                 <span className={styles.spepTitle}>More info</span>
             </div>
-            {getFormInsideBasedOnStep(step, data, setData)}
+            {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
             <div className={styles.buttonsContainer}>
                 <button type="button" className={styles.backButton}>
                     Cancel

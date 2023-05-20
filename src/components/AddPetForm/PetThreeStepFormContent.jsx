@@ -1,6 +1,6 @@
 import styles from './addPetForm.module.scss';
 
-const PetThreeStepFormContent = ({ data, setData }) => {
+const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;
@@ -14,7 +14,15 @@ const PetThreeStepFormContent = ({ data, setData }) => {
         <div className={styles.inputs}>
             <label>
                 Add photo
-                <input type="file" required value={data.photo} name="photo" alt="pet`s photo" onChange={handleChange} />
+                <input
+                    type="file"
+                    required
+                    value={data.photo}
+                    ref={fileInputRef}
+                    name="photo"
+                    alt="pet`s photo"
+                    onChange={handleChange}
+                />
             </label>
             <label>
                 Comments
