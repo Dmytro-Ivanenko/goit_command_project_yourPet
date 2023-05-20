@@ -121,7 +121,7 @@ const UserCard = () => {
             <div className={styles.containerEditPhoto}>
                 <div className={styles.wrap}>
                     <div className={styles.userPhoto}>
-                        <img id="img" src={src} width="182" height="182" alt="Avatar" />
+                        <img src={src} width="182" height="182" alt="Avatar" />
                     </div>
                 </div>
                 <div className={styles.wrapEditPhoto}>
