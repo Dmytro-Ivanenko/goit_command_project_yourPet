@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
 import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
 import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';
-import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import { ReactComponent as CheckIcon } from 'images/icons/check.svg';
 import { ReactComponent as EditIcon } from 'images/icons/edit.svg';
 import defaultAvatar from 'images/Photo default.jpg';
@@ -115,24 +114,22 @@ const UserCard = () => {
     return (
         <div className={styles.userCard}>
             <div className={styles.containerEditPhoto}>
-                <div className={styles.wrap}>
-                    <div className={styles.userPhoto}>
-                        <img src={src} width="182" height="182" alt="Avatar" />
-                    </div>
+                <div className={styles.userPhoto}>
+                    <img className={styles.avatar} src={src} width="182" height="182" alt="Avatar" />
                 </div>
                 <div className={styles.wrapEditPhoto}>
                     <input type="file" id="file" accept="image/*" onChange={handleFileSelect} />
                     <label htmlFor="file" className={styles.wrapImg}>
                         <CameraIcon className={styles.camera} width={24} height={24} />
-                        {avatar ? (
-                            <button type="submit" onClick={handleSubmit}>
-                                <CheckIcon className={styles.checkIcon} width={24} height={24} />
-                                Confirm
-                            </button>
-                        ) : (
-                            <span className={styles.spanEdit}>Edit photo</span>
-                        )}
                     </label>
+                    {avatar ? (
+                        <button className={styles.confirmBtn} type="submit" onClick={handleSubmit}>
+                            <CheckIcon className={styles.checkIcon} width={24} height={24} />
+                            Confirm
+                        </button>
+                    ) : (
+                        <span className={styles.spanEdit}>Edit photo</span>
+                    )}
                 </div>
             </div>
             <div className={styles.userDetails}>
@@ -140,6 +137,7 @@ const UserCard = () => {
                     <label htmlFor="name">Name:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="text"
                             id="name"
                             name="name"
@@ -166,6 +164,7 @@ const UserCard = () => {
                     <label htmlFor="email">Email:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="email"
                             id="email"
                             name="email"
@@ -192,6 +191,7 @@ const UserCard = () => {
                     <label htmlFor="birthday">Birthday:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="text"
                             id="birthday"
                             name="birthday"
@@ -218,6 +218,7 @@ const UserCard = () => {
                     <label htmlFor="phone">Phone:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="tel"
                             id="phone"
                             name="phone"
@@ -244,6 +245,7 @@ const UserCard = () => {
                     <label htmlFor="city">City:</label>
                     <div className={styles.position}>
                         <input
+                            className={styles.input}
                             type="text"
                             id="city"
                             name="city"
@@ -266,6 +268,10 @@ const UserCard = () => {
                         )}
                     </div>
                 </div>
+                <button className={styles.logOut} onClick={handleModal}>
+                    <LogoutIcon className={styles.icon} width={24} height={24} />
+                    Log Out
+                </button>
             </div>
             {isModalShown && (
                 <ModalApproveAction onClose={handleModal}>
@@ -285,13 +291,6 @@ const UserCard = () => {
                     </div>
                 </ModalApproveAction>
             )}
-
-            <div className={styles.conteinerLogaut}>
-                <button className={styles.logOut} id="logout-button" onClick={handleModal}>
-                    <LogoutIcon className={styles.icon} width={24} height={24} />
-                    Log Out
-                </button>
-            </div>
         </div>
     );
 };

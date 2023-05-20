@@ -1,12 +1,12 @@
 .userCard {
-    width: 280px;
-    height: 517px;
+    border-radius: 20px;
+    padding: 20px 8px;
+
     background: #ffffff;
     box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
-    border-radius: 20px;
+
     @media only screen and (min-width: 768px) {
         width: 704px;
-        height: 268px;
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
@@ -14,9 +14,10 @@
 }
 
 .userPhoto {
-    margin-left: 49px;
-    margin-right: 49px;
-    padding-top: 20px;
+    margin-bottom: 14px;
+    line-height: 0;
+    margin-left: 41px;
+    margin-right: 41px;
     border-radius: 40px;
     @media only screen and (min-width: 1280px) {
         margin-left: 0;
@@ -24,18 +25,26 @@
     }
 }
 
-.userDetails {
-    @media only screen and (min-width: 768px) {
-        padding-left: 20px;
-        padding-top: 20px;
-    }
-    @media only screen and (min-width: 1280px) {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 0;
-        padding-top: 0;
-    }
+.avatar {
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.confirmBtn {
+    border: none;
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    line-height: 22px;
+
+    letter-spacing: 0.04em;
+
+    color: #111111;
+    background-color: transparent;
 }
 
 .userDetails label {
@@ -50,7 +59,8 @@
     color: #111111;
 }
 
-.userDetails input {
+.input {
+    padding-right: 40px;
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -64,56 +74,41 @@
         height: 32px;
     }
 }
+
 .userData {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     &:not(:last-child) {
         margin-bottom: 10px;
-    }
-    padding-left: 8px;
-    padding-right: 8px;
-    @media only screen and (min-width: 768px) {
-        padding-right: 0;
-        padding-left: 0;
     }
 }
 
 .logOut {
+    width: 110px;
     margin-top: 21px;
-    background-color: transparent;
-    border: transparent;
-    font-family: 'Manrope';
-    font-style: normal;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
-    display: flex;
-    align-items: center;
     letter-spacing: 0.04em;
+
+    background-color: transparent;
+
     color: #888888;
-    @media only screen and (min-width: 768px) {
-        margin-top: 0;
-        position: absolute;
-        top: 51.5%;
-    }
-    @media only screen and (min-width: 1280px) {
-        top: 87%;
-        left: 6.5%;
-    }
-}
-.icon {
-    margin-left: 10px;
-    margin-right: 12px;
-    cursor: pointer;
 }
 
 .prevValue {
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
-    margin-right: 30px;
     position: absolute;
     top: 0;
     left: 0;
@@ -123,8 +118,11 @@
     width: 160px;
     height: 28px;
     border-radius: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     @media only screen and (min-width: 768px) {
-        width: 225px;
+        width: 215px;
         height: 32px;
     }
 }
@@ -145,15 +143,16 @@
 
 @media (min-width: 1280px) {
     .userCard {
+        padding: 20px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 395px;
-        height: 520px;
         flex-flow: column;
     }
 
     .userDetails {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -174,10 +173,11 @@
     color: #111111;
 }
 .wrapEditPhoto {
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 14px;
+    gap: 8px;
 }
 
 input[type='file'] {
@@ -190,8 +190,6 @@ input[type='file'] {
 .camera {
     display: flex;
     justify-content: baseline;
-    margin-right: 8px;
-    margin-top: 5px;
 }
 
 .cameraInput {
@@ -204,7 +202,11 @@ input[type='file'] {
 }
 
 .spanEdit {
-    padding-top: 7px;
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+
+    color: #111111;
 }
 
 // mobile styles for modal
@@ -345,5 +347,14 @@ input[type='file'] {
         margin-bottom: 48px;
         font-size: 36px;
         line-height: 49px;
+    }
+
+    .userDetails label {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    .userCard {
+        padding: 20px;
     }
 }
