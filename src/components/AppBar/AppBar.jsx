@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { getUserNameFromEmail } from 'shared/helpers/getUserNameFromEmail';
 import AppBar from '@mui/material/AppBar';
@@ -26,13 +27,15 @@ import { UserMenuMobile } from 'components/NavBar/UserMenu';
 
 const pages = [
     { name: 'News', path: '/news' },
-    { name: 'Notice', path: '/notices' },
+    { name: 'Notice', path: '/notices/sell' },
     { name: 'Our Friends', path: '/friends' },
 ];
 
 
 
 function ResponsiveAppBar() {
+    const location = useLocation();
+    console.log('location: ' , location.pathname);
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -50,9 +53,17 @@ function ResponsiveAppBar() {
         padding: isMobileScreen ? padding.mobile : isTabletScreen ? padding.tablet : padding.desktop,
     };
 
-    const [isActiveButton, setActiveButton] = useState(localStorage.getItem('activeButton') || '');
+    const [isActiveButton, setIsActiveButton] = useState(location.pathname);
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+
+    useEffect(() => {
+        const storedButton = localStorage.getItem('activeButton');
+        // if (storedButton !== null) {
+        //     setIsActiveButton(storedButton);
+        // }
+        setIsActiveButton(storedButton)
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('activeButton', isActiveButton);
@@ -63,14 +74,14 @@ function ResponsiveAppBar() {
     };
 
 
-    const handleCloseNavMenu = name => {
+    const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        setActiveButton(name);
+        // setIsActiveButton(path);
     };
 
     const handleClickUserMenu = () => {
-        setActiveButton('');
-        localStorage.setItem('activeButton', '')
+        setIsActiveButton(null);
+        localStorage.setItem('activeButton', null)
     }
 
     const handleCloseUserMenu = () => {
@@ -87,6 +98,7 @@ function ResponsiveAppBar() {
                         noWrap
                         component={NavLink}
                         to="/main"
+                        onClick={handleClickUserMenu}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', sm: 'none', md: 'flex' },
@@ -105,6 +117,7 @@ function ResponsiveAppBar() {
                         variant="h5"
                         noWrap
                         component={NavLink}
+                        onClick={handleClickUserMenu}
                         to="/main"
                         sx={{
                             mr: 2,
@@ -132,10 +145,13 @@ function ResponsiveAppBar() {
                         {pages.map(({ name, path }) => (
                             <Button
                                 key={name}
-                                onClick={() => handleCloseNavMenu(name)}
+                                onClick={() => {
+                                    // handleCloseNavMenu();
+                                    setIsActiveButton(path)
+                                }}
                                 sx={{
                                     my: 2,
-                                    color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
+                                    color: isActiveButton === path ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
                                     fontFamily: "Manrope",
                                     fontSize: '20px',
@@ -180,7 +196,10 @@ function ResponsiveAppBar() {
                             </Menu>
                         </Box>
                     ) : (
-                        <AuthNavDesktop />
+                        <AuthNavDesktop handleClick={() => {
+                            setIsActiveButton(location.pathname);
+                            localStorage.setItem('activeButton', location.pathname)
+                        }} />
                     )}
 
                     {/* Burger menu */}
@@ -246,10 +265,13 @@ function ResponsiveAppBar() {
                             {pages.map(({ name, path }) => (
                                 <MenuItem
                                     key={name}
-                                    onClick={() => handleCloseNavMenu(name)}
+                                    onClick={() => {
+                                        handleCloseNavMenu(path);
+                                        setIsActiveButton(path)
+                                    }}
                                     sx={{
                                         my: 2,
-                                        color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
+                                        color: isActiveButton === path ? 'var(--header-acc)' : 'var(--header-font)',
                                         display: 'block',
                                         margin: 0,
                                     }}

@@ -28,15 +28,15 @@ export const AuthNavMobile = ({ closeNavMenu }) => {
 };
 
 
-export const AuthNavDesktop = () => {
+export const AuthNavDesktop = ({handleClick}) => {
   return (
     <Box className={styles.authNavBoxDesktop}
     >
       
-      <StyledNavLink to="/login">
+      <StyledNavLink onClick={()=>handleClick()} to="/login">
         Log In <PetsOutlinedIcon sx={{ transform: 'rotate(25deg)' }} />
       </StyledNavLink>
-      <StyledNavLink to="/register">Registration</StyledNavLink>
+      <StyledNavLink onClick={()=>handleClick()} to="/register">Registration</StyledNavLink>
     </Box>
   );
 };
