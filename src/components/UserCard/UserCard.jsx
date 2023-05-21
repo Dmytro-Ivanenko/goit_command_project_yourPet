@@ -6,7 +6,7 @@ import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
 import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';
 import { ReactComponent as CheckIcon } from 'images/icons/check.svg';
 import { ReactComponent as EditIcon } from 'images/icons/edit.svg';
-import defaultAvatar from 'images/Photo default.jpg';
+import defaultAvatar from 'images/placeholder/avatar-default.jpg';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
 
 import { useAuth } from 'shared/hooks/useAuth';

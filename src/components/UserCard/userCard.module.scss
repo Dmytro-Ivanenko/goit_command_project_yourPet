@@ -286,11 +286,23 @@ input[type='file'] {
 
 @media screen and (min-width: 768px) {
     .userCard {
-        padding: 20px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+        padding-right: 70px;
         width: 704px;
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
+    }
+
+    .userPhoto {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .userDetails {
+        width: 355px;
     }
 
     .userDetails label {
@@ -337,11 +349,6 @@ input[type='file'] {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .userPhoto {
-        margin-left: 0;
-        margin-right: 0;
     }
 
     .userDetails {

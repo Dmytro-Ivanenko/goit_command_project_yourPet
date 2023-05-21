@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-import { deleteYourPet } from 'services/api/userPage';
+import { deleteYourPet } from 'services/api/pets';
 import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 
 import styles from './pets-item.module.scss';

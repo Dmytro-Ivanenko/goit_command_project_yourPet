@@ -4,7 +4,7 @@
 body {
     font-family: 'Manrope';
     background-color: var(--main-back);
-    background-image: url(./images/bg-mobile.jpg);
+    background-image: url(./images/background/bg-mobile.jpg);
 }
 
 ul {
@@ -28,12 +28,12 @@ button {
 
 @media screen and (min-width: 768px) {
     body {
-        background-image: url(./images/bg-tablet.jpg);
+        background-image: url(./images/background/bg-tablet.jpg);
     }
 }
 
 @media screen and (min-width: 1280px) {
     body {
-        background-image: url(./images/bg-desktop.jpg);
+        background-image: url(./images/background/bg-desktop.jpg);
     }
 }
