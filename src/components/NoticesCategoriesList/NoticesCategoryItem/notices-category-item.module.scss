@@ -64,8 +64,7 @@
 
     transition: color var(--timing);
 
-    &:hover,
-    &:focus {
+    &:hover {
         color: var(--main-acc);
     }
 }
@@ -107,8 +106,7 @@
 
     transition: background-color var(--timing), color var(--timing);
 
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: var(--main-acc);
         color: var(--main-light);
     }
