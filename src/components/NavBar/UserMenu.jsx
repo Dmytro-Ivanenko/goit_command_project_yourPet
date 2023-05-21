@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 import { useAuth } from 'shared/hooks/useAuth';
 import { NavLink } from 'react-router-dom';
 import { getUserNameFromEmail } from 'shared/helpers/getUserNameFromEmail';
@@ -26,6 +26,8 @@ export const UserMenuMobile = ({ closeNavMenu }) => {
   );
 };
 
-
+UserMenuMobile.propTypes = {
+  closeNavMenu: PropTypes.func.isRequired
+}
 
 
