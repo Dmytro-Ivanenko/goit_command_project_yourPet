@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { getNoticeById } from 'services/api/notices';
+import { addFavoriteNotice } from 'services/api/favorites';
+import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { useAuth } from 'shared/hooks/useAuth';
 
 import { ReactComponent as ClockIcon } from 'images/icons/clock.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
@@ -8,18 +14,13 @@ import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
-
-import { getNoticeById } from 'services/api/notices';
-import { addFavoriteNotice } from 'services/api/favorites';
-import ModalApproveAction from 'shared/components/ModalApproveAction';
-import { useAuth } from 'shared/hooks/useAuth';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
 
 const NoticesCategoryItem = ({ item }) => {
-    const { isLoggedIn } = useAuth();
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
+    const { isLoggedIn } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const { category, location, date, sex, title, favorite, image, _id } = item;
@@ -27,7 +28,6 @@ const NoticesCategoryItem = ({ item }) => {
     const handleModal = async () => {
         try {
             const data = await getNoticeById(_id);
-            console.log(data);
             data.date = data.date.replaceAll('-', '.');
             setItemDetailedInfo(data);
         } catch (error) {
@@ -150,6 +150,18 @@ const NoticesCategoryItem = ({ item }) => {
             )}
         </>
     );
+};
+
+NoticesCategoryItem.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        sex: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+    }),
 };
 
 export default NoticesCategoryItem;

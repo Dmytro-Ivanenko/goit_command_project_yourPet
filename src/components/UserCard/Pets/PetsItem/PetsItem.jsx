@@ -1,8 +1,10 @@
-import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
-import styles from './pets-item.module.scss';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import { deleteYourPet } from 'services/api/userPage';
-import { toast } from 'react-toastify';
+import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
+
+import styles from './pets-item.module.scss';
 
 const PetsItem = ({ item }) => {
     const { name, birthDate, breed, comments, photoURL, _id } = item;
@@ -45,6 +47,17 @@ const PetsItem = ({ item }) => {
             </div>
         </li>
     );
+};
+
+PetsItem.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        birthDate: PropTypes.string.isRequired,
+        breed: PropTypes.string.isRequired,
+        comments: PropTypes.string.isRequired,
+        photoURL: PropTypes.string.isRequired,
+    }),
 };
 
 export default PetsItem;

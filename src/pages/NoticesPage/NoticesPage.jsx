@@ -53,7 +53,7 @@ const NoticesPage = () => {
         const getApiNotices = async () => {
             try {
                 const page = currentPage + 1;
-                const notices = await getNotices(category, query, gender, page, PER_PAGE);
+                const { pets: notices } = await getNotices(category, query, gender, page, PER_PAGE);
 
                 if (notices.length === 0) {
                     setItems([]);
