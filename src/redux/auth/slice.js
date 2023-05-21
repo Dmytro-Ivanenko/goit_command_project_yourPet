@@ -5,7 +5,16 @@ const extraActions = [registration, logIn, logOut, refreshUser, updateUser];
 const getActions = type => extraActions.map(action => action[type]);
 
 const initialState = {
-    user: { name: null, email: null, avatar: null, birthday: null, phone: null, city: null, id: null },
+    user: {
+        id: null,
+        name: null,
+        email: null,
+        avatar: null,
+        birthday: null,
+        phone: null,
+        city: null,
+        favoriteNotices: [],
+    },
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -35,6 +44,7 @@ const authSlice = createSlice({
                     phone: null,
                     city: null,
                     id: null,
+                    favoriteNotices: [],
                 };
                 state.token = null;
                 state.isLoggedIn = false;

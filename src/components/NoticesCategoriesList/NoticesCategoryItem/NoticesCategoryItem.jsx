@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getNoticeById, deleteNoticeById } from 'services/api/notices';
-import { addFavoriteNotice } from 'services/api/favorites';
+import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
 import { useAuth } from 'shared/hooks/useAuth';
 
@@ -24,7 +24,7 @@ const NoticesCategoryItem = ({ item }) => {
     const { isLoggedIn, user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const { category, location, date, sex, title, favorite, image, _id, owner } = item;
+    const { category, location, date, sex, title, image, _id, owner } = item;
 
     const handleModal = async () => {
         try {
@@ -42,7 +42,16 @@ const NoticesCategoryItem = ({ item }) => {
             return;
         }
 
-        // add to favorite
+        if (user.favoriteNotices.includes(_id)) {
+            try {
+                await deleteFavoriteNotice(_id);
+                toast.success('Deleted successfully');
+            } catch (error) {
+                toast.error(error.message);
+            }
+            return;
+        }
+
         try {
             await addFavoriteNotice(item._id);
             toast.success('Added successfully');
@@ -104,7 +113,9 @@ const NoticesCategoryItem = ({ item }) => {
                         <div className={styles.btnWrapper}>
                             <button
                                 onClick={handleFavoriteClick}
-                                className={favorite ? `${styles.btn} ${styles.favorite}` : styles.btn}
+                                className={
+                                    user.favoriteNotices.includes(_id) ? `${styles.btn} ${styles.favorite}` : styles.btn
+                                }
                             >
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
