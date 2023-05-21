@@ -1,5 +1,6 @@
 import { StyledNavLink } from 'shared/components/StyledNavLink/StyledNavLink.styled';
 
+import PropTypes from 'prop-types';
 
 import { Box } from '@mui/material';
 
@@ -41,3 +42,10 @@ export const AuthNavDesktop = ({handleClick}) => {
   );
 };
 
+AuthNavMobile.propTypes={
+  closeNavMenu:PropTypes.func.isRequired,
+}
+
+AuthNavDesktop.propTypes={
+  handleClick:PropTypes.func.isRequired
+}

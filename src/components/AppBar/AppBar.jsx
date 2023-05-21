@@ -9,21 +9,18 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import { MobileMenu } from './AppBar.styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';
 import { ReactComponent as User } from '../../images/icons/user.svg';
-import CloseIcon from '@mui/icons-material/Close';
 import { useAuth } from 'shared/hooks/useAuth';
 import styles from './AppBar.module.scss';
 
-import { AuthNavMobile, AuthNavDesktop } from 'components/NavBar/AuthNav';
-import { UserMenuMobile } from 'components/NavBar/UserMenu';
+import {AuthNavDesktop } from 'components/NavBar/AuthNav';
+import MobileMenuComponent from './MobileMenu';
 
 const pages = [
     { name: 'News', path: '/news' },
@@ -35,7 +32,7 @@ const pages = [
 
 function ResponsiveAppBar() {
     const location = useLocation();
-    console.log('location: ' , location.pathname);
+    console.log('location: ', location.pathname);
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -215,77 +212,12 @@ function ResponsiveAppBar() {
                             <MenuIcon style={{ color: 'var(--header-acc)' }} />
                         </IconButton>
                         {/* Mobile menu */}
-                        <MobileMenu
-                            id="menu-appbar"
-                            anchorReference="none"
-                            anchorPosition={{ top: 0, left: 0 }}
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', sm: 'block', md: 'flex', lg: 'none' },
-                                width: '100vw',
-                                maxWidth: 'none',
-                                maxHeight: 'none',
-                                padding: 0,
-                            }}
-                            classes={{ paper: 'mobile-menu' }}
-                            className="mobile-menu"
-                        >
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} className={styles.myCustomBox}>
-                                <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
-                                    <Logo width={116} height={20} />
-                                </IconButton>
-                                <IconButton
-                                    onClick={handleCloseNavMenu}
-                                    sx={{
-                                        color: 'var(--header-acc)',
-                                        width: '24px',
-                                        height: '24px',
-                                    }}
-                                >
-                                    <CloseIcon />
-                                </IconButton>
-                            </Box>
-                            {isLoggedIn ? (
-                                <UserMenuMobile closeNavMenu={handleCloseNavMenu} />
-                            ) : (
-                                <AuthNavMobile closeNavMenu={handleCloseNavMenu} />
-                            )}
-
-                            {pages.map(({ name, path }) => (
-                                <MenuItem
-                                    key={name}
-                                    onClick={() => {
-                                        handleCloseNavMenu(path);
-                                        setIsActiveButton(path)
-                                    }}
-                                    sx={{
-                                        my: 2,
-                                        color: isActiveButton === path ? 'var(--header-acc)' : 'var(--header-font)',
-                                        display: 'block',
-                                        margin: 0,
-                                    }}
-                                    className={styles.menuItemMobile}
-                                    component={NavLink}
-                                    to={path}
-                                >
-                                    <p
-                                        className={styles.menuTextMobile}>
-                                        {name}
-                                    </p>
-                                </MenuItem>
-                            ))}
-                        </MobileMenu>
+                        <MobileMenuComponent anchorElNav={anchorElNav}
+                            handleCloseNavMenu={handleCloseNavMenu}
+                            isLoggedIn={isLoggedIn}
+                            pages={pages}
+                            isActiveButton={isActiveButton}
+                            setIsActiveButton={setIsActiveButton} />
                     </Box>
                 </Toolbar>
             </Container>
