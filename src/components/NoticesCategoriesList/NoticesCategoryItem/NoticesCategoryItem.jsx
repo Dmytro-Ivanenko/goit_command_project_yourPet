@@ -18,11 +18,14 @@ import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/operations';
 
 const NoticesCategoryItem = ({ item }) => {
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
     const { isLoggedIn, user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
+    const dispatch = useDispatch();
 
     const { category, location, date, sex, title, image, _id, owner } = item;
 
@@ -45,6 +48,7 @@ const NoticesCategoryItem = ({ item }) => {
         if (user.favoriteNotices.includes(_id)) {
             try {
                 await deleteFavoriteNotice(_id);
+                dispatch(refreshUser());
                 toast.success('Deleted successfully');
             } catch (error) {
                 toast.error(error.message);
@@ -54,6 +58,7 @@ const NoticesCategoryItem = ({ item }) => {
 
         try {
             await addFavoriteNotice(item._id);
+            dispatch(refreshUser());
             toast.success('Added successfully');
         } catch (error) {
             if (error.response.status === 409) {
