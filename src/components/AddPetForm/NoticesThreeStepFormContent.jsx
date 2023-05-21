@@ -33,6 +33,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         name="photo"
                         alt="pet`s photo"
                         onChange={handleChange}
+                        className={styles.photoInput}
                     />
                 </label>
             </div>

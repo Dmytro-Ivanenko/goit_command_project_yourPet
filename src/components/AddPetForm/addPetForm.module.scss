@@ -101,12 +101,13 @@
 // }
 .photoInput {
     margin-bottom: 47px;
+    display: block;
     width: 112px;
     height: 112px;
     position: relative;
     border-radius: 20px;
     background-color: #af4f4f;
-    z-index: 1;
+    z-index: 3;
     margin-left: 27px;
     // visibility: hidden;
     // -webkit-appearance: none;
@@ -118,7 +119,7 @@
         content: '';
         top: 0;
         left: 0;
-        z-index: 3;
+        z-index: 7;
         width: 100%;
         height: 100%;
         background-color: #cce4fb;
@@ -164,6 +165,9 @@
     }
 }
 @media screen and (min-width: 1280px) {
+    .form {
+        width: 542px;
+    }
     .stepTitleContainer {
         margin-bottom: 36px;
     }
