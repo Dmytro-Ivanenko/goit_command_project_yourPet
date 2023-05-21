@@ -20,6 +20,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                         value={data.addTitle}
                         name="addTitle"
                         onChange={handleChange}
+                        className={styles.input}
                     />
                 </label>
             )}
@@ -32,15 +33,30 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     value={data.name}
                     name="name"
                     onChange={handleChange}
+                    className={styles.input}
                 />
             </label>
             <label>
                 Date of birth
-                <input type="text" value={data.birth} required name="birth" onChange={handleChange} />
+                <input
+                    type="text"
+                    value={data.birth}
+                    required
+                    name="birth"
+                    onChange={handleChange}
+                    className={styles.input}
+                />
             </label>
             <label>
                 Breed
-                <input type="text" value={data.breed} required name="breed" onChange={handleChange} />
+                <input
+                    type="text"
+                    value={data.breed}
+                    required
+                    name="breed"
+                    onChange={handleChange}
+                    className={styles.input}
+                />
             </label>
         </div>
     );

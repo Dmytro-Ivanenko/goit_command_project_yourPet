@@ -1,12 +1,18 @@
 import styles from './addPetForm.module.scss';
+import btnStyle from './buttons.module.scss';
+import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
 import isBtnDisabled from './isBtnDisabled';
+import getFormTitle from './getFormTitle';
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
-axios.defaults.baseURL = 'https://petprojectonrendercom.onrender.com/api';
+import serverRequest from './serverRequest';
 
 const AddPetForm = () => {
+    const location = useLocation();
     const fileInputRef = useRef(null);
 
     const [step, setStep] = useState(1);
@@ -22,72 +28,66 @@ const AddPetForm = () => {
                 break;
             case 'Done':
                 e.preventDefault();
-                console.log('DATA ON SUBMITTTT: ', data);
-                // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                // const inputWithFile = fileInputRef.current.files;
-                const file = fileInputRef.current.files[0];
-                const fileType = fileInputRef.current.files[0].type;
-                const fileName = fileInputRef.current.files[0].name;
-
-                // let imageBlob = await new Promise(resolve => fileInputRef.current.toBlob(resolve, fileType));
-
-                let formData = new FormData();
-                // formData.append('firstName', 'John');
-                formData.append('photo', file, fileName);
-
-                let response = await fetch('https://petprojectonrendercom.onrender.com/api/yourPets/', {
-                    method: 'POST',
-                    body: formData,
-                });
-                let result = await response.json();
-                alert(result.message);
-
-                // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+                // console.log('DATA ON SUBMITTTT: ', data);
+                // console.log(fileInputRef.current.files[0]);
+                serverRequest(data, fileInputRef);
                 break;
+            case 'Back':
+                setStep(prev => prev - 1);
             default:
                 return;
         }
         console.log('fileInputRef', fileInputRef.current);
     };
 
-    let title = 'Add pet';
-    switch (data.option) {
-        case 'sell':
-            title = `${title} for sell`;
-            break;
-        case 'lostFound':
-            title = `${title} for lost/found category`;
-            break;
-        case 'hands':
-            title = `${title} for in good hands category`;
-            break;
-        default:
-            title = 'Add pet';
-    }
-
-    const submit = async () => {};
+    const title = getFormTitle(data);
+    const backPage = step === 1 ? location.state?.from ?? '/user' : '';
 
     return (
         <form className={styles.form} onClick={onClick}>
             <h2 className={styles.title}>{title}</h2>
             <div className={styles.stepTitleContainer}>
-                <span className={styles.spepTitle}>Choose option</span>
-                <span className={styles.spepTitle}>Personal details</span>
-                <span className={styles.spepTitle}>More info</span>
+                <span className={styles.stepTitle}>
+                    Choose option{' '}
+                    <span
+                        className={clsx(
+                            styles.stepOneTitleAfter,
+                            { [styles.oneSelected]: step === 1 },
+                            { [styles.passed]: step > 1 }
+                        )}
+                    ></span>
+                </span>
+
+                <span className={styles.stepTitle}>
+                    Personal details
+                    <span
+                        className={clsx(
+                            styles.stepTwoTitleAfter,
+                            { [styles.twoSelected]: step === 2 },
+                            { [styles.passed]: step > 2 }
+                        )}
+                    ></span>
+                </span>
+                <span className={styles.stepTitle}>
+                    More info
+                    <span className={clsx(styles.stepThreeTitleAfter, { [styles.threeSelected]: step === 3 })}></span>
+                </span>
             </div>
             {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
-            <div className={styles.buttonsContainer}>
-                <button type="button" className={styles.backButton}>
-                    Cancel
-                </button>
+            <div className={btnStyle.buttonsContainer}>
+                <Link to={backPage}>
+                    <button type="button" className={styles.backButton}>
+                        {step === 1 ? 'Cancel' : 'Back'}
+                    </button>
+                </Link>
 
                 <button
                     type={data.comments ? 'submit' : 'button'}
                     disabled={isBtnDisabled(step, data)}
-                    className={styles.nextButton}
+                    className={btnStyle.btnLearn}
                 >
                     {step === 3 ? 'Done' : 'Next'}
+                    {/* <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} /> */}
                 </button>
             </div>
         </form>

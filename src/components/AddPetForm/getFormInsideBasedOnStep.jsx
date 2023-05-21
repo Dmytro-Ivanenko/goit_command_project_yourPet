@@ -12,7 +12,9 @@ const getFormInsideBasedOnStep = (step, data, setData, fileInputRef) => {
             break;
         case 3:
             if (data.option !== 'pet') {
-                formInsideBasedOnStep = <NoticesThreeStepFormContent data={data} setData={setData} />;
+                formInsideBasedOnStep = (
+                    <NoticesThreeStepFormContent fileInputRef={fileInputRef} data={data} setData={setData} />
+                );
             } else {
                 formInsideBasedOnStep = (
                     <PetThreeStepFormContent data={data} setData={setData} fileInputRef={fileInputRef} />
