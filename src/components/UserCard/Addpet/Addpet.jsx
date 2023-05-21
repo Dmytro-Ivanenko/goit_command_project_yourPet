@@ -12,7 +12,7 @@ const Addpet = () => {
             <Link to="/add-pet" state={{ from: location }} className={styles.link}>
                 <button className={styles.addPet}>
                     <span className={styles.titleBtn}>Add Pet</span>
-                    //<img src={plus} width="24" height="24" alt="plus" />
+ {/*<img src={plus} width="24" height="24" alt="plus" */}
                 </button>
             </Link>
         </div>
