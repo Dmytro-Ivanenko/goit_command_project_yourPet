@@ -1,6 +1,16 @@
 import React from 'react';
 import styles from './OurFriendsItem.module.scss';
 
+import lion from 'images/friends/lion.png';
+import barbos from 'images/friends/barbos.png';
+import whiskas from 'images/friends/whiskas.png';
+import happypaw from 'images/friends/happypaw.png';
+import pethelp from 'images/friends/pethelp.png';
+import sirius from 'images/friends/sirius.png';
+import purina from 'images/friends/purina.png';
+import josera from 'images/friends/josera.png';
+import lico from 'images/friends/lico.png';
+
 const OurFriendCard = ({ title, logo, time, address, linkadress, email, phone }) => (
     <li className={styles.card}>
         <h2 className={styles.card__title}>{title}</h2>
@@ -45,7 +55,7 @@ const FriendsPage = () => {
         {
             id: 1,
             title: 'ЛКП "ЛЕВ"',
-            logo: require('../../../images/friends/lion.png'),
+            logo: lion,
             time: '8:00-19:00',
             address: 'Promuslova Street, 56',
             linkadress: 'https://goo.gl/maps/hDwKTL4ZD76qgZmC8?coh=178573&entry=tt',
@@ -55,7 +65,7 @@ const FriendsPage = () => {
         {
             id: 2,
             title: 'Барбос',
-            logo: require('../../../images/friends/barbos.png'),
+            logo: barbos,
             time: '8:00-20:00',
             address: 'Grigorenka Street, 25',
             linkadress: 'https://goo.gl/maps/iGGoSv893zUW22Vq7?coh=178573&entry=tt',
@@ -65,7 +75,7 @@ const FriendsPage = () => {
         {
             id: 3,
             title: 'Whiskas',
-            logo: require('../../../images/friends/whiskas.png'),
+            logo: whiskas,
             time: 'day and night',
             address: 'website only',
             linkadress: 'https://www.whiskas.ua/',
@@ -75,7 +85,7 @@ const FriendsPage = () => {
         {
             id: 4,
             title: 'Happy paw',
-            logo: require('../../../images/friends/happypaw.png'),
+            logo: happypaw,
             time: '09:00-19:00',
             address: 'Chota Rystaveli Street, 44',
             linkadress: 'https://goo.gl/maps/9gE3C8cMTBYTpyGeA?coh=178573&entry=tt',
@@ -85,7 +95,7 @@ const FriendsPage = () => {
         {
             id: 5,
             title: 'PetHelp',
-            logo: require('../../../images/friends/pethelp.png'),
+            logo: pethelp,
             time: 'day and night',
             address: 'website only',
             linkadress: 'https://pethelp.com.ua/dopomogti/',
@@ -95,7 +105,7 @@ const FriendsPage = () => {
         {
             id: 6,
             title: 'Сіріус',
-            logo: require('../../../images/friends/sirius.png'),
+            logo: sirius,
             time: '11:00-16:00',
             address: 'Fedorivka, Kyiv Oblast',
             linkadress: 'https://goo.gl/maps/18zVkCsBeDcBULYD7?coh=178573&entry=tt',
@@ -105,7 +115,7 @@ const FriendsPage = () => {
         {
             id: 7,
             title: 'PURINA',
-            logo: require('../../../images/friends/purina.png'),
+            logo: purina,
             time: 'day and night',
             address: 'website only',
             linkadress: 'https://www.purina.ua/',
@@ -115,7 +125,7 @@ const FriendsPage = () => {
         {
             id: 8,
             title: 'Josera',
-            logo: require('../../../images/friends/josera.png'),
+            logo: josera,
             time: '09:00-17:00',
             address: 'Sholom-Aleikhema St, 11',
             linkadress: 'https://goo.gl/maps/QX9WrqUi6XRvuA5a6?coh=178573&entry=tt',
@@ -125,7 +135,7 @@ const FriendsPage = () => {
         {
             id: 9,
             title: 'LICO',
-            logo: require('../../../images/friends/lico.png'),
+            logo: lico,
             time: '9:00-20:00',
             address: 'Dryhetiv Street, 77',
             linkadress: 'https://goo.gl/maps/tDU1Nc24Da7fxxtM7?coh=178573&entry=tt',
