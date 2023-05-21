@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './OurFriendsItem.module.scss';
 
-import lion from 'images/friends/lion.png';
-import barbos from 'images/friends/barbos.png';
-import whiskas from 'images/friends/whiskas.png';
-import happypaw from 'images/friends/happypaw.png';
-import pethelp from 'images/friends/pethelp.png';
-import sirius from 'images/friends/sirius.png';
-import purina from 'images/friends/purina.png';
-import josera from 'images/friends/josera.png';
-import lico from 'images/friends/lico.png';
+import lion from 'images/our-friends/lion.png';
+import barbos from 'images/our-friends/barbos.png';
+import whiskas from 'images/our-friends/whiskas.png';
+import happypaw from 'images/our-friends/happypaw.png';
+import pethelp from 'images/our-friends/pethelp.png';
+import sirius from 'images/our-friends/sirius.png';
+import purina from 'images/our-friends/purina.png';
+import josera from 'images/our-friends/josera.png';
+import lico from 'images/our-friends/lico.png';
 
 const OurFriendCard = ({ title, logo, time, address, linkadress, email, phone }) => (
     <li className={styles.card}>
