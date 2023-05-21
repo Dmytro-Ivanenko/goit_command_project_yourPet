@@ -127,7 +127,7 @@ ModalNotice.propTypes = {
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         comments: PropTypes.string.isRequired,
-        price: PropTypes.string,
+        price: PropTypes.number,
         email: PropTypes.string.isRequired,
         phone: PropTypes.string.isRequired,
     }),

@@ -1,8 +1,11 @@
+import moment from 'moment';
+
 export const calcAge = birthdate => {
-    const birthDate = new Date(birthdate.split('-').reverse().join('-'));
-    const currentDate = new Date();
-    const yearsDiff = currentDate.getFullYear() - birthDate.getFullYear();
-    const monthsDiff = currentDate.getMonth() - birthDate.getMonth();
+    const birthDate = moment(birthdate, 'DD-MM-YYYY');
+    const currentDate = moment();
+
+    const yearsDiff = currentDate.diff(birthDate, 'years');
+    const monthsDiff = currentDate.diff(birthDate, 'month') % 12;
     const totalMonths = yearsDiff * 12 + monthsDiff;
 
     if (totalMonths < 12) {
