@@ -48,8 +48,8 @@ const NoticesCategoryItem = ({ item }) => {
         if (user.favoriteNotices.includes(_id)) {
             try {
                 await deleteFavoriteNotice(_id);
-                toast.success('Deleted successfully');
                 dispatch(refreshUser());
+                toast.success('Deleted successfully');
             } catch (error) {
                 toast.error(error.message);
             }
