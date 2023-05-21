@@ -1,12 +1,12 @@
 .container {
     width: 280px;
-    height: 541px;
     background: #ffffff;
     box-shadow: var(--small-shadow);
     border-radius: 20px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 16px;
+    padding-bottom: 40px;
 
     &:not(:last-child) {
         margin-bottom: 20px;
@@ -63,8 +63,8 @@ p {
 
 @media screen and (min-width: 768px) {
     .container {
+        padding-top: 20px;
         width: 703px;
-        height: 256px;
         display: flex;
         margin-right: 0;
         position: relative;
@@ -83,7 +83,7 @@ p {
 @media screen and (min-width: 1280px) {
     .container {
         width: 821px;
-        height: 212px;
+        padding-bottom: 20px;
     }
 
     .photoPet {
