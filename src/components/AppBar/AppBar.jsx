@@ -154,7 +154,6 @@ function ResponsiveAppBar() {
                                     fontSize: '20px',
                                     lineHeight: '1.35',
                                     letterSpacing: '0.04em',
-
                                 }}
                                 component={NavLink}
                                 to={path}
@@ -166,13 +165,16 @@ function ResponsiveAppBar() {
                     {/* User menu descktop */}
                     {isLoggedIn ? (
                         <Box sx={{ flexGrow: 0 }}>
+
                             <Box onClick={handleClickUserMenu} component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
+
                                 <IconButton sx={{ p: 0 }}>
                                     {user.avatar ? (<img className={styles.userAvatar}
                                         src={user.avatar} alt="User avatar"></img>) :
                                         (<User alt="Remy Sharp" />)}
                                 </IconButton>
                                 <span className={styles.userNameDesc}>{user.name ? (user.name) : userName}</span>
+
                             </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -212,12 +214,14 @@ function ResponsiveAppBar() {
                             <MenuIcon style={{ color: 'var(--header-acc)' }} />
                         </IconButton>
                         {/* Mobile menu */}
+
                         <MobileMenuComponent anchorElNav={anchorElNav}
                             handleCloseNavMenu={handleCloseNavMenu}
                             isLoggedIn={isLoggedIn}
                             pages={pages}
                             isActiveButton={isActiveButton}
                             setIsActiveButton={setIsActiveButton} />
+
                     </Box>
                 </Toolbar>
             </Container>
