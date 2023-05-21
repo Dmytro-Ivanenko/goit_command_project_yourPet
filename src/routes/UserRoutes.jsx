@@ -39,7 +39,7 @@ const UserRoutes = () => {
                 />
                 <Route path="/user" element={<PrivateRoute redirectTo="/login" component={<UserPage />} />} />
 
-                <Route path="/add-pet" element={<AddPetPage />} />
+                <Route path="/add-pet" element={<PrivateRoute redirectTo="/login" component={<AddPetPage />} />} />
 
                 <Route path="/notices" element={<NoticesPage />}>
                     <Route index element={<Navigate to="/notices/sell" replace />} />

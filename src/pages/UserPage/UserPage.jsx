@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 
-import UserCard from 'components/UserCard/UserCard';
-import Addpet from 'components/UserCard/Addpet/Addpet';
-import Pets from 'components/UserCard/Pets/Pets';
+import UserCard from 'components/UserCard';
+import Addpet from 'components/UserCard/Addpet';
+import Pets from 'components/UserCard/Pets';
 import styles from './userPage.module.scss';
 
 import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
