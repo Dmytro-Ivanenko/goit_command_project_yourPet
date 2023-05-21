@@ -6,6 +6,12 @@ export const getNoticeById = async id => {
     return data;
 };
 
+export const deleteNoticeById = async id => {
+    const { data } = await axios.delete(`/notice/${id}`);
+    console.log(data);
+    return data;
+};
+
 export const getSellNotices = async (query, gender, page, limit) => {
     const { data } = await axios.get(`/notice/sell`, {
         params: {
