@@ -18,8 +18,8 @@ const NoticesCategoriesNav = () => {
     return (
         <div className={styles.wrapper}>
             <ul className={styles.list}>
-                {publicCategories.map(({ to, text }) => (
-                    <li key={to}>
+                {publicCategories.map(({ to, text, id }) => (
+                    <li key={id}>
                         <Link to={{ pathname: to, search }} className={getFullName(pathname, to)}>
                             {text}
                         </Link>
@@ -28,8 +28,8 @@ const NoticesCategoriesNav = () => {
             </ul>
             {isLoggedIn && (
                 <ul className={styles.list}>
-                    {privateCategories.map(({ to, text }) => (
-                        <li key={to}>
+                    {privateCategories.map(({ to, text, id }) => (
+                        <li key={id}>
                             <Link to={{ pathname: to, search }} className={getFullName(pathname, to)}>
                                 {text}
                             </Link>

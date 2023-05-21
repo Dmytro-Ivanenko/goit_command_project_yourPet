@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { ReactComponent as FiltersIcon } from 'images/icons/filters.svg';
 import { ReactComponent as ChevronUpIcon } from 'images/icons/chevron-up.svg';
 import { ReactComponent as ChevronDownIcon } from 'images/icons/chevron-down.svg';
@@ -124,6 +126,11 @@ const NoticesFilters = ({ onFilter, filters }) => {
             )}
         </div>
     );
+};
+
+NoticesFilters.propTypes = {
+    onFilter: PropTypes.func.isRequired,
+    filters: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default NoticesFilters;

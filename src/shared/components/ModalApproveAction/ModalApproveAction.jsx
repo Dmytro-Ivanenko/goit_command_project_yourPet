@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import styles from './modal-approve-action.module.scss';
@@ -35,6 +36,11 @@ const ModalApproveAction = ({ children, onClose }) => {
         </div>,
         modalRoot
     );
+};
+
+ModalApproveAction.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.element.isRequired,
 };
 
 export default ModalApproveAction;

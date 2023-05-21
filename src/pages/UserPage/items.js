@@ -1,7 +1,9 @@
+import { nanoid } from 'nanoid';
 import cat from 'images/example/cat.jpg';
 
 const items = [
     {
+        _id: nanoid(),
         name: 'Cat',
         birthDate: '21-10-2022',
         breed: 'breed',
@@ -10,6 +12,7 @@ const items = [
         photoURL: cat,
     },
     {
+        _id: nanoid(),
         name: 'Cat',
         birthDate: '21-10-2022',
         breed: 'breed',

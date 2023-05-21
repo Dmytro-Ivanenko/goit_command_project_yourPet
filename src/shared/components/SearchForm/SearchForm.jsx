@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import { ReactComponent as SearchIcon } from 'images/icons/search.svg';
@@ -69,6 +70,11 @@ const SearchForm = ({ onSubmit, onClear }) => {
             )}
         </form>
     );
+};
+
+SearchForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onClear: PropTypes.func.isRequired,
 };
 
 export default SearchForm;

@@ -1,35 +1,17 @@
 import { useAuth } from 'shared/hooks/useAuth';
-import { addFavoriteNotice } from 'services/api/favorites';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
-import dogPicture from 'images/example/dog.jpg';
+import { addFavoriteNotice } from 'services/api/favorites';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 
 import styles from './modal-notice.module.scss';
-import { toast } from 'react-toastify';
 
 const ModalNotice = ({ item }) => {
     const { isLoggedIn } = useAuth();
 
-    const handleClick = async () => {
-        if (!isLoggedIn) {
-            toast.error('Sign in to add to favorites.');
-            return;
-        }
-
-        // add to favorite
-        try {
-            await addFavoriteNotice(item._id);
-            toast.success('Added successfully');
-        } catch (error) {
-            if (error.response.status === 409) {
-                return toast.warn('Already in favorites');
-            }
-
-            toast.error(error.message);
-        }
-    };
-
     const {
+        _id,
         breed,
         category,
         comments,
@@ -39,10 +21,29 @@ const ModalNotice = ({ item }) => {
         price,
         sex,
         title,
+        image,
         email = 'user@mail.com',
         phone = '+380971234567',
-        image = dogPicture,
     } = item;
+
+    const handleClick = async () => {
+        if (!isLoggedIn) {
+            toast.error('Sign in to add to favorites.');
+            return;
+        }
+
+        // add to favorite
+        try {
+            await addFavoriteNotice(_id);
+            toast.success('Added successfully');
+        } catch (error) {
+            if (error.response.status === 409) {
+                return toast.warn('Already in favorites');
+            }
+
+            toast.error(error.message);
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -113,6 +114,23 @@ const ModalNotice = ({ item }) => {
             </div>
         </div>
     );
+};
+
+ModalNotice.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        breed: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        sex: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        comments: PropTypes.string.isRequired,
+        price: PropTypes.string,
+        email: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+    }),
 };
 
 export default ModalNotice;
