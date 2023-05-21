@@ -41,7 +41,6 @@
 .stepOneTitleAfter,
 .stepTwoTitleAfter,
 .stepThreeTitleAfter {
-    // display: block;
     position: absolute;
     top: 20px;
     left: 0;
@@ -96,9 +95,6 @@
     flex-basis: 50%;
 }
 
-// .fakePhotoInputContainer {
-//     position: relative;
-// }
 .photoInput {
     margin-bottom: 47px;
     display: block;
@@ -109,10 +105,6 @@
     background-color: #af4f4f;
     z-index: 3;
     margin-left: 27px;
-    // visibility: hidden;
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
-    // appearance: none;
 
     &:after {
         position: absolute;

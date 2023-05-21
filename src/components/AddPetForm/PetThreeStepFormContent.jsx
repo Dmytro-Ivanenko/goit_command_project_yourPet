@@ -15,7 +15,6 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
         <div className={styles.inputs}>
             <label>
                 Add photo
-                {/* <div className={styles.fakePhotoInputContainer}> */}
                 <input
                     type="file"
                     required
@@ -26,8 +25,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     onChange={handleChange}
                     className={styles.photoInput}
                 />
-                {/* <span className={styles.fakePhotoInput}></span>
-                </div> */}
+             
             </label>
 
             <label>
