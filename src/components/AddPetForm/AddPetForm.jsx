@@ -1,6 +1,6 @@
 import styles from './addPetForm.module.scss';
 import btnStyle from './buttons.module.scss';
-import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
+//import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
 import isBtnDisabled from './isBtnDisabled';
 import getFormTitle from './getFormTitle';
@@ -34,6 +34,7 @@ const AddPetForm = () => {
                 break;
             case 'Back':
                 setStep(prev => prev - 1);
+             break;
             default:
                 return;
         }
