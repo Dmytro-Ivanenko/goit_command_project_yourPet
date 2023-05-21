@@ -1,8 +1,5 @@
 // Mobile
 @media screen and (max-width: 767px) {
-    body {
-        background-image: url(../../images/bg-mobile.jpg);
-    }
     .mainPageText {
         font-family: 'Manrope';
         font-weight: 700;
@@ -17,7 +14,8 @@
         margin-bottom: 10px;
     }
     .mainPageWrapper {
-        height: 573px;
+        // height: 573px;
+        height: 100%;
         width: 100%;
         margin-top: 65px;
     }
@@ -28,9 +26,6 @@
 
 // Tablet
 @media screen and (min-width: 768px) {
-    body {
-        background-image: url(../../images/bg-tablet.jpg);
-    }
     .mainPageText {
         font-size: 68px;
 
@@ -40,15 +35,12 @@
         margin-top: 80px;
     }
     .mainPageWrapper {
-        height: 1300px;
+        // height: 1300px;
     }
 }
 
 // Desktop
 @media screen and (min-width: 1280px) {
-    body {
-        background-image: url(../../images/bg-desktop.jpg);
-    }
     .mainPageText {
         font-weight: 800;
         line-height: 1.3;
@@ -61,8 +53,8 @@
     }
     .mainPageWrapper {
         display: flex;
-        height: 720px;
-        margin-top: 20px;
+        // height: 720px;
+        margin-top: 10px;
         margin-right: 10px;
         margin-bottom: 0;
         width: 100%;

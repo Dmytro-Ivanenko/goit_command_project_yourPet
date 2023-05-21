@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { getNoticeById, deleteNoticeById } from 'services/api/notices';
+import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
+import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { useAuth } from 'shared/hooks/useAuth';
 
 import { ReactComponent as ClockIcon } from 'images/icons/clock.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
@@ -8,26 +14,24 @@ import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
-
-import { getNoticeById } from 'services/api/notices';
-import { addFavoriteNotice } from 'services/api/favorites';
-import ModalApproveAction from 'shared/components/ModalApproveAction';
-import { useAuth } from 'shared/hooks/useAuth';
+import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/operations';
 
 const NoticesCategoryItem = ({ item }) => {
-    const { isLoggedIn } = useAuth();
     const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
+    const { isLoggedIn, user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
+    const dispatch = useDispatch();
 
-    const { category, location, date, sex, title, favorite, image, _id } = item;
+    const { category, location, date, sex, title, image, _id, owner } = item;
 
     const handleModal = async () => {
         try {
             const data = await getNoticeById(_id);
-            console.log(data);
             data.date = data.date.replaceAll('-', '.');
             setItemDetailedInfo(data);
         } catch (error) {
@@ -41,10 +45,26 @@ const NoticesCategoryItem = ({ item }) => {
             return;
         }
 
-        // add to favorite
+        if (user.favoriteNotices.includes(_id)) {
+            try {
+                await deleteFavoriteNotice(_id);
+                dispatch(refreshUser());
+                toast.success('Deleted successfully');
+            } catch (error) {
+                toast.error(error.message);
+            }
+            return;
+        }
+
         try {
             await addFavoriteNotice(item._id);
+            dispatch(refreshUser());
+            toast.success('Added successfully');
         } catch (error) {
+            if (error.response.status === 409) {
+                return toast.warn('Already in favorites');
+            }
+
             toast.error(error.message);
         }
     };
@@ -79,6 +99,15 @@ const NoticesCategoryItem = ({ item }) => {
         setSearchParams(searchParams);
     };
 
+    const handleOwnDelete = async () => {
+        try {
+            await deleteNoticeById(_id);
+            toast.success('Deleted successfully!');
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
+
     return (
         <>
             <li className={styles.item}>
@@ -86,12 +115,21 @@ const NoticesCategoryItem = ({ item }) => {
                     <img className={styles.img} src={image} alt="pet" />
                     <div className={styles.upperBlock}>
                         <p className={styles.upperBlockText}>{category}</p>
-                        <button
-                            onClick={handleFavoriteClick}
-                            className={favorite ? `${styles.btn} ${styles.favorite}` : styles.btn}
-                        >
-                            <HeartIcon className={styles.btnIcon} width={24} height={24} />
-                        </button>
+                        <div className={styles.btnWrapper}>
+                            <button
+                                onClick={handleFavoriteClick}
+                                className={
+                                    user.favoriteNotices.includes(_id) ? `${styles.btn} ${styles.favorite}` : styles.btn
+                                }
+                            >
+                                <HeartIcon className={styles.btnIcon} width={24} height={24} />
+                            </button>
+                            {owner === user.id && (
+                                <button onClick={handleOwnDelete} className={styles.btnDelete}>
+                                    <TrashIcon className={styles.btnIcon} width={24} height={24} />
+                                </button>
+                            )}
+                        </div>
                     </div>
                     <ul className={styles.lowerBlock}>
                         <li className={styles.lowerBlockItem}>
@@ -145,6 +183,18 @@ const NoticesCategoryItem = ({ item }) => {
             )}
         </>
     );
+};
+
+NoticesCategoryItem.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        sex: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+    }),
 };
 
 export default NoticesCategoryItem;

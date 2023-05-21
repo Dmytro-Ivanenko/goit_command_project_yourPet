@@ -1,68 +1,26 @@
 .authNavBoxMobile {
-    @media screen and (max-width: 1279px) {
+    @media screen and (max-width: 767px) {
         display: flex;
         flex-direction: column;
         gap: 12px;
         align-items: center;
         justify-content: center;
+        margin-bottom: 40px;
     }
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: 768px) {
         display: none;
     }
 }
 
 .authNavBoxDesktop {
-    @media screen and (max-width: 1279px) {
+    @media screen and (max-width: 767px) {
         display: none;
     }
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: 768px) {
         display: flex;
         gap: 30px;
     }
 }
 
-// .authNavlink {
-//     display: flex;
-//     justify-content: center;
-//     text-decoration: none;
-//     gap: 5px;
-//     align-items: center;
-//     padding: 7px 20px;
-//     font-weight: 400;
-//     font-size: 16px;
-//     color: var(--header-acc);
-//     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-//     border: 2px solid var(--header-acc);
-//     border-radius: 40px;
-//     width: 165px;
-//     height: 40px;
-
-//     &:hover {
-//         text-shadow: 1px 0 11px rgba(255 255 255 / 80%);
-//     }
-
-//     &:active {
-//         color: var(--main-back);
-//         background-color: var(--header-acc);
-//         text-shadow: 1px 0 11px rgb(52, 152, 219);
-//     }
-// }
-
-// .navLinkText {
-//     display: flex;
-//     align-items: center;
-//     gap: 8px;
-//     color: var(--header-acc)
-// }
-
-// .navLinkText::after {
-//     content: "";
-//     display: block;
-//     width: 24px;
-//     height: 24px;
-//     background-image: url("../../images/icons/pawprint.svg");
-//     background-size: cover;
-//     margin-right: 5px;
-// }

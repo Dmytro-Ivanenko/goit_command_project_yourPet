@@ -33,7 +33,10 @@ const UserRoutes = () => {
                 <Route path="/news" element={<NewsPage />}></Route>
 
                 <Route path="/login" element={<PublicRoute redirectTo="/user" component={<LoginPage />} />} />
-                <Route path="/register" element={<PublicRoute redirectTo="/user" component={<RegisterPage />} />} />
+                <Route
+                    path="/register"
+                    element={<PublicRoute redirectTo="/user" component={<RegisterPage />} from={'/register'} />}
+                />
                 <Route path="/user" element={<PrivateRoute redirectTo="/login" component={<UserPage />} />} />
 
                 <Route path="/add-pet" element={<AddPetPage />} />

@@ -1,11 +1,13 @@
 import styles from './addpet.module.scss';
-import plus from '../../../images/icons/plus-small.svg';
+import { ReactComponent as PlusSmallIcon } from 'images/icons/plus-small.svg';
+
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 const Addpet = () => {
     const location = useLocation();
     return (
+
         <div className={styles.container}>
             <Link to="/add-pet" state={{ from: location }} className={styles.link}>
                 <button className={styles.addPet}>
@@ -14,6 +16,7 @@ const Addpet = () => {
                 </button>
             </Link>
         </div>
+
     );
 };
 

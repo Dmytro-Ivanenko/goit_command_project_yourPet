@@ -1,11 +1,24 @@
 .title {
-    color: #111111;
+    margin-top: 60px;
+    color: var(--header-font);
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
     line-height: 130%;
     text-align: center;
+    @media screen and (max-width: 767px) {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        margin: 80px auto;
+        width: 280px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .title_br {
+        padding: 0 100px;
+    }
 }
 .btn {
     display: flex;
@@ -13,13 +26,14 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    margin-bottom: 100px;
     width: 248px;
     height: 40px;
     padding: 8px 28px;
     gap: 12px;
-    background: #54adff;
+    background: var(--main-acc);
     border-radius: 40px;
-    color: #fef9f9;
+    color: var(--main-back);
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
@@ -27,9 +41,14 @@
     line-height: 22px;
     letter-spacing: 0.04em;
     text-decoration: none;
+    @media screen and (max-width: 767px) {
+        margin-top: 60px;
+        margin-bottom: 275px;
+    }
 }
-.icon_paw {
-    fill: #fef9f9;
+.btnIcon {
+    width: 24px;
+    height: 24px;
 }
 .digit {
     display: flex;
@@ -38,24 +57,40 @@
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 800;
-    font-size: 381.004px;
+    font-size: 130px;
     line-height: 130%;
-    color: #54adff;
+    color: var(--main-acc);
+
+    @media screen and (min-width: 768px) {
+        font-size: 325px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        font-size: 380px;
+    }
 }
 .cat {
     background-image: url('../../images/example/selective-focus-black-white-adorable-cat-with-its-tongue-out.png');
-    background-color: #ffc107;
+    background-color: var(--header-acc);
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: 91%;
-    width: 292px;
-    height: 292px;
+    width: 131px;
+    height: 131px;
     background-position: center right;
+
+    @media screen and (min-width: 768px) {
+        width: 250px;
+        height: 250px;
+    }
+    @media screen and (min-width: 1280px) {
+        width: 292px;
+        height: 292px;
+    }
 }
 .digit_right {
     transform: rotate(-11.34deg);
 }
 .digit_left {
-    transform: rotate(24.23deg);
-    margin-left: 10px;
+    transform: rotate(16.23deg);
 }
