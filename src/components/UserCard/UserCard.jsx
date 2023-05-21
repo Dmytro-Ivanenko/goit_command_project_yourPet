@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import * as Yup from 'yup';
+// import { ToastContainer, toast } from 'react-toastify';
 import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
 import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
 import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';
@@ -13,6 +14,16 @@ import { useAuth } from 'shared/hooks/useAuth';
 import { logOut, updateUser } from 'redux/auth/operations';
 
 import styles from './userCard.module.scss';
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().matches(/^[A-Za-z]+$/, 'Invalid name').required('Name is required'),
+  email: Yup.string().email('Invalid email').matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, 'Invalid email').required('Email is required'),
+  birthday: Yup.date().nullable().required('Birthday is required'),
+  phone: Yup.string().matches(/^\d{10}$/, 'Invalid phone number').required('Phone number is required'),
+  city: Yup.string().required('City is required'),
+});
+
+
 
 const initialState = {
     avatar: null,
@@ -69,36 +80,47 @@ const UserCard = () => {
 
     const handleChange = e => {
         const { name, value } = e.target;
-
+        
         setState(prevState => ({
             ...prevState,
             [name]: value,
         }));
     };
 
-    const handleSubmit = e => {
-        e.preventDefault();
+   const handleSubmit = async (e) => {
+  e.preventDefault();
 
-        const formData = new FormData();
-        const entries = Object.entries(state);
-        console.log(entries);
+  try {
+    await validationSchema.validate(state, { abortEarly: false });
 
-        entries.forEach(entry => {
-            if (entry[1]) {
-                formData.append(`${entry[0]}`, entry[1]);
-            }
-        });
+    const formData = new FormData();
+    const entries = Object.entries(state);
 
-        // Check if form data is not empty to prevent unnecessary api calls
-        const res = !formData.entries().next().done;
+    entries.forEach((entry) => {
+      if (entry[1]) {
+        formData.append(entry[0], entry[1]);
+      }
+    });
 
-        setState({ ...initialState });
-        setIsFieldShown(null);
+    // Check if form data is not empty to prevent unnecessary API calls
+    const res = !formData.entries().next().done;
 
-        if (res) {
-            dispatch(updateUser(formData));
-        }
-    };
+    setState({ ...initialState });
+    setIsFieldShown(null);
+
+    if (res) {
+      dispatch(updateUser(formData));
+    }
+  } catch (error) {
+    console.error(error);
+    // Show validation errors or error messages to the user
+  }
+};
+
+
+
+
+
 
     const { avatar, name, email, birthday, phone, city } = state;
     const {
@@ -137,7 +159,7 @@ const UserCard = () => {
                     <label htmlFor="name">Name:</label>
                     <div className={styles.position}>
                         <input
-                            className={styles.input}
+                            className={styles.input}  
                             type="text"
                             id="name"
                             name="name"
@@ -145,6 +167,7 @@ const UserCard = () => {
                             value={name}
                             required
                             onChange={handleChange}
+                   
                         />
                         {isFieldShown === 'name' ? (
                             <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
@@ -290,7 +313,9 @@ const UserCard = () => {
                         </div>
                     </div>
                 </ModalApproveAction>
+                
             )}
+            {/* <ToastContainer/> */}
         </div>
     );
 };
