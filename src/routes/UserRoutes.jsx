@@ -8,15 +8,12 @@ const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 
-// const AddPetPage = lazy(() => import('pages/AddPetPage/AddPetPage'));
+const AddPetPage = lazy(() => import('pages/AddPetPage/AddPetPage'));
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
 
 const NoticesPage = lazy(() => import('pages/NoticesPage'));
 
 const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
-
-
-
 
 const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
 
@@ -32,15 +29,17 @@ const UserRoutes = () => {
                 <Route path="/main" element={<MainPage />} />
 
                 <Route path="/friends" element={<OurFriendsPage />} />
-               
 
                 <Route path="/news" element={<NewsPage />}></Route>
 
                 <Route path="/login" element={<PublicRoute redirectTo="/user" component={<LoginPage />} />} />
-                <Route path="/register" element={<PublicRoute redirectTo="/user" component={<RegisterPage />} />} />
+                <Route
+                    path="/register"
+                    element={<PublicRoute redirectTo="/user" component={<RegisterPage />} from={'/register'} />}
+                />
                 <Route path="/user" element={<PrivateRoute redirectTo="/login" component={<UserPage />} />} />
 
-                {/* <Route path="/add-pet" element={<AddPetPage />} /> */}
+                <Route path="/add-pet" element={<AddPetPage />} />
 
                 <Route path="/notices" element={<NoticesPage />}>
                     <Route index element={<Navigate to="/notices/sell" replace />} />

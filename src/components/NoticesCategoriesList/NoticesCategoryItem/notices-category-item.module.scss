@@ -26,6 +26,7 @@
     left: 0;
 
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
 }
 
@@ -63,10 +64,14 @@
 
     transition: color var(--timing);
 
-    &:hover,
-    &:focus {
+    &:hover {
         color: var(--main-acc);
     }
+}
+
+.btnDelete {
+    @extend .btn;
+    margin-top: 16px;
 }
 
 .btnIcon {
@@ -101,8 +106,7 @@
 
     transition: background-color var(--timing), color var(--timing);
 
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: var(--main-acc);
         color: var(--main-light);
     }

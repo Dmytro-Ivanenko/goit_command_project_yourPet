@@ -1,8 +1,8 @@
 import React from 'react';
 
-import desktop from '../../images/mainPage-pictures-desktop.jpg';
-import mobile from '../../images/mainPage-pictures-mobile.jpg';
-import tablet from '../../images/mainPage-pictures-tablet.jpg';
+import desktop from 'images/background/mainPage-pictures-desktop.jpg';
+import mobile from 'images/background/mainPage-pictures-mobile.jpg';
+import tablet from 'images/background/mainPage-pictures-tablet.jpg';
 
 import styles from './MainPage.module.scss';
 

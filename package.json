@@ -16,6 +16,7 @@
         "@testing-library/react": "^12.1.4",
         "@testing-library/user-event": "^13.5.0",
         "axios": "^1.4.0",
+        "clsx": "^1.2.1",
         "formik": "^2.2.9",
         "modern-normalize": "^1.1.0",
         "moment": "^2.29.4",
@@ -36,7 +37,8 @@
         "yup": "^1.1.1"
     },
     "devDependencies": {
-        "@redux-devtools/extension": "^3.2.5"
+        "@redux-devtools/extension": "^3.2.5",
+        "prop-types": "^15.8.1"
     },
     "scripts": {
         "start": "react-scripts start",

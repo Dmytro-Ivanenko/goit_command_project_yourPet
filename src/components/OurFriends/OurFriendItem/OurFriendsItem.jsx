@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './OurFriendsItem.module.scss';
 // import CardListWithDropdown from '../Card/Card';
 
+
 const OurFriendCard = ({ title, logo, timeTittle, timeOptions, address, linkadress, email, phone }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -61,11 +62,13 @@ const OurFriendCard = ({ title, logo, timeTittle, timeOptions, address, linkadre
     );
 };
 
+
 const FriendsPage = () => {
     const friends = [
         {
             id: 1,
             title: 'ЛКП "ЛЕВ"',
+
             logo: require('../../../images/Friends/lion.png'),
             timeTittle: '8:00- 19:00',
             timeOptions: [
@@ -77,6 +80,7 @@ const FriendsPage = () => {
                 'SA 8:00 - 19:00',
                 'SU 8:00 - 19:00',
             ],
+
             address: 'Promuslova Street, 56',
             linkadress: 'https://goo.gl/maps/hDwKTL4ZD76qgZmC8?coh=178573&entry=tt',
             email: 'lkplev@gmail.com',
@@ -85,6 +89,7 @@ const FriendsPage = () => {
         {
             id: 2,
             title: 'Барбос',
+
             logo: require('../../../images/Friends/barbos.png'),
             timeTittle: '8:00- 20:00',
             timeOptions: [
@@ -96,6 +101,7 @@ const FriendsPage = () => {
                 'SA 8:00 - 20:00',
                 'SU 8:00 - 20:00',
             ],
+
             address: 'Grigorenka Street, 25',
             linkadress: 'https://goo.gl/maps/iGGoSv893zUW22Vq7?coh=178573&entry=tt',
             email: 'barbos@gmail.com',
@@ -104,9 +110,11 @@ const FriendsPage = () => {
         {
             id: 3,
             title: 'Whiskas',
+
             logo: require('../../../images/Friends/whiskas.png'),
             timeTittle: 'day and night',
             timeOptions: ["We are working day and night"],
+
             address: 'website only',
             linkadress: 'https://www.whiskas.ua/',
             email: 'whiskas@gmail.com',
@@ -115,6 +123,7 @@ const FriendsPage = () => {
         {
             id: 4,
             title: 'Happy paw',
+
             logo: require('../../../images/Friends/happypaw.png'),
             timeTittle: '09:00- 19:00',
             timeOptions: [
@@ -126,6 +135,7 @@ const FriendsPage = () => {
                 'SA 9:00 - 19:00',
                 'SU 9:00 - 19:00',
             ],
+
             address: 'Chota Rystaveli Street, 44',
             linkadress: 'https://goo.gl/maps/9gE3C8cMTBYTpyGeA?coh=178573&entry=tt',
             email: 'hello@happypaw.ua',
@@ -134,10 +144,12 @@ const FriendsPage = () => {
         {
             id: 5,
             title: 'PetHelp',
+
             logo: require('../../../images/Friends/pethelp.png'),
             timeTittle: 'day and night',
             timeOptions: ["We are working day and night"]
             ,
+
             address: 'website only',
             linkadress: 'https://pethelp.com.ua/dopomogti/',
             email: 'pithelp.ukr@gmail.com',
@@ -146,6 +158,7 @@ const FriendsPage = () => {
         {
             id: 6,
             title: 'Сіріус',
+
             logo: require('../../../images/Friends/sirius.png'),
            timeTittle: '11:00- 16:00',
             timeOptions: [
@@ -157,6 +170,7 @@ const FriendsPage = () => {
                 'SA 11:00 - 16:00',
                 'SU 11:00 - 16:00',
             ],
+
             address: 'Fedorivka, Kyiv Oblast',
             linkadress: 'https://goo.gl/maps/18zVkCsBeDcBULYD7?coh=178573&entry=tt',
             email: 'dogcat.sirius@gmail.com',
@@ -165,10 +179,12 @@ const FriendsPage = () => {
         {
             id: 7,
             title: 'PURINA',
+
             logo: require('../../../images/Friends/purina.png'),
              timeTittle: 'day and night',
             timeOptions: ["We are working day and night"]
             ,
+
             address: 'website only',
             linkadress: 'https://www.purina.ua/',
             email: 'info@ua.nestle.com',
@@ -177,6 +193,7 @@ const FriendsPage = () => {
         {
             id: 8,
             title: 'Josera',
+
             logo: require('../../../images/Friends/josera.png'),
             timeTittle: '09:00-17:00',
                timeOptions: [
@@ -188,6 +205,7 @@ const FriendsPage = () => {
                 'SA 09:00 - 17:00',
                 'SU 09:00 - 17:00',
             ],
+
             address: 'Sholom-Aleikhema St, 11',
             linkadress: 'https://goo.gl/maps/QX9WrqUi6XRvuA5a6?coh=178573&entry=tt',
             email: 'info@josera.ua',
@@ -196,6 +214,7 @@ const FriendsPage = () => {
         {
             id: 9,
             title: 'LICO',
+
             logo: require('../../../images/Friends/lico.png'),
             timeTittle: '9:00-20:00',
              timeOptions: [
@@ -207,6 +226,7 @@ const FriendsPage = () => {
                 'SA 09:00 - 20:00',
                 'SU 09:00 - 20:00',
             ],
+
             address: 'Dryhetiv Street, 77',
             linkadress: 'https://goo.gl/maps/tDU1Nc24Da7fxxtM7?coh=178573&entry=tt',
             email: 'lico@gmail.com',

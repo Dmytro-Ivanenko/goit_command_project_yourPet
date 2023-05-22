@@ -14,11 +14,11 @@
 }
 
 .authNavBoxDesktop {
-    @media screen and (max-width: 1279px) {
+    @media screen and (max-width: 767px) {
         display: none;
     }
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: 768px) {
         display: flex;
         gap: 30px;
     }
