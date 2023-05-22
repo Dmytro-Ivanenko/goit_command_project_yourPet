@@ -3,9 +3,10 @@ import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getNoticeById, deleteNoticeById } from 'services/api/notices';
+import { deleteNoticeById } from 'services/api/notices';
 import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { calcAge } from 'shared/helpers';
 import Button from 'shared/components/Button';
 import { useAuth } from 'shared/hooks/useAuth';
 
@@ -22,7 +23,7 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 
 const NoticesCategoryItem = ({ item }) => {
-    const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const { isLoggedIn, user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
@@ -30,13 +31,7 @@ const NoticesCategoryItem = ({ item }) => {
     const { category, location, date, sex, title, image, _id, owner } = item;
 
     const handleModal = async () => {
-        try {
-            const data = await getNoticeById(_id);
-            data.date = data.date.replaceAll('-', '.');
-            setItemDetailedInfo(data);
-        } catch (error) {
-            toast.error(error.message);
-        }
+        setShowModal(prevState => !prevState);
     };
 
     const handleFavoriteClick = async () => {
@@ -108,6 +103,9 @@ const NoticesCategoryItem = ({ item }) => {
         }
     };
 
+    // Age formatting for cards
+    const age = calcAge(date);
+
     return (
         <>
             <li className={styles.item}>
@@ -124,7 +122,7 @@ const NoticesCategoryItem = ({ item }) => {
                             >
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
-                            {owner === user.id && (
+                            {owner?.id === user.id && (
                                 <button onClick={handleOwnDelete} className={styles.btnDelete}>
                                     <TrashIcon className={styles.btnIcon} width={24} height={24} />
                                 </button>
@@ -144,10 +142,10 @@ const NoticesCategoryItem = ({ item }) => {
                                         ? `${styles.lowerBlockBtn} ${styles.active}`
                                         : styles.lowerBlockBtn
                                 }
-                                onClick={() => handleAgeClick(date)}
+                                onClick={() => handleAgeClick(age)}
                             >
                                 <ClockIcon className={styles.icon} width={24} height={24} />
-                                <span className={styles.label}>{date}</span>
+                                <span className={styles.label}>{age}</span>
                             </button>
                         </li>
                         <li className={styles.lowerBlockItem}>
@@ -173,9 +171,9 @@ const NoticesCategoryItem = ({ item }) => {
                 <h4 className={styles.title}>{title}</h4>
                 <Button onClick={handleModal} text="Learn More" />
             </li>
-            {itemDetailedInfo && (
-                <ModalApproveAction onClose={() => setItemDetailedInfo(null)}>
-                    <ModalNotice item={itemDetailedInfo} />
+            {showModal && (
+                <ModalApproveAction onClose={handleModal}>
+                    <ModalNotice item={item} />
                 </ModalApproveAction>
             )}
         </>
