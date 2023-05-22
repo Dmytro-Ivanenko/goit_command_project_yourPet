@@ -4,26 +4,23 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import PublicRoute from 'routes/PublicRoute';
 import PrivateRoute from 'routes/PrivateRoute';
 
+import Loader from 'shared/components/Loader';
+
+// Pages
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
-
 const AddPetPage = lazy(() => import('pages/AddPetPage/AddPetPage'));
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
-
 const NoticesPage = lazy(() => import('pages/NoticesPage'));
-
 const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
-
 const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
-
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
-
 const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
 
 const UserRoutes = () => {
     return (
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loader />}>
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/main" element={<MainPage />} />
