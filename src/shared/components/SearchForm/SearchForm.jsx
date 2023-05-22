@@ -37,8 +37,6 @@ const SearchForm = ({ onSubmit, onClear }) => {
         e.preventDefault();
 
         if (state.query.trim() === '') {
-            // Notification for empty string
-            console.log('empty');
             setState({ ...initialState });
             return;
         }
