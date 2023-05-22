@@ -122,7 +122,7 @@ const NoticesCategoryItem = ({ item }) => {
                             >
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
-                            {owner?.id === user.id && (
+                            {owner?._id === user.id && (
                                 <button onClick={handleOwnDelete} className={styles.btnDelete}>
                                     <TrashIcon className={styles.btnIcon} width={24} height={24} />
                                 </button>
