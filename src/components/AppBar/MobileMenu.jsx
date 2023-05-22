@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -9,9 +8,16 @@ import { ReactComponent as Logo } from '../../images/icons/logo.svg';
 import { AuthNavMobile } from 'components/NavBar/AuthNav';
 import { UserMenuMobile } from 'components/NavBar/UserMenu';
 import IconButton from '@mui/material/IconButton';
-import styles from "./AppBar.module.scss"
+import styles from './AppBar.module.scss';
 
-const MobileMenuComponent = ({ anchorElNav, handleCloseNavMenu, isLoggedIn, pages, isActiveButton, setIsActiveButton }) => (
+const MobileMenuComponent = ({
+    anchorElNav,
+    handleCloseNavMenu,
+    isLoggedIn,
+    pages,
+    isActiveButton,
+    setIsActiveButton,
+}) => (
     <MobileMenu
         id="menu-appbar"
         anchorReference="none"
@@ -38,7 +44,10 @@ const MobileMenuComponent = ({ anchorElNav, handleCloseNavMenu, isLoggedIn, page
         classes={{ paper: 'mobile-menu' }}
         className="mobile-menu"
     >
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} className={styles.myCustomBox}>
+        <Box
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}
+            className={styles.myCustomBox}
+        >
             <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
                 <Logo width={116} height={20} />
             </IconButton>
@@ -64,7 +73,7 @@ const MobileMenuComponent = ({ anchorElNav, handleCloseNavMenu, isLoggedIn, page
                 key={name}
                 onClick={() => {
                     handleCloseNavMenu(path);
-                    setIsActiveButton(path)
+                    setIsActiveButton(path);
                 }}
                 sx={{
                     my: 2,
@@ -76,29 +85,28 @@ const MobileMenuComponent = ({ anchorElNav, handleCloseNavMenu, isLoggedIn, page
                 component={NavLink}
                 to={path}
             >
-                <p
-                    className={styles.menuTextMobile}>
-                    {name}
-                </p>
+                <p className={styles.menuTextMobile}>{name}</p>
             </MenuItem>
         ))}
     </MobileMenu>
-) 
- 
-export default MobileMenuComponent
+);
+
+export default MobileMenuComponent;
 
 MobileMenuComponent.propTypes = {
     handleCloseNavMenu: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
-    pages: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        path: PropTypes.string,
-    })).isRequired,
+    pages: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            path: PropTypes.string,
+        })
+    ).isRequired,
     isActiveButton: PropTypes.string,
     setIsActiveButton: PropTypes.func.isRequired,
-    anchorElNav: PropTypes.any
-}
+    anchorElNav: PropTypes.any,
+};
 
 MobileMenuComponent.defaultProps = {
-    pages:[],
-}
+    pages: [],
+};

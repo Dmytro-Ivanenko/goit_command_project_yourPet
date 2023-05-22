@@ -1,5 +1,5 @@
-import styles from './page-title.module.scss';
 import PropTypes from 'prop-types';
+import styles from './page-title.module.scss';
 
 const PageTitle = ({ text }) => {
     return <h1 className={styles.title}>{text}</h1>;

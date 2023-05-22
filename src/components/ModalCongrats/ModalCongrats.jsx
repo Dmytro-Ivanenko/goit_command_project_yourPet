@@ -1,5 +1,5 @@
-import React from 'react';
-import ModalApproveAction from 'shared/components/ModalApproveAction/ModalApproveAction';
+import PropTypes from 'prop-types';
+import ModalApproveAction from 'shared/components/ModalApproveAction';
 
 import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 
@@ -18,6 +18,10 @@ const ModalCongrats = ({ onClose }) => {
             </div>
         </ModalApproveAction>
     );
+};
+
+ModalCongrats.propTypes = {
+    onClose: PropTypes.func.isRequired,
 };
 
 export default ModalCongrats;

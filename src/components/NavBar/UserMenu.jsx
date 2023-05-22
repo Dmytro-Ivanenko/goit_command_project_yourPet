@@ -11,23 +11,23 @@ import styles from '../AppBar/AppBar.module.scss';
 import { UserMenuBoxMobile } from './UserMenu.styled';
 
 export const UserMenuMobile = ({ closeNavMenu }) => {
-  const { user } = useAuth();
-  const userName=getUserNameFromEmail(user.email);
- 
-  return (
-    <UserMenuBoxMobile onClick={closeNavMenu} component={NavLink} to="/user">
-      <IconButton sx={{ p: 0 }}>
-        {user.avatar ? (<img className={styles.userAvatar}
-          src={user.avatar} alt="User avatar"></img>) :
-          (<User alt="Remy Sharp" />)}
-      </IconButton>
-      <span className={styles.userNameMob}>{user.name?(user.name):userName}</span>
-    </UserMenuBoxMobile>
-  );
+    const { user } = useAuth();
+    const userName = getUserNameFromEmail(user.email);
+
+    return (
+        <UserMenuBoxMobile onClick={closeNavMenu} component={NavLink} to="/user">
+            <IconButton sx={{ p: 0 }}>
+                {user.avatar ? (
+                    <img className={styles.userAvatar} src={user.avatar} alt="User avatar"></img>
+                ) : (
+                    <User alt="Remy Sharp" />
+                )}
+            </IconButton>
+            <span className={styles.userNameMob}>{user.name ? user.name : userName}</span>
+        </UserMenuBoxMobile>
+    );
 };
 
 UserMenuMobile.propTypes = {
-  closeNavMenu: PropTypes.func.isRequired
-}
-
-
+    closeNavMenu: PropTypes.func.isRequired,
+};

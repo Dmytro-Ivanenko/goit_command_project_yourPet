@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './OurFriendsItem.module.scss';
-// import CardListWithDropdown from '../Card/Card';
-
 
 const OurFriendCard = ({ title, logo, timeTittle, timeOptions, address, linkadress, email, phone }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -62,6 +61,16 @@ const OurFriendCard = ({ title, logo, timeTittle, timeOptions, address, linkadre
     );
 };
 
+OurFriendCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
+    timeTittle: PropTypes.string.isRequired,
+    timeOptions: PropTypes.arrayOf(PropTypes.string.isRequired),
+    address: PropTypes.string.isRequired,
+    linkadress: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+};
 
 const FriendsPage = () => {
     const friends = [
@@ -113,7 +122,7 @@ const FriendsPage = () => {
 
             logo: require('../../../images/friends/whiskas.png'),
             timeTittle: 'day and night',
-            timeOptions: ["We are working day and night"],
+            timeOptions: ['We are working day and night'],
 
             address: 'website only',
             linkadress: 'https://www.whiskas.ua/',
@@ -147,9 +156,7 @@ const FriendsPage = () => {
 
             logo: require('../../../images/friends/pethelp.png'),
             timeTittle: 'day and night',
-            timeOptions: ["We are working day and night"]
-            ,
-
+            timeOptions: ['We are working day and night'],
             address: 'website only',
             linkadress: 'https://pethelp.com.ua/dopomogti/',
             email: 'pithelp.ukr@gmail.com',
@@ -160,7 +167,7 @@ const FriendsPage = () => {
             title: 'Сіріус',
 
             logo: require('../../../images/friends/sirius.png'),
-           timeTittle: '11:00- 16:00',
+            timeTittle: '11:00- 16:00',
             timeOptions: [
                 'MN 11:00 - 16:00',
                 'TU 11:00 - 16:00',
@@ -181,10 +188,8 @@ const FriendsPage = () => {
             title: 'PURINA',
 
             logo: require('../../../images/friends/purina.png'),
-             timeTittle: 'day and night',
-            timeOptions: ["We are working day and night"]
-            ,
-
+            timeTittle: 'day and night',
+            timeOptions: ['We are working day and night'],
             address: 'website only',
             linkadress: 'https://www.purina.ua/',
             email: 'info@ua.nestle.com',
@@ -196,7 +201,7 @@ const FriendsPage = () => {
 
             logo: require('../../../images/friends/josera.png'),
             timeTittle: '09:00-17:00',
-               timeOptions: [
+            timeOptions: [
                 'MN 09:00 - 17:00',
                 'TU 09:00 - 17:00',
                 'WE 09:00 - 17:00',
@@ -217,7 +222,7 @@ const FriendsPage = () => {
 
             logo: require('../../../images/friends/lico.png'),
             timeTittle: '9:00-20:00',
-             timeOptions: [
+            timeOptions: [
                 'MN 09:00 - 20:00',
                 'TU 09:00 - 20:00',
                 'WE 09:00 - 20:00',

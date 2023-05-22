@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-// import { ToastContainer, toast } from 'react-toastify';
+
 import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
 import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
 import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';

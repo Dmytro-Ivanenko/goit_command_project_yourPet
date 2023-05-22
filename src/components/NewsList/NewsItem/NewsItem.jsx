@@ -1,5 +1,8 @@
-import styles from './news_item.module.scss';
+import PropTypes from 'prop-types';
 import moment from 'moment';
+
+import styles from './news_item.module.scss';
+
 const NewsItem = ({ item }) => {
     const { url = '', text, title, imgUrl, date } = item;
     const formatedDate = moment(date).format('DD/MM/YYYY');
@@ -23,6 +26,16 @@ const NewsItem = ({ item }) => {
             </div>
         </li>
     );
+};
+
+NewsItem.propTypes = {
+    item: PropTypes.shape({
+        url: PropTypes.string,
+        text: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        imgUrl: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default NewsItem;

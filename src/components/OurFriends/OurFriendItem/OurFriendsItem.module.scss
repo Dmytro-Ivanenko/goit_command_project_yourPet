@@ -12,12 +12,12 @@ a {
     flex-direction: column;
     gap: 24px;
 }
-.card__listItemTime{
+.card__listItemTime {
     display: flex;
-        flex-direction: column;
-    gap:12px;
+    flex-direction: column;
+    gap: 12px;
 }
-.card__labelTime{
+.card__labelTime {
     font-weight: bold;
     padding-bottom: 4px;
 }
@@ -52,13 +52,12 @@ a {
     line-height: 33px;
     text-align: center;
 }
-.card__data{
+.card__data {
     color: red;
-
 }
-.card__listItemTime:hover{
+.card__listItemTime:hover {
     cursor: pointer;
-   color: var(--main-acc);
+    color: var(--main-acc);
 }
 .card {
     // padding: 16px 12px;
@@ -122,7 +121,7 @@ a {
             gap: 5px;
             font-size: 16px;
         }
-                
+
         .card__wrap {
             gap: 16px;
         }
@@ -131,41 +130,39 @@ a {
             height: 88px;
         }
         width: 336px;
-                .card__listItemTime {
-                    gap: 0px;
-                    font-size: 16px;
-                }
-                .dropDown {
-                    font-size: 12px;
-                }
+        .card__listItemTime {
+            gap: 0px;
+            font-size: 16px;
+        }
+        .dropDown {
+            font-size: 12px;
+        }
     }
 
     @media (min-width: 1280px) {
         .dropDown {
-                font-size: 16px;
-            }
+            font-size: 16px;
+        }
         .card__frame {
             display: flex;
             justify-content: center;
-                width: 146px;
-                height: 104px;
-            }
+            width: 146px;
+            height: 104px;
+        }
         width: 394px;
         height: 287px;
     }
-                 
 }
 
 @media screen and (min-width: 480px) {
-    
     .card__listItem {
         gap: 0px;
         font-size: 12px;
     }
-          .card__listItemTime {
-              gap: 0px;
-              font-size: 12px;
-          }
+    .card__listItemTime {
+        gap: 0px;
+        font-size: 12px;
+    }
     .card__list {
         padding-bottom: 16px;
         padding-right: 11px;
@@ -180,8 +177,8 @@ a {
         width: 100px;
         height: 68px;
     }
-      
-          .dropDown {
-              font-size: 8px;
-          }
+
+    .dropDown {
+        font-size: 8px;
+    }
 }

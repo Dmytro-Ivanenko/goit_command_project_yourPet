@@ -1,9 +1,7 @@
-import React from 'react';
-//import css from './OurFriendsList.module.scss';
-import OurFriendsItem from '../OurFriendItem/OurFriendsItem';
+import OurFriendsItem from '../OurFriendItem';
 
 const OurFriendsList = () => {
-    return (<OurFriendsItem/>)
+    return <OurFriendsItem />;
 };
 
 export default OurFriendsList;
