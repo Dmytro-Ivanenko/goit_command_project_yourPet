@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 // import { ToastContainer, toast } from 'react-toastify';
 import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
 import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
@@ -9,21 +9,12 @@ import { ReactComponent as CheckIcon } from 'images/icons/check.svg';
 import { ReactComponent as EditIcon } from 'images/icons/edit.svg';
 import defaultAvatar from 'images/placeholder/avatar-default.jpg';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { validationSchema } from './schema';
 
 import { useAuth } from 'shared/hooks/useAuth';
 import { logOut, updateUser } from 'redux/auth/operations';
 
 import styles from './userCard.module.scss';
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().matches(/^[A-Za-z]+$/, 'Invalid name').required('Name is required'),
-  email: Yup.string().email('Invalid email').matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, 'Invalid email').required('Email is required'),
-  birthday: Yup.date().nullable().required('Birthday is required'),
-  phone: Yup.string().matches(/^\d{10}$/, 'Invalid phone number').required('Phone number is required'),
-  city: Yup.string().required('City is required'),
-});
-
-
 
 const initialState = {
     avatar: null,
@@ -80,47 +71,47 @@ const UserCard = () => {
 
     const handleChange = e => {
         const { name, value } = e.target;
-        
+
         setState(prevState => ({
             ...prevState,
             [name]: value,
         }));
     };
 
-   const handleSubmit = async (e) => {
-  e.preventDefault();
+    const handleSubmit = async e => {
+        e.preventDefault();
 
-  try {
-    await validationSchema.validate(state, { abortEarly: false });
+        try {
+            const formData = new FormData();
+            const entries = Object.entries(state);
 
-    const formData = new FormData();
-    const entries = Object.entries(state);
+            let validationObject = {};
 
-    entries.forEach((entry) => {
-      if (entry[1]) {
-        formData.append(entry[0], entry[1]);
-      }
-    });
+            entries.forEach(entry => {
+                if (entry[1]) {
+                    formData.append(entry[0], entry[1]);
+                    validationObject = {
+                        ...validationObject,
+                        [entry[0]]: entry[1],
+                    };
+                }
+            });
 
-    // Check if form data is not empty to prevent unnecessary API calls
-    const res = !formData.entries().next().done;
+            // Check if form data is not empty to prevent unnecessary API calls
+            const res = !formData.entries().next().done;
 
-    setState({ ...initialState });
-    setIsFieldShown(null);
+            setState({ ...initialState });
+            setIsFieldShown(null);
 
-    if (res) {
-      dispatch(updateUser(formData));
-    }
-  } catch (error) {
-    console.error(error);
-    // Show validation errors or error messages to the user
-  }
-};
-
-
-
-
-
+            if (res) {
+                await validationSchema.validate(validationObject);
+                dispatch(updateUser(formData));
+            }
+        } catch (error) {
+            // Show validation errors or error messages to the user
+            toast.error(error.message);
+        }
+    };
 
     const { avatar, name, email, birthday, phone, city } = state;
     const {
@@ -159,7 +150,7 @@ const UserCard = () => {
                     <label htmlFor="name">Name:</label>
                     <div className={styles.position}>
                         <input
-                            className={styles.input}  
+                            className={styles.input}
                             type="text"
                             id="name"
                             name="name"
@@ -167,7 +158,6 @@ const UserCard = () => {
                             value={name}
                             required
                             onChange={handleChange}
-                   
                         />
                         {isFieldShown === 'name' ? (
                             <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
@@ -313,9 +303,7 @@ const UserCard = () => {
                         </div>
                     </div>
                 </ModalApproveAction>
-                
             )}
-            {/* <ToastContainer/> */}
         </div>
     );
 };
