@@ -1,20 +1,18 @@
 import React from 'react';
 
-import desktop from '../../images/mainPage-pictures-desktop.jpg';
-import desktop1xjpg from '../../images/PictureMainPage-desktop1xjpg.jpg';
-import desktop3xjpg from '../../images/PictureMainPage-desktop3xjpg.jpg';
-import desktop1xwebp from '../../images/PictureMainPage-desktop1xwebp.webp';
-import desktop3xwebp from '../../images/PictureMainPage-desktop3xwebp.webp';
-// import mobile from '../../images/mainPage-pictures-mobile.jpg';
-import mobile1xjpg from '../../images/PictureMainPage-mobile1xjpg.jpg';
-import mobile2xjpg from '../../images/PictureMainPage-mobile2xjpg.jpg';
-import mobile1xwebp from '../../images/PictureMainPage-mobile1xwebp.webp';
-import mobile2xwebp from '../../images/PictureMainPage-mobile2xwebp.webp';
-// import tablet from '../../images/mainPage-pictures-tablet.jpg';
-import tablet1xjpg from '../../images/PictureMainPage-tablet1xjpg.jpg';
-import tablet2xjpg from '../../images/PictureMainPage-tablet2xjpg.jpg';
-import tablet1xwebp from '../../images/PictureMainPage-tablet1xwebp.webp';
-import tablet2xwebp from '../../images/PictureMainPage-tablet2xwebp.webp';
+import desktop from '../../images/background/mainPage-pictures-desktop.jpg';
+import desktop1xjpg from '../../images/background/PictureMainPage-desktop1xjpg.jpg';
+import desktop3xjpg from '../../images/background/PictureMainPage-desktop3xjpg.jpg';
+import desktop1xwebp from '../../images/background/PictureMainPage-desktop1xwebp.webp';
+import desktop3xwebp from '../../images/background/PictureMainPage-desktop3xwebp.webp';
+import mobile1xjpg from '../../images/background/PictureMainPage-mobile1xjpg.jpg';
+import mobile2xjpg from '../../images/background/PictureMainPage-mobile2xjpg.jpg';
+import mobile1xwebp from '../../images/background/PictureMainPage-mobile1xwebp.webp';
+import mobile2xwebp from '../../images/background/PictureMainPage-mobile2xwebp.webp';
+import tablet1xjpg from '../../images/background/PictureMainPage-tablet1xjpg.jpg';
+import tablet2xjpg from '../../images/background/PictureMainPage-tablet2xjpg.jpg';
+import tablet1xwebp from '../../images/background/PictureMainPage-tablet1xwebp.webp';
+import tablet2xwebp from '../../images/background/PictureMainPage-tablet2xwebp.webp';
 
 import styles from './MainPage.module.scss';
 
