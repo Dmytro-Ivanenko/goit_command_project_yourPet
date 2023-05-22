@@ -12,6 +12,7 @@
     justify-content: center;
     gap: 4px;
 
+    text-decoration: none;
     background-color: var(--main-acc);
     transition: background-color var(--timing);
 
@@ -73,6 +74,7 @@
         height: auto;
         padding: 8px 15px;
         border-radius: 40px;
+        text-decoration: none;
 
         position: relative;
 
