@@ -7,15 +7,19 @@ import PrivateRoute from 'routes/PrivateRoute';
 import Loader from 'shared/components/Loader';
 
 // Pages
-const MainPage = lazy(() => import('pages/MainPage/MainPage'));
-const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
-const AddPetPage = lazy(() => import('pages/AddPetPage/AddPetPage'));
-const UserPage = lazy(() => import('pages/UserPage/UserPage'));
+const MainPage = lazy(() => import('pages/MainPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const AddPetPage = lazy(() => import('pages/AddPetPage'));
+const UserPage = lazy(() => import('pages/UserPage'));
 const NoticesPage = lazy(() => import('pages/NoticesPage'));
-const OurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
-const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
-const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
+
+const OurFriendsPage = lazy(() => import('pages/OurFriendsPage'));
+
+const NewsPage = lazy(() => import('pages/NewsPage'));
+
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
+
 const NoticesCategoriesList = lazy(() => import('components/NoticesCategoriesList'));
 
 const UserRoutes = () => {

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { getNoticeById, deleteNoticeById } from 'services/api/notices';
 import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import Button from 'shared/components/Button';
 import { useAuth } from 'shared/hooks/useAuth';
 
 import { ReactComponent as ClockIcon } from 'images/icons/clock.svg';
@@ -13,7 +14,6 @@ import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
 import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
-import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 import ModalNotice from 'components/ModalNotice';
 
@@ -171,10 +171,7 @@ const NoticesCategoryItem = ({ item }) => {
                     </ul>
                 </div>
                 <h4 className={styles.title}>{title}</h4>
-                <button type="button" className={styles.btnLearn} onClick={handleModal}>
-                    <span className={styles.btnLearnText}>Learn More</span>
-                    <PawprintIcon className={styles.btnLearnIcon} width={24} height={24} />
-                </button>
+                <Button onClick={handleModal} text="Learn More" />
             </li>
             {itemDetailedInfo && (
                 <ModalApproveAction onClose={() => setItemDetailedInfo(null)}>
