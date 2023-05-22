@@ -13,8 +13,8 @@
 
         width: 280px;
         height: 88px;
-        margin-left: 35px;
-        margin-bottom: 10px;
+        // margin-left: 35px;
+        // margin-bottom: 10px;
     }
     .mainPageWrapper {
         // height: 573px;
@@ -37,11 +37,15 @@
 
         width: 588px;
         height: 200px;
-        margin-left: 32px;
+        // margin-left: 32px;
         margin-top: 80px;
+        // margin-bottom: 10px;
     }
     .mainPageWrapper {
         // height: 1300px;
+    }
+    .imgMainPage {
+        width: 100%;
     }
 }
 
@@ -56,7 +60,7 @@
 
         width: 487px;
         height: 264px;
-        margin-left: 35px;
+        // margin-left: 35px;
         margin-top: 188px;
         margin-bottom: 188px;
     }
@@ -64,11 +68,12 @@
         display: flex;
         // height: 720px;
         margin-top: 10px;
-        margin-right: 10px;
+        // margin-right: 10px;
         margin-bottom: 0;
         width: 100%;
     }
     .imgMainPage {
-        width: 100%;
+        width: 900px;
+        height: 670px;
     }
 }
