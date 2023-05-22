@@ -69,7 +69,7 @@ const FriendsPage = () => {
             id: 1,
             title: 'ЛКП "ЛЕВ"',
 
-            logo: require('../../../images/Friends/lion.png'),
+            logo: require('../../../images/friends/lion.png'),
             timeTittle: '8:00- 19:00',
             timeOptions: [
                 'MN 8:00 - 19:00',
@@ -90,7 +90,7 @@ const FriendsPage = () => {
             id: 2,
             title: 'Барбос',
 
-            logo: require('../../../images/Friends/barbos.png'),
+            logo: require('../../../images/friends/barbos.png'),
             timeTittle: '8:00- 20:00',
             timeOptions: [
                 'MN 8:00 - 20:00',
@@ -111,7 +111,7 @@ const FriendsPage = () => {
             id: 3,
             title: 'Whiskas',
 
-            logo: require('../../../images/Friends/whiskas.png'),
+            logo: require('../../../images/friends/whiskas.png'),
             timeTittle: 'day and night',
             timeOptions: ["We are working day and night"],
 
@@ -124,7 +124,7 @@ const FriendsPage = () => {
             id: 4,
             title: 'Happy paw',
 
-            logo: require('../../../images/Friends/happypaw.png'),
+            logo: require('../../../images/friends/happypaw.png'),
             timeTittle: '09:00- 19:00',
             timeOptions: [
                 'MN 9:00 - 19:00',
@@ -145,7 +145,7 @@ const FriendsPage = () => {
             id: 5,
             title: 'PetHelp',
 
-            logo: require('../../../images/Friends/pethelp.png'),
+            logo: require('../../../images/friends/pethelp.png'),
             timeTittle: 'day and night',
             timeOptions: ["We are working day and night"]
             ,
@@ -159,7 +159,7 @@ const FriendsPage = () => {
             id: 6,
             title: 'Сіріус',
 
-            logo: require('../../../images/Friends/sirius.png'),
+            logo: require('../../../images/friends/sirius.png'),
            timeTittle: '11:00- 16:00',
             timeOptions: [
                 'MN 11:00 - 16:00',
@@ -180,7 +180,7 @@ const FriendsPage = () => {
             id: 7,
             title: 'PURINA',
 
-            logo: require('../../../images/Friends/purina.png'),
+            logo: require('../../../images/friends/purina.png'),
              timeTittle: 'day and night',
             timeOptions: ["We are working day and night"]
             ,
@@ -194,7 +194,7 @@ const FriendsPage = () => {
             id: 8,
             title: 'Josera',
 
-            logo: require('../../../images/Friends/josera.png'),
+            logo: require('../../../images/friends/josera.png'),
             timeTittle: '09:00-17:00',
                timeOptions: [
                 'MN 09:00 - 17:00',
@@ -215,7 +215,7 @@ const FriendsPage = () => {
             id: 9,
             title: 'LICO',
 
-            logo: require('../../../images/Friends/lico.png'),
+            logo: require('../../../images/friends/lico.png'),
             timeTittle: '9:00-20:00',
              timeOptions: [
                 'MN 09:00 - 20:00',
