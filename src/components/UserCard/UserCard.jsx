@@ -154,6 +154,7 @@ const UserCard = () => {
                             type="text"
                             id="name"
                             name="name"
+                            placeholder={isFieldShown !== 'name' ? '' : 'Example Name'}
                             disabled={isFieldShown !== 'name'}
                             value={name}
                             required
@@ -181,6 +182,7 @@ const UserCard = () => {
                             type="email"
                             id="email"
                             name="email"
+                            placeholder={isFieldShown !== 'email' ? '' : 'example@mail.com'}
                             disabled={isFieldShown !== 'email'}
                             value={email}
                             required
@@ -208,6 +210,7 @@ const UserCard = () => {
                             type="text"
                             id="birthday"
                             name="birthday"
+                            placeholder={isFieldShown !== 'birthday' ? '' : '01.01.1970'}
                             disabled={isFieldShown !== 'birthday'}
                             value={birthday}
                             required
@@ -235,6 +238,7 @@ const UserCard = () => {
                             type="tel"
                             id="phone"
                             name="phone"
+                            placeholder={isFieldShown !== 'phone' ? '' : '+380501234567'}
                             disabled={isFieldShown !== 'phone'}
                             value={phone}
                             required
@@ -262,6 +266,7 @@ const UserCard = () => {
                             type="text"
                             id="city"
                             name="city"
+                            placeholder={isFieldShown !== 'city' ? '' : 'Example'}
                             disabled={isFieldShown !== 'city'}
                             value={city}
                             required
