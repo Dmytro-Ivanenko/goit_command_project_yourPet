@@ -2,6 +2,7 @@ import styles from './addPetForm.module.scss';
 import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
 import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
+import clsx from 'clsx';
 
 const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
     const handleChange = e => {
@@ -16,8 +17,11 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
         <div className={styles.flexContainer}>
             <div className={styles.sexRadioBtns}>
                 <h3 className={styles.radioBtnsTitle}>The sex</h3>
-                <label className={styles.sexRadioLabel}>
-                    <FemaleIcon className={styles.sexIcon} style={{ stroke: '#F43F5E' }} />
+                <label className={styles.sexRadioLabel} style={{ fontWeight: data.sex === 'female' ? '500' : '400' }}>
+                    <FemaleIcon
+                        className={styles.sexIcon}
+                        style={{ stroke: '#F43F5E', fill: data.sex === 'female' ? '#F43F5E' : 'none' }}
+                    />
                     <input
                         type="radio"
                         checked={data.sex === 'female'}
@@ -27,8 +31,11 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     />
                     Female
                 </label>
-                <label className={styles.sexRadioLabel}>
-                    <MaleIcon className={styles.sexIcon} style={{ stroke: '#54ADFF' }} />
+                <label className={styles.sexRadioLabel} style={{ fontWeight: data.sex === 'male' ? '500' : '400' }}>
+                    <MaleIcon
+                        className={styles.sexIcon}
+                        style={{ stroke: '#54ADFF', fill: data.sex === 'male' ? '#54ADFF' : 'none' }}
+                    />
                     <input
                         type="radio"
                         checked={data.sex === 'male'}
@@ -75,19 +82,19 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                             value={data.price}
                             name="price"
                             onChange={handleChange}
-                            className={styles.secStepInput}
+                            className={styles.textInput}
                         />
                     </label>
                 )}
                 <label className={styles.label}>
                     Comments
-                    <input
+                    <textArea
                         type="text"
                         required
                         value={data.comments}
                         name="comments"
                         onChange={handleChange}
-                        className={styles.textInput}
+                        className={styles.textArea}
                     />
                 </label>
             </div>

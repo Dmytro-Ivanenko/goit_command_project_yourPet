@@ -126,11 +126,17 @@
     composes: input;
     margin-top: 5px;
 }
-
 .textInput {
     composes: secStepInput;
-    height: 92px;
     border-radius: 20px;
+}
+
+.textArea {
+    composes: secStepInput;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    height: 92px;
 }
 
 .label:not(:last-child) {
@@ -153,7 +159,8 @@
     margin-right: 36px;
 }
 .sexIcon {
-    stroke: var(--main-acc);
+    // stroke: var(--main-acc);
+
     // display: block;
     position: absolute;
     z-index: 100;
@@ -229,6 +236,7 @@
         align-items: start;
     }
     .title {
+        text-align: center;
         font-size: 28px;
         line-height: 38px;
     }
@@ -240,6 +248,7 @@
     }
 
     .stepTitleContainer {
+        text-align: center;
         margin-top: 24px;
         margin-bottom: 60px;
     }
@@ -273,8 +282,14 @@
         margin-top: 8px;
     }
 
-    .textInput {
-        height: 79px;
+    // .textInput {
+
+    // }
+
+    .textArea {
+        padding-top: 12px;
+        padding-bottom: 10px;
+        height: 108px;
     }
 
     .label:not(:last-child) {
