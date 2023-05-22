@@ -1,7 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
 
 import NoticesCategoryItem from './NoticesCategoryItem';
-
 import styles from './notices-categories-list.module.scss';
 
 const NoticesCategoriesList = () => {

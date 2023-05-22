@@ -7,7 +7,7 @@ import Addpet from 'components/UserCard/Addpet';
 import Pets from 'components/UserCard/Pets';
 import styles from './userPage.module.scss';
 
-import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
+import ModalCongrats from 'components/ModalCongrats';
 
 // import { getYourPets } from 'services/api/userPage';
 

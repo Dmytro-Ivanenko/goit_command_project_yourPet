@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PageTitle from 'shared/components/PageTitle';
 import SearchForm from 'shared/components/SearchForm';
 import newsSource from '../../components/NewsList/newsSource.json';
-import NewsList from '../../components/NewsList/NewsList';
+import NewsList from '../../components/NewsList';
 import styles from './news_page.module.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

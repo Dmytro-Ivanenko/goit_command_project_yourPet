@@ -1,4 +1,4 @@
-.btnLearn {
+.btn {
     position: relative;
     width: 248px;
     height: 38px;
@@ -31,7 +31,7 @@
             opacity: 1;
         }
 
-        & > .btnLearnIcon {
+        & > .btnIcon {
             width: 24px;
             height: 24px;
             position: relative;
@@ -56,12 +56,12 @@
         transition: opacity var(--timing);
     }
 
-    & span {
+    & .btnText {
         z-index: 5;
     }
 }
 
-.btnLearnIcon {
+.btnIcon {
     width: 0;
     height: 0;
     position: absolute;
