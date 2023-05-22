@@ -62,6 +62,9 @@
     height: 28px;
     border: 1px solid var(--main-acc);
     border-radius: 20px;
+    &::placeholder {
+        color: #b8b8b8;
+    }
 }
 
 .userData {
@@ -89,9 +92,7 @@
     background-color: transparent;
 
     color: var(--grey-font);
- 
 }
-
 
 .prevValue {
     padding-left: 10px;
