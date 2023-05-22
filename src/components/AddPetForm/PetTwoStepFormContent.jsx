@@ -11,7 +11,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
     return (
         <div className={styles.inputs}>
             {data.option !== 'pet' && (
-                <label>
+                <label className={styles.label}>
                     Title of add
                     <input
                         autoFocus
@@ -20,11 +20,11 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                         value={data.addTitle}
                         name="addTitle"
                         onChange={handleChange}
-                        className={styles.input}
+                        className={styles.secStepInput}
                     />
                 </label>
             )}
-            <label>
+            <label className={styles.label}>
                 Pet's name
                 <input
                     autoFocus={data.option !== 'pet' ? false : true}
@@ -33,10 +33,10 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     value={data.name}
                     name="name"
                     onChange={handleChange}
-                    className={styles.input}
+                    className={styles.secStepInput}
                 />
             </label>
-            <label>
+            <label className={styles.label}>
                 Date of birth
                 <input
                     type="text"
@@ -44,10 +44,10 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     required
                     name="birth"
                     onChange={handleChange}
-                    className={styles.input}
+                    className={styles.secStepInput}
                 />
             </label>
-            <label>
+            <label className={styles.label}>
                 Breed
                 <input
                     type="text"
@@ -55,7 +55,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     required
                     name="breed"
                     onChange={handleChange}
-                    className={styles.input}
+                    className={styles.secStepInput}
                 />
             </label>
         </div>

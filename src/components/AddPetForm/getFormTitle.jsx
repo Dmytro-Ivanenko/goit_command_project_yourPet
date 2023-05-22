@@ -5,10 +5,10 @@ const getFormTitle = data => {
             title = `${title} for sell`;
             break;
         case 'lostFound':
-            title = `${title} for lost/found category`;
+            title = `${title} for 'lost/found'`;
             break;
         case 'hands':
-            title = `${title} for in good hands category`;
+            title = `${title} for 'in good hands'`;
             break;
         default:
             title = 'Add pet';

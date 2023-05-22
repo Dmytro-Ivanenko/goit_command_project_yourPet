@@ -1,19 +1,23 @@
 .form {
-    width: 280px;
+    // width: 280px;
+    width: fit-content;
     // height: 500px;
     margin: 60px auto;
     background-color: #dff8a3;
-    padding: 20px 8px;
+    padding: 16px 8px;
     border-radius: 40px;
     background-color: #f7f8ce;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
 }
 
 .title {
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
-    font-size: 28px;
-    line-height: 38px;
+    font-size: 20px;
+    line-height: 27px;
     color: var(--header-font);
 }
 
@@ -42,7 +46,7 @@
 .stepTwoTitleAfter,
 .stepThreeTitleAfter {
     position: absolute;
-    top: 20px;
+    top: 26px;
     left: 0;
     background-color: #cce4fb;
     border-radius: 8px;
@@ -67,9 +71,40 @@
     display: flex;
     flex-direction: column;
 }
+.radioBtnsTitle {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}
+.oneStepRadioLabel {
+    padding: 8px 16px;
+    color: var(--main-acc);
+    background: var(--dark);
+    border-radius: 40px;
+    width: fit-content;
+}
+// Not supported by firefox
+.oneStepRadioLabel:has(> .oneStepRadioBtn:checked) {
+    color: var(--main-back);
+    background: var(--main-acc);
+}
+
+.oneStepRadioLabel:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.oneStepRadioLabel:last-child {
+    margin-bottom: 91px;
+}
+
+.oneStepRadioBtn {
+    opacity: 0;
+}
 
 .flexContainer {
     display: flex;
+    flex-direction: column;
 }
 
 .inputs {
@@ -82,6 +117,27 @@
     height: 40px;
     border-radius: 40px;
     border: 1px solid #54adff;
+    margin-right: 100%;
+    padding: 0px;
+    padding-left: 16px;
+}
+
+.secStepInput {
+    composes: input;
+    margin-top: 5px;
+}
+
+.textInput {
+    composes: secStepInput;
+    height: 92px;
+    border-radius: 20px;
+}
+
+.label:not(:last-child) {
+    margin-bottom: 20px;
+}
+.label:last-child {
+    margin-bottom: 44px;
 }
 
 .sexRadioBtns {
@@ -91,40 +147,94 @@
 .radioBtnsTitle {
     flex-basis: 100%;
 }
+
+.sexRadioInput {
+    opacity: 0;
+    margin-right: 36px;
+}
+.sexIcon {
+    stroke: var(--main-acc);
+    // display: block;
+    position: absolute;
+    z-index: 100;
+    top: 20;
+    left: 50;
+    width: 24px;
+    height: 24px;
+}
+
 .sexRadioLabel {
     flex-basis: 50%;
+    position: relative;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #888888;
+    margin-bottom: 16px;
+}
+
+.photoLabel {
+    display: block;
+    position: relative;
+    margin-top: 63px;
+    margin-bottom: 62px;
+
+    &::after {
+        position: absolute;
+        content: '';
+        opacity: 0.7;
+        top: -45px;
+        left: 122px;
+        z-index: 7;
+        width: 112px;
+        height: 112px;
+        border-radius: 20px;
+        background-color: #cce4fb;
+    }
+}
+
+.photoPlusIcon {
+    position: absolute;
+    top: -7px;
+    left: 160px;
+    width: 30px;
+    height: 30px;
+    z-index: 50;
 }
 
 .photoInput {
-    margin-bottom: 47px;
-    display: block;
-    width: 112px;
-    height: 112px;
-    position: relative;
-    border-radius: 20px;
-    background-color: #af4f4f;
-    z-index: 3;
-    margin-left: 27px;
-
-    &:after {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        z-index: 7;
-        width: 100%;
-        height: 100%;
-        background-color: #cce4fb;
-    }
+    opacity: 1;
+    // margin-bottom: 62px;
+    // margin-bottom: 47px;
+    // display: block;
+    // width: 112px;
+    // height: 112px;
+    // position: relative;
+    // border-radius: 20px;
+    // background-color: #af4f4f;
+    // z-index: 3000;
+    // margin-left: 27px;
 }
 
 @media screen and (min-width: 768px) {
     .form {
         padding: 20px 32px;
-        width: 458px;
+        // width: 458px;
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .flexContainer {
+        flex-direction: row;
+        align-items: start;
+    }
+    .title {
+        font-size: 28px;
+        line-height: 38px;
     }
 
     .stepTitle {
+        // padding-right: 47px;
         font-size: 16px;
         line-height: 26px;
     }
@@ -141,20 +251,70 @@
     .stepTwoTitleAfter,
     .stepThreeTitleAfter {
         width: 120px;
+        top: 39px;
+    }
+
+    .radioBtnsTitle {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .oneStepRadioLabel:last-child {
+        margin-bottom: 137px;
     }
 
     .input {
         width: 394px;
-        height: 32px;
-        border-radius: 40px;
-        border: 1px solid #54adff;
+        height: 48px;
     }
 
-    .photoInput {
-        width: 182px;
-        height: 182px;
-        margin-left: 33px;
+    .secStepInput {
+        composes: input;
+        margin-top: 8px;
     }
+
+    .textInput {
+        height: 79px;
+    }
+
+    .label:not(:last-child) {
+        margin-bottom: 24px;
+    }
+    .label:last-child {
+        margin-bottom: 40px;
+    }
+
+    .sexRadioLabel {
+        margin-bottom: 48px;
+    }
+
+    .photoLabel {
+        width: 200px;
+        height: 27px;
+        margin-top: 0px;
+        margin-right: 45px;
+        margin-bottom: 0px;
+
+        &::after {
+            width: 182px;
+            height: 182px;
+            left: 0px;
+            top: 35px;
+        }
+    }
+
+    .photoPlusIcon {
+        width: 48px;
+        height: 48px;
+        top: 100px;
+        left: 67px;
+    }
+
+    // .photoInput {
+    //     width: 182px;
+    //     height: 182px;
+    //     margin-left: 33px;
+    // }
 }
 @media screen and (min-width: 1280px) {
     .form {

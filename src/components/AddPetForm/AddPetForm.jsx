@@ -8,6 +8,7 @@ import React, { useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { ReactComponent as BackBtn } from 'images/icons/arrow-left.svg';
 
 import serverRequest from './serverRequest';
 
@@ -34,7 +35,7 @@ const AddPetForm = () => {
                 break;
             case 'Back':
                 setStep(prev => prev - 1);
-             break;
+                break;
             default:
                 return;
         }
@@ -76,12 +77,6 @@ const AddPetForm = () => {
             </div>
             {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
             <div className={btnStyle.buttonsContainer}>
-                <Link to={backPage}>
-                    <button type="button" className={styles.backButton}>
-                        {step === 1 ? 'Cancel' : 'Back'}
-                    </button>
-                </Link>
-
                 <button
                     type={data.comments ? 'submit' : 'button'}
                     disabled={isBtnDisabled(step, data)}
@@ -90,6 +85,13 @@ const AddPetForm = () => {
                     {step === 3 ? 'Done' : 'Next'}
                     {/* <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} /> */}
                 </button>
+
+                <Link className={btnStyle.backBtnLink} to={backPage}>
+                    <button type="button" className={btnStyle.backButton}>
+                        <BackBtn className={btnStyle.backIcon} />
+                        {step === 1 ? 'Cancel' : 'Back'}
+                    </button>
+                </Link>
             </div>
         </form>
     );
