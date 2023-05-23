@@ -8,7 +8,7 @@ const NoticesCategoriesList = () => {
 
     return (
         <>
-            {items && (
+            {items.length > 0 && (
                 <ul className={styles.list}>
                     {items.map(item => (
                         <NoticesCategoryItem key={item._id} item={item} />

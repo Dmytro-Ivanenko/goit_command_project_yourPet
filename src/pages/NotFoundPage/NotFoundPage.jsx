@@ -16,7 +16,7 @@ const NotFoundPage = () => {
             </div>
 
             <Link to="/" className={styles.btn}>
-                To main page
+                <span className={styles.btnText}>To main page</span>
                 <Pawprint className={styles.btnIcon} />
             </Link>
         </div>

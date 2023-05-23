@@ -10,6 +10,7 @@ import NoticesCategoriesNav from 'components/NoticesCategoriesNav';
 import NoticesFilters from 'components/NoticesFilters';
 import AddPetButton from 'components/AddPetButton';
 import SelectedFilters from 'components/SelectedFilters';
+import Placeholder from 'shared/components/Placeholder';
 
 import { getFilterValues } from './filter';
 import { getNotices, applySearchParams } from 'shared/helpers';
@@ -137,6 +138,7 @@ const NoticesPage = () => {
 
             {isLoading && <Loader />}
             <Outlet context={items} />
+            {items.length === 0 && !isLoading && <Placeholder text={'Oops! Nothing found.'} />}
             {pageCount > 1 && (
                 <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={currentPage} />
             )}
