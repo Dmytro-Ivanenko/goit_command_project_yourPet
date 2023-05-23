@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -19,7 +18,7 @@ import { ReactComponent as User } from '../../images/icons/user.svg';
 import { useAuth } from 'shared/hooks/useAuth';
 import styles from './AppBar.module.scss';
 
-import {AuthNavDesktop } from 'components/NavBar/AuthNav';
+import { AuthNavDesktop } from 'components/NavBar/AuthNav';
 import MobileMenuComponent from './MobileMenu';
 
 const pages = [
@@ -28,15 +27,11 @@ const pages = [
     { name: 'Our Friends', path: '/friends' },
 ];
 
-
-
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
     const location = useLocation();
-    console.log('location: ', location.pathname);
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-
 
     const { isLoggedIn, user } = useAuth();
 
@@ -56,10 +51,7 @@ function ResponsiveAppBar() {
 
     useEffect(() => {
         const storedButton = localStorage.getItem('activeButton');
-        // if (storedButton !== null) {
-        //     setIsActiveButton(storedButton);
-        // }
-        setIsActiveButton(storedButton)
+        setIsActiveButton(storedButton);
     }, []);
 
     useEffect(() => {
@@ -70,16 +62,14 @@ function ResponsiveAppBar() {
         setAnchorElNav(event.currentTarget);
     };
 
-
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        // setIsActiveButton(path);
     };
 
     const handleClickUserMenu = () => {
         setIsActiveButton(null);
-        localStorage.setItem('activeButton', null)
-    }
+        localStorage.setItem('activeButton', null);
+    };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -98,16 +88,26 @@ function ResponsiveAppBar() {
                         onClick={handleClickUserMenu}
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', sm: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
+                            display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' },
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            flexGrow: 1,
+                            flexGrow: 0,
+                            padding: '6px 0px',
+                            marginRight: "160px",
+                            borderRadius: '10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                color: '#fff'
+                            },
                         }}
                     >
-                        <Logo width={162} height={28} />
+                        <Logo width={243} height={42} />
                     </Typography>
 
                     <Typography
@@ -118,16 +118,16 @@ function ResponsiveAppBar() {
                         to="/main"
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        <Logo width={116} height={20} />
+                        <Logo width={174} height={30} />
                     </Typography>
 
                     {/* Main menu */}
@@ -143,14 +143,13 @@ function ResponsiveAppBar() {
                             <Button
                                 key={name}
                                 onClick={() => {
-                                    // handleCloseNavMenu();
-                                    setIsActiveButton(path)
+                                    setIsActiveButton(path);
                                 }}
                                 sx={{
                                     my: 2,
                                     color: isActiveButton === path ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
-                                    fontFamily: "Manrope",
+                                    fontFamily: 'Manrope',
                                     fontSize: '20px',
                                     lineHeight: '1.35',
                                     letterSpacing: '0.04em',
@@ -164,17 +163,31 @@ function ResponsiveAppBar() {
                     </Box>
                     {/* User menu descktop */}
                     {isLoggedIn ? (
-                        <Box sx={{ flexGrow: 0 }}>
-
-                            <Box onClick={handleClickUserMenu} component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: "none" }}>
-
+                        <Box sx={{
+                            flexGrow: 0, marginLeft: 'auto', padding: '6px 10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                borderRadius: '5px',
+                                color: '#fff'
+                            },
+                        }}>
+                            <Box
+                                onClick={handleClickUserMenu}
+                                component={NavLink}
+                                to="/user"
+                                sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '12px', textDecoration: 'none' }}
+                            >
                                 <IconButton sx={{ p: 0 }}>
-                                    {user.avatar ? (<img className={styles.userAvatar}
-                                        src={user.avatar} alt="User avatar"></img>) :
-                                        (<User alt="Remy Sharp" />)}
+                                    {user.avatar ? (
+                                        <img className={styles.userAvatar} src={user.avatar} alt="User avatar"></img>
+                                    ) : (
+                                        <User alt="Remy Sharp" />
+                                    )}
                                 </IconButton>
-                                <span className={styles.userNameDesc}>{user.name ? (user.name) : userName}</span>
-
+                                <span className={styles.userNameDesc}>{user.name ? user.name : userName}</span>
                             </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -191,14 +204,15 @@ function ResponsiveAppBar() {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
-                            >
-                            </Menu>
+                            ></Menu>
                         </Box>
                     ) : (
-                        <AuthNavDesktop handleClick={() => {
-                            setIsActiveButton(location.pathname);
-                            localStorage.setItem('activeButton', location.pathname)
-                        }} />
+                        <AuthNavDesktop
+                            handleClick={() => {
+                                setIsActiveButton(location.pathname);
+                                localStorage.setItem('activeButton', location.pathname);
+                            }}
+                        />
                     )}
 
                     {/* Burger menu */}
@@ -215,17 +229,18 @@ function ResponsiveAppBar() {
                         </IconButton>
                         {/* Mobile menu */}
 
-                        <MobileMenuComponent anchorElNav={anchorElNav}
+                        <MobileMenuComponent
+                            anchorElNav={anchorElNav}
                             handleCloseNavMenu={handleCloseNavMenu}
                             isLoggedIn={isLoggedIn}
                             pages={pages}
                             isActiveButton={isActiveButton}
-                            setIsActiveButton={setIsActiveButton} />
-
+                            setIsActiveButton={setIsActiveButton}
+                        />
                     </Box>
                 </Toolbar>
             </Container>
         </AppBar>
     );
-}
+};
 export default ResponsiveAppBar;

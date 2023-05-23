@@ -1,29 +1,21 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import * as Yup from 'yup';
-// import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+
 import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
 import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
 import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';
 import { ReactComponent as CheckIcon } from 'images/icons/check.svg';
 import { ReactComponent as EditIcon } from 'images/icons/edit.svg';
+import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import defaultAvatar from 'images/placeholder/avatar-default.jpg';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { validationSchema } from './schema';
 
 import { useAuth } from 'shared/hooks/useAuth';
 import { logOut, updateUser } from 'redux/auth/operations';
 
 import styles from './userCard.module.scss';
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().matches(/^[A-Za-z]+$/, 'Invalid name').required('Name is required'),
-  email: Yup.string().email('Invalid email').matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, 'Invalid email').required('Email is required'),
-  birthday: Yup.date().nullable().required('Birthday is required'),
-  phone: Yup.string().matches(/^\d{10}$/, 'Invalid phone number').required('Phone number is required'),
-  city: Yup.string().required('City is required'),
-});
-
-
 
 const initialState = {
     avatar: null,
@@ -80,47 +72,54 @@ const UserCard = () => {
 
     const handleChange = e => {
         const { name, value } = e.target;
-        
+
         setState(prevState => ({
             ...prevState,
             [name]: value,
         }));
     };
 
-   const handleSubmit = async (e) => {
-  e.preventDefault();
+    const handleAvatarClear = () => {
+        setState(prevState => ({
+            ...prevState,
+            avatar: null,
+        }));
+    };
 
-  try {
-    await validationSchema.validate(state, { abortEarly: false });
+    const handleSubmit = async e => {
+        e.preventDefault();
 
-    const formData = new FormData();
-    const entries = Object.entries(state);
+        try {
+            const formData = new FormData();
+            const entries = Object.entries(state);
 
-    entries.forEach((entry) => {
-      if (entry[1]) {
-        formData.append(entry[0], entry[1]);
-      }
-    });
+            let validationObject = {};
 
-    // Check if form data is not empty to prevent unnecessary API calls
-    const res = !formData.entries().next().done;
+            entries.forEach(entry => {
+                if (entry[1]) {
+                    formData.append(entry[0], entry[1]);
+                    validationObject = {
+                        ...validationObject,
+                        [entry[0]]: entry[1],
+                    };
+                }
+            });
 
-    setState({ ...initialState });
-    setIsFieldShown(null);
+            // Check if form data is not empty to prevent unnecessary API calls
+            const res = !formData.entries().next().done;
 
-    if (res) {
-      dispatch(updateUser(formData));
-    }
-  } catch (error) {
-    console.error(error);
-    // Show validation errors or error messages to the user
-  }
-};
+            setState({ ...initialState });
+            setIsFieldShown(null);
 
-
-
-
-
+            if (res) {
+                await validationSchema.validate(validationObject);
+                dispatch(updateUser(formData));
+            }
+        } catch (error) {
+            // Show validation errors or error messages to the user
+            toast.error(error.message);
+        }
+    };
 
     const { avatar, name, email, birthday, phone, city } = state;
     const {
@@ -141,16 +140,22 @@ const UserCard = () => {
                 </div>
                 <div className={styles.wrapEditPhoto}>
                     <input type="file" id="file" accept="image/*" onChange={handleFileSelect} />
-                    <label htmlFor="file" className={styles.wrapImg}>
-                        <CameraIcon className={styles.camera} width={24} height={24} />
-                    </label>
                     {avatar ? (
-                        <button className={styles.confirmBtn} type="submit" onClick={handleSubmit}>
-                            <CheckIcon className={styles.checkIcon} width={24} height={24} />
-                            Confirm
-                        </button>
+                        <div className={styles.btnWrapper}>
+                            <button className={styles.avatarBtn} type="submit" onClick={handleSubmit}>
+                                <CheckIcon className={styles.checkIcon} width={24} height={24} />
+                                Confirm
+                            </button>
+                            <button type="button" onClick={handleAvatarClear} className={styles.avatarBtn}>
+                                <CrossIcon className={styles.clearIcon} width={24} height={24} />
+                                Cancel
+                            </button>
+                        </div>
                     ) : (
-                        <span className={styles.spanEdit}>Edit photo</span>
+                        <label htmlFor="file" className={styles.wrapImg}>
+                            <CameraIcon className={styles.camera} width={24} height={24} />
+                            <span className={styles.spanEdit}>Edit photo</span>
+                        </label>
                     )}
                 </div>
             </div>
@@ -159,24 +164,34 @@ const UserCard = () => {
                     <label htmlFor="name">Name:</label>
                     <div className={styles.position}>
                         <input
-                            className={styles.input}  
+                            className={styles.input}
                             type="text"
                             id="name"
                             name="name"
+                            placeholder={isFieldShown !== 'name' ? '' : 'Example Name'}
                             disabled={isFieldShown !== 'name'}
                             value={name}
                             required
                             onChange={handleChange}
-                   
                         />
                         {isFieldShown === 'name' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldName}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="name">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="name"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -191,19 +206,30 @@ const UserCard = () => {
                             type="email"
                             id="email"
                             name="email"
+                            placeholder={isFieldShown !== 'email' ? '' : 'example@mail.com'}
                             disabled={isFieldShown !== 'email'}
                             value={email}
                             required
                             onChange={handleChange}
                         />
                         {isFieldShown === 'email' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldEmail}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="email">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="email"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -218,19 +244,30 @@ const UserCard = () => {
                             type="text"
                             id="birthday"
                             name="birthday"
+                            placeholder={isFieldShown !== 'birthday' ? '' : '01.01.1970'}
                             disabled={isFieldShown !== 'birthday'}
                             value={birthday}
                             required
                             onChange={handleChange}
                         />
                         {isFieldShown === 'birthday' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldBirthday}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="birthday">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="birthday"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -245,19 +282,30 @@ const UserCard = () => {
                             type="tel"
                             id="phone"
                             name="phone"
+                            placeholder={isFieldShown !== 'phone' ? '' : '+380501234567'}
                             disabled={isFieldShown !== 'phone'}
                             value={phone}
                             required
                             onChange={handleChange}
                         />
                         {isFieldShown === 'phone' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldPhone}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="phone">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="phone"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -272,19 +320,30 @@ const UserCard = () => {
                             type="text"
                             id="city"
                             name="city"
+                            placeholder={isFieldShown !== 'city' ? '' : 'Example'}
                             disabled={isFieldShown !== 'city'}
                             value={city}
                             required
                             onChange={handleChange}
                         />
                         {isFieldShown === 'city' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldCity}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="city">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="city"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -313,9 +372,7 @@ const UserCard = () => {
                         </div>
                     </div>
                 </ModalApproveAction>
-                
             )}
-            {/* <ToastContainer/> */}
         </div>
     );
 };

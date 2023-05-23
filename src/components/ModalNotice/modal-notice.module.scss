@@ -98,7 +98,6 @@
 
 .btn {
     position: relative;
-    width: 256px;
     padding: 8px 20px;
     border: none;
     border-radius: 40px;
@@ -254,10 +253,6 @@
         justify-content: flex-end;
         flex-direction: row;
         gap: 17px;
-    }
-
-    .btn {
-        width: 129px;
     }
 
     .contactLink {

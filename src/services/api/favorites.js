@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-export const getFavoriteNotices = async (query, gender, page, limit) => {
+export const getFavoriteNotices = async ({ query, gender, age }) => {
     const { data } = await axios.get(`/notice/favorites/list`, {
         params: {
             query,
             gender,
-            page,
-            limit,
+            age,
         },
     });
     console.log(data);

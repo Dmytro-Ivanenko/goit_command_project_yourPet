@@ -37,8 +37,6 @@ const SearchForm = ({ onSubmit, onClear }) => {
         e.preventDefault();
 
         if (state.query.trim() === '') {
-            // Notification for empty string
-            console.log('empty');
             setState({ ...initialState });
             return;
         }
@@ -60,11 +58,15 @@ const SearchForm = ({ onSubmit, onClear }) => {
                 placeholder="Search"
             />
 
-            <button type="submit" className={query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn}>
+            <button
+                type="submit"
+                className={query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn}
+                aria-label="submit"
+            >
                 <SearchIcon width={24} height={24} />
             </button>
             {query && (
-                <button type="button" className={styles.clearBtn} onClick={handleClear}>
+                <button type="button" className={styles.clearBtn} onClick={handleClear} aria-label="clear">
                     <CrossIcon className={styles.clearBtnIcon} width={24} height={24} />
                 </button>
             )}

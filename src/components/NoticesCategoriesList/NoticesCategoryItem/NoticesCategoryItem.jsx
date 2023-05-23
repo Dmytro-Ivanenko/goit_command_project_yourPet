@@ -3,9 +3,11 @@ import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getNoticeById, deleteNoticeById } from 'services/api/notices';
+import { deleteNoticeById } from 'services/api/notices';
 import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import { calcAge } from 'shared/helpers';
+import Button from 'shared/components/Button';
 import { useAuth } from 'shared/hooks/useAuth';
 
 import { ReactComponent as ClockIcon } from 'images/icons/clock.svg';
@@ -13,7 +15,6 @@ import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
 import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
 import { ReactComponent as LocationIcon } from 'images/icons/location.svg';
-import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
 import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 import ModalNotice from 'components/ModalNotice';
 
@@ -22,7 +23,7 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 
 const NoticesCategoryItem = ({ item }) => {
-    const [itemDetailedInfo, setItemDetailedInfo] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const { isLoggedIn, user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
@@ -30,18 +31,12 @@ const NoticesCategoryItem = ({ item }) => {
     const { category, location, date, sex, title, image, _id, owner } = item;
 
     const handleModal = async () => {
-        try {
-            const data = await getNoticeById(_id);
-            data.date = data.date.replaceAll('-', '.');
-            setItemDetailedInfo(data);
-        } catch (error) {
-            toast.error(error.message);
-        }
+        setShowModal(prevState => !prevState);
     };
 
     const handleFavoriteClick = async () => {
         if (!isLoggedIn) {
-            toast.error('Sign in to add to favorites');
+            toast.error('Sign in to add to favorites.');
             return;
         }
 
@@ -49,7 +44,7 @@ const NoticesCategoryItem = ({ item }) => {
             try {
                 await deleteFavoriteNotice(_id);
                 dispatch(refreshUser());
-                toast.success('Deleted successfully');
+                toast.success('Removed successfully!');
             } catch (error) {
                 toast.error(error.message);
             }
@@ -57,14 +52,10 @@ const NoticesCategoryItem = ({ item }) => {
         }
 
         try {
-            await addFavoriteNotice(item._id);
+            await addFavoriteNotice(_id);
             dispatch(refreshUser());
-            toast.success('Added successfully');
+            toast.success('Added successfully!');
         } catch (error) {
-            if (error.response.status === 409) {
-                return toast.warn('Already in favorites');
-            }
-
             toast.error(error.message);
         }
     };
@@ -108,6 +99,9 @@ const NoticesCategoryItem = ({ item }) => {
         }
     };
 
+    // Age formatting for cards
+    const age = calcAge(date);
+
     return (
         <>
             <li className={styles.item}>
@@ -121,10 +115,13 @@ const NoticesCategoryItem = ({ item }) => {
                                 className={
                                     user.favoriteNotices.includes(_id) ? `${styles.btn} ${styles.favorite}` : styles.btn
                                 }
+                                aria-label={
+                                    user.favoriteNotices.includes(_id) ? 'remove from favorites' : 'add to favorites'
+                                }
                             >
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
-                            {owner === user.id && (
+                            {owner?._id === user.id && (
                                 <button onClick={handleOwnDelete} className={styles.btnDelete}>
                                     <TrashIcon className={styles.btnIcon} width={24} height={24} />
                                 </button>
@@ -144,10 +141,10 @@ const NoticesCategoryItem = ({ item }) => {
                                         ? `${styles.lowerBlockBtn} ${styles.active}`
                                         : styles.lowerBlockBtn
                                 }
-                                onClick={() => handleAgeClick(date)}
+                                onClick={() => handleAgeClick(age)}
                             >
                                 <ClockIcon className={styles.icon} width={24} height={24} />
-                                <span className={styles.label}>{date}</span>
+                                <span className={styles.label}>{age}</span>
                             </button>
                         </li>
                         <li className={styles.lowerBlockItem}>
@@ -170,15 +167,12 @@ const NoticesCategoryItem = ({ item }) => {
                         </li>
                     </ul>
                 </div>
-                <h4 className={styles.title}>{title}</h4>
-                <button type="button" className={styles.btnLearn} onClick={handleModal}>
-                    <span className={styles.btnLearnText}>Learn More</span>
-                    <PawprintIcon className={styles.btnLearnIcon} width={24} height={24} />
-                </button>
+                <p className={styles.title}>{title}</p>
+                <Button onClick={handleModal} text="Learn More" />
             </li>
-            {itemDetailedInfo && (
-                <ModalApproveAction onClose={() => setItemDetailedInfo(null)}>
-                    <ModalNotice item={itemDetailedInfo} />
+            {showModal && (
+                <ModalApproveAction onClose={handleModal}>
+                    <ModalNotice item={item} />
                 </ModalApproveAction>
             )}
         </>

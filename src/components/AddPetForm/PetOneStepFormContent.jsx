@@ -12,20 +12,45 @@ const PetOneStepFormContent = ({ data, setData }) => {
     const { option } = data;
     return (
         <div className={styles.radios}>
-            <label>
+            <label className={styles.oneStepRadioLabel}>
                 your pet
-                <input type="radio" checked={option === 'pet'} value="pet" onChange={handleChange} />
+                <input
+                    type="radio"
+                    checked={option === 'pet'}
+                    value="pet"
+                    onChange={handleChange}
+                    className={styles.oneStepRadioBtn}
+                />
             </label>
-            <label>
+            <label className={styles.oneStepRadioLabel}>
                 sell
-                <input type="radio" checked={option === 'sell'} value="sell" onChange={handleChange} />
+                <input
+                    type="radio"
+                    checked={option === 'sell'}
+                    value="sell"
+                    onChange={handleChange}
+                    className={styles.oneStepRadioBtn}
+                />
             </label>
-            <label>
+            <label className={styles.oneStepRadioLabel}>
                 lost/found
-                <input type="radio" checked={option === 'lostFound'} value="lostFound" onChange={handleChange} />
+                <input
+                    type="radio"
+                    checked={option === 'lostFound'}
+                    value="lostFound"
+                    onChange={handleChange}
+                    className={styles.oneStepRadioBtn}
+                />
             </label>
-            <label>
-                in good hands <input type="radio" checked={option === 'hands'} value="hands" onChange={handleChange} />
+            <label className={styles.oneStepRadioLabel}>
+                in good hands{' '}
+                <input
+                    type="radio"
+                    checked={option === 'hands'}
+                    value="hands"
+                    onChange={handleChange}
+                    className={styles.oneStepRadioBtn}
+                />
             </label>
         </div>
     );

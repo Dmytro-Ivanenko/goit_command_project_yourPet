@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Pagination from '../../shared/components/Pagination';
 import NewsItem from './NewsItem';
@@ -47,6 +48,22 @@ const NewsList = ({ list }) => {
             <Pagination onPageClick={onPageClick} pageCount={pageCount} />
         </>
     );
+};
+
+NewsList.defaultProps = {
+    list: [],
+};
+
+NewsList.propTypes = {
+    list: PropTypes.arrayOf(
+        PropTypes.shape({
+            url: PropTypes.string,
+            text: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            imgUrl: PropTypes.string.isRequired,
+            date: PropTypes.string.isRequired,
+        }).isRequired
+    ),
 };
 
 export default NewsList;

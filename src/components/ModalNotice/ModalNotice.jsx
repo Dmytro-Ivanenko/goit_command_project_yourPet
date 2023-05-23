@@ -2,45 +2,41 @@ import { useAuth } from 'shared/hooks/useAuth';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-import { addFavoriteNotice } from 'services/api/favorites';
+import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
+import { refreshUser } from 'redux/auth/operations';
 
 import styles from './modal-notice.module.scss';
+import { useDispatch } from 'react-redux';
 
 const ModalNotice = ({ item }) => {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, user } = useAuth();
+    const dispatch = useDispatch();
 
-    const {
-        _id,
-        breed,
-        category,
-        comments,
-        date,
-        location,
-        name,
-        price,
-        sex,
-        title,
-        image,
-        email = 'user@mail.com',
-        phone = '+380971234567',
-    } = item;
+    const { _id, breed, category, comments, date, location, name, price, sex, title, image, owner } = item;
 
-    const handleClick = async () => {
+    const handleFavoriteClick = async () => {
         if (!isLoggedIn) {
-            toast.error('Sign in to add to favorites.');
+            toast.warn('Sign in to add to favorites!');
             return;
         }
 
-        // add to favorite
+        if (user.favoriteNotices.includes(_id)) {
+            try {
+                await deleteFavoriteNotice(_id);
+                dispatch(refreshUser());
+                toast.success('Removed successfully!');
+            } catch (error) {
+                toast.error(error.message);
+            }
+            return;
+        }
+
         try {
             await addFavoriteNotice(_id);
-            toast.success('Added successfully');
+            dispatch(refreshUser());
+            toast.success('Added successfully!');
         } catch (error) {
-            if (error.response.status === 409) {
-                return toast.warn('Already in favorites');
-            }
-
             toast.error(error.message);
         }
     };
@@ -85,30 +81,34 @@ const ModalNotice = ({ item }) => {
                             <tr className={styles.tableRow}>
                                 <td className={styles.tableLabel}>Email:</td>
                                 <td className={styles.tableValue}>
-                                    <a className={styles.link} href={`mailto:${email}`}>
-                                        {email}
+                                    <a className={styles.link} href={`mailto:${owner.email}`}>
+                                        {owner.email}
                                     </a>
                                 </td>
                             </tr>
-                            <tr className={styles.tableRow}>
-                                <td className={styles.tableLabel}>Phone:</td>
-                                <td className={styles.tableValue}>
-                                    <a className={styles.link} href={`tel:${phone}`}>
-                                        {phone}
-                                    </a>
-                                </td>
-                            </tr>
+                            {owner?.phone && (
+                                <tr className={styles.tableRow}>
+                                    <td className={styles.tableLabel}>Phone:</td>
+                                    <td className={styles.tableValue}>
+                                        <a className={styles.link} href={`tel:${owner.phone}`}>
+                                            {owner.phone}
+                                        </a>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
             </div>
             <p className={styles.comment}>{comments}</p>
             <div className={styles.btnWrapper}>
-                <button className={styles.btn} onClick={handleClick}>
-                    <span className={styles.btnLabel}>Add to</span>
+                <button className={styles.btn} onClick={handleFavoriteClick}>
+                    <span className={styles.btnLabel}>
+                        {user.favoriteNotices.includes(_id) ? 'Remove from' : 'Add to'}
+                    </span>
                     <HeartIcon className={styles.icon} width={24} height={24} />
                 </button>
-                <a className={styles.contactLink} href={`tel:${phone}`}>
+                <a className={styles.contactLink} href={`mailto:${owner.email}`}>
                     Contact
                 </a>
             </div>
@@ -128,8 +128,11 @@ ModalNotice.propTypes = {
         image: PropTypes.string.isRequired,
         comments: PropTypes.string.isRequired,
         price: PropTypes.number,
-        email: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
+        owner: PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired,
+            phone: PropTypes.string,
+        }),
     }),
 };
 

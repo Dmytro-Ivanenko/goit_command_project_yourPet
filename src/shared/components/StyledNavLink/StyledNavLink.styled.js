@@ -10,7 +10,7 @@ export const StyledNavLink = styled(NavLink)`
     padding: 7px 20px;
     font-weight: 400;
     font-size: 16px;
-    background-color:var(--main-back); 
+    background-color: var(--main-back);
     color: var(--header-acc);
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid var(--header-acc);
@@ -20,6 +20,7 @@ export const StyledNavLink = styled(NavLink)`
 
     &:hover {
         text-shadow: 1px 0 11px rgba(255 255 255 / 80%);
+        background-color: rgba(25, 118, 210, 0.04);
     }
 
     &.active {
