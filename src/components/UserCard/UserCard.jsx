@@ -82,7 +82,7 @@ const UserCard = () => {
     const handleAvatarClear = () => {
         setState(prevState => ({
             ...prevState,
-            avatar: '',
+            avatar: null,
         }));
     };
 

@@ -18,7 +18,7 @@ const AddPetButton = () => {
     };
 
     return (
-        // condition on to stay on current page
+        // condition to stay on current page
         <Link className={styles.button} to={isLoggedIn && '/add-pet'} state={{ from: location }} onClick={handleClick}>
             <PlusIcon className={styles.iconBig} width={24} height={24} />
             <span className={styles.label}>Add Pet</span>
