@@ -52,9 +52,6 @@ const ResponsiveAppBar = () => {
 
     useEffect(() => {
         const storedButton = localStorage.getItem('activeButton');
-        // if (storedButton !== null) {
-        //     setIsActiveButton(storedButton);
-        // }
         setIsActiveButton(storedButton);
     }, []);
 
@@ -68,7 +65,6 @@ const ResponsiveAppBar = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        // setIsActiveButton(path);
     };
 
     const handleClickUserMenu = () => {
@@ -94,15 +90,25 @@ const ResponsiveAppBar = () => {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', sm: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            flexGrow: 1,
+                            flexGrow: 0,
+                            padding: '6px 0px',
+                            marginRight: "160px",
+                            borderRadius: '10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                color: '#fff'
+                            },
                         }}
                     >
-                        <Logo width={162} height={28} />
+                        <Logo width={243} height={42} />
                     </Typography>
 
                     <Typography
@@ -115,14 +121,14 @@ const ResponsiveAppBar = () => {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        <Logo width={116} height={20} />
+                        <Logo width={174} height={42} />
                     </Typography>
 
                     {/* Main menu */}
@@ -138,7 +144,6 @@ const ResponsiveAppBar = () => {
                             <Button
                                 key={name}
                                 onClick={() => {
-                                    // handleCloseNavMenu();
                                     setIsActiveButton(path);
                                 }}
                                 sx={{

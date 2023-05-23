@@ -20,6 +20,7 @@ export const StyledNavLink = styled(NavLink)`
 
     &:hover {
         text-shadow: 1px 0 11px rgba(255 255 255 / 80%);
+        background-color: rgba(25, 118, 210, 0.04);
     }
 
     &.active {
