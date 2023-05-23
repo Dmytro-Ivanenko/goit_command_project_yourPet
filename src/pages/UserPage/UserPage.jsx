@@ -13,7 +13,7 @@ import { getYourPets } from 'services/api/pets';
 
 const Userpage = () => {
     const { state } = useLocation();
-    const [pets, setPets] = useState();
+    const [pets, setPets] = useState([]);
     const [showModal, setShowModal] = useState(state);
 
     const handleClose = () => {
@@ -43,7 +43,7 @@ const Userpage = () => {
                     <h2 className={styles.titlePets}>My pets:</h2>
                     <Addpet />
                 </div>
-                <div className={styles.wrapPets}>{pets && <Pets pets={pets} />}</div>
+                <div className={styles.wrapPets}>{pets.length > 0 && <Pets pets={pets} />}</div>
             </div>
 
             {showModal && <ModalCongrats onClose={handleClose} />}
