@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import styles from './selected-filters.module.scss';
 
@@ -16,6 +18,11 @@ const SelectedFilters = ({ filters, handleReset }) => {
             </ul>
         </div>
     );
+};
+
+SelectedFilters.propTypes = {
+    filters: PropTypes.arrayOf(PropTypes.string),
+    handleReset: PropTypes.func.isRequired,
 };
 
 export default SelectedFilters;

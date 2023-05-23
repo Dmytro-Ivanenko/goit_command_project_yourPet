@@ -21,35 +21,81 @@
     }
 }
 .btn {
+    position: relative;
+    width: 248px;
+    height: 38px;
+    padding: 6px 28px;
+    margin: 0 auto;
+    border: 2px solid var(--main-acc);
+    border-radius: 40px;
+
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    margin-bottom: 100px;
-    width: 248px;
-    height: 40px;
-    padding: 8px 28px;
     gap: 12px;
-    background: var(--main-acc);
-    border-radius: 40px;
-    color: var(--main-back);
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 700;
+
+    font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0.04em;
+
     text-decoration: none;
-    @media screen and (max-width: 767px) {
-        margin-top: 60px;
-        margin-bottom: 275px;
+    background-color: transparent;
+    color: var(--main-acc);
+
+    transition: color var(--timing);
+
+    &:hover,
+    &:focus {
+        color: var(--main-back);
+        border: none;
+
+        &::before {
+            opacity: 1;
+        }
+
+        & > .btnIcon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
+
+    & .btnText {
+        z-index: 5;
     }
 }
+
 .btnIcon {
-    width: 24px;
-    height: 24px;
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+    fill: currentColor;
+
+    transition: opacity var(--timing);
 }
+
 .digit {
     display: flex;
     justify-content: center;
@@ -69,8 +115,12 @@
         font-size: 380px;
     }
 }
+
 .cat_bcg {
     position: relative;
+
+    background-image: url('../../images/placeholder/404.png');
+
     background-color: var(--header-acc);
     border-radius: 50%;
     width: 131px;

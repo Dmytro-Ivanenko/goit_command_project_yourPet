@@ -1,8 +1,9 @@
 import ReactPaginate from 'react-paginate';
+import PropTypes from 'prop-types';
 
 import styles from './pagination.module.scss';
 
-function Pagination({ onPageClick, pageCount, currentPage }) {
+const Pagination = ({ onPageClick, pageCount, currentPage }) => {
     return (
         <div className={styles.paginationContainer}>
             <ReactPaginate
@@ -24,10 +25,16 @@ function Pagination({ onPageClick, pageCount, currentPage }) {
                 activeClassName={styles.active}
                 renderOnZeroPageCount={null}
                 className={styles.pagination}
-                forcePage={currentPage}
+                forcePage={currentPage - 1}
             />
         </div>
     );
-}
+};
+
+Pagination.propTypes = {
+    onPageClick: PropTypes.func.isRequired,
+    pageCount: PropTypes.number.isRequired,
+    currentPage: PropTypes.number,
+};
 
 export default Pagination;

@@ -1,9 +1,10 @@
 @import '~modern-normalize/modern-normalize.css';
-@import './sass/color-root';
+@import './sass/variables';
 
 body {
     font-family: 'Manrope';
     background-color: var(--main-back);
+    background-image: url(./images/background/bg-mobile.jpg);
 }
 
 ul {
@@ -23,4 +24,16 @@ p {
 
 button {
     cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        background-image: url(./images/background/bg-tablet.jpg);
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    body {
+        background-image: url(./images/background/bg-desktop.jpg);
+    }
 }

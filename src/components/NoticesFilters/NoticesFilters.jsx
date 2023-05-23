@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { ReactComponent as FiltersIcon } from 'images/icons/filters.svg';
 import { ReactComponent as ChevronUpIcon } from 'images/icons/chevron-up.svg';
 import { ReactComponent as ChevronDownIcon } from 'images/icons/chevron-down.svg';
@@ -28,7 +30,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
 
     return (
         <div className={styles.wrapper}>
-            <button className={styles.openBtn} type="button" onClick={handleBtnClick}>
+            <button className={styles.openBtn} type="button" onClick={handleBtnClick} aria-label="open filters">
                 <span className={styles.openBtnLabel}>Filter</span>
                 <FiltersIcon className={styles.openBtnIcon} width={24} height={24} />
             </button>
@@ -37,7 +39,12 @@ const NoticesFilters = ({ onFilter, filters }) => {
                     <div className={styles.dropdown}>
                         <p className={styles.text}>Filters</p>
                         <div className={styles.submenu}>
-                            <button className={styles.filterBtn} type="button" onClick={handleAgeClick}>
+                            <button
+                                className={styles.filterBtn}
+                                type="button"
+                                onClick={handleAgeClick}
+                                aria-label="open age options"
+                            >
                                 {ageOpen ? (
                                     <ChevronUpIcon className={styles.icon} width={24} height={24} />
                                 ) : (
@@ -84,7 +91,12 @@ const NoticesFilters = ({ onFilter, filters }) => {
                             )}
                         </div>
                         <div className={styles.submenu}>
-                            <button className={styles.filterBtn} type="button" onClick={handleGenderClick}>
+                            <button
+                                className={styles.filterBtn}
+                                type="button"
+                                onClick={handleGenderClick}
+                                aria-label="open gender options"
+                            >
                                 {genderOpen ? (
                                     <ChevronUpIcon className={styles.icon} width={24} height={24} />
                                 ) : (
@@ -124,6 +136,11 @@ const NoticesFilters = ({ onFilter, filters }) => {
             )}
         </div>
     );
+};
+
+NoticesFilters.propTypes = {
+    onFilter: PropTypes.func.isRequired,
+    filters: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default NoticesFilters;

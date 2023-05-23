@@ -1,47 +1,39 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { getUserNameFromEmail } from 'shared/helpers/getUserNameFromEmail';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import { MobileMenu } from './AppBar.styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-// import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';
 import { ReactComponent as User } from '../../images/icons/user.svg';
-import CloseIcon from '@mui/icons-material/Close';
 import { useAuth } from 'shared/hooks/useAuth';
 import styles from './AppBar.module.scss';
 
-import { AuthNavMobile, AuthNavDesktop } from 'components/NavBar/AuthNav';
-import { UserMenuMobile } from 'components/NavBar/UserMenu';
+import { AuthNavDesktop } from 'components/NavBar/AuthNav';
+import MobileMenuComponent from './MobileMenu';
 
 const pages = [
     { name: 'News', path: '/news' },
-    { name: 'Notice', path: '/notices' },
+    { name: 'Notice', path: '/notices/sell' },
     { name: 'Our Friends', path: '/friends' },
 ];
 
-// const settings = ['Profile', 'Logout'];
-
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
+    const location = useLocation();
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-    // const isDesktopScreen = useMediaQuery(theme.breakpoints.up('md'));
 
-    const { isLoggedIn } = useAuth();
-    // const isLoggedIn = true //temporary
-    // console.log('isLoggedIn', isLoggedIn)
+    const { isLoggedIn, user } = useAuth();
 
     const padding = {
         desktop: '16px',
@@ -53,25 +45,36 @@ function ResponsiveAppBar() {
         padding: isMobileScreen ? padding.mobile : isTabletScreen ? padding.tablet : padding.desktop,
     };
 
-    const [isActiveButton, setActiveButton] = useState('');
+    const [isActiveButton, setIsActiveButton] = useState(location.pathname);
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+
+    useEffect(() => {
+        const storedButton = localStorage.getItem('activeButton');
+        setIsActiveButton(storedButton);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('activeButton', isActiveButton);
+    }, [isActiveButton]);
 
     const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = event => {
-        setAnchorElUser(event.currentTarget);
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
     };
 
-    const handleCloseNavMenu = name => {
-        setAnchorElNav(null);
-        setActiveButton(name);
+    const handleClickUserMenu = () => {
+        setIsActiveButton(null);
+        localStorage.setItem('activeButton', null);
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const userName = getUserNameFromEmail(user.email);
 
     return (
         <AppBar position="static" sx={{ backgroundColor: 'var(--main-back)' }}>
@@ -82,37 +85,49 @@ function ResponsiveAppBar() {
                         noWrap
                         component={NavLink}
                         to="/main"
+                        onClick={handleClickUserMenu}
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', sm: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
+                            display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' },
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            flexGrow: 1,
+                            flexGrow: 0,
+                            padding: '6px 0px',
+                            marginRight: "160px",
+                            borderRadius: '10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                color: '#fff'
+                            },
                         }}
                     >
-                        <Logo width={162} height={28} />
+                        <Logo width={243} height={42} />
                     </Typography>
 
                     <Typography
                         variant="h5"
                         noWrap
                         component={NavLink}
+                        onClick={handleClickUserMenu}
                         to="/main"
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        <Logo width={116} height={20} />
+                        <Logo width={174} height={30} />
                     </Typography>
 
                     {/* Main menu */}
@@ -127,11 +142,17 @@ function ResponsiveAppBar() {
                         {pages.map(({ name, path }) => (
                             <Button
                                 key={name}
-                                onClick={() => handleCloseNavMenu(name)}
+                                onClick={() => {
+                                    setIsActiveButton(path);
+                                }}
                                 sx={{
                                     my: 2,
-                                    color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
+                                    color: isActiveButton === path ? 'var(--header-acc)' : 'var(--header-font)',
                                     display: 'block',
+                                    fontFamily: 'Manrope',
+                                    fontSize: '20px',
+                                    lineHeight: '1.35',
+                                    letterSpacing: '0.04em',
                                 }}
                                 component={NavLink}
                                 to={path}
@@ -142,12 +163,31 @@ function ResponsiveAppBar() {
                     </Box>
                     {/* User menu descktop */}
                     {isLoggedIn ? (
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Box component={NavLink} to="/user" sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration:"none" }}>   
-                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Box sx={{
+                            flexGrow: 0, marginLeft: 'auto', padding: '6px 10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                borderRadius: '5px',
+                                color: '#fff'
+                            },
+                        }}>
+                            <Box
+                                onClick={handleClickUserMenu}
+                                component={NavLink}
+                                to="/user"
+                                sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '12px', textDecoration: 'none' }}
+                            >
+                                <IconButton sx={{ p: 0 }}>
+                                    {user.avatar ? (
+                                        <img className={styles.userAvatar} src={user.avatar} alt="User avatar"></img>
+                                    ) : (
                                         <User alt="Remy Sharp" />
-                                    </IconButton>
-                                <span className={styles.userNameDesc}>Anna</span>   
+                                    )}
+                                </IconButton>
+                                <span className={styles.userNameDesc}>{user.name ? user.name : userName}</span>
                             </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -164,16 +204,15 @@ function ResponsiveAppBar() {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
-                            >
-                                {/* {settings.map(setting => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))} */}
-                            </Menu>
+                            ></Menu>
                         </Box>
                     ) : (
-                        <AuthNavDesktop />
+                        <AuthNavDesktop
+                            handleClick={() => {
+                                setIsActiveButton(location.pathname);
+                                localStorage.setItem('activeButton', location.pathname);
+                            }}
+                        />
                     )}
 
                     {/* Burger menu */}
@@ -189,72 +228,19 @@ function ResponsiveAppBar() {
                             <MenuIcon style={{ color: 'var(--header-acc)' }} />
                         </IconButton>
                         {/* Mobile menu */}
-                        <MobileMenu
-                            id="menu-appbar"
-                            anchorReference="none"
-                            anchorPosition={{ top: 0, left: 0 }}
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', sm: 'block', md: 'flex', lg: 'none' },
-                                width: '100vw',
-                                maxWidth: 'none',
-                                maxHeight: 'none',
-                            }}
-                            classes={{ paper: 'mobile-menu' }}
-                            className="mobile-menu"
-                        >
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
-                                <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
-                                    <Logo width={116} height={20} />
-                                </IconButton>
-                                <IconButton
-                                    onClick={handleCloseNavMenu}
-                                    sx={{
-                                        color: 'var(--header-acc)',
-                                        width: '24px',
-                                        height: '24px',
-                                    }}
-                                >
-                                    <CloseIcon />
-                                </IconButton>
-                            </Box>
-                            {isLoggedIn ? (
-                                <UserMenuMobile closeNavMenu={handleCloseNavMenu} />
-                            ) : (
-                                <AuthNavMobile closeNavMenu={handleCloseNavMenu} />
-                            )}
 
-                            {pages.map(({ name, path }) => (
-                                <MenuItem
-                                    key={name}
-                                    onClick={() => handleCloseNavMenu(name)}
-                                    sx={{
-                                        my: 2,
-                                        color: isActiveButton === name ? 'var(--header-acc)' : 'var(--header-font)',
-                                        display: 'block',
-                                    }}
-                                    component={NavLink}
-                                    to={path}
-                                >
-                                    <Typography textAlign="center">{name}</Typography>
-                                </MenuItem>
-                            ))}
-                        </MobileMenu>
+                        <MobileMenuComponent
+                            anchorElNav={anchorElNav}
+                            handleCloseNavMenu={handleCloseNavMenu}
+                            isLoggedIn={isLoggedIn}
+                            pages={pages}
+                            isActiveButton={isActiveButton}
+                            setIsActiveButton={setIsActiveButton}
+                        />
                     </Box>
                 </Toolbar>
             </Container>
         </AppBar>
     );
-}
+};
 export default ResponsiveAppBar;

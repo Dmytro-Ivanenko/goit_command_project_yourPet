@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import { ReactComponent as SearchIcon } from 'images/icons/search.svg';
@@ -9,11 +10,16 @@ const initialState = {
     query: '',
 };
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit, onClear }) => {
     const [state, setState] = useState({ ...initialState });
 
     const handleChange = e => {
         const { name, value } = e.target;
+
+        if (!value) {
+            handleClear();
+            return;
+        }
 
         setState(prevState => ({
             ...prevState,
@@ -23,15 +29,14 @@ const SearchForm = ({ onSubmit }) => {
 
     const handleClear = () => {
         setState({ ...initialState });
-        onSubmit({ ...initialState });
+
+        onClear({ ...initialState });
     };
 
     const handleSubmit = e => {
         e.preventDefault();
 
         if (state.query.trim() === '') {
-            // Notification for empty string
-            console.log('empty');
             setState({ ...initialState });
             return;
         }
@@ -53,16 +58,25 @@ const SearchForm = ({ onSubmit }) => {
                 placeholder="Search"
             />
 
-            <button type="submit" className={query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn}>
+            <button
+                type="submit"
+                className={query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn}
+                aria-label="submit"
+            >
                 <SearchIcon width={24} height={24} />
             </button>
             {query && (
-                <button type="button" className={styles.clearBtn} onClick={handleClear}>
+                <button type="button" className={styles.clearBtn} onClick={handleClear} aria-label="clear">
                     <CrossIcon className={styles.clearBtnIcon} width={24} height={24} />
                 </button>
             )}
         </form>
     );
+};
+
+SearchForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onClear: PropTypes.func.isRequired,
 };
 
 export default SearchForm;

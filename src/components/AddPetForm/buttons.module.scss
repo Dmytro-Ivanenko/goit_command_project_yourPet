@@ -1,0 +1,82 @@
+.buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnLearn {
+    // position: relative;
+    // width: 248px;
+    // height: 38px;
+    padding: 9px 87px;
+    // margin: 0 auto;
+    border: none;
+    // border: 2px solid var(--main-acc);
+    border-radius: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+
+    background-color: var(--main-acc);
+    color: var(--main-back);
+    transition: background-color var(--timing);
+    margin-bottom: 13px;
+}
+
+.backButton {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    color: #54adff;
+    padding: 0px 0px;
+    display: flex;
+    border: none;
+
+    outline: none;
+    background-color: transparent;
+}
+
+.backBtnLink {
+    text-decoration: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.backIcon {
+    display: inline-block;
+    margin-right: 12px;
+    width: 16px;
+    height: 12px;
+    margin: auto;
+    margin-right: 16px;
+}
+
+.btnLearnIcon {
+    width: 24px;
+    height: 24px;
+}
+@media screen and (min-width: 768px) {
+    .buttonsContainer {
+        flex-direction: row-reverse;
+        margin-bottom: 17px;
+        justify-content: center;
+    }
+    .btnLearn {
+        margin-bottom: 0px;
+        margin-left: 32px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .buttonsContainer {
+        margin-bottom: 40px;
+    }
+}

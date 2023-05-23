@@ -1,0 +1,18 @@
+.container {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.errorContainer {
+    position: relative;
+    top: 100%;
+    left: 100%;
+    bottom: 100%;
+    right: 100%;
+}
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #baf7c4;
+}

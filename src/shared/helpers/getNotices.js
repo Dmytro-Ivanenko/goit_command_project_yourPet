@@ -1,14 +1,42 @@
-import { getSellNotices, getLostNotices, getInGoodHandsNotices } from 'services/api/notices';
+import { getSellNotices, getLostNotices, getInGoodHandsNotices, getOwnNotices } from 'services/api/notices';
+import { getFavoriteNotices } from 'services/api/favorites';
 
-export const getNotices = async (category, query, gender) => {
-    if (category === 'sell') {
-        return await getSellNotices(query, gender);
-    } else if (category === 'lost-found') {
-        return await getLostNotices(query, gender);
-    } else if (category === 'for-free') {
-        return await getInGoodHandsNotices(query, gender);
-    } else {
-        // temporary to fix infinite loading on private categories
-        return [];
+export const getNotices = async params => {
+    params.age = getAgeParam(params.age);
+
+    switch (params.category) {
+        case 'sell':
+            return await getSellNotices(params);
+
+        case 'lost-found':
+            return await getLostNotices(params);
+
+        case 'for-free':
+            return await getInGoodHandsNotices(params);
+
+        case 'favorite':
+            return await getFavoriteNotices(params);
+
+        case 'own':
+            return await getOwnNotices(params);
+
+        default:
+            return [];
+    }
+};
+
+const getAgeParam = age => {
+    switch (age) {
+        case '3-12 m':
+            return 12;
+
+        case '1 year':
+            return 24;
+
+        case '2 years +':
+            return 25;
+
+        default:
+            return;
     }
 };

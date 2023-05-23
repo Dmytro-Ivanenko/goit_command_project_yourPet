@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from './Yup';
 
+import { toast } from 'react-toastify';
+
 // Icons
 import { ReactComponent as EyeOpen } from 'images/icons/eye-open.svg';
 import { ReactComponent as EyeClosed } from 'images/icons/eye-closed.svg';
@@ -36,8 +38,13 @@ const RegisterForm = () => {
     };
 
     const onSubmit = ({ email, password1 }) => {
-        dispatch(registration({ email, password: password1 }));
-        reset();
+        dispatch(registration({ email, password: password1 }))
+            .then(response => {
+                reset();
+            })
+            .catch(error => {
+                toast.error(error.message);
+            });
     };
 
     return (

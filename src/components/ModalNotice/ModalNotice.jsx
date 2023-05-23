@@ -1,38 +1,45 @@
 import { useAuth } from 'shared/hooks/useAuth';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
-import dogPicture from 'images/example/dog.jpg';
+import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
+import { refreshUser } from 'redux/auth/operations';
 
 import styles from './modal-notice.module.scss';
-import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 const ModalNotice = ({ item }) => {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, user } = useAuth();
+    const dispatch = useDispatch();
 
-    const handleClick = () => {
+    const { _id, breed, category, comments, date, location, name, price, sex, title, image, owner } = item;
+
+    const handleFavoriteClick = async () => {
         if (!isLoggedIn) {
-            toast.error('Sign in to add your pets.');
+            toast.warn('Sign in to add to favorites!');
             return;
         }
 
-        // add to favorite
-        console.log('added');
-    };
+        if (user.favoriteNotices.includes(_id)) {
+            try {
+                await deleteFavoriteNotice(_id);
+                dispatch(refreshUser());
+                toast.success('Removed successfully!');
+            } catch (error) {
+                toast.error(error.message);
+            }
+            return;
+        }
 
-    const {
-        breed,
-        category,
-        comments,
-        date,
-        location,
-        name,
-        price,
-        sex,
-        title,
-        email = 'user@mail.com',
-        phone = '+380971234567',
-        image = dogPicture,
-    } = item;
+        try {
+            await addFavoriteNotice(_id);
+            dispatch(refreshUser());
+            toast.success('Added successfully!');
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -74,35 +81,59 @@ const ModalNotice = ({ item }) => {
                             <tr className={styles.tableRow}>
                                 <td className={styles.tableLabel}>Email:</td>
                                 <td className={styles.tableValue}>
-                                    <a className={styles.link} href={`mailto:${email}`}>
-                                        {email}
+                                    <a className={styles.link} href={`mailto:${owner.email}`}>
+                                        {owner.email}
                                     </a>
                                 </td>
                             </tr>
-                            <tr className={styles.tableRow}>
-                                <td className={styles.tableLabel}>Phone:</td>
-                                <td className={styles.tableValue}>
-                                    <a className={styles.link} href={`tel:${phone}`}>
-                                        {phone}
-                                    </a>
-                                </td>
-                            </tr>
+                            {owner?.phone && (
+                                <tr className={styles.tableRow}>
+                                    <td className={styles.tableLabel}>Phone:</td>
+                                    <td className={styles.tableValue}>
+                                        <a className={styles.link} href={`tel:${owner.phone}`}>
+                                            {owner.phone}
+                                        </a>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
             </div>
             <p className={styles.comment}>{comments}</p>
             <div className={styles.btnWrapper}>
-                <button className={styles.btn} onClick={handleClick}>
-                    <span className={styles.btnLabel}>Add to</span>
+                <button className={styles.btn} onClick={handleFavoriteClick}>
+                    <span className={styles.btnLabel}>
+                        {user.favoriteNotices.includes(_id) ? 'Remove from' : 'Add to'}
+                    </span>
                     <HeartIcon className={styles.icon} width={24} height={24} />
                 </button>
-                <a className={styles.contactLink} href={`tel:${phone}`}>
+                <a className={styles.contactLink} href={`mailto:${owner.email}`}>
                     Contact
                 </a>
             </div>
         </div>
     );
+};
+
+ModalNotice.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        breed: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        sex: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        comments: PropTypes.string.isRequired,
+        price: PropTypes.number,
+        owner: PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired,
+            phone: PropTypes.string,
+        }),
+    }),
 };
 
 export default ModalNotice;

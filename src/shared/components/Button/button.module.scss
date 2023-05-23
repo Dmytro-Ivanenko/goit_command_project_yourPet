@@ -1,0 +1,74 @@
+.btn {
+    position: relative;
+    width: 248px;
+    height: 38px;
+    padding: 6px 28px;
+    margin: 0 auto;
+    border: 2px solid var(--main-acc);
+    border-radius: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+
+    background-color: transparent;
+    color: var(--main-acc);
+
+    transition: color var(--timing);
+
+    &:hover,
+    &:focus {
+        color: var(--main-back);
+        border: none;
+
+        &::before {
+            opacity: 1;
+        }
+
+        & > .btnIcon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
+
+    & .btnText {
+        z-index: 5;
+    }
+}
+
+.btnIcon {
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+    fill: currentColor;
+
+    transition: opacity var(--timing);
+}

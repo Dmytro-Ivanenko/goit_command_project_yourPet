@@ -1,0 +1,184 @@
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+
+.section {
+    // height: 913px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+}
+.card__listItemTime {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.card__labelTime {
+    font-weight: bold;
+    padding-bottom: 4px;
+}
+.friendsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 32px;
+    }
+}
+.dropDown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 500;
+    gap: 5px;
+    color: #111111;
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    border: 1px solid var(--main-acc);
+    padding: 12px;
+}
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    text-align: center;
+}
+.card__data {
+    color: red;
+}
+.card__listItemTime:hover {
+    cursor: pointer;
+    color: var(--main-acc);
+}
+.card {
+    // padding: 16px 12px;
+
+    background: #ffffff;
+    box-shadow: var(--small-shadow);
+    border-radius: 40px;
+
+    &__title {
+        padding-top: 16px;
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        line-height: 27px;
+        color: var(--main-acc);
+        margin-bottom: 16px;
+    }
+
+    &__wrap {
+        display: flex;
+        gap: 20px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__listItem {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        gap: 5px;
+        line-height: 16px;
+        color: #111111;
+    }
+
+    &__label {
+        font-weight: 600;
+    }
+
+    address {
+        font-style: unset;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .card {
+            justify-content: space-between;
+            width: 336px;
+        }
+        .card__frame {
+            width: 146px;
+            height: 104px;
+        }
+        .card__listItem {
+            gap: 5px;
+            font-size: 16px;
+        }
+
+        .card__wrap {
+            gap: 16px;
+        }
+        .card__frame {
+            width: 124px;
+            height: 88px;
+        }
+        width: 336px;
+        .card__listItemTime {
+            gap: 0px;
+            font-size: 16px;
+        }
+        .dropDown {
+            font-size: 12px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .dropDown {
+            font-size: 16px;
+        }
+        .card__frame {
+            display: flex;
+            justify-content: center;
+            width: 146px;
+            height: 104px;
+        }
+        width: 394px;
+        height: 287px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .card__listItem {
+        gap: 0px;
+        font-size: 12px;
+    }
+    .card__listItemTime {
+        gap: 0px;
+        font-size: 12px;
+    }
+    .card__list {
+        padding-bottom: 16px;
+        padding-right: 11px;
+    }
+    .card__wrap {
+        gap: 16px;
+        justify-content: center;
+    }
+    .card__frame {
+        display: flex;
+        justify-content: center;
+        width: 100px;
+        height: 68px;
+    }
+
+    .dropDown {
+        font-size: 8px;
+    }
+}
