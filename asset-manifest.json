@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/goit_command_project_yourPet/static/css/main.3dfa9425.css",
-    "main.js": "/goit_command_project_yourPet/static/js/main.d169a182.js",
+    "main.css": "/goit_command_project_yourPet/static/css/main.cd572fbb.css",
+    "main.js": "/goit_command_project_yourPet/static/js/main.a9abe3a0.js",
     "static/css/601.c9fd4e4d.chunk.css": "/goit_command_project_yourPet/static/css/601.c9fd4e4d.chunk.css",
     "static/js/601.e9ffd588.chunk.js": "/goit_command_project_yourPet/static/js/601.e9ffd588.chunk.js",
     "static/css/585.ab5cf567.chunk.css": "/goit_command_project_yourPet/static/css/585.ab5cf567.chunk.css",
@@ -46,7 +46,7 @@
     "static/media/inter-latin-ext-400-normal.woff2": "/goit_command_project_yourPet/static/media/inter-latin-ext-400-normal.3a7a76525d98d25962eb.woff2",
     "static/media/inter-latin-400-normal.woff2": "/goit_command_project_yourPet/static/media/inter-latin-400-normal.be7cb18dc7caf47cf7e9.woff2",
     "static/media/PictureMainPage-mobile1xjpg.jpg": "/goit_command_project_yourPet/static/media/PictureMainPage-mobile1xjpg.f54543084c6a06e65df3.jpg",
-    "static/media/logo.svg": "/goit_command_project_yourPet/static/media/logo.ff0314ccd00c94213bc98aee007e8199.svg",
+    "static/media/logo.svg": "/goit_command_project_yourPet/static/media/logo.f17d0e0b4794f9516e951f7bbf516584.svg",
     "static/media/manrope-latin-700-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-latin-700-normal.19fa7bed40332c82ef91.woff2",
     "static/media/manrope-latin-400-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-latin-400-normal.2cfae0fb4662deefa552.woff2",
     "static/media/manrope-latin-600-normal.woff2": "/goit_command_project_yourPet/static/media/manrope-latin-600-normal.9edb3db61d0dd174eb66.woff2",
@@ -104,8 +104,8 @@
     "static/media/cross-small.svg": "/goit_command_project_yourPet/static/media/cross-small.7b3821a2ab5686b23a2f771591b8b66c.svg",
     "static/media/check.svg": "/goit_command_project_yourPet/static/media/check.2a64553bc65df77be06926ee8669f056.svg",
     "static/media/plus.svg": "/goit_command_project_yourPet/static/media/plus.c38c5c6716210f10cb288a5bc889eca6.svg",
-    "main.3dfa9425.css.map": "/goit_command_project_yourPet/static/css/main.3dfa9425.css.map",
-    "main.d169a182.js.map": "/goit_command_project_yourPet/static/js/main.d169a182.js.map",
+    "main.cd572fbb.css.map": "/goit_command_project_yourPet/static/css/main.cd572fbb.css.map",
+    "main.a9abe3a0.js.map": "/goit_command_project_yourPet/static/js/main.a9abe3a0.js.map",
     "601.c9fd4e4d.chunk.css.map": "/goit_command_project_yourPet/static/css/601.c9fd4e4d.chunk.css.map",
     "601.e9ffd588.chunk.js.map": "/goit_command_project_yourPet/static/js/601.e9ffd588.chunk.js.map",
     "585.ab5cf567.chunk.css.map": "/goit_command_project_yourPet/static/css/585.ab5cf567.chunk.css.map",
@@ -132,7 +132,7 @@
     "48.06b7c004.chunk.js.map": "/goit_command_project_yourPet/static/js/48.06b7c004.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3dfa9425.css",
-    "static/js/main.d169a182.js"
+    "static/css/main.cd572fbb.css",
+    "static/js/main.a9abe3a0.js"
   ]
 }
