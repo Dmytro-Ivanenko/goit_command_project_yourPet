@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
-import serverRequest from './serverRequest';
+import serverRequestHandler from './serverRequestHandler';
 
 const AddPetForm = () => {
     const location = useLocation();
@@ -30,11 +30,11 @@ const AddPetForm = () => {
                 e.preventDefault();
                 // console.log('DATA ON SUBMITTTT: ', data);
                 // console.log(fileInputRef.current.files[0]);
-                serverRequest(data, fileInputRef);
+                serverRequestHandler(data, fileInputRef);
                 break;
             case 'Back':
                 setStep(prev => prev - 1);
-             break;
+                break;
             default:
                 return;
         }
