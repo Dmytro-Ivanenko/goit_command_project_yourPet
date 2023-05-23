@@ -116,7 +116,7 @@ const NoticesCategoryItem = ({ item }) => {
                                     user.favoriteNotices.includes(_id) ? `${styles.btn} ${styles.favorite}` : styles.btn
                                 }
                                 aria-label={
-                                    user.favoriteNotices.includes(_id) ? 'add to favorites' : 'remove from favorites'
+                                    user.favoriteNotices.includes(_id) ? 'remove from favorites' : 'add to favorites'
                                 }
                             >
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
