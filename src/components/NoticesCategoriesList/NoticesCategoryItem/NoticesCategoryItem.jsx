@@ -52,7 +52,7 @@ const NoticesCategoryItem = ({ item }) => {
         }
 
         try {
-            await addFavoriteNotice(item._id);
+            await addFavoriteNotice(_id);
             dispatch(refreshUser());
             toast.success('Added successfully!');
         } catch (error) {

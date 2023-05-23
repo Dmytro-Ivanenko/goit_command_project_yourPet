@@ -138,7 +138,6 @@
     color: var(--header-font);
 
     .lowerBlockItem:hover &,
-    .lowerBlockItem:focus &,
     .lowerBlockBtn.active & {
         color: var(--main-light);
     }
