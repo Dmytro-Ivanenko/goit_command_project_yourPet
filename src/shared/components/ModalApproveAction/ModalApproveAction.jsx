@@ -28,7 +28,7 @@ const ModalApproveAction = ({ children, onClose }) => {
     return createPortal(
         <div className={styles.backdrop} onClick={handleClose}>
             <div className={styles.modal}>
-                <button type="button" className={styles.closeBtn} onClick={onClose}>
+                <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="close">
                     <CrossIcon className={styles.closeIcon} width={24} height={24} />
                 </button>
                 {children}

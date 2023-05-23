@@ -175,13 +175,23 @@ const UserCard = () => {
                             onChange={handleChange}
                         />
                         {isFieldShown === 'name' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldName}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="name">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="name"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -203,13 +213,23 @@ const UserCard = () => {
                             onChange={handleChange}
                         />
                         {isFieldShown === 'email' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldEmail}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="email">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="email"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -231,13 +251,23 @@ const UserCard = () => {
                             onChange={handleChange}
                         />
                         {isFieldShown === 'birthday' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldBirthday}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="birthday">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="birthday"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -259,13 +289,23 @@ const UserCard = () => {
                             onChange={handleChange}
                         />
                         {isFieldShown === 'phone' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldPhone}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="phone">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="phone"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>
@@ -287,13 +327,23 @@ const UserCard = () => {
                             onChange={handleChange}
                         />
                         {isFieldShown === 'city' ? (
-                            <button type="submit" onClick={handleSubmit} className={styles.btnEdit}>
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                className={styles.btnEdit}
+                                aria-label="submit changes"
+                            >
                                 <CheckIcon className={styles.checkIcon} width={24} height={24} />
                             </button>
                         ) : (
                             <>
                                 <p className={styles.prevValue}>{oldCity}</p>
-                                <button className={styles.btnEdit} onClick={handleRedactClick} name="city">
+                                <button
+                                    className={styles.btnEdit}
+                                    onClick={handleRedactClick}
+                                    name="city"
+                                    aria-label="start redacting"
+                                >
                                     <EditIcon className={styles.iconEdit} width={20} height={20} />
                                 </button>
                             </>

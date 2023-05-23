@@ -115,6 +115,9 @@ const NoticesCategoryItem = ({ item }) => {
                                 className={
                                     user.favoriteNotices.includes(_id) ? `${styles.btn} ${styles.favorite}` : styles.btn
                                 }
+                                aria-label={
+                                    user.favoriteNotices.includes(_id) ? 'add to favorites' : 'remove from favorites'
+                                }
                             >
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
@@ -164,7 +167,7 @@ const NoticesCategoryItem = ({ item }) => {
                         </li>
                     </ul>
                 </div>
-                <h4 className={styles.title}>{title}</h4>
+                <p className={styles.title}>{title}</p>
                 <Button onClick={handleModal} text="Learn More" />
             </li>
             {showModal && (
