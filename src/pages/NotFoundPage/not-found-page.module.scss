@@ -69,25 +69,49 @@
         font-size: 380px;
     }
 }
-.cat {
-    background-image: url('../../images/example/selective-focus-black-white-adorable-cat-with-its-tongue-out.png');
+.cat_bcg {
+    position: relative;
     background-color: var(--header-acc);
     border-radius: 50%;
-    background-repeat: no-repeat;
-    background-size: 91%;
     width: 131px;
     height: 131px;
-    background-position: center right;
 
     @media screen and (min-width: 768px) {
         width: 250px;
         height: 250px;
     }
     @media screen and (min-width: 1280px) {
-        width: 292px;
-        height: 292px;
+        width: 310px;
+        height: 310px;
     }
 }
+.cat_img {
+    position: absolute;
+    width: 105px;
+    height: 115px;
+    top: 17px;
+    left: 15px;
+    border-bottom-right-radius: 46px;
+    border-bottom-left-radius: 46px;
+
+    @media screen and (min-width: 768px) {
+        top: 20px;
+        left: 28px;
+        width: 200px;
+        height: 230px;
+        border-bottom-right-radius: 86px;
+        border-bottom-left-radius: 86px;
+    }
+    @media screen and (min-width: 1280px) {
+        width: 255px;
+        height: 275px;
+        top: 36px;
+        left: 40px;
+        border-bottom-right-radius: 48%;
+        border-bottom-left-radius: 102px;
+    }
+}
+
 .digit_right {
     transform: rotate(-11.34deg);
 }
