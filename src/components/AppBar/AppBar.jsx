@@ -29,7 +29,6 @@ const pages = [
 
 const ResponsiveAppBar = () => {
     const location = useLocation();
-    console.log('location: ', location.pathname);
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -164,12 +163,12 @@ const ResponsiveAppBar = () => {
                     </Box>
                     {/* User menu descktop */}
                     {isLoggedIn ? (
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{ flexGrow: 0, marginLeft:'auto' }}>
                             <Box
                                 onClick={handleClickUserMenu}
                                 component={NavLink}
                                 to="/user"
-                                sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
+                                sx={{ display: 'flex', alignItems: 'center', marginLeft:'auto', gap: '12px', textDecoration: 'none'}}
                             >
                                 <IconButton sx={{ p: 0 }}>
                                     {user.avatar ? (
