@@ -10,7 +10,9 @@ import btnStyle from './buttons.module.scss';
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
 import isBtnDisabled from './isBtnDisabled';
 import getFormTitle from './getFormTitle';
-import serverRequest from './serverRequest';
+import React, { useState, useRef } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import serverRequestHandler from './serverRequestHandler';
 
 // Components
 import StepTitles from './StepTitles';
@@ -34,7 +36,7 @@ const AddPetForm = () => {
         } else if (btn.includes('Done')) {
             console.log('click on Done');
             e.preventDefault();
-            return serverRequest(data, fileInputRef);
+            return serverRequestHandler(data, fileInputRef);
         } else if (btn.includes('Back')) {
             return setStep(prev => prev - 1);
         } else {
