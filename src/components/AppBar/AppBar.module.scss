@@ -228,22 +228,31 @@
 
 .iconButton {
     position: absolute;
+    padding: 5px;
+    background-color:var(--header-acc);
+    border-radius: 5px;
+
+
     @media screen and (max-width: 767px) {
-        top: 0;
-        left: 0;
+        width: 40px;
+        height: 40px;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     @media screen and (min-width: 768px) {
-        top: 12px;
-        left: 40px;
+        width: 50px;
+        height: 50px;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
 .userMenuWrap {
 
     @media screen and (max-width: 767px) {
-        position: relative;
-        max-width: 320px;
         margin-left: auto;
         margin-right: auto;
     }
