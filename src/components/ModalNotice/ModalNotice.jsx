@@ -10,21 +10,7 @@ import styles from './modal-notice.module.scss';
 const ModalNotice = ({ item }) => {
     const { isLoggedIn } = useAuth();
 
-    const {
-        _id,
-        breed,
-        category,
-        comments,
-        date,
-        location,
-        name,
-        price,
-        sex,
-        title,
-        image,
-        email = 'user@mail.com',
-        phone = '+380971234567',
-    } = item;
+    const { _id, breed, category, comments, date, location, name, price, sex, title, image, owner } = item;
 
     const handleClick = async () => {
         if (!isLoggedIn) {
@@ -85,19 +71,21 @@ const ModalNotice = ({ item }) => {
                             <tr className={styles.tableRow}>
                                 <td className={styles.tableLabel}>Email:</td>
                                 <td className={styles.tableValue}>
-                                    <a className={styles.link} href={`mailto:${email}`}>
-                                        {email}
+                                    <a className={styles.link} href={`mailto:${owner.email}`}>
+                                        {owner.email}
                                     </a>
                                 </td>
                             </tr>
-                            <tr className={styles.tableRow}>
-                                <td className={styles.tableLabel}>Phone:</td>
-                                <td className={styles.tableValue}>
-                                    <a className={styles.link} href={`tel:${phone}`}>
-                                        {phone}
-                                    </a>
-                                </td>
-                            </tr>
+                            {owner?.phone && (
+                                <tr className={styles.tableRow}>
+                                    <td className={styles.tableLabel}>Phone:</td>
+                                    <td className={styles.tableValue}>
+                                        <a className={styles.link} href={`tel:${owner.phone}`}>
+                                            {owner.phone}
+                                        </a>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -108,7 +96,7 @@ const ModalNotice = ({ item }) => {
                     <span className={styles.btnLabel}>Add to</span>
                     <HeartIcon className={styles.icon} width={24} height={24} />
                 </button>
-                <a className={styles.contactLink} href={`tel:${phone}`}>
+                <a className={styles.contactLink} href={`mailto:${owner.email}`}>
                     Contact
                 </a>
             </div>
@@ -128,8 +116,11 @@ ModalNotice.propTypes = {
         image: PropTypes.string.isRequired,
         comments: PropTypes.string.isRequired,
         price: PropTypes.number,
-        email: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
+        owner: PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired,
+            phone: PropTypes.string,
+        }),
     }),
 };
 

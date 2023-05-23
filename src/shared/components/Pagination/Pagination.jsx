@@ -25,7 +25,7 @@ const Pagination = ({ onPageClick, pageCount, currentPage }) => {
                 activeClassName={styles.active}
                 renderOnZeroPageCount={null}
                 className={styles.pagination}
-                forcePage={currentPage}
+                forcePage={currentPage - 1}
             />
         </div>
     );
