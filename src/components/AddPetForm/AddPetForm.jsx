@@ -10,8 +10,6 @@ import btnStyle from './buttons.module.scss';
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
 import isBtnDisabled from './isBtnDisabled';
 import getFormTitle from './getFormTitle';
-import React, { useState, useRef } from 'react';
-import { useLocation, Link } from 'react-router-dom';
 import serverRequestHandler from './serverRequestHandler';
 
 // Components
