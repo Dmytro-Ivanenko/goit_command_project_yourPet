@@ -1,4 +1,5 @@
 import styles from './addPetForm.module.scss';
+import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
 
 const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
     const handleChange = e => {
@@ -11,10 +12,13 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
         console.log(e.target.value);
     };
 
+    const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);
+
     return (
-        <div className={styles.inputs}>
-            <label>
+        <div className={styles.petThirdStepInputs}>
+            <label className={styles.petPhotoLabel}>
                 Add photo
+                <PlusIcon className={styles.petPhotoPlusIcon} />
                 <input
                     type="file"
                     required
@@ -25,12 +29,22 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     onChange={handleChange}
                     className={styles.photoInput}
                 />
-             
+                {fileInputRef.current?.files[0] && (
+                    <img className={styles.petPhotoPreview} src={getphotoURL()} alt="pet preview"></img>
+                )}
             </label>
 
-            <label>
+            <label className={styles.petLabel}>
                 Comments
-                <input type="text" required value={data.comments} name="comments" onChange={handleChange} />
+                <textarea
+                    type="text"
+                    required
+                    value={data.comments}
+                    name="comments"
+                    onChange={handleChange}
+                    className={styles.textArea}
+                    placeholder="For additional information"
+                />
             </label>
         </div>
     );

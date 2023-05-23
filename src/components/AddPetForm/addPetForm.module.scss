@@ -1,25 +1,29 @@
 .form {
-    width: 280px;
+    // width: 280px;
+    width: fit-content;
     // height: 500px;
     margin: 60px auto;
     background-color: #dff8a3;
-    padding: 20px 8px;
+    padding: 16px 8px;
     border-radius: 40px;
     background-color: #f7f8ce;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
 }
 
 .title {
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
-    font-size: 28px;
-    line-height: 38px;
+    font-size: 20px;
+    line-height: 27px;
     color: var(--header-font);
 }
 
 .stepTitleContainer {
     margin-top: 24px;
-    margin-bottom: 36px;
+    // margin-bottom: 36px;
 }
 
 .stepTitle {
@@ -29,7 +33,8 @@
     font-weight: 500;
     font-size: 10px;
     line-height: 14px;
-
+    display: inline-block;
+    min-width: 80px;
     &:first-child {
         margin-right: 11px;
     }
@@ -37,12 +42,16 @@
     &:nth-child(2) {
         margin-right: 16px;
     }
+
+    // &:last-child {
+
+    // }
 }
 .stepOneTitleAfter,
 .stepTwoTitleAfter,
 .stepThreeTitleAfter {
     position: absolute;
-    top: 20px;
+    top: 26px;
     left: 0;
     background-color: #cce4fb;
     border-radius: 8px;
@@ -66,15 +75,67 @@
 .radios {
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
+}
+.radioBtnsTitle {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}
+.oneStepRadioLabel {
+    padding: 8px 16px;
+    color: var(--main-acc);
+    background: var(--dark);
+    border-radius: 40px;
+    width: fit-content;
+}
+// Not supported by firefox
+.oneStepRadioLabel:has(> .oneStepRadioBtn:checked) {
+    color: var(--main-back);
+    background: var(--main-acc);
+}
+
+.oneStepRadioLabel:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.oneStepRadioLabel:last-child {
+    margin-bottom: 91px;
+}
+
+.oneStepRadioBtn {
+    opacity: 0;
 }
 
 .flexContainer {
     display: flex;
+    flex-direction: column;
+    margin-top: 36px;
+}
+
+input:focus,
+textArea:focus {
+    border: 2px solid var(--main-acc);
+    outline: var(--main-acc);
+}
+
+input::placeholder,
+textArea::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #888888;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
+    margin-top: 36px;
+}
+.petThirdStepInputs {
+    composes: inputs;
+    margin-top: 0px;
 }
 
 .input {
@@ -82,8 +143,50 @@
     height: 40px;
     border-radius: 40px;
     border: 1px solid #54adff;
+    margin-right: 100%;
+    padding: 0px;
+    padding-left: 16px;
 }
 
+.secStepInput {
+    composes: input;
+    margin-top: 5px;
+}
+.textInput {
+    composes: secStepInput;
+    border-radius: 20px;
+}
+
+.textArea {
+    composes: secStepInput;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    height: 92px;
+    margin-right: 0%;
+    width: 100%;
+    padding-right: 16px;
+}
+
+// .label {
+//     display: block;
+//     width: 100%;
+// }
+.label:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.label:last-child {
+    margin-bottom: 44px;
+}
+
+.petLabel {
+    // composes: label;
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+    margin-bottom: 24px;
+}
 .sexRadioBtns {
     display: flex;
     flex-wrap: wrap;
@@ -91,47 +194,140 @@
 .radioBtnsTitle {
     flex-basis: 100%;
 }
+
+.sexRadioInput {
+    opacity: 0;
+    margin-right: 36px;
+}
+.sexIcon {
+    // stroke: var(--main-acc);
+
+    // display: block;
+    position: absolute;
+    z-index: 100;
+    top: 20;
+    left: 50;
+    width: 24px;
+    height: 24px;
+}
+
 .sexRadioLabel {
     flex-basis: 50%;
+    position: relative;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #888888;
+    margin-bottom: 16px;
+}
+
+.photoLabel {
+    display: block;
+    position: relative;
+    margin-top: 63px;
+    margin-bottom: 62px;
+
+    &::after {
+        position: absolute;
+        content: '';
+        opacity: 0.7;
+        top: -45px;
+        left: 122px;
+        z-index: 7;
+        width: 112px;
+        height: 112px;
+        border-radius: 20px;
+        background-color: #cce4fb;
+    }
+}
+
+.petPhotoLabel {
+    display: block;
+    position: relative;
+    margin-top: 83px;
+    // margin-bottom: 62px;
+
+    &::after {
+        position: absolute;
+        content: '';
+        opacity: 0.7;
+        top: -45px;
+        left: 122px;
+        z-index: 7;
+        width: 112px;
+        height: 112px;
+        border-radius: 20px;
+        background-color: #cce4fb;
+    }
+}
+
+.photoPlusIcon {
+    position: absolute;
+    top: -7px;
+    left: 160px;
+    width: 30px;
+    height: 30px;
+    z-index: 50;
+}
+
+.petPhotoPlusIcon {
+    position: absolute;
+    top: -5px;
+    left: 162px;
+    width: 30px;
+    height: 30px;
+    z-index: 50;
 }
 
 .photoInput {
-    margin-bottom: 47px;
-    display: block;
+    opacity: 0;
+}
+
+.photoPreview {
+    position: absolute;
+    top: -45px;
+    left: 122px;
     width: 112px;
     height: 112px;
-    position: relative;
     border-radius: 20px;
-    background-color: #af4f4f;
-    z-index: 3;
-    margin-left: 27px;
+    z-index: 200;
+    object-fit: cover;
+    object-position: center;
+}
 
-    &:after {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        z-index: 7;
-        width: 100%;
-        height: 100%;
-        background-color: #cce4fb;
-    }
+.petPhotoPreview {
+    composes: photoPreview;
 }
 
 @media screen and (min-width: 768px) {
     .form {
         padding: 20px 32px;
-        width: 458px;
-    }
-
-    .stepTitle {
-        font-size: 16px;
+        // width: 458px;
+        font-size: 20px;
         line-height: 26px;
     }
 
+    .flexContainer {
+        flex-direction: row;
+        align-items: start;
+    }
+    .title {
+        text-align: center;
+        font-size: 28px;
+        line-height: 38px;
+    }
+
+    .stepTitle {
+        // padding-right: 47px;
+        font-size: 16px;
+        line-height: 26px;
+        min-width: 120px;
+    }
+
     .stepTitleContainer {
+        text-align: center;
         margin-top: 24px;
-        margin-bottom: 60px;
+        // margin-bottom: 60px;
     }
 
     .stepTitle:first-child {
@@ -141,26 +337,126 @@
     .stepTwoTitleAfter,
     .stepThreeTitleAfter {
         width: 120px;
+        top: 39px;
+    }
+
+    .radios {
+        margin-top: 36px;
+    }
+    .radioBtnsTitle {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .oneStepRadioLabel:last-child {
+        margin-bottom: 137px;
+    }
+
+    input::placeholder,
+    textArea::placeholder {
+        font-size: 16px;
     }
 
     .input {
         width: 394px;
-        height: 32px;
-        border-radius: 40px;
-        border: 1px solid #54adff;
+        height: 48px;
     }
 
-    .photoInput {
+    .secStepInput {
+        composes: input;
+        margin-top: 8px;
+    }
+
+    .petLabel {
+        margin-top: 102px;
+        margin-bottom: 17px;
+    }
+    // .textInput {
+
+    // }
+
+    .textArea {
+        padding-top: 12px;
+        padding-bottom: 10px;
+        height: 108px;
+        width: 100%;
+    }
+
+    .label:not(:last-child) {
+        margin-bottom: 24px;
+    }
+    .label:last-child {
+        margin-bottom: 40px;
+    }
+
+    .sexRadioLabel {
+        margin-bottom: 48px;
+    }
+
+    .photoLabel {
+        width: 200px;
+        height: 27px;
+        margin-top: 0px;
+        margin-right: 45px;
+        margin-bottom: 0px;
+
+        &::after {
+            width: 182px;
+            height: 182px;
+            left: 0px;
+            top: 35px;
+        }
+    }
+
+    .petPhotoLabel {
+        margin-top: 113px;
+    }
+    .petPhotoLabel::after {
+        left: 194px;
+        top: -72px;
         width: 182px;
         height: 182px;
-        margin-left: 33px;
     }
+
+    .photoPreview {
+        left: 0px;
+        top: 35px;
+        width: 182px;
+        height: 182px;
+    }
+
+    .petPhotoPreview {
+        left: 194px;
+        top: -72px;
+        width: 182px;
+        height: 182px;
+    }
+
+    .photoPlusIcon {
+        width: 48px;
+        height: 48px;
+        top: 100px;
+        left: 67px;
+    }
+
+    .petPhotoPlusIcon {
+        width: 48px;
+        height: 48px;
+        top: -6px;
+        left: 260px;
+    }
+
+    // .photoInput {
+    //     width: 182px;
+    //     height: 182px;
+    //     margin-left: 33px;
+    // }
 }
 @media screen and (min-width: 1280px) {
     .form {
         width: 542px;
     }
-    .stepTitleContainer {
-        margin-bottom: 36px;
-    }
+    // .stepTitleContainer {
+    //     margin-bottom: 36px;
+    // }
 }

@@ -7,13 +7,29 @@ const serverRequest = async (data, fileInputRef) => {
 
     if (data.option !== 'pet') {
         try {
-            const { addTitle, location, option, price = null, sex } = data;
+            console.log('after submit, not pet');
+            const { addTitle, location, option, price, sex } = data;
+
+            if (data.option === 'sell') {
+                let response = await axios.postForm('/notice', {
+                    name,
+                    breed,
+                    sex,
+                    price,
+                    location,
+                    comments,
+                    date: birth,
+                    title: addTitle,
+                    category: option,
+                    image: fileInputRef.current.files[0],
+                });
+                return console.log(response.data);
+            }
             let response = await axios.postForm('/notice', {
                 name,
                 breed,
                 sex,
                 location,
-                price,
                 comments,
                 date: birth,
                 title: addTitle,
@@ -26,6 +42,7 @@ const serverRequest = async (data, fileInputRef) => {
             console.log(err);
         }
     } else {
+        console.log('pet to Server');
         try {
             let response = await axios.postForm('/yourPets', {
                 comments,

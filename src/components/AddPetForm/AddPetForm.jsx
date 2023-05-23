@@ -1,15 +1,23 @@
+// icons
+import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
+import { ReactComponent as BackBtn } from 'images/icons/arrow-left.svg';
+
+// scss modules
 import styles from './addPetForm.module.scss';
 import btnStyle from './buttons.module.scss';
-//import { ReactComponent as PawprintIcon } from 'images/icons/pawprint.svg';
+
+// helpers
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
 import isBtnDisabled from './isBtnDisabled';
 import getFormTitle from './getFormTitle';
-import React, { useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-
 import serverRequest from './serverRequest';
+
+// Components
+import StepTitles from './StepTitles';
+
+// react / react-dom
+import React, { useState, useRef } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 
 const AddPetForm = () => {
     const location = useLocation();
@@ -20,25 +28,20 @@ const AddPetForm = () => {
 
     const onClick = async e => {
         const btn = e.target.innerHTML;
-        console.log('BBTTTNNNNN', e.target);
-        console.log('STTEEEP', step);
-        switch (btn) {
-            case 'Next':
-                step === 2 ? setStep(3) : setStep(2);
-                break;
-            case 'Done':
-                e.preventDefault();
-                // console.log('DATA ON SUBMITTTT: ', data);
-                // console.log(fileInputRef.current.files[0]);
-                serverRequest(data, fileInputRef);
-                break;
-            case 'Back':
-                setStep(prev => prev - 1);
-             break;
-            default:
-                return;
+
+        if (btn.includes('Next')) {
+            return step === 2 ? setStep(3) : setStep(2);
+        } else if (btn.includes('Done')) {
+            console.log('click on Done');
+            e.preventDefault();
+            return serverRequest(data, fileInputRef);
+        } else if (btn.includes('Back')) {
+            return setStep(prev => prev - 1);
+        } else {
+            return;
         }
-        console.log('fileInputRef', fileInputRef.current);
+
+        // console.log('fileInputRef', fileInputRef.current);
     };
 
     const title = getFormTitle(data);
@@ -47,49 +50,27 @@ const AddPetForm = () => {
     return (
         <form className={styles.form} onClick={onClick}>
             <h2 className={styles.title}>{title}</h2>
-            <div className={styles.stepTitleContainer}>
-                <span className={styles.stepTitle}>
-                    Choose option{' '}
-                    <span
-                        className={clsx(
-                            styles.stepOneTitleAfter,
-                            { [styles.oneSelected]: step === 1 },
-                            { [styles.passed]: step > 1 }
-                        )}
-                    ></span>
-                </span>
 
-                <span className={styles.stepTitle}>
-                    Personal details
-                    <span
-                        className={clsx(
-                            styles.stepTwoTitleAfter,
-                            { [styles.twoSelected]: step === 2 },
-                            { [styles.passed]: step > 2 }
-                        )}
-                    ></span>
-                </span>
-                <span className={styles.stepTitle}>
-                    More info
-                    <span className={clsx(styles.stepThreeTitleAfter, { [styles.threeSelected]: step === 3 })}></span>
-                </span>
-            </div>
+            <StepTitles step={step} />
+
             {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
-            <div className={btnStyle.buttonsContainer}>
-                <Link to={backPage}>
-                    <button type="button" className={styles.backButton}>
-                        {step === 1 ? 'Cancel' : 'Back'}
-                    </button>
-                </Link>
 
+            <div className={btnStyle.buttonsContainer}>
                 <button
                     type={data.comments ? 'submit' : 'button'}
                     disabled={isBtnDisabled(step, data)}
                     className={btnStyle.btnLearn}
                 >
                     {step === 3 ? 'Done' : 'Next'}
-                    {/* <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} /> */}
+                    <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} />
                 </button>
+
+                <Link className={btnStyle.backBtnLink} to={backPage}>
+                    <button type="button" className={btnStyle.backButton}>
+                        <BackBtn className={btnStyle.backIcon} />
+                        {step === 1 ? 'Cancel' : 'Back'}
+                    </button>
+                </Link>
             </div>
         </form>
     );
