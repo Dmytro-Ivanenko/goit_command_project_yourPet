@@ -68,7 +68,7 @@ const MobileMenuComponent = ({
                     className={styles.myCustomBox}
                 >
                     <IconButton component={NavLink} to="/main" onClick={handleCloseNavMenu}>
-                        <Logo width={116} height={20} />
+                        <Logo width={174} height={30} />
                     </IconButton>
                     <IconButton
                         onClick={handleCloseNavMenu}
@@ -122,7 +122,7 @@ const MobileMenuComponent = ({
                                 </button>
                                 <button className={styles.yesButton} onClick={handleLogout}>
                                     <span className={styles.titleBtnYes}>Yes</span>
-                                    <LogoutWhiteIcon className={styles.logoutModal} width={24} height={24} />
+                                    <LogoutWhiteIcon className={styles.logoutModal} />
                                 </button>
                             </div>
                         </div>

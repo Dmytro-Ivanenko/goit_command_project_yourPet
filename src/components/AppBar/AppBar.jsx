@@ -29,7 +29,6 @@ const pages = [
 
 const ResponsiveAppBar = () => {
     const location = useLocation();
-    console.log('location: ', location.pathname);
     const theme = useTheme();
     const isMobileScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
     const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -52,9 +51,6 @@ const ResponsiveAppBar = () => {
 
     useEffect(() => {
         const storedButton = localStorage.getItem('activeButton');
-        // if (storedButton !== null) {
-        //     setIsActiveButton(storedButton);
-        // }
         setIsActiveButton(storedButton);
     }, []);
 
@@ -68,7 +64,6 @@ const ResponsiveAppBar = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        // setIsActiveButton(path);
     };
 
     const handleClickUserMenu = () => {
@@ -93,16 +88,26 @@ const ResponsiveAppBar = () => {
                         onClick={handleClickUserMenu}
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', sm: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
+                            display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' },
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            flexGrow: 1,
+                            flexGrow: 0,
+                            padding: '6px 0px',
+                            marginRight: "160px",
+                            borderRadius: '10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                color: '#fff'
+                            },
                         }}
                     >
-                        <Logo width={162} height={28} />
+                        <Logo width={243} height={42} />
                     </Typography>
 
                     <Typography
@@ -113,16 +118,16 @@ const ResponsiveAppBar = () => {
                         to="/main"
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        <Logo width={116} height={20} />
+                        <Logo width={174} height={30} />
                     </Typography>
 
                     {/* Main menu */}
@@ -138,7 +143,6 @@ const ResponsiveAppBar = () => {
                             <Button
                                 key={name}
                                 onClick={() => {
-                                    // handleCloseNavMenu();
                                     setIsActiveButton(path);
                                 }}
                                 sx={{
@@ -159,12 +163,22 @@ const ResponsiveAppBar = () => {
                     </Box>
                     {/* User menu descktop */}
                     {isLoggedIn ? (
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{
+                            flexGrow: 0, marginLeft: 'auto', padding: '6px 10px',
+                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            '&:hover': {
+                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                boxShadow: 'none',
+                                borderColor: 'transparent',
+                                borderRadius: '5px',
+                                color: '#fff'
+                            },
+                        }}>
                             <Box
                                 onClick={handleClickUserMenu}
                                 component={NavLink}
                                 to="/user"
-                                sx={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
+                                sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '12px', textDecoration: 'none' }}
                             >
                                 <IconButton sx={{ p: 0 }}>
                                     {user.avatar ? (
