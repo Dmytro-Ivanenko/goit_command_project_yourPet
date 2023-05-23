@@ -21,6 +21,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                         name="addTitle"
                         onChange={handleChange}
                         className={styles.secStepInput}
+                        placeholder=" Title of add"
                     />
                 </label>
             )}
@@ -34,6 +35,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     name="name"
                     onChange={handleChange}
                     className={styles.secStepInput}
+                    placeholder="Start with capital letter, like (W) not (w) "
                 />
             </label>
             <label className={styles.label}>
@@ -45,6 +47,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     name="birth"
                     onChange={handleChange}
                     className={styles.secStepInput}
+                    placeholder="Format  dd-mm-yyyy"
                 />
             </label>
             <label className={styles.label}>
@@ -56,6 +59,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     name="breed"
                     onChange={handleChange}
                     className={styles.secStepInput}
+                    placeholder=" Type breed"
                 />
             </label>
         </div>

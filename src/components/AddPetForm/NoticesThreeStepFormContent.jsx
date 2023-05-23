@@ -2,17 +2,19 @@ import styles from './addPetForm.module.scss';
 import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
 import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
-import clsx from 'clsx';
 
 const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
+    // const photoInput = fileInputRef.current;
     const handleChange = e => {
+        // console.log('fileInputRef', fileInputRef.current.files[0]);
         const input = e.target.name;
         const value = e.target.value;
 
         input ? setData(prev => ({ ...prev, [input]: value })) : setData(prev => ({ ...prev, sex: value }));
     };
 
-    // console.log(viewPortWidth);
+    const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);
+
     return (
         <div className={styles.flexContainer}>
             <div className={styles.sexRadioBtns}>
@@ -59,6 +61,9 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         onChange={handleChange}
                         className={styles.photoInput}
                     />
+                    {fileInputRef.current?.files[0] && (
+                        <img className={styles.photoPreview} src={getphotoURL()} alt="pet preview"></img>
+                    )}
                 </label>
             </div>
             <div className={styles.inputs}>
@@ -71,6 +76,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         name="location"
                         onChange={handleChange}
                         className={styles.secStepInput}
+                        placeholder="Type place of your living"
                     />
                 </label>
                 {data.option === 'sell' && (
@@ -83,18 +89,20 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                             name="price"
                             onChange={handleChange}
                             className={styles.textInput}
+                            placeholder="How much does your pet cost?"
                         />
                     </label>
                 )}
                 <label className={styles.label}>
                     Comments
-                    <textArea
+                    <textarea
                         type="text"
                         required
                         value={data.comments}
                         name="comments"
                         onChange={handleChange}
                         className={styles.textArea}
+                        placeholder="No less than 8 characters is required"
                     />
                 </label>
             </div>
