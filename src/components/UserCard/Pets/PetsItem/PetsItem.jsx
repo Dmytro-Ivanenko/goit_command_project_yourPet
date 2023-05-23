@@ -28,7 +28,7 @@ const PetsItem = ({ item }) => {
                         <span className={styles.title}>Name: </span>
                         {name}
                     </p>
-                    <button type="submit" className={styles.btnTrash} onClick={handleDelete}>
+                    <button type="submit" className={styles.btnTrash} onClick={handleDelete} aria-label="delete">
                         <TrashIcon className={styles.icon} width={24} height={24} />
                     </button>
                 </div>
