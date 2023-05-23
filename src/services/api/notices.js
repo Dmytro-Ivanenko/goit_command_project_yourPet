@@ -12,33 +12,57 @@ export const deleteNoticeById = async id => {
     return res;
 };
 
-export const getSellNotices = async params => {
+export const getSellNotices = async ({ page, limit, query, gender, age }) => {
     const { data } = await axios.get(`/notice/sell`, {
-        params,
+        params: {
+            page,
+            limit,
+            query,
+            gender,
+            age,
+        },
     });
     console.log(data);
     return data;
 };
 
-export const getInGoodHandsNotices = async params => {
+export const getInGoodHandsNotices = async ({ page, limit, query, gender, age }) => {
     const { data } = await axios.get(`/notice/inGoodHands`, {
-        params,
+        params: {
+            page,
+            limit,
+            query,
+            gender,
+            age,
+        },
     });
     console.log(data);
     return data;
 };
 
-export const getLostNotices = async params => {
+export const getLostNotices = async ({ page, limit, query, gender, age }) => {
     const { data } = await axios.get(`/notice/lost`, {
-        params,
+        params: {
+            page,
+            limit,
+            query,
+            gender,
+            age,
+        },
     });
     console.log(data);
     return data;
 };
 
-export const getOwnNotices = async params => {
+export const getOwnNotices = async ({ page, limit, query, gender, age }) => {
     const { data } = await axios.get(`/notice/myAdds`, {
-        params,
+        params: {
+            page,
+            limit,
+            query,
+            gender,
+            age,
+        },
     });
     console.log(data);
     return data;
