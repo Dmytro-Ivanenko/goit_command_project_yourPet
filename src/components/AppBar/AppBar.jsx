@@ -88,7 +88,7 @@ const ResponsiveAppBar = () => {
                         onClick={handleClickUserMenu}
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', sm: 'none', md: 'flex' },
+                            display: { xs: 'none', sm: 'none', md: 'none', lg:'flex' },
                             fontFamily: 'Manrope',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -118,7 +118,7 @@ const ResponsiveAppBar = () => {
                         to="/main"
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: { xs: 'flex', sm:'flex', md: 'flex', lg:'none' },
                             flexGrow: 1,
                             fontFamily: 'Manrope',
                             fontWeight: 700,
@@ -127,7 +127,7 @@ const ResponsiveAppBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        <Logo width={174} height={42} />
+                        <Logo width={174} height={30} />
                     </Typography>
 
                     {/* Main menu */}
