@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import UserCard from 'components/UserCard';
 import Addpet from 'components/UserCard/Addpet';
@@ -9,29 +9,27 @@ import styles from './userPage.module.scss';
 
 import ModalCongrats from 'components/ModalCongrats';
 
-// import { getYourPets } from 'services/api/userPage';
-
-import items from './items';
+import { getYourPets } from 'services/api/pets';
 
 const Userpage = () => {
     const { state } = useLocation();
+    const [pets, setPets] = useState();
     const [showModal, setShowModal] = useState(state);
-    // const [pets, setPets] = useState(items);
 
     const handleClose = () => {
         setShowModal(false);
     };
 
     useEffect(() => {
-        // try {
-        //     const getPets = async () => {
-        //         const pets = await getYourPets();
-        //         setPets(pets);
-        //     };
-        //     getPets();
-        // } catch (error) {
-        //     toast.error(error.message);
-        // }
+        try {
+            const getPets = async () => {
+                const pets = await getYourPets();
+                setPets(pets);
+            };
+            getPets();
+        } catch (error) {
+            toast.error(error.message);
+        }
     }, []);
 
     return (
@@ -45,7 +43,7 @@ const Userpage = () => {
                     <h2 className={styles.titlePets}>My pets:</h2>
                     <Addpet />
                 </div>
-                <div className={styles.wrapPets}>{items && <Pets pets={items} />}</div>
+                <div className={styles.wrapPets}>{pets && <Pets pets={pets} />}</div>
             </div>
 
             {showModal && <ModalCongrats onClose={handleClose} />}

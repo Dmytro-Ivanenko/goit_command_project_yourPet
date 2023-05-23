@@ -2,31 +2,41 @@ import { useAuth } from 'shared/hooks/useAuth';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-import { addFavoriteNotice } from 'services/api/favorites';
+import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
+import { refreshUser } from 'redux/auth/operations';
 
 import styles from './modal-notice.module.scss';
+import { useDispatch } from 'react-redux';
 
 const ModalNotice = ({ item }) => {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, user } = useAuth();
+    const dispatch = useDispatch();
 
     const { _id, breed, category, comments, date, location, name, price, sex, title, image, owner } = item;
 
-    const handleClick = async () => {
+    const handleFavoriteClick = async () => {
         if (!isLoggedIn) {
-            toast.error('Sign in to add to favorites.');
+            toast.warn('Sign in to add to favorites!');
             return;
         }
 
-        // add to favorite
+        if (user.favoriteNotices.includes(_id)) {
+            try {
+                await deleteFavoriteNotice(_id);
+                dispatch(refreshUser());
+                toast.success('Removed successfully!');
+            } catch (error) {
+                toast.error(error.message);
+            }
+            return;
+        }
+
         try {
             await addFavoriteNotice(_id);
-            toast.success('Added successfully');
+            dispatch(refreshUser());
+            toast.success('Added successfully!');
         } catch (error) {
-            if (error.response.status === 409) {
-                return toast.warn('Already in favorites');
-            }
-
             toast.error(error.message);
         }
     };
@@ -92,8 +102,10 @@ const ModalNotice = ({ item }) => {
             </div>
             <p className={styles.comment}>{comments}</p>
             <div className={styles.btnWrapper}>
-                <button className={styles.btn} onClick={handleClick}>
-                    <span className={styles.btnLabel}>Add to</span>
+                <button className={styles.btn} onClick={handleFavoriteClick}>
+                    <span className={styles.btnLabel}>
+                        {user.favoriteNotices.includes(_id) ? 'Remove from' : 'Add to'}
+                    </span>
                     <HeartIcon className={styles.icon} width={24} height={24} />
                 </button>
                 <a className={styles.contactLink} href={`mailto:${owner.email}`}>

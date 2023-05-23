@@ -7,6 +7,7 @@ import { ReactComponent as CameraIcon } from 'images/icons/camera.svg';
 import { ReactComponent as LogoutWhiteIcon } from 'images/icons/logout-white.svg';
 import { ReactComponent as CheckIcon } from 'images/icons/check.svg';
 import { ReactComponent as EditIcon } from 'images/icons/edit.svg';
+import { ReactComponent as CrossIcon } from 'images/icons/cross-small.svg';
 import defaultAvatar from 'images/placeholder/avatar-default.jpg';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
 import { validationSchema } from './schema';
@@ -78,6 +79,13 @@ const UserCard = () => {
         }));
     };
 
+    const handleAvatarClear = () => {
+        setState(prevState => ({
+            ...prevState,
+            avatar: null,
+        }));
+    };
+
     const handleSubmit = async e => {
         e.preventDefault();
 
@@ -132,16 +140,22 @@ const UserCard = () => {
                 </div>
                 <div className={styles.wrapEditPhoto}>
                     <input type="file" id="file" accept="image/*" onChange={handleFileSelect} />
-                    <label htmlFor="file" className={styles.wrapImg}>
-                        <CameraIcon className={styles.camera} width={24} height={24} />
-                    </label>
                     {avatar ? (
-                        <button className={styles.confirmBtn} type="submit" onClick={handleSubmit}>
-                            <CheckIcon className={styles.checkIcon} width={24} height={24} />
-                            Confirm
-                        </button>
+                        <div className={styles.btnWrapper}>
+                            <button className={styles.avatarBtn} type="submit" onClick={handleSubmit}>
+                                <CheckIcon className={styles.checkIcon} width={24} height={24} />
+                                Confirm
+                            </button>
+                            <button type="button" onClick={handleAvatarClear} className={styles.avatarBtn}>
+                                <CrossIcon className={styles.clearIcon} width={24} height={24} />
+                                Cancel
+                            </button>
+                        </div>
                     ) : (
-                        <span className={styles.spanEdit}>Edit photo</span>
+                        <label htmlFor="file" className={styles.wrapImg}>
+                            <CameraIcon className={styles.camera} width={24} height={24} />
+                            <span className={styles.spanEdit}>Edit photo</span>
+                        </label>
                     )}
                 </div>
             </div>

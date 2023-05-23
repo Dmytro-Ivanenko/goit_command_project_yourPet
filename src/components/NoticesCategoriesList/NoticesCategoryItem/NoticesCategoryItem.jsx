@@ -36,7 +36,7 @@ const NoticesCategoryItem = ({ item }) => {
 
     const handleFavoriteClick = async () => {
         if (!isLoggedIn) {
-            toast.error('Sign in to add to favorites');
+            toast.error('Sign in to add to favorites.');
             return;
         }
 
@@ -44,7 +44,7 @@ const NoticesCategoryItem = ({ item }) => {
             try {
                 await deleteFavoriteNotice(_id);
                 dispatch(refreshUser());
-                toast.success('Deleted successfully');
+                toast.success('Removed successfully!');
             } catch (error) {
                 toast.error(error.message);
             }
@@ -54,12 +54,8 @@ const NoticesCategoryItem = ({ item }) => {
         try {
             await addFavoriteNotice(item._id);
             dispatch(refreshUser());
-            toast.success('Added successfully');
+            toast.success('Added successfully!');
         } catch (error) {
-            if (error.response.status === 409) {
-                return toast.warn('Already in favorites');
-            }
-
             toast.error(error.message);
         }
     };
