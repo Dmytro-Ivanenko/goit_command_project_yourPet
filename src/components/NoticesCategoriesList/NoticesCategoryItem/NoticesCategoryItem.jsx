@@ -126,8 +126,10 @@ const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
                         </li>
                     </ul>
                 </div>
-                <p className={styles.title}>{title}</p>
-                <Button onClick={handleModal} text="Learn More" />
+                <div className={styles.titleWrapper}>
+                    <p className={styles.title}>{title}</p>
+                    <Button onClick={handleModal} text="Learn More" />
+                </div>
             </li>
             {showModal && (
                 <ModalApproveAction onClose={handleModal}>
