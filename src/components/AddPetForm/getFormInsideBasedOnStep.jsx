@@ -1,4 +1,4 @@
-import PetFirstStepFormContent from './PetOneStepFormContent';
+import PetOneStepFormContent from './PetOneStepFormContent';
 import PetTwoStepFormContent from './PetTwoStepFormContent';
 import PetThreeStepFormContent from './PetThreeStepFormContent';
 import NoticesThreeStepFormContent from './NoticesThreeStepFormContent';
@@ -23,7 +23,7 @@ const getFormInsideBasedOnStep = (step, data, setData, fileInputRef) => {
             break;
 
         default:
-            formInsideBasedOnStep = <PetFirstStepFormContent data={data} setData={setData} />;
+            formInsideBasedOnStep = <PetOneStepFormContent data={data} setData={setData} />;
     }
     return formInsideBasedOnStep;
 };

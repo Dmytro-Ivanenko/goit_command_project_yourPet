@@ -10,6 +10,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
 
     return (
         <div className={styles.inputs}>
+            {' '}
             {data.option !== 'pet' && (
                 <label className={styles.label}>
                     Title of add
@@ -17,7 +18,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                         autoFocus
                         type="text"
                         required
-                        value={data.addTitle}
+                        value={data.addTitle ?? ''}
                         name="addTitle"
                         onChange={handleChange}
                         className={styles.secStepInput}
@@ -31,7 +32,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     autoFocus={data.option !== 'pet' ? false : true}
                     type="text"
                     required
-                    value={data.name}
+                    value={data.name ?? ''}
                     name="name"
                     onChange={handleChange}
                     className={styles.secStepInput}
@@ -42,7 +43,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                 Date of birth
                 <input
                     type="text"
-                    value={data.birth}
+                    value={data.birth ?? ''}
                     required
                     name="birth"
                     onChange={handleChange}
@@ -54,7 +55,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                 Breed
                 <input
                     type="text"
-                    value={data.breed}
+                    value={data.breed ?? ''}
                     required
                     name="breed"
                     onChange={handleChange}

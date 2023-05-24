@@ -22,7 +22,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                 <input
                     type="file"
                     required
-                    value={data.photo}
+                    value={data.photo ?? ''}
                     ref={fileInputRef}
                     name="photo"
                     alt="pet`s photo"
@@ -39,7 +39,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                 <textarea
                     type="text"
                     required
-                    value={data.comments}
+                    value={data.comments ?? ''}
                     name="comments"
                     onChange={handleChange}
                     className={styles.textArea}

@@ -1,10 +1,12 @@
 import sendRequest from './sendRequest';
 
-const serverRequestHandler = async (data, fileInputRef) => {
-    const { birth, breed, comments, name } = data;
+const serverRequestHandler = (data, fileInputRef) => {
+    console.log('in handler');
+    const { birth, breed, comments, name, option } = data;
 
-    if (data.option !== 'pet') {
-        let { addTitle, location, option, price = null, sex } = data;
+    if (option !== 'pet') {
+        console.log('not pet');
+        let { addTitle, location, option, sex, price } = data;
 
         switch (option) {
             case 'hands': {
@@ -22,19 +24,33 @@ const serverRequestHandler = async (data, fileInputRef) => {
             default:
                 return;
         }
-        sendRequest('/notice', {
+        console.log('modif option');
+        let obj = {
             name,
             breed,
             sex,
             location,
-            price,
             comments,
             date: birth,
             title: addTitle,
             category: option,
             image: fileInputRef.current.files[0],
-        });
+        };
+
+        if (option !== 'sell') {
+            console.log('not sell');
+            sendRequest('/notice', obj);
+            return;
+        } else {
+            console.log('in sell');
+            obj.price = price;
+            console.log('obj.price', obj.price);
+            sendRequest('/notice', obj);
+
+            return;
+        }
     } else {
+        console.log('in serverRequestHandler - pet');
         sendRequest('/yourPets', {
             comments,
             breed,
@@ -42,6 +58,7 @@ const serverRequestHandler = async (data, fileInputRef) => {
             birthDate: birth,
             petsAvatar: fileInputRef.current.files[0],
         });
+        return;
     }
 };
 export default serverRequestHandler;
