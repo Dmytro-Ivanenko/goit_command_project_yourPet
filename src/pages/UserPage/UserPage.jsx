@@ -7,13 +7,11 @@ import Addpet from 'components/UserCard/Addpet';
 import Pets from 'components/UserCard/Pets';
 import Placeholder from 'shared/components/Placeholder';
 import Loader from 'shared/components/Loader';
-import styles from './userPage.module.scss';
-
-import { deleteYourPet } from 'services/api/pets';
-
 import ModalCongrats from 'components/ModalCongrats';
 
-import { getYourPets } from 'services/api/pets';
+import { deleteYourPet, getYourPets } from 'services/api/pets';
+
+import styles from './userPage.module.scss';
 
 const Userpage = () => {
     const { state } = useLocation();

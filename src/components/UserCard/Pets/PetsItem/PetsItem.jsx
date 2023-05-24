@@ -10,7 +10,7 @@ const PetsItem = ({ item, onDelete }) => {
 
     return (
         <li className={styles.container}>
-            <img className={styles.photoPet} src={petsAvatar} alt="pet" />
+            <img className={styles.photoPet} src={petsAvatar} alt="pet" loading="lazy" />
             <div className={styles.wrapData}>
                 <div className={styles.cardTitle}>
                     <p className={styles.text}>

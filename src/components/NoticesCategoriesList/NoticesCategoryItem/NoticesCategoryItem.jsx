@@ -65,7 +65,7 @@ const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
         <>
             <li className={styles.item}>
                 <div className={styles.imgWrapper}>
-                    <img className={styles.img} src={image} alt="pet" />
+                    <img className={styles.img} src={image} alt="pet" loading="lazy" />
                     <div className={styles.upperBlock}>
                         <p className={styles.upperBlockText}>{category}</p>
                         <div className={styles.btnWrapper}>
