@@ -79,7 +79,7 @@ const ModalNotice = ({ item, onFavorite }) => {
                     <HeartIcon className={styles.icon} width={24} height={24} />
                 </button>
                 <a className={styles.contactLink} href={`mailto:${owner.email}`}>
-                    Contact
+                    <span>Contact</span>
                 </a>
             </div>
         </div>

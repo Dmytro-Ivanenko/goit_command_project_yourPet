@@ -130,12 +130,19 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
 
         background: var(--gradient);
         opacity: 0;
 
         transition: opacity var(--timing);
+    }
+
+    & span {
+        z-index: 5;
+    }
+
+    & svg {
+        z-index: 5;
     }
 }
 
@@ -193,12 +200,15 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
 
         background: var(--gradient);
         opacity: 0;
 
         transition: opacity var(--timing);
+    }
+
+    & span {
+        z-index: 5;
     }
 }
 
