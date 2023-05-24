@@ -25,6 +25,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     alt="pet`s photo"
                     onChange={handleChange}
                     className={styles.photoInput}
+                    accept="image/jpeg, image/png, image/webp, image/gif"
                 />
                 {fileInputRef.current?.files[0] && (
                     <img className={styles.petPhotoPreview} src={getphotoURL()} alt="pet preview"></img>

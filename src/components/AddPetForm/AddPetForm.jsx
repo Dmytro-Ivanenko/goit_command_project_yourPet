@@ -17,11 +17,12 @@ import StepTitles from './StepTitles';
 
 // react / react-dom
 import React, { useState, useRef } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 
 const AddPetForm = () => {
     const location = useLocation();
     const fileInputRef = useRef(null);
+    const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
     const [data, setData] = useState({ option: 'pet' });
@@ -33,8 +34,9 @@ const AddPetForm = () => {
             return step === 2 ? setStep(3) : setStep(2);
         } else if (btn.includes('Done')) {
             e.preventDefault();
-            console.log('click on Done');
+
             serverRequestHandler(data, fileInputRef);
+            data.option === 'pet' ? navigate('/user') : navigate('/notices/sell');
             return;
         } else if (btn.includes('Back')) {
             return setStep(prev => prev - 1);
@@ -42,8 +44,6 @@ const AddPetForm = () => {
             console.log('no btns from list were clicked');
             return;
         }
-
-        // console.log('fileInputRef', fileInputRef.current);
     };
 
     const title = getFormTitle(data);
