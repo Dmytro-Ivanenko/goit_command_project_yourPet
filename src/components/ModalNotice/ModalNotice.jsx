@@ -1,45 +1,15 @@
 import { useAuth } from 'shared/hooks/useAuth';
-import { toast } from 'react-toastify';
+
 import PropTypes from 'prop-types';
 
-import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import { ReactComponent as HeartIcon } from 'images/icons/heart.svg';
-import { refreshUser } from 'redux/auth/operations';
 
 import styles from './modal-notice.module.scss';
-import { useDispatch } from 'react-redux';
 
-const ModalNotice = ({ item }) => {
-    const { isLoggedIn, user } = useAuth();
-    const dispatch = useDispatch();
+const ModalNotice = ({ item, onFavorite }) => {
+    const { user } = useAuth();
 
     const { _id, breed, category, comments, date, location, name, price, sex, title, image, owner } = item;
-
-    const handleFavoriteClick = async () => {
-        if (!isLoggedIn) {
-            toast.warn('Sign in to add to favorites!');
-            return;
-        }
-
-        if (user.favoriteNotices.includes(_id)) {
-            try {
-                await deleteFavoriteNotice(_id);
-                dispatch(refreshUser());
-                toast.success('Removed successfully!');
-            } catch (error) {
-                toast.error(error.message);
-            }
-            return;
-        }
-
-        try {
-            await addFavoriteNotice(_id);
-            dispatch(refreshUser());
-            toast.success('Added successfully!');
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
 
     return (
         <div className={styles.container}>
@@ -102,7 +72,7 @@ const ModalNotice = ({ item }) => {
             </div>
             <p className={styles.comment}>{comments}</p>
             <div className={styles.btnWrapper}>
-                <button className={styles.btn} onClick={handleFavoriteClick}>
+                <button className={styles.btn} onClick={() => onFavorite(_id)}>
                     <span className={styles.btnLabel}>
                         {user.favoriteNotices.includes(_id) ? 'Remove from' : 'Add to'}
                     </span>
@@ -132,8 +102,9 @@ ModalNotice.propTypes = {
             _id: PropTypes.string.isRequired,
             email: PropTypes.string.isRequired,
             phone: PropTypes.string,
-        }),
+        }).isRequired,
     }),
+    onFavorite: PropTypes.func.isRequired,
 };
 
 export default ModalNotice;

@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
 import { calcAge } from 'shared/helpers';
 import Button from 'shared/components/Button';
@@ -18,45 +16,16 @@ import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 import ModalNotice from 'components/ModalNotice';
 
 import styles from './notices-category-item.module.scss';
-import { useDispatch } from 'react-redux';
-import { refreshUser } from 'redux/auth/operations';
 
-const NoticesCategoryItem = ({ item, onDelete }) => {
+const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
     const [showModal, setShowModal] = useState(false);
-    const { isLoggedIn, user } = useAuth();
+    const { user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
-    const dispatch = useDispatch();
 
     const { category, location, date, sex, title, image, _id, owner } = item;
 
     const handleModal = async () => {
         setShowModal(prevState => !prevState);
-    };
-
-    const handleFavoriteClick = async () => {
-        if (!isLoggedIn) {
-            toast.error('Sign in to add to favorites.');
-            return;
-        }
-
-        if (user.favoriteNotices.includes(_id)) {
-            try {
-                await deleteFavoriteNotice(_id);
-                dispatch(refreshUser());
-                toast.success('Removed successfully!');
-            } catch (error) {
-                toast.error(error.message);
-            }
-            return;
-        }
-
-        try {
-            await addFavoriteNotice(_id);
-            dispatch(refreshUser());
-            toast.success('Added successfully!');
-        } catch (error) {
-            toast.error(error.message);
-        }
     };
 
     const handleAgeClick = value => {
@@ -101,7 +70,7 @@ const NoticesCategoryItem = ({ item, onDelete }) => {
                         <p className={styles.upperBlockText}>{category}</p>
                         <div className={styles.btnWrapper}>
                             <button
-                                onClick={handleFavoriteClick}
+                                onClick={() => onFavorite(_id)}
                                 className={
                                     user.favoriteNotices.includes(_id) ? `${styles.btn} ${styles.favorite}` : styles.btn
                                 }
@@ -162,7 +131,7 @@ const NoticesCategoryItem = ({ item, onDelete }) => {
             </li>
             {showModal && (
                 <ModalApproveAction onClose={handleModal}>
-                    <ModalNotice item={item} />
+                    <ModalNotice item={item} onFavorite={onFavorite} />
                 </ModalApproveAction>
             )}
         </>
@@ -179,6 +148,8 @@ NoticesCategoryItem.propTypes = {
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
     }),
+    onDelete: PropTypes.func.isRequired,
+    onFavorite: PropTypes.func.isRequired,
 };
 
 export default NoticesCategoryItem;
