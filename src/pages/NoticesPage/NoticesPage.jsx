@@ -16,8 +16,11 @@ import { getFilterValues } from './filter';
 import { getNotices, applySearchParams } from 'shared/helpers';
 import { useAuth } from 'shared/hooks/useAuth';
 import { deleteNoticeById } from 'services/api/notices';
+import { deleteFavoriteNotice, addFavoriteNotice } from 'services/api/favorites';
 
 import styles from './notices-page.module.scss';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/operations';
 
 const PER_PAGE = 12;
 
@@ -27,7 +30,8 @@ const NoticesPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, user } = useAuth();
+    const dispatch = useDispatch();
 
     const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
@@ -132,6 +136,42 @@ const NoticesPage = () => {
         [items]
     );
 
+    const handleFavoriteClick = useCallback(
+        async id => {
+            if (!isLoggedIn) {
+                toast.error('Sign in to add to favorites.');
+                return;
+            }
+
+            const path = pathname.split('/');
+            const category = path[path.length - 1];
+
+            if (user.favoriteNotices.includes(id)) {
+                try {
+                    await deleteFavoriteNotice(id);
+                    dispatch(refreshUser());
+                    if (category === 'favorite') {
+                        const filteredNotices = items.filter(item => item._id !== id);
+                        setItems(filteredNotices);
+                    }
+                    toast.success('Removed successfully!');
+                } catch (error) {
+                    toast.error(error.message);
+                }
+                return;
+            }
+
+            try {
+                await addFavoriteNotice(id);
+                dispatch(refreshUser());
+                toast.success('Added successfully!');
+            } catch (error) {
+                toast.error(error.message);
+            }
+        },
+        [dispatch, isLoggedIn, items, pathname, user.favoriteNotices]
+    );
+
     const filters = getFilterValues(searchParams);
 
     return (
@@ -152,7 +192,7 @@ const NoticesPage = () => {
             </div>
 
             {isLoading && <Loader />}
-            <Outlet context={{ items, handleDelete }} />
+            <Outlet context={{ items, handleDelete, handleFavoriteClick }} />
             {items.length === 0 && !isLoading && <Placeholder text={'Oops! Nothing found.'} />}
             {pageCount > 1 && (
                 <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={currentPage} />
