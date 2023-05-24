@@ -10,7 +10,7 @@ const ModalCongrats = ({ onClose }) => {
         <ModalApproveAction onClose={onClose}>
             <div className={styles.container}>
                 <h3 className={styles.title}>Congrats!</h3>
-                <p className={styles.text}>Your registration is successful.</p>
+                <p className={styles.text}>Your registration is success</p>
                 <Button onClick={onClose} text="Go to profile" />
             </div>
         </ModalApproveAction>
