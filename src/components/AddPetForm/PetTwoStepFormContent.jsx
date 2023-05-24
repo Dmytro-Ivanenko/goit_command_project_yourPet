@@ -36,7 +36,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     name="name"
                     onChange={handleChange}
                     className={styles.secStepInput}
-                    placeholder="Start with capital letter, like (W) not (w) "
+                    placeholder="No symbols and no numbers"
                 />
             </label>
             <label className={styles.label}>

@@ -3,13 +3,10 @@ import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
 
 const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
     const handleChange = e => {
-        console.log(fileInputRef.current.files[0]);
         const input = e.target.name;
         const value = e.target.value;
 
         setData(prev => ({ ...prev, [input]: value }));
-
-        console.log(e.target.value);
     };
 
     const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);
@@ -43,7 +40,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     name="comments"
                     onChange={handleChange}
                     className={styles.textArea}
-                    placeholder="For additional information"
+                    placeholder="Field is required"
                 />
             </label>
         </div>

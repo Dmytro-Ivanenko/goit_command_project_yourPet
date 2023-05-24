@@ -102,7 +102,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         name="comments"
                         onChange={handleChange}
                         className={styles.textArea}
-                        placeholder="No less than 8 characters is required"
+                        placeholder="Field is required"
                     />
                 </label>
             </div>
