@@ -30,7 +30,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
 
     return (
         <div className={styles.wrapper}>
-            <button className={styles.openBtn} type="button" onClick={handleBtnClick} aria-label="open filters">
+            <button className={styles.openBtn} type="button" onClick={handleBtnClick} aria-label="toggle filters">
                 <span className={styles.openBtnLabel}>Filter</span>
                 <FiltersIcon className={styles.openBtnIcon} width={24} height={24} />
             </button>
@@ -43,7 +43,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                 className={styles.filterBtn}
                                 type="button"
                                 onClick={handleAgeClick}
-                                aria-label="open age options"
+                                aria-label="toggle age options"
                             >
                                 {ageOpen ? (
                                     <ChevronUpIcon className={styles.icon} width={24} height={24} />
@@ -95,7 +95,7 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                 className={styles.filterBtn}
                                 type="button"
                                 onClick={handleGenderClick}
-                                aria-label="open gender options"
+                                aria-label="toggle gender options"
                             >
                                 {genderOpen ? (
                                     <ChevronUpIcon className={styles.icon} width={24} height={24} />

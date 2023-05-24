@@ -102,7 +102,7 @@ ModalNotice.propTypes = {
             _id: PropTypes.string.isRequired,
             email: PropTypes.string.isRequired,
             phone: PropTypes.string,
-        }),
+        }).isRequired,
     }),
     onFavorite: PropTypes.func.isRequired,
 };
