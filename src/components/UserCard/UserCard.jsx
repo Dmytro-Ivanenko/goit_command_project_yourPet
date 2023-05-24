@@ -362,7 +362,7 @@ const UserCard = () => {
                         <div className={styles.modalContent}>
                             <div className={styles.modalButtons}>
                                 <button className={styles.cancelButton} onClick={handleModal}>
-                                    Cancel
+                                    <span>Cancel</span>
                                 </button>
                                 <button className={styles.yesButton} onClick={handleLogout}>
                                     <span className={styles.titleBtnYes}>Yes</span>
