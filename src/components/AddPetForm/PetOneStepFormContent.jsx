@@ -1,15 +1,13 @@
 import styles from './addPetForm.module.scss';
 
 const PetOneStepFormContent = ({ data, setData }) => {
-    // const handleChange = e => {
-    //     getValue({ option: e.target.value });
-    //     setChosenOpt(e.target.value);
-    // };
     const handleChange = e => {
         const value = e.target.value;
         setData(prev => ({ ...prev, option: value }));
     };
+
     const { option } = data;
+
     return (
         <div className={styles.radios}>
             <label className={styles.oneStepRadioLabel}>

@@ -1,10 +1,10 @@
 import sendRequest from './sendRequest';
 
 const serverRequestHandler = async (data, fileInputRef) => {
-    const { birth, breed, comments, name } = data;
+    const { birth, breed, comments, name, option } = data;
 
-    if (data.option !== 'pet') {
-        let { addTitle, location, option, price = null, sex } = data;
+    if (option !== 'pet') {
+        let { addTitle, location, option, sex, price } = data;
 
         switch (option) {
             case 'hands': {
@@ -20,20 +20,29 @@ const serverRequestHandler = async (data, fileInputRef) => {
                 break;
             }
             default:
-                return;
+                break;
         }
-        sendRequest('/notice', {
+
+        let obj = {
             name,
             breed,
             sex,
             location,
-            price,
             comments,
             date: birth,
             title: addTitle,
             category: option,
             image: fileInputRef.current.files[0],
-        });
+        };
+
+        if (option !== 'sell') {
+            await sendRequest('/notice', obj);
+            return;
+        } else {
+            obj.price = price;
+            sendRequest('/notice', obj);
+            return;
+        }
     } else {
         sendRequest('/yourPets', {
             comments,
@@ -42,6 +51,7 @@ const serverRequestHandler = async (data, fileInputRef) => {
             birthDate: birth,
             petsAvatar: fileInputRef.current.files[0],
         });
+        return;
     }
 };
 export default serverRequestHandler;

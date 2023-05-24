@@ -55,7 +55,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         type="file"
                         ref={fileInputRef}
                         required
-                        value={data.photo}
+                        value={data.photo ?? ''}
                         name="photo"
                         alt="pet`s photo"
                         onChange={handleChange}
@@ -72,7 +72,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     <input
                         type="text"
                         required
-                        value={data.location}
+                        value={data.location ?? ''}
                         name="location"
                         onChange={handleChange}
                         className={styles.secStepInput}
@@ -85,7 +85,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         <input
                             type="text"
                             required
-                            value={data.price}
+                            value={data.price ?? ''}
                             name="price"
                             onChange={handleChange}
                             className={styles.textInput}
@@ -98,11 +98,11 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     <textarea
                         type="text"
                         required
-                        value={data.comments}
+                        value={data.comments ?? ''}
                         name="comments"
                         onChange={handleChange}
                         className={styles.textArea}
-                        placeholder="No less than 8 characters is required"
+                        placeholder="Field is required"
                     />
                 </label>
             </div>

@@ -26,18 +26,20 @@ const AddPetForm = () => {
     const [step, setStep] = useState(1);
     const [data, setData] = useState({ option: 'pet' });
 
-    const onClick = async e => {
+    const onClick = e => {
         const btn = e.target.innerHTML;
 
         if (btn.includes('Next')) {
             return step === 2 ? setStep(3) : setStep(2);
         } else if (btn.includes('Done')) {
-            console.log('click on Done');
             e.preventDefault();
-            return serverRequestHandler(data, fileInputRef);
+            console.log('click on Done');
+            serverRequestHandler(data, fileInputRef);
+            return;
         } else if (btn.includes('Back')) {
             return setStep(prev => prev - 1);
         } else {
+            console.log('no btns from list were clicked');
             return;
         }
 
