@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import PageTitle from 'shared/components/PageTitle';
@@ -12,15 +13,13 @@ import AddPetButton from 'components/AddPetButton';
 import SelectedFilters from 'components/SelectedFilters';
 import Placeholder from 'shared/components/Placeholder';
 
-import { getFilterValues } from './filter';
-import { getNotices, applySearchParams } from 'shared/helpers';
+import { getNotices, applySearchParams, getFilterValues } from 'shared/helpers';
 import { useAuth } from 'shared/hooks/useAuth';
 import { deleteNoticeById } from 'services/api/notices';
 import { deleteFavoriteNotice, addFavoriteNotice } from 'services/api/favorites';
+import { refreshUser } from 'redux/auth/operations';
 
 import styles from './notices-page.module.scss';
-import { useDispatch } from 'react-redux';
-import { refreshUser } from 'redux/auth/operations';
 
 const PER_PAGE = 12;
 
@@ -29,12 +28,13 @@ const NoticesPage = () => {
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+
     const [searchParams, setSearchParams] = useSearchParams();
     const { isLoggedIn, user } = useAuth();
     const dispatch = useDispatch();
-
     const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
+
     const query = searchParams.get('query');
     const gender = searchParams.get('gender');
     const age = searchParams.get('age');
@@ -89,21 +89,19 @@ const NoticesPage = () => {
     }, [currentPage, pathname, query, gender, age, isLoggedIn]);
 
     const handleFilterChange = target => {
-        setCurrentPage(1);
         applySearchParams(target, searchParams, setSearchParams);
+        setCurrentPage(1);
     };
 
     const handleFilterReset = value => {
-        setCurrentPage(1);
-
         if (value === 'male' || value === 'female') {
             searchParams.delete('gender');
-            setSearchParams(searchParams);
-            return;
+        } else {
+            searchParams.delete('age');
         }
 
-        searchParams.delete('age');
         setSearchParams(searchParams);
+        setCurrentPage(1);
     };
 
     const handleSubmit = ({ query }) => {
@@ -172,7 +170,7 @@ const NoticesPage = () => {
         [dispatch, isLoggedIn, items, pathname, user.favoriteNotices]
     );
 
-    const filters = getFilterValues(searchParams);
+    const filters = useMemo(() => getFilterValues(searchParams), [searchParams]);
 
     return (
         <div className={styles.container}>
