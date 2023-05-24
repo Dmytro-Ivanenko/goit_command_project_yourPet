@@ -34,6 +34,7 @@ const AddPetForm = () => {
             return step === 2 ? setStep(3) : setStep(2);
         } else if (btn.includes('Done')) {
             e.preventDefault();
+
             serverRequestHandler(data, fileInputRef);
             data.option === 'pet' ? navigate('/user') : navigate('/notices/sell');
             return;

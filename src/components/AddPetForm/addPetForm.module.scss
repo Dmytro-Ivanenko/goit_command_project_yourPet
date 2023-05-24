@@ -146,6 +146,10 @@ textArea::placeholder {
     margin-right: 100%;
     padding: 0px;
     padding-left: 16px;
+
+    // &:focus {
+    //     border-color: red;
+    // }
 }
 
 .secStepInput {
