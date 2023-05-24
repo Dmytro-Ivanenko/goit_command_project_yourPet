@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ModalApproveAction from 'shared/components/ModalApproveAction';
+import ModalConfirmDelete from 'components/ModalConfirmDelete';
 import { calcAge } from 'shared/helpers';
 import Button from 'shared/components/Button';
 import { useAuth } from 'shared/hooks/useAuth';
@@ -18,15 +19,12 @@ import ModalNotice from 'components/ModalNotice';
 import styles from './notices-category-item.module.scss';
 
 const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
-    const [showModal, setShowModal] = useState(false);
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const { user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const { category, location, date, sex, title, image, _id, owner } = item;
-
-    const handleModal = async () => {
-        setShowModal(prevState => !prevState);
-    };
 
     const handleAgeClick = value => {
         let paramValue = null;
@@ -81,7 +79,7 @@ const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
                             {owner?._id === user.id && (
-                                <button className={styles.btnDelete} onClick={() => onDelete(_id)}>
+                                <button className={styles.btnDelete} onClick={() => setShowDeleteModal(true)}>
                                     <TrashIcon className={styles.btnIcon} width={24} height={24} />
                                 </button>
                             )}
@@ -128,12 +126,21 @@ const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
                 </div>
                 <div className={styles.titleWrapper}>
                     <p className={styles.title}>{title}</p>
-                    <Button onClick={handleModal} text="Learn More" />
+                    <Button onClick={() => setShowDetailsModal(true)} text="Learn More" />
                 </div>
             </li>
-            {showModal && (
-                <ModalApproveAction onClose={handleModal}>
+            {showDetailsModal && (
+                <ModalApproveAction onClose={() => setShowDetailsModal(false)}>
                     <ModalNotice item={item} onFavorite={onFavorite} />
+                </ModalApproveAction>
+            )}
+            {showDeleteModal && (
+                <ModalApproveAction onClose={() => setShowDeleteModal(false)}>
+                    <ModalConfirmDelete
+                        title={title}
+                        handleModal={() => setShowDeleteModal(false)}
+                        handleDelete={() => onDelete(_id)}
+                    />
                 </ModalApproveAction>
             )}
         </>
