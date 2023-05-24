@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { deleteNoticeById } from 'services/api/notices';
 import { addFavoriteNotice, deleteFavoriteNotice } from 'services/api/favorites';
 import ModalApproveAction from 'shared/components/ModalApproveAction';
 import { calcAge } from 'shared/helpers';
@@ -22,7 +21,7 @@ import styles from './notices-category-item.module.scss';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 
-const NoticesCategoryItem = ({ item }) => {
+const NoticesCategoryItem = ({ item, onDelete }) => {
     const [showModal, setShowModal] = useState(false);
     const { isLoggedIn, user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -90,15 +89,6 @@ const NoticesCategoryItem = ({ item }) => {
         setSearchParams(searchParams);
     };
 
-    const handleOwnDelete = async () => {
-        try {
-            await deleteNoticeById(_id);
-            toast.success('Deleted successfully!');
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
-
     // Age formatting for cards
     const age = calcAge(date);
 
@@ -122,7 +112,7 @@ const NoticesCategoryItem = ({ item }) => {
                                 <HeartIcon className={styles.btnIcon} width={24} height={24} />
                             </button>
                             {owner?._id === user.id && (
-                                <button onClick={handleOwnDelete} className={styles.btnDelete}>
+                                <button className={styles.btnDelete} onClick={() => onDelete(_id)}>
                                     <TrashIcon className={styles.btnIcon} width={24} height={24} />
                                 </button>
                             )}

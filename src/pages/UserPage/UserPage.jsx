@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -8,6 +8,8 @@ import Pets from 'components/UserCard/Pets';
 import Placeholder from 'shared/components/Placeholder';
 import Loader from 'shared/components/Loader';
 import styles from './userPage.module.scss';
+
+import { deleteYourPet } from 'services/api/pets';
 
 import ModalCongrats from 'components/ModalCongrats';
 
@@ -22,6 +24,20 @@ const Userpage = () => {
     const handleClose = () => {
         setShowModal(false);
     };
+
+    const handleDelete = useCallback(
+        async id => {
+            try {
+                await deleteYourPet(id);
+                const filteredPets = pets.filter(pet => pet._id !== id);
+                setPets(filteredPets);
+                toast.success('Deleted successfully');
+            } catch (error) {
+                toast.error(error.message);
+            }
+        },
+        [pets]
+    );
 
     useEffect(() => {
         setIsLoading(true);
@@ -50,7 +66,7 @@ const Userpage = () => {
                     <Addpet />
                 </div>
                 <div className={styles.wrapPets}>
-                    {pets.length > 0 && <Pets pets={pets} />}
+                    {pets.length > 0 && <Pets pets={pets} onDelete={handleDelete} />}
                     {pets.length === 0 && !isLoading && <Placeholder text={'Try adding your own pets!'} />}
                 </div>
             </div>
