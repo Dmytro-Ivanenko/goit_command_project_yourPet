@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -15,6 +15,7 @@ import Placeholder from 'shared/components/Placeholder';
 import { getFilterValues } from './filter';
 import { getNotices, applySearchParams } from 'shared/helpers';
 import { useAuth } from 'shared/hooks/useAuth';
+import { deleteNoticeById } from 'services/api/notices';
 
 import styles from './notices-page.module.scss';
 
@@ -117,6 +118,20 @@ const NoticesPage = () => {
         setCurrentPage(1);
     };
 
+    const handleDelete = useCallback(
+        async id => {
+            try {
+                await deleteNoticeById(id);
+                const filteredNotices = items.filter(item => item._id !== id);
+                setItems(filteredNotices);
+                toast.success('Deleted successfully!');
+            } catch (error) {
+                toast.error(error.message);
+            }
+        },
+        [items]
+    );
+
     const filters = getFilterValues(searchParams);
 
     return (
@@ -137,7 +152,7 @@ const NoticesPage = () => {
             </div>
 
             {isLoading && <Loader />}
-            <Outlet context={items} />
+            <Outlet context={{ items, handleDelete }} />
             {items.length === 0 && !isLoading && <Placeholder text={'Oops! Nothing found.'} />}
             {pageCount > 1 && (
                 <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={currentPage} />

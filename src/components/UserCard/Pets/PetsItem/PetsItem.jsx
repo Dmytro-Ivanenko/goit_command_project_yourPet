@@ -1,34 +1,23 @@
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-import { deleteYourPet } from 'services/api/pets';
 import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 
 import styles from './pets-item.module.scss';
 
-const PetsItem = ({ item }) => {
-    const { name, birthDate, breed, comments, photoURL, _id } = item;
+const PetsItem = ({ item, onDelete }) => {
+    const { name, birthDate, breed, comments, petsAvatar, _id } = item;
     const birth = birthDate.replaceAll('-', '.');
-
-    const handleDelete = async () => {
-        try {
-            await deleteYourPet(_id);
-            toast.success('Deleted successfully');
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
 
     return (
         <li className={styles.container}>
-            <img className={styles.photoPet} src={photoURL} alt="pet" />
+            <img className={styles.photoPet} src={petsAvatar} alt="pet" />
             <div className={styles.wrapData}>
                 <div className={styles.cardTitle}>
                     <p className={styles.text}>
                         <span className={styles.title}>Name: </span>
                         {name}
                     </p>
-                    <button type="submit" className={styles.btnTrash} onClick={handleDelete} aria-label="delete">
+                    <button type="submit" className={styles.btnTrash} onClick={() => onDelete(_id)} aria-label="delete">
                         <TrashIcon className={styles.icon} width={24} height={24} />
                     </button>
                 </div>
@@ -56,8 +45,9 @@ PetsItem.propTypes = {
         birthDate: PropTypes.string.isRequired,
         breed: PropTypes.string.isRequired,
         comments: PropTypes.string.isRequired,
-        photoURL: PropTypes.string.isRequired,
+        petsAvatar: PropTypes.string.isRequired,
     }),
+    onDelete: PropTypes.func.isRequired,
 };
 
 export default PetsItem;
