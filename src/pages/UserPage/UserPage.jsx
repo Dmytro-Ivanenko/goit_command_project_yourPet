@@ -17,7 +17,7 @@ const Userpage = () => {
     const { state } = useLocation();
     const [pets, setPets] = useState([]);
     const [showModal, setShowModal] = useState(state);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleClose = () => {
         setShowModal(false);
@@ -38,18 +38,18 @@ const Userpage = () => {
     );
 
     useEffect(() => {
-        setIsLoading(true);
-        try {
-            const getPets = async () => {
+        const getPets = async () => {
+            try {
                 const pets = await getYourPets();
                 setPets(pets);
-            };
-            getPets();
-        } catch (error) {
-            toast.error(error.message);
-        } finally {
-            setIsLoading(false);
-        }
+            } catch (error) {
+                toast.error(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        getPets();
     }, []);
 
     return (
@@ -65,7 +65,7 @@ const Userpage = () => {
                 </div>
                 <div className={styles.wrapPets}>
                     {pets.length > 0 && <Pets pets={pets} onDelete={handleDelete} />}
-                    {pets.length === 0 && !isLoading && <Placeholder text={'Try adding your own pets!'} />}
+                    {!isLoading && pets.length === 0 && <Placeholder text={'Try adding your own pets!'} />}
                 </div>
             </div>
 
