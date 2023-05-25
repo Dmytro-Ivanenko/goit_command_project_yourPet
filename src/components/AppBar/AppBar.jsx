@@ -142,6 +142,7 @@ const ResponsiveAppBar = () => {
                     >
                         {pages.map(({ name, path }) => (
                             <Button
+                                className={styles.pageLink}
                                 key={name}
                                 onClick={() => {
                                     setIsActiveButton(path);
@@ -170,7 +171,7 @@ const ResponsiveAppBar = () => {
                                 marginLeft: 'auto',
                                 padding: '6px 10px',
                                 transition:
-                                'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                                    'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
                                 '&:hover': {
                                     backgroundColor: 'rgba(25, 118, 210, 0.04)',
                                     boxShadow: 'none',
