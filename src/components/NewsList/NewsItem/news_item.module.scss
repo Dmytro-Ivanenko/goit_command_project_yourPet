@@ -4,6 +4,12 @@
     background-color: #ffffff;
     box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
     border-radius: 20px;
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        transform: scale(1.05);
+    }
 }
 .item:hover:before {
     animation-name: move;
@@ -108,7 +114,13 @@
     font-size: 16px;
     line-height: 22px;
     text-align: right;
-    color: #54adff;
+    color: var(--main-acc);
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        color: var(--header-acc);
+    }
 }
 
 @media screen and (min-width: 768px) {
