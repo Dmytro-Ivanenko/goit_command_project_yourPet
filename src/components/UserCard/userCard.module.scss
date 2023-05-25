@@ -151,7 +151,7 @@ input[type='file'] {
     cursor: pointer;
 }
 
-.btnWrapper {
+.avatarButtons {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,6 +166,10 @@ input[type='file'] {
 .cameraInput {
     width: 100%;
     height: 100%;
+}
+
+.checkAvatar {
+    stroke: var(--main-acc);
 }
 
 .checkIcon {

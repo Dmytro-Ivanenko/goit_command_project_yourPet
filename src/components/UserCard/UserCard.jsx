@@ -141,9 +141,9 @@ const UserCard = () => {
                 <div className={styles.wrapEditPhoto}>
                     <input type="file" id="file" accept="image/*" onChange={handleFileSelect} />
                     {avatar ? (
-                        <div className={styles.btnWrapper}>
+                        <div className={styles.avatarButtons}>
                             <button className={styles.avatarBtn} type="submit" onClick={handleSubmit}>
-                                <CheckIcon className={styles.checkIcon} width={24} height={24} />
+                                <CheckIcon className={styles.checkAvatar} width={24} height={24} />
                                 Confirm
                             </button>
                             <button type="button" onClick={handleAvatarClear} className={styles.avatarBtn}>
