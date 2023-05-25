@@ -77,18 +77,49 @@ const NoticesPage = () => {
         resetPage();
     };
 
+    const getApiNotices = useCallback(async () => {
+        const path = pathname.split('/');
+        const category = path[path.length - 1];
+
+        try {
+            const { pets, total } = await getNotices({
+                category,
+                query,
+                gender,
+                page,
+                limit: PER_PAGE,
+                age,
+            });
+            console.log(pets);
+
+            if (total === 0) {
+                setItems([]);
+                resetPage();
+                setSearchParams(searchParams);
+                setIsLoading(false);
+                return;
+            }
+
+            setPageCount(Math.ceil(total / PER_PAGE));
+            setItems(pets);
+        } catch (error) {
+            toast.error(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [age, gender, page, pathname, query, resetPage, searchParams, setSearchParams]);
+
     const handleDelete = useCallback(
         async id => {
             try {
                 await deleteNoticeById(id);
-                const filteredNotices = items.filter(item => item._id !== id);
-                setItems(filteredNotices);
+                await getApiNotices();
                 toast.success('Deleted successfully!');
             } catch (error) {
                 toast.error(error.message);
             }
         },
-        [items]
+        [getApiNotices]
     );
 
     const handleFavoriteClick = useCallback(
@@ -106,8 +137,7 @@ const NoticesPage = () => {
                     await deleteFavoriteNotice(id);
                     dispatch(refreshUser());
                     if (category === 'favorite') {
-                        const filteredNotices = items.filter(item => item._id !== id);
-                        setItems(filteredNotices);
+                        await getApiNotices();
                     }
                     toast.success('Removed successfully!');
                 } catch (error) {
@@ -124,7 +154,7 @@ const NoticesPage = () => {
                 toast.error(error.message);
             }
         },
-        [dispatch, isLoggedIn, items, pathname, user.favoriteNotices]
+        [dispatch, getApiNotices, isLoggedIn, pathname, user.favoriteNotices]
     );
 
     useEffect(() => {
@@ -149,37 +179,8 @@ const NoticesPage = () => {
             resetPage();
         }
 
-        const getApiNotices = async () => {
-            try {
-                const { pets, total } = await getNotices({
-                    category,
-                    query,
-                    gender,
-                    page,
-                    limit: PER_PAGE,
-                    age,
-                });
-                console.log(pets);
-
-                if (total === 0) {
-                    setItems([]);
-                    resetPage();
-                    setSearchParams(searchParams);
-                    setIsLoading(false);
-                    return;
-                }
-
-                setPageCount(Math.ceil(total / PER_PAGE));
-                setItems(pets);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         getApiNotices();
-    }, [pathname, query, gender, age, isLoggedIn, searchParams, setSearchParams, page, resetPage]);
+    }, [getApiNotices, isLoggedIn, pathname, resetPage, searchParams]);
 
     const filters = useMemo(() => getFilterValues(searchParams), [searchParams]);
 
