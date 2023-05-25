@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './pagination.module.scss';
 
-const Pagination = ({ onPageClick, pageCount, currentPage }) => {
+const Pagination = ({ onPageClick, pageCount = 1, currentPage = 1 }) => {
     return (
         <div className={styles.paginationContainer}>
             <ReactPaginate
