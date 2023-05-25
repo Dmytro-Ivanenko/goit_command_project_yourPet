@@ -11,9 +11,14 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
 
     const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);
 
+    const focusHandle = e => {
+        let input = document.querySelector(`#${e.target.name}`);
+        input.classList.contains('notValid') && input.classList.remove('notValid');
+    };
+
     return (
         <div className={styles.petThirdStepInputs}>
-            <label className={styles.petPhotoLabel}>
+            <label id="photo" className={styles.petPhotoLabel}>
                 Add photo
                 <PlusIcon className={styles.petPhotoPlusIcon} />
                 <input
@@ -25,13 +30,14 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     alt="pet`s photo"
                     onChange={handleChange}
                     className={styles.photoInput}
+                    onFocus={focusHandle}
                 />
                 {fileInputRef.current?.files[0] && (
                     <img className={styles.petPhotoPreview} src={getphotoURL()} alt="pet preview"></img>
                 )}
             </label>
 
-            <label className={styles.petLabel}>
+            <label id="comments" className={styles.petLabel}>
                 Comments
                 <textarea
                     type="text"
@@ -41,6 +47,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     onChange={handleChange}
                     className={styles.textArea}
                     placeholder="Field is required"
+                    onFocus={focusHandle}
                 />
             </label>
         </div>

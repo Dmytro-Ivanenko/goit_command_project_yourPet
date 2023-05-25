@@ -13,13 +13,22 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
         input ? setData(prev => ({ ...prev, [input]: value })) : setData(prev => ({ ...prev, sex: value }));
     };
 
+    const focusHandle = e => {
+        let input = document.querySelector(`#${e.target.name}`);
+        input.classList.contains('notValid') && input.classList.remove('notValid');
+    };
+
     const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);
 
     return (
         <div className={styles.flexContainer}>
             <div className={styles.sexRadioBtns}>
                 <h3 className={styles.radioBtnsTitle}>The sex</h3>
-                <label className={styles.sexRadioLabel} style={{ fontWeight: data.sex === 'female' ? '500' : '400' }}>
+                <label
+                    id="sex"
+                    className={styles.sexRadioLabel}
+                    style={{ fontWeight: data.sex === 'female' ? '500' : '400' }}
+                >
                     <FemaleIcon
                         className={styles.sexIcon}
                         style={{ stroke: '#F43F5E', fill: data.sex === 'female' ? '#F43F5E' : 'none' }}
@@ -30,10 +39,15 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         value="female"
                         onChange={handleChange}
                         className={styles.sexRadioInput}
+                        onFocus={focusHandle}
                     />
                     Female
                 </label>
-                <label className={styles.sexRadioLabel} style={{ fontWeight: data.sex === 'male' ? '500' : '400' }}>
+                <label
+                    id="sex"
+                    className={styles.sexRadioLabel}
+                    style={{ fontWeight: data.sex === 'male' ? '500' : '400' }}
+                >
                     <MaleIcon
                         className={styles.sexIcon}
                         style={{ stroke: '#54ADFF', fill: data.sex === 'male' ? '#54ADFF' : 'none' }}
@@ -44,11 +58,12 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         value="male"
                         onChange={handleChange}
                         className={styles.sexRadioInput}
+                        onFocus={focusHandle}
                     />
                     Male
                 </label>
 
-                <label className={styles.photoLabel}>
+                <label id="photo" className={styles.photoLabel}>
                     {window.innerWidth < 768 ? 'Add photo' : 'Load the pet`s image'}
                     <PlusIcon className={styles.photoPlusIcon} />
                     <input
@@ -60,6 +75,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         alt="pet`s photo"
                         onChange={handleChange}
                         className={styles.photoInput}
+                        onFocus={focusHandle}
                     />
                     {fileInputRef.current?.files[0] && (
                         <img className={styles.photoPreview} src={getphotoURL()} alt="pet preview"></img>
@@ -67,7 +83,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                 </label>
             </div>
             <div className={styles.inputs}>
-                <label className={styles.label}>
+                <label id="location" className={styles.label}>
                     Location
                     <input
                         type="text"
@@ -77,10 +93,11 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         onChange={handleChange}
                         className={styles.secStepInput}
                         placeholder="Type place of your living"
+                        onFocus={focusHandle}
                     />
                 </label>
                 {data.option === 'sell' && (
-                    <label className={styles.label}>
+                    <label id="price" className={styles.label}>
                         Price
                         <input
                             type="text"
@@ -90,10 +107,11 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                             onChange={handleChange}
                             className={styles.textInput}
                             placeholder="How much does your pet cost?"
+                            onFocus={focusHandle}
                         />
                     </label>
                 )}
-                <label className={styles.label}>
+                <label id="comments" className={styles.label}>
                     Comments
                     <textarea
                         type="text"
@@ -103,6 +121,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         onChange={handleChange}
                         className={styles.textArea}
                         placeholder="Field is required"
+                        onFocus={focusHandle}
                     />
                 </label>
             </div>
