@@ -29,19 +29,59 @@ const AddPetForm = () => {
 
     const onClick = e => {
         const btn = e.target.innerHTML;
-
+        let allFields;
         if (btn.includes('Next')) {
-            return step === 2 ? setStep(3) : setStep(2);
+            let fullFields = Object.keys(data);
+            if (step === 1) return setStep(2);
+
+            allFields = ['addTitle', 'name', 'birth', 'breed'];
+            data.option === 'pet' && allFields.shift('addTitle');
+
+            let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
+            for (const key of notCompletedFields) {
+                let input = document.querySelector(`#${key}`);
+                input.classList.add('notValid');
+            }
+
+            !Boolean(notCompletedFields.length) && setStep(3);
         } else if (btn.includes('Done')) {
             e.preventDefault();
 
-            serverRequestHandler(data, fileInputRef);
+            let fullFields = Object.keys(data);
+            allFields = ['price', 'sex', 'photo', 'location', 'comments'];
+            data.option !== 'sell' && allFields.shift('price');
+
+            if (data.option === 'pet') {
+                allFields = ['photo', 'comments'];
+            }
+            let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
+            for (const key of notCompletedFields) {
+                let input = document.querySelector(`#${key}`);
+                if (key === 'photo') {
+                    data.option !== 'pet' && input.classList.add('notValidNoticePhoto');
+                    data.option === 'pet' && input.classList.add('notValidPhoto');
+                    continue;
+                }
+                if (key === 'comments') {
+                    input.classList.add('notValidComment');
+                    continue;
+                }
+                if (key === 'sex') {
+                    input.classList.add('notValidSex');
+                    continue;
+                }
+
+                input.classList.add('notValid');
+            }
+
+            !Boolean(notCompletedFields.length) && serverRequestHandler(data, fileInputRef);
+
             data.option === 'pet' ? navigate('/user') : navigate('/notices/sell');
+
             return;
         } else if (btn.includes('Back')) {
             return setStep(prev => prev - 1);
         } else {
-            console.log('no btns from list were clicked');
             return;
         }
     };
@@ -51,16 +91,18 @@ const AddPetForm = () => {
 
     return (
         <form className={styles.form} onClick={onClick}>
-            <h2 className={styles.title}>{title}</h2>
-
-            <StepTitles step={step} />
+            <div className="upperFormPart">
+                <h2 className={styles.title}>{title}</h2>
+                <StepTitles step={step} />
+            </div>
 
             {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
 
             <div className={btnStyle.buttonsContainer}>
                 <button
                     type={data.comments ? 'submit' : 'button'}
-                    disabled={isBtnDisabled(step, data)}
+                    // disabled={isBtnDisabled(step, data)}
+
                     className={btnStyle.btnLearn}
                 >
                     {step === 3 ? 'Done' : 'Next'}

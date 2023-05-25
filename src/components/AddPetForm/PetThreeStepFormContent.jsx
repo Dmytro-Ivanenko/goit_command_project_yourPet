@@ -1,7 +1,20 @@
 import styles from './addPetForm.module.scss';
 import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
+import { useRef, useEffect } from 'react';
 
 const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
+    const firstRender = useRef(true);
+
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+
+        let input = document.querySelector('#photo');
+        input.classList.contains('notValidPhoto') && input.classList.remove('notValidPhoto');
+    }, [fileInputRef.current]);
+
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;
@@ -11,9 +24,14 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
 
     const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);
 
+    const focusHandle = e => {
+        let input = document.querySelector(`#${e.target.name}`);
+        input.classList.contains('notValid') && input.classList.remove('notValid');
+    };
+
     return (
         <div className={styles.petThirdStepInputs}>
-            <label className={styles.petPhotoLabel}>
+            <label id="photo" className={styles.petPhotoLabel}>
                 Add photo
                 <PlusIcon className={styles.petPhotoPlusIcon} />
                 <input
@@ -25,6 +43,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     alt="pet`s photo"
                     onChange={handleChange}
                     className={styles.photoInput}
+                    onFocus={focusHandle}
                     accept="image/jpeg, image/png, image/webp, image/gif"
                 />
                 {fileInputRef.current?.files[0] && (
@@ -32,7 +51,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                 )}
             </label>
 
-            <label className={styles.petLabel}>
+            <label id="comments" className={styles.petLabel}>
                 Comments
                 <textarea
                     type="text"
@@ -42,6 +61,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                     onChange={handleChange}
                     className={styles.textArea}
                     placeholder="Field is required"
+                    onFocus={focusHandle}
                 />
             </label>
         </div>

@@ -1,6 +1,13 @@
 import styles from './addPetForm.module.scss';
+import React, { useState } from 'react';
+import { blurHandle, focushandle } from './blurAndFocus';
+
+// external libraries
+import clsx from 'clsx';
 
 const PetTwoStepFormContent = ({ data, setData }) => {
+    const [invalids, setInvalids] = useState([]);
+
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;
@@ -8,11 +15,19 @@ const PetTwoStepFormContent = ({ data, setData }) => {
         setData(prev => ({ ...prev, [input]: value }));
     };
 
+    const focusHandle = e => {
+        let input = document.querySelector(`#${e.target.name}`);
+        input.classList.contains('notValid') && input.classList.remove('notValid');
+    };
+
     return (
         <div className={styles.inputs}>
             {' '}
             {data.option !== 'pet' && (
-                <label className={styles.label}>
+                <label
+                    id="addTitle"
+                    className={clsx(styles.label, { [styles.invalid]: invalids.includes('addTitle') })}
+                >
                     Title of add
                     <input
                         autoFocus
@@ -21,12 +36,13 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                         value={data.addTitle ?? ''}
                         name="addTitle"
                         onChange={handleChange}
-                        className={styles.secStepInput}
+                        className={clsx(styles.secStepInput)}
                         placeholder=" Title of add"
+                        onFocus={focusHandle}
                     />
                 </label>
             )}
-            <label className={styles.label}>
+            <label id="name" className={clsx(styles.label, { [styles.invalid]: invalids.includes('name') })}>
                 Pet's name
                 <input
                     autoFocus={data.option !== 'pet' ? false : true}
@@ -37,9 +53,10 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     onChange={handleChange}
                     className={styles.secStepInput}
                     placeholder="No symbols and no numbers"
+                    onFocus={focusHandle}
                 />
             </label>
-            <label className={styles.label}>
+            <label id="birth" className={clsx(styles.label, { [styles.invalid]: invalids.includes('birth') })}>
                 Date of birth
                 <input
                     type="text"
@@ -49,9 +66,10 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     onChange={handleChange}
                     className={styles.secStepInput}
                     placeholder="Format  dd-mm-yyyy"
+                    onFocus={focusHandle}
                 />
             </label>
-            <label className={styles.label}>
+            <label id="breed" className={clsx(styles.label, { [styles.invalid]: invalids.includes('breed') })}>
                 Breed
                 <input
                     type="text"
@@ -61,6 +79,7 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     onChange={handleChange}
                     className={styles.secStepInput}
                     placeholder=" Type breed"
+                    onFocus={focusHandle}
                 />
             </label>
         </div>
