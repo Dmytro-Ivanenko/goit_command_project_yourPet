@@ -55,6 +55,7 @@ a {
 .card__data {
     color: red;
 }
+
 .card__listItemTime:hover {
     cursor: pointer;
     color: var(--main-acc);
@@ -65,6 +66,12 @@ a {
     background: #ffffff;
     box-shadow: var(--small-shadow);
     border-radius: 40px;
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        transform: scale(1.05);
+    }
 
     &__title {
         padding-top: 16px;

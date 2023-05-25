@@ -351,7 +351,7 @@ const UserCard = () => {
                     </div>
                 </div>
                 <button className={styles.logOut} onClick={handleModal}>
-                    <LogoutIcon className={styles.icon} width={24} height={24} />
+                    <LogoutIcon className={styles.logOutIcon} width={24} height={24} />
                     Log Out
                 </button>
             </div>
