@@ -40,7 +40,6 @@ const Userpage = () => {
     useEffect(() => {
         const getPets = async () => {
             try {
-                setIsLoading(true);
                 const pets = await getYourPets();
                 setPets(pets);
             } catch (error) {
