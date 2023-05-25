@@ -60,6 +60,11 @@
     color: #000000;
 }
 
+.table {
+    width: 256px;
+    table-layout: fixed;
+}
+
 .tableLabel {
     width: 80px;
     font-weight: 600;
@@ -75,10 +80,16 @@
     line-height: 16px;
 
     color: #000000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .link {
     color: var(--header-acc);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .comment {
@@ -88,6 +99,9 @@
     font-size: 14px;
     line-height: 19px;
     letter-spacing: 0.04em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .btnWrapper {
@@ -239,6 +253,10 @@
         width: 321px;
         font-size: 28px;
         line-height: 38px;
+    }
+
+    .table {
+        width: 340px;
     }
 
     .tableLabel {

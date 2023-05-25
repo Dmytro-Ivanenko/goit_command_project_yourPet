@@ -47,7 +47,7 @@ const NewsList = ({ list }) => {
                     <NewsItem key={item.id} item={item} />
                 ))}
             </ul>
-            <Pagination onPageClick={onPageClick} pageCount={pageCount} />
+            {pageCount > 1 && <Pagination onPageClick={onPageClick} pageCount={pageCount} />}
         </>
     );
 };

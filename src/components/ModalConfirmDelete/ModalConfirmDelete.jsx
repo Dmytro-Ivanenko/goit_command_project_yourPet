@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 
 import styles from './modal-confirm-delete.module.scss';
@@ -5,7 +7,7 @@ import styles from './modal-confirm-delete.module.scss';
 const ModalConfirmDelete = ({ handleModal, handleDelete, title }) => {
     return (
         <div className={styles.modal}>
-            <h2 className={styles.titleModal}>Delete adverstiment?</h2>
+            <h2 className={styles.titleModal}>Delete advertisement?</h2>
             <p className={styles.text}>
                 Are you sure you want to delete <span>“{title}”</span>? You can`t undo this action.
             </p>
@@ -22,6 +24,12 @@ const ModalConfirmDelete = ({ handleModal, handleDelete, title }) => {
             </div>
         </div>
     );
+};
+
+ModalConfirmDelete.propTypes = {
+    handleModal: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
 };
 
 export default ModalConfirmDelete;
