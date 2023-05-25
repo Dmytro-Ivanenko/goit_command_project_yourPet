@@ -8,7 +8,7 @@ import btnStyle from './buttons.module.scss';
 
 // helpers
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
-import isBtnDisabled from './isBtnDisabled';
+//import isBtnDisabled from './isBtnDisabled';
 import getFormTitle from './getFormTitle';
 import serverRequestHandler from './serverRequestHandler';
 
