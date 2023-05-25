@@ -6,7 +6,7 @@
     line-height: 1.375;
     text-decoration: none;
 
-    @media screen and (max-width:767px) {
+    @media screen and (max-width: 767px) {
         display: none;
     }
 }
@@ -21,21 +21,21 @@
 }
 
 .myCustomBox {
-    @media screen and (max-width:767px) {
+    @media screen and (max-width: 767px) {
         margin-bottom: 40px;
     }
 
-    @media screen and (min-width:768px) {
+    @media screen and (min-width: 768px) {
         margin-bottom: 90px;
     }
 }
 
 .menuItemMobile:not(:last-child) {
-    @media screen and (max-width:767px) {
+    @media screen and (max-width: 767px) {
         margin-bottom: 20px;
     }
 
-    @media screen and (min-width:768px) {
+    @media screen and (min-width: 768px) {
         margin-bottom: 60px;
     }
 }
@@ -47,11 +47,11 @@
     letter-spacing: 0.04em;
     text-align: center;
 
-    @media screen and (max-width:767px) {
+    @media screen and (max-width: 767px) {
         font-size: 32px;
     }
 
-    @media screen and (min-width:768px) {
+    @media screen and (min-width: 768px) {
         font-size: 48px;
     }
 }
@@ -81,7 +81,6 @@
     background-color: transparent;
 
     color: var(--grey-font);
-
 }
 
 // mobile styles for modal
@@ -204,7 +203,6 @@
 }
 
 @media screen and (min-width: 768px) {
-
     .modal {
         padding: 108px;
         width: 608px;
@@ -229,16 +227,14 @@
 .iconButton {
     position: absolute;
     padding: 5px;
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 5px;
     stroke: var(--header-font);
     cursor: pointer;
     transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
     &:hover {
-            stroke: var(--header-acc);      
-        }
-  
-
+        stroke: var(--header-acc);
+    }
 
     @media screen and (max-width: 767px) {
         width: 40px;
@@ -258,9 +254,38 @@
 }
 
 .userMenuWrap {
-
     @media screen and (max-width: 767px) {
         margin-left: auto;
         margin-right: auto;
+    }
+}
+
+.pageLink {
+    transition: color var(--timing);
+    position: relative;
+
+    &::after {
+        content: '';
+        background-color: transparent;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--header-acc);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s;
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    &:focus,
+    &:hover {
+        background-color: transparent !important;
+        color: var(--header-acc);
     }
 }
