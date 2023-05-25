@@ -40,11 +40,11 @@ const serverRequestHandler = async (data, fileInputRef) => {
             return;
         } else {
             obj.price = price;
-            sendRequest('/notice', obj);
+            await sendRequest('/notice', obj);
             return;
         }
     } else {
-        sendRequest('/yourPets', {
+        await sendRequest('/yourPets', {
             comments,
             breed,
             name,
