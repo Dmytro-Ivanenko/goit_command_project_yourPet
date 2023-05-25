@@ -1,10 +1,11 @@
 .form {
     width: fit-content;
     margin: 60px auto;
-    background-color: #dff8a3;
+    background-color: var(--main-back);
+    box-shadow: var(--small-shadow);
     padding: 16px 8px;
     border-radius: 40px;
-    background-color: #f7f8ce;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 19px;
