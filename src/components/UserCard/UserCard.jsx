@@ -141,9 +141,9 @@ const UserCard = () => {
                 <div className={styles.wrapEditPhoto}>
                     <input type="file" id="file" accept="image/*" onChange={handleFileSelect} />
                     {avatar ? (
-                        <div className={styles.btnWrapper}>
+                        <div className={styles.avatarButtons}>
                             <button className={styles.avatarBtn} type="submit" onClick={handleSubmit}>
-                                <CheckIcon className={styles.checkIcon} width={24} height={24} />
+                                <CheckIcon className={styles.checkAvatar} width={24} height={24} />
                                 Confirm
                             </button>
                             <button type="button" onClick={handleAvatarClear} className={styles.avatarBtn}>
@@ -168,7 +168,7 @@ const UserCard = () => {
                             type="text"
                             id="name"
                             name="name"
-                            placeholder={isFieldShown !== 'name' ? '' : 'Example Name'}
+                            placeholder={isFieldShown === 'name' ? 'Example Name' : ' '}
                             disabled={isFieldShown !== 'name'}
                             value={name}
                             required
@@ -206,7 +206,7 @@ const UserCard = () => {
                             type="email"
                             id="email"
                             name="email"
-                            placeholder={isFieldShown !== 'email' ? '' : 'example@mail.com'}
+                            placeholder={isFieldShown === 'email' ? 'example@mail.com' : ''}
                             disabled={isFieldShown !== 'email'}
                             value={email}
                             required
@@ -244,7 +244,7 @@ const UserCard = () => {
                             type="text"
                             id="birthday"
                             name="birthday"
-                            placeholder={isFieldShown !== 'birthday' ? '' : '01.01.1970'}
+                            placeholder={isFieldShown === 'birthday' ? '01.01.1970' : ''}
                             disabled={isFieldShown !== 'birthday'}
                             value={birthday}
                             required
@@ -282,7 +282,7 @@ const UserCard = () => {
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder={isFieldShown !== 'phone' ? '' : '+380501234567'}
+                            placeholder={isFieldShown === 'phone' ? '+380501234567' : ''}
                             disabled={isFieldShown !== 'phone'}
                             value={phone}
                             required
@@ -320,7 +320,7 @@ const UserCard = () => {
                             type="text"
                             id="city"
                             name="city"
-                            placeholder={isFieldShown !== 'city' ? '' : 'Example'}
+                            placeholder={isFieldShown === 'city' ? 'Example' : ''}
                             disabled={isFieldShown !== 'city'}
                             value={city}
                             required
@@ -351,7 +351,7 @@ const UserCard = () => {
                     </div>
                 </div>
                 <button className={styles.logOut} onClick={handleModal}>
-                    <LogoutIcon className={styles.icon} width={24} height={24} />
+                    <LogoutIcon className={styles.logOutIcon} width={24} height={24} />
                     Log Out
                 </button>
             </div>
@@ -362,7 +362,7 @@ const UserCard = () => {
                         <div className={styles.modalContent}>
                             <div className={styles.modalButtons}>
                                 <button className={styles.cancelButton} onClick={handleModal}>
-                                    Cancel
+                                    <span>Cancel</span>
                                 </button>
                                 <button className={styles.yesButton} onClick={handleLogout}>
                                     <span className={styles.titleBtnYes}>Yes</span>

@@ -60,10 +60,17 @@
     position: relative;
     width: 190px;
     height: 28px;
-    border: 1px solid var(--main-acc);
-    border-radius: 20px;
     &::placeholder {
         color: #b8b8b8;
+    }
+
+    /* Стилі для ввімкненого елемента */
+    border: 1px solid var(--header-acc);
+    border-radius: 20px;
+
+    /* Стилі для відключеного елемента */
+    &:disabled {
+        border: 1px solid var(--main-acc);
     }
 }
 
@@ -92,6 +99,23 @@
     background-color: transparent;
 
     color: var(--grey-font);
+
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        color: var(--header-acc);
+
+        & .logOutIcon {
+            stroke: var(--header-acc);
+        }
+    }
+}
+
+.logOutIcon {
+    stroke: var(--main-acc);
+    fill: transparent;
+    transition: var(--timing);
 }
 
 .prevValue {
@@ -144,14 +168,35 @@
 input[type='file'] {
     display: none;
 }
+
 .wrapImg {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        & .spanEdit {
+            color: var(--header-acc);
+        }
+
+        & .camera {
+            stroke: var(--header-acc);
+        }
+    }
 }
 
-.btnWrapper {
+.spanEdit {
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+    color: #111111;
+    transition: var(--timing);
+}
+
+.avatarButtons {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -159,8 +204,10 @@ input[type='file'] {
 }
 
 .camera {
+    stroke: var(--main-acc);
     display: flex;
     justify-content: baseline;
+    transition: var(--timing);
 }
 
 .cameraInput {
@@ -168,46 +215,70 @@ input[type='file'] {
     height: 100%;
 }
 
+.checkAvatar {
+    stroke: var(--main-acc);
+}
+
 .checkIcon {
+    border-radius: 50%;
     stroke: var(--good-validation);
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        background-color: var(--main-acc);
+        border-radius: 50%;
+        stroke: white;
+        transform: scale(1.2);
+    }
+}
+
+.iconEdit {
+    border-radius: 50%;
+    fill: var(--main-acc);
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        background-color: var(--main-acc);
+        border-radius: 50%;
+        fill: white;
+        transform: scale(1.2);
+    }
 }
 
 .clearIcon {
     stroke: var(--header-acc);
 }
 
-.spanEdit {
-    font-size: 12px;
-    line-height: 22px;
-    letter-spacing: 0.04em;
-
-    color: #111111;
-}
-
 // mobile styles for modal
 .modal {
     width: 280px;
-    padding: 30px;
+    padding-top: 80px;
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: 60px;
     border-radius: 40px;
 }
 
 .modalButtons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 8px;
 }
 
-.cancelButton,
-.yesButton {
-    padding: 9px 20px;
-    font-weight: 700;
-    font-size: 16px;
+.btnWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .cancelButton {
+    width: 100%;
     position: relative;
+    padding: 9px 20px;
     border: 2px solid var(--main-acc);
     border-radius: 40px;
     background-color: #ffffff;
@@ -235,17 +306,25 @@ input[type='file'] {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
 
         background: var(--gradient);
         opacity: 0;
 
         transition: opacity var(--timing);
     }
+
+    & span {
+        position: relative;
+        z-index: 5;
+        font-weight: 700;
+        font-size: 16px;
+    }
 }
 
 .yesButton {
+    width: 100%;
     position: relative;
+    padding: 9px 20px;
     border-radius: 40px;
     border: none;
     display: flex;
@@ -276,12 +355,23 @@ input[type='file'] {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
 
         background: var(--gradient);
         opacity: 0;
 
         transition: opacity var(--timing);
+    }
+
+    & span {
+        position: relative;
+        z-index: 5;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    & svg {
+        position: relative;
+        z-index: 5;
     }
 }
 .titleModal {
@@ -344,11 +434,13 @@ input[type='file'] {
     }
 
     .modalButtons {
+        flex-direction: row;
         gap: 17px;
     }
 
     .cancelButton,
     .yesButton {
+        width: 129px;
         padding: 9px 34px;
     }
 

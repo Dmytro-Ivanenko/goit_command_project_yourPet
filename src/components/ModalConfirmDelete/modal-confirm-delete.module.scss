@@ -1,0 +1,176 @@
+.modal {
+    width: 280px;
+    padding-top: 80px;
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: 60px;
+    border-radius: 40px;
+}
+
+.btnWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.cancelButton {
+    width: 100%;
+    position: relative;
+    padding: 9px 20px;
+    border: 2px solid var(--main-acc);
+    border-radius: 40px;
+    background-color: #ffffff;
+    background-color: transparent;
+    color: var(--main-acc);
+
+    transition: color var(--timing);
+
+    &:hover,
+    &:focus {
+        color: #ffffff;
+        border-color: transparent;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
+
+    & span {
+        position: relative;
+        z-index: 5;
+        font-weight: 700;
+        font-size: 16px;
+    }
+}
+
+.yesButton {
+    width: 100%;
+    position: relative;
+    padding: 9px 20px;
+    border-radius: 40px;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--main-acc);
+    color: var(--main-back);
+
+    transition: background-color var(--timing);
+
+    &:hover,
+    &:focus {
+        background-color: transparent;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
+
+    & span {
+        position: relative;
+        z-index: 5;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    & svg {
+        position: relative;
+        z-index: 5;
+    }
+}
+
+.titleModal {
+    margin-bottom: 14px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #111111;
+}
+
+.icon {
+    stroke: currentColor;
+}
+
+.titleBtnYes {
+    margin-right: 8px;
+}
+
+.text {
+    margin-bottom: 44px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: -0.01em;
+
+    & span {
+        font-weight: 700;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .modal {
+        padding: 60px;
+        width: 608px;
+    }
+
+    .btnWrapper {
+        flex-direction: row;
+        gap: 17px;
+    }
+
+    .cancelButton,
+    .yesButton {
+        width: 129px;
+        padding: 9px 34px;
+    }
+
+    .text {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .titleModal {
+        margin-bottom: 48px;
+        font-size: 36px;
+        line-height: 49px;
+    }
+}

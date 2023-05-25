@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import PageTitle from 'shared/components/PageTitle';
@@ -12,10 +13,11 @@ import AddPetButton from 'components/AddPetButton';
 import SelectedFilters from 'components/SelectedFilters';
 import Placeholder from 'shared/components/Placeholder';
 
-import { getFilterValues } from './filter';
-import { getNotices, applySearchParams } from 'shared/helpers';
+import { getNotices, applySearchParams, getFilterValues } from 'shared/helpers';
 import { useAuth } from 'shared/hooks/useAuth';
 import { deleteNoticeById } from 'services/api/notices';
+import { deleteFavoriteNotice, addFavoriteNotice } from 'services/api/favorites';
+import { refreshUser } from 'redux/auth/operations';
 
 import styles from './notices-page.module.scss';
 
@@ -24,98 +26,55 @@ const PER_PAGE = 12;
 const NoticesPage = () => {
     const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { isLoggedIn } = useAuth();
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    const { isLoggedIn, user } = useAuth();
+    const dispatch = useDispatch();
     const { pathname } = useLocation();
     const prevPathname = useRef(pathname);
+
     const query = searchParams.get('query');
     const gender = searchParams.get('gender');
     const age = searchParams.get('age');
+    const page = searchParams.get('page');
 
-    useEffect(() => {
-        setIsLoading(true);
-
-        const path = pathname.split('/');
-        const category = path[path.length - 1];
-
-        // should prevent unwanted behavior
-        if ((category === 'favorite' && !isLoggedIn) || (category === 'own' && !isLoggedIn)) {
-            return;
-        }
-
-        if (prevPathname.current !== pathname) {
-            // reset pagination for category change
-            prevPathname.current = pathname;
-            setCurrentPage(1);
-        }
-
-        const getApiNotices = async () => {
-            try {
-                const { pets, total } = await getNotices({
-                    category,
-                    query,
-                    gender,
-                    page: currentPage,
-                    limit: PER_PAGE,
-                    age,
-                });
-                console.log(pets);
-
-                if (total === 0) {
-                    setItems([]);
-                    setPageCount(0);
-                    setCurrentPage(1);
-                    setIsLoading(false);
-                    return;
-                }
-
-                setPageCount(Math.ceil(total / PER_PAGE));
-                setItems(pets);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        getApiNotices();
-    }, [currentPage, pathname, query, gender, age, isLoggedIn]);
+    const resetPage = useCallback(() => {
+        searchParams.set('page', 1);
+        setSearchParams(searchParams);
+    }, [searchParams, setSearchParams]);
 
     const handleFilterChange = target => {
-        setCurrentPage(1);
         applySearchParams(target, searchParams, setSearchParams);
+        resetPage();
     };
 
     const handleFilterReset = value => {
-        setCurrentPage(1);
-
         if (value === 'male' || value === 'female') {
             searchParams.delete('gender');
-            setSearchParams(searchParams);
-            return;
+        } else {
+            searchParams.delete('age');
         }
 
-        searchParams.delete('age');
         setSearchParams(searchParams);
+        resetPage();
     };
 
     const handleSubmit = ({ query }) => {
         searchParams.set('query', query);
         setSearchParams(searchParams);
-        setCurrentPage(1);
+        resetPage();
     };
 
     const handlePageClick = e => {
-        setCurrentPage(e.selected + 1);
+        searchParams.set('page', e.selected + 1);
+        setSearchParams(searchParams);
     };
 
     const handleClear = () => {
         searchParams.delete('query', query);
         setSearchParams(searchParams);
-        setCurrentPage(1);
+        resetPage();
     };
 
     const handleDelete = useCallback(
@@ -132,7 +91,97 @@ const NoticesPage = () => {
         [items]
     );
 
-    const filters = getFilterValues(searchParams);
+    const handleFavoriteClick = useCallback(
+        async id => {
+            if (!isLoggedIn) {
+                toast.error('Sign in to add to favorites.');
+                return;
+            }
+
+            const path = pathname.split('/');
+            const category = path[path.length - 1];
+
+            if (user.favoriteNotices.includes(id)) {
+                try {
+                    await deleteFavoriteNotice(id);
+                    dispatch(refreshUser());
+                    if (category === 'favorite') {
+                        const filteredNotices = items.filter(item => item._id !== id);
+                        setItems(filteredNotices);
+                    }
+                    toast.success('Removed successfully!');
+                } catch (error) {
+                    toast.error(error.message);
+                }
+                return;
+            }
+
+            try {
+                await addFavoriteNotice(id);
+                dispatch(refreshUser());
+                toast.success('Added successfully!');
+            } catch (error) {
+                toast.error(error.message);
+            }
+        },
+        [dispatch, isLoggedIn, items, pathname, user.favoriteNotices]
+    );
+
+    useEffect(() => {
+        if (!searchParams.has('page')) {
+            // set initial page param on first render
+            resetPage();
+        }
+
+        setIsLoading(true);
+
+        const path = pathname.split('/');
+        const category = path[path.length - 1];
+
+        // should prevent unwanted behavior
+        if ((category === 'favorite' && !isLoggedIn) || (category === 'own' && !isLoggedIn)) {
+            return;
+        }
+
+        if (prevPathname.current !== pathname) {
+            // reset pagination for category change
+            prevPathname.current = pathname;
+            resetPage();
+        }
+
+        const getApiNotices = async () => {
+            try {
+                const { pets, total } = await getNotices({
+                    category,
+                    query,
+                    gender,
+                    page,
+                    limit: PER_PAGE,
+                    age,
+                });
+                console.log(pets);
+
+                if (total === 0) {
+                    setItems([]);
+                    resetPage();
+                    setSearchParams(searchParams);
+                    setIsLoading(false);
+                    return;
+                }
+
+                setPageCount(Math.ceil(total / PER_PAGE));
+                setItems(pets);
+            } catch (error) {
+                toast.error(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        getApiNotices();
+    }, [pathname, query, gender, age, isLoggedIn, searchParams, setSearchParams, page, resetPage]);
+
+    const filters = useMemo(() => getFilterValues(searchParams), [searchParams]);
 
     return (
         <div className={styles.container}>
@@ -152,10 +201,10 @@ const NoticesPage = () => {
             </div>
 
             {isLoading && <Loader />}
-            <Outlet context={{ items, handleDelete }} />
+            <Outlet context={{ items, handleDelete, handleFavoriteClick }} />
             {items.length === 0 && !isLoading && <Placeholder text={'Oops! Nothing found.'} />}
             {pageCount > 1 && (
-                <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={currentPage} />
+                <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={Number(page)} />
             )}
         </div>
     );

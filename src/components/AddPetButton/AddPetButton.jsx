@@ -13,7 +13,7 @@ const AddPetButton = () => {
 
     const handleClick = () => {
         if (!isLoggedIn) {
-            toast.warn('Sign in to add to favorites.');
+            toast.warn('Sign in to add your own notice.');
         }
     };
 

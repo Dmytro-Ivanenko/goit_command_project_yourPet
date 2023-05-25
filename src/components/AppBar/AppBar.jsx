@@ -96,14 +96,15 @@ const ResponsiveAppBar = () => {
                             textDecoration: 'none',
                             flexGrow: 0,
                             padding: '6px 0px',
-                            marginRight: "160px",
+                            marginRight: '160px',
                             borderRadius: '10px',
-                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                            transition:
+                                'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
                             '&:hover': {
                                 backgroundColor: 'rgba(25, 118, 210, 0.04)',
                                 boxShadow: 'none',
                                 borderColor: 'transparent',
-                                color: '#fff'
+                                color: '#fff',
                             },
                         }}
                     >
@@ -141,6 +142,7 @@ const ResponsiveAppBar = () => {
                     >
                         {pages.map(({ name, path }) => (
                             <Button
+                                className={styles.pageLink}
                                 key={name}
                                 onClick={() => {
                                     setIsActiveButton(path);
@@ -163,22 +165,33 @@ const ResponsiveAppBar = () => {
                     </Box>
                     {/* User menu descktop */}
                     {isLoggedIn ? (
-                        <Box sx={{
-                            flexGrow: 0, marginLeft: 'auto', padding: '6px 10px',
-                            transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-                            '&:hover': {
-                                backgroundColor: 'rgba(25, 118, 210, 0.04)',
-                                boxShadow: 'none',
-                                borderColor: 'transparent',
-                                borderRadius: '5px',
-                                color: '#fff'
-                            },
-                        }}>
+                        <Box
+                            sx={{
+                                flexGrow: 0,
+                                marginLeft: 'auto',
+                                padding: '6px 10px',
+                                transition:
+                                    'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                                    boxShadow: 'none',
+                                    borderColor: 'transparent',
+                                    borderRadius: '5px',
+                                    color: '#fff',
+                                },
+                            }}
+                        >
                             <Box
                                 onClick={handleClickUserMenu}
                                 component={NavLink}
                                 to="/user"
-                                sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '12px', textDecoration: 'none' }}
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    marginLeft: 'auto',
+                                    gap: '12px',
+                                    textDecoration: 'none',
+                                }}
                             >
                                 <IconButton sx={{ p: 0 }}>
                                     {user.avatar ? (

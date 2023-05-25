@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { MobileMenu } from './AppBar.styled';
 import CloseIcon from '@mui/icons-material/Close';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';
-import { ReactComponent as LogoutIcon } from 'images/icons/logout.svg';
+import { ReactComponent as LogoutIcon } from 'images/icons/logout1.svg';
 import { AuthNavMobile } from 'components/NavBar/AuthNav';
 import { UserMenuMobile } from 'components/NavBar/UserMenu';
 import IconButton from '@mui/material/IconButton';
