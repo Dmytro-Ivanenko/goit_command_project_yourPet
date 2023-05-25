@@ -28,10 +28,8 @@ const AddPetForm = () => {
 
     const onClick = e => {
         const btn = e.target.innerHTML;
-        // console.log(e.target);
         let allFields;
         if (btn.includes('Next')) {
-            // console.log('clic');
             let fullFields = Object.keys(data);
             if (step === 1) return setStep(2);
 
@@ -39,25 +37,38 @@ const AddPetForm = () => {
             data.option === 'pet' && allFields.shift('addTitle');
 
             let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
-            console.log(notCompletedFields);
             for (const key of notCompletedFields) {
                 let input = document.querySelector(`#${key}`);
                 input.classList.add('notValid');
             }
 
-            console.log(Boolean(notCompletedFields.length));
             !Boolean(notCompletedFields.length) && setStep(3);
         } else if (btn.includes('Done')) {
             e.preventDefault();
-            console.log('click on Done');
             let fullFields = Object.keys(data);
-            allFields = ['sex', 'photo', 'location', 'price', 'comments'];
-            data.option === 'sell' && allFields.shift('price');
+            allFields = ['price', 'sex', 'photo', 'location', 'comments'];
+            data.option !== 'sell' && allFields.shift('price');
 
+            if (data.option === 'pet') {
+                allFields = ['photo', 'comments'];
+            }
             let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
-            console.log(notCompletedFields);
             for (const key of notCompletedFields) {
                 let input = document.querySelector(`#${key}`);
+                if (key === 'photo') {
+                    data.option !== 'pet' && input.classList.add('notValidNoticePhoto');
+                    data.option === 'pet' && input.classList.add('notValidPhoto');
+                    continue;
+                }
+                if (key === 'comments') {
+                    input.classList.add('notValidComment');
+                    continue;
+                }
+                if (key === 'sex') {
+                    input.classList.add('notValidSex');
+                    continue;
+                }
+
                 input.classList.add('notValid');
             }
 
@@ -66,16 +77,8 @@ const AddPetForm = () => {
         } else if (btn.includes('Back')) {
             return setStep(prev => prev - 1);
         } else {
-            console.log('no btns from list were clicked');
             return;
         }
-
-        // console.log('fileInputRef', fileInputRef.current);
-    };
-
-    const clickHandle = e => {
-        console.log('hhhhhhhhhh');
-        // console.log(e.target);
     };
 
     const title = getFormTitle(data);
@@ -91,17 +94,15 @@ const AddPetForm = () => {
             {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
 
             <div className={btnStyle.buttonsContainer}>
-                <div onClick={clickHandle}>
-                    <button
-                        type={data.comments ? 'submit' : 'button'}
-                        // disabled={isBtnDisabled(step, data)}
+                <button
+                    type={data.comments ? 'submit' : 'button'}
+                    // disabled={isBtnDisabled(step, data)}
 
-                        className={btnStyle.btnLearn}
-                    >
-                        {step === 3 ? 'Done' : 'Next'}
-                        <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} />
-                    </button>
-                </div>
+                    className={btnStyle.btnLearn}
+                >
+                    {step === 3 ? 'Done' : 'Next'}
+                    <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} />
+                </button>
 
                 <Link className={btnStyle.backBtnLink} to={backPage}>
                     <button type="button" className={btnStyle.backButton}>

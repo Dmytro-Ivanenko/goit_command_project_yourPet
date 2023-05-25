@@ -12,17 +12,14 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
             firstRender.current = false;
             return;
         }
-        console.log('fileInputRef was changed');
+
         let input = document.querySelector('#photo');
-        input.classList.contains('notValid') && input.classList.remove('notValid');
+        input.classList.contains('notValidNoticePhoto') && input.classList.remove('notValidNoticePhoto');
     }, [fileInputRef.current]);
 
-    // const photoInput = fileInputRef.current;
     const handleChange = e => {
-        // console.log('fileInputRef', fileInputRef.current.files[0]);
         const input = e.target.name;
         const value = e.target.value;
-        console.log(value);
 
         input !== 'sex' ? setData(prev => ({ ...prev, [input]: value })) : setData(prev => ({ ...prev, sex: value }));
     };
@@ -30,6 +27,8 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
     const focusHandle = e => {
         let input = document.querySelector(`#${e.target.name}`);
         input.classList.contains('notValid') && input.classList.remove('notValid');
+        input.classList.contains('notValidSex') && input.classList.remove('notValidSex');
+        input.classList.contains('notValidComment') && input.classList.remove('notValidComment');
     };
 
     const getphotoURL = () => URL.createObjectURL(fileInputRef.current.files[0]);

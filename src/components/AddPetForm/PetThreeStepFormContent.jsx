@@ -10,9 +10,9 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
             firstRender.current = false;
             return;
         }
-        console.log('fileInputRef was changed');
+
         let input = document.querySelector('#photo');
-        input.classList.contains('notValid') && input.classList.remove('notValid');
+        input.classList.contains('notValidPhoto') && input.classList.remove('notValidPhoto');
     }, [fileInputRef.current]);
 
     const handleChange = e => {

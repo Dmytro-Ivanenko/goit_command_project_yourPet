@@ -178,8 +178,6 @@ textArea::placeholder {
     border-radius: 20px;
 }
 
-
-
 .textArea {
     composes: secStepInput;
     padding-top: 8px;
@@ -264,6 +262,7 @@ textArea::placeholder {
     display: inline-block;
     position: relative;
     margin-top: 83px;
+    border: red;
 
     &::after {
         position: absolute;

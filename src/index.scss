@@ -38,31 +38,157 @@ button {
     }
 }
 
+label.notValidComment {
+    position: relative;
+
+    &::after {
+        content: 'Add some comments.';
+        bottom: -20px;
+        left: 18px;
+        position: absolute;
+        font-size: 13px;
+        color: red;
+        z-index: 3000;
+    }
+    & textarea {
+        border-color: red;
+    }
+}
+
+label.notValidSex {
+    position: relative;
+
+    &::after {
+        content: 'Fill up this field first.';
+        bottom: -20px;
+        left: 18px;
+        position: absolute;
+        font-size: 13px;
+        color: red;
+        z-index: 3000;
+    }
+}
 label.notValid {
     position: relative;
 
     &::after {
         content: 'Fill up this field first.';
-        // top: 65px;
         bottom: -20px;
         left: 18px;
         position: absolute;
-        // width: auto;
-        // height: 50px;
         font-size: 13px;
         color: red;
         z-index: 3000;
-        background-color: transparent;
     }
     & input {
         border-color: red;
     }
 }
 
+label.notValidPhoto {
+    position: relative;
+
+    &::after {
+        content: '';
+        bottom: -20px;
+        left: 120px;
+        position: absolute;
+        font-size: 13px;
+        border: 1px solid red;
+        background-color: #cce4fb;
+    }
+    &::after {
+        content: 'Upload photo.';
+        position: absolute;
+        padding-top: 110px;
+        padding-left: 10px;
+        font-size: 13px;
+        color: red;
+        z-index: 4000;
+    }
+}
+
+label.notValidNoticePhoto {
+    position: relative;
+
+    &::after {
+        content: '';
+        bottom: -20px;
+        left: 120px;
+        position: absolute;
+        font-size: 13px;
+        border: 1px solid red;
+        background-color: #cce4fb;
+    }
+    &::after {
+        content: 'Upload photo.';
+        position: absolute;
+        padding-top: 110px;
+        padding-left: 10px;
+        font-size: 13px;
+        color: red;
+        z-index: 4000;
+    }
+}
+
 @media screen and (min-width: 768px) {
+    label.notValidSex {
+        position: relative;
+
+        &::after {
+            content: 'Fill up gender';
+            bottom: -20px;
+            left: 18px;
+            position: absolute;
+            font-size: 13px;
+            color: red;
+            z-index: 3000;
+        }
+    }
+
     label.notValid::after {
         top: 80px;
         left: 22px;
         font-size: 14px;
+    }
+
+    label.notValidPhoto {
+        &::after {
+            left: 192px;
+        }
+        &::after {
+            content: 'Upload pet`s photo.';
+            padding-top: 180px;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+    }
+
+    label.notValidNoticePhoto {
+        position: relative;
+
+        &::after {
+            content: '';
+            bottom: 10px;
+            left: 0px;
+        }
+        &::after {
+            content: 'Upload pet`s photo.';
+            padding-top: 180px;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+    }
+
+    label.notValidComment {
+        position: relative;
+
+        &::after {
+            content: 'Add some comments.';
+            bottom: -26px;
+            left: 18px;
+
+            font-size: 14px;
+        }
     }
 }
