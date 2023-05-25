@@ -26,7 +26,6 @@ const PER_PAGE = 12;
 const NoticesPage = () => {
     const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
     const [searchParams, setSearchParams] = useSearchParams();
@@ -38,59 +37,16 @@ const NoticesPage = () => {
     const query = searchParams.get('query');
     const gender = searchParams.get('gender');
     const age = searchParams.get('age');
+    const page = searchParams.get('page');
 
-    useEffect(() => {
-        setIsLoading(true);
-
-        const path = pathname.split('/');
-        const category = path[path.length - 1];
-
-        // should prevent unwanted behavior
-        if ((category === 'favorite' && !isLoggedIn) || (category === 'own' && !isLoggedIn)) {
-            return;
-        }
-
-        if (prevPathname.current !== pathname) {
-            // reset pagination for category change
-            prevPathname.current = pathname;
-            setCurrentPage(1);
-        }
-
-        const getApiNotices = async () => {
-            try {
-                const { pets, total } = await getNotices({
-                    category,
-                    query,
-                    gender,
-                    page: currentPage,
-                    limit: PER_PAGE,
-                    age,
-                });
-                console.log(pets);
-
-                if (total === 0) {
-                    setItems([]);
-                    setPageCount(0);
-                    setCurrentPage(1);
-                    setIsLoading(false);
-                    return;
-                }
-
-                setPageCount(Math.ceil(total / PER_PAGE));
-                setItems(pets);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        getApiNotices();
-    }, [currentPage, pathname, query, gender, age, isLoggedIn]);
+    const resetPage = useCallback(() => {
+        searchParams.set('page', 1);
+        setSearchParams(searchParams);
+    }, [searchParams, setSearchParams]);
 
     const handleFilterChange = target => {
         applySearchParams(target, searchParams, setSearchParams);
-        setCurrentPage(1);
+        resetPage();
     };
 
     const handleFilterReset = value => {
@@ -101,23 +57,24 @@ const NoticesPage = () => {
         }
 
         setSearchParams(searchParams);
-        setCurrentPage(1);
+        resetPage();
     };
 
     const handleSubmit = ({ query }) => {
         searchParams.set('query', query);
         setSearchParams(searchParams);
-        setCurrentPage(1);
+        resetPage();
     };
 
     const handlePageClick = e => {
-        setCurrentPage(e.selected + 1);
+        searchParams.set('page', e.selected + 1);
+        setSearchParams(searchParams);
     };
 
     const handleClear = () => {
         searchParams.delete('query', query);
         setSearchParams(searchParams);
-        setCurrentPage(1);
+        resetPage();
     };
 
     const handleDelete = useCallback(
@@ -170,6 +127,60 @@ const NoticesPage = () => {
         [dispatch, isLoggedIn, items, pathname, user.favoriteNotices]
     );
 
+    useEffect(() => {
+        if (!searchParams.has('page')) {
+            // set initial page param on first render
+            resetPage();
+        }
+
+        setIsLoading(true);
+
+        const path = pathname.split('/');
+        const category = path[path.length - 1];
+
+        // should prevent unwanted behavior
+        if ((category === 'favorite' && !isLoggedIn) || (category === 'own' && !isLoggedIn)) {
+            return;
+        }
+
+        if (prevPathname.current !== pathname) {
+            // reset pagination for category change
+            prevPathname.current = pathname;
+            resetPage();
+        }
+
+        const getApiNotices = async () => {
+            try {
+                const { pets, total } = await getNotices({
+                    category,
+                    query,
+                    gender,
+                    page,
+                    limit: PER_PAGE,
+                    age,
+                });
+                console.log(pets);
+
+                if (total === 0) {
+                    setItems([]);
+                    resetPage();
+                    setSearchParams(searchParams);
+                    setIsLoading(false);
+                    return;
+                }
+
+                setPageCount(Math.ceil(total / PER_PAGE));
+                setItems(pets);
+            } catch (error) {
+                toast.error(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        getApiNotices();
+    }, [pathname, query, gender, age, isLoggedIn, searchParams, setSearchParams, page, resetPage]);
+
     const filters = useMemo(() => getFilterValues(searchParams), [searchParams]);
 
     return (
@@ -193,7 +204,7 @@ const NoticesPage = () => {
             <Outlet context={{ items, handleDelete, handleFavoriteClick }} />
             {items.length === 0 && !isLoading && <Placeholder text={'Oops! Nothing found.'} />}
             {pageCount > 1 && (
-                <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={currentPage} />
+                <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={Number(page)} />
             )}
         </div>
     );
