@@ -26,7 +26,7 @@ const PER_PAGE = 12;
 const NoticesPage = () => {
     const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const [searchParams, setSearchParams] = useSearchParams();
     const { isLoggedIn, user } = useAuth();
