@@ -15,7 +15,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
 
         let input = document.querySelector('#photo');
         input.classList.contains('notValidNoticePhoto') && input.classList.remove('notValidNoticePhoto');
-    }, [fileInputRef.current]);
+    });
 
     const handleChange = e => {
         const input = e.target.name;
