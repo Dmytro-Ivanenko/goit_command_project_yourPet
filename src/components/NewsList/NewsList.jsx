@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Pagination from '../../shared/components/Pagination';
@@ -18,8 +18,7 @@ const NewsList = ({ list }) => {
         if (list.length !== 0) {
             setItems(list);
             const endOffset = itemOffset + PER_PAGE;
-            // itemOffset = number of the first news shown (0 - default),
-            // endOffset = number of the last news shown on page (12 - default)
+
             setItemOffset(0);
             setCurrentItems(items.slice(itemOffset, endOffset));
             setPageCount(1);
@@ -33,10 +32,13 @@ const NewsList = ({ list }) => {
         setPageCount(Math.ceil(items.length / PER_PAGE));
     }, [itemOffset, items, list, pageCount]);
 
-    const onPageClick = event => {
-        const newOffset = (event.selected * PER_PAGE) % items.length;
-        setItemOffset(newOffset);
-    };
+    const onPageClick = useCallback(
+        event => {
+            const newOffset = (event.selected * PER_PAGE) % items.length;
+            setItemOffset(newOffset);
+        },
+        [items.length]
+    );
 
     return (
         <>
