@@ -25,6 +25,9 @@ const MainPage = () => {
                     />
                     <source srcSet={(desktop1x, desktop2x)} media="(min-width: 1280px)" type="image/png" />
 
+                    {/* <source srcSet={mobile} media="(max-width: 767px)" /> */}
+                    {/* <source srcSet={tablet} media="(min-width: 768px) and (max-width: 1279px)" /> */}
+                    {/* <source srcSet={desktop} media="(min-width: 1280px)" /> */}
                     <img className={styles.imgMainPage} src={desktop1x} alt="Cute puppy" />
                 </picture>
             </div>
