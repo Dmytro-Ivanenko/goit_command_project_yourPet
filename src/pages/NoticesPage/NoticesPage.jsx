@@ -204,7 +204,7 @@ const NoticesPage = () => {
             {isLoading && <Loader />}
             <Outlet context={{ items, handleDelete, handleFavoriteClick }} />
             {items.length === 0 && !isLoading && <Placeholder text={'Oops! Nothing found.'} />}
-            {pageCount > 1 && (
+            {pageCount > 1 && items.length > 0 && (
                 <Pagination onPageClick={handlePageClick} pageCount={pageCount} currentPage={Number(page)} />
             )}
         </div>
