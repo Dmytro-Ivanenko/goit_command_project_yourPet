@@ -51,9 +51,10 @@ const AddPetForm = () => {
 
     return (
         <form className={styles.form} onClick={onClick}>
-            <h2 className={styles.title}>{title}</h2>
-
-            <StepTitles step={step} />
+            <div className="upperFormPart">
+                <h2 className={styles.title}>{title}</h2>
+                <StepTitles step={step} />
+            </div>
 
             {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
 

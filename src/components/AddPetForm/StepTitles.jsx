@@ -6,8 +6,14 @@ import clsx from 'clsx';
 const StepTitles = ({ step }) => {
     return (
         <div className={styles.stepTitleContainer}>
-            <span className={styles.stepTitle}>
-                Choose option{' '}
+            <span
+                className={clsx(
+                    styles.stepTitle,
+                    { [styles.oneSelectedColor]: step === 1 },
+                    { [styles.passedColor]: step > 1 }
+                )}
+            >
+                Choose option
                 <span
                     className={clsx(
                         styles.stepOneTitleAfter,
@@ -17,7 +23,13 @@ const StepTitles = ({ step }) => {
                 ></span>
             </span>
 
-            <span className={styles.stepTitle}>
+            <span
+                className={clsx(
+                    styles.stepTitle,
+                    { [styles.twoSelectedColor]: step === 2 },
+                    { [styles.passedColor]: step > 2 }
+                )}
+            >
                 Personal details
                 <span
                     className={clsx(
@@ -27,7 +39,7 @@ const StepTitles = ({ step }) => {
                     )}
                 ></span>
             </span>
-            <span className={styles.stepTitle}>
+            <span className={clsx(styles.stepTitle, { [styles.threeSelectedColor]: step === 3 })}>
                 More info
                 <span className={clsx(styles.stepThreeTitleAfter, { [styles.threeSelected]: step === 3 })}></span>
             </span>

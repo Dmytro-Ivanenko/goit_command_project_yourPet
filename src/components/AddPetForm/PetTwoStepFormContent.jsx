@@ -1,6 +1,11 @@
 import styles from './addPetForm.module.scss';
+import { useState } from 'react';
+
+// external libraries
+import clsx from 'clsx';
 
 const PetTwoStepFormContent = ({ data, setData }) => {
+    const [invalids, setInvalids] = useState([]);
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;
@@ -8,11 +13,20 @@ const PetTwoStepFormContent = ({ data, setData }) => {
         setData(prev => ({ ...prev, [input]: value }));
     };
 
+    const blurHandle = e => {
+        console.log(data[e.target.name]);
+        !data[e.target.name] && setInvalids(prevNames => [...prevNames, e.target.name]);
+    };
+
+    const focushandle = e => {
+        invalids.includes(e.target.name) && setInvalids(prevNames => [...prevNames].pop(e.target.name));
+    };
+
     return (
         <div className={styles.inputs}>
             {' '}
             {data.option !== 'pet' && (
-                <label className={styles.label}>
+                <label className={clsx(styles.label, { [styles.invalid]: invalids.includes('addTitle') })}>
                     Title of add
                     <input
                         autoFocus
@@ -21,12 +35,14 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                         value={data.addTitle ?? ''}
                         name="addTitle"
                         onChange={handleChange}
-                        className={styles.secStepInput}
+                        className={clsx(styles.secStepInput)}
                         placeholder=" Title of add"
+                        onBlur={blurHandle}
+                        onFocus={focushandle}
                     />
                 </label>
             )}
-            <label className={styles.label}>
+            <label className={clsx(styles.label, { [styles.invalid]: invalids.includes('name') })}>
                 Pet's name
                 <input
                     autoFocus={data.option !== 'pet' ? false : true}
@@ -37,6 +53,8 @@ const PetTwoStepFormContent = ({ data, setData }) => {
                     onChange={handleChange}
                     className={styles.secStepInput}
                     placeholder="No symbols and no numbers"
+                    onBlur={blurHandle}
+                    onFocus={focushandle}
                 />
             </label>
             <label className={styles.label}>
