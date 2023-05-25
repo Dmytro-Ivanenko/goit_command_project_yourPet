@@ -23,34 +23,33 @@ const Userpage = () => {
         setShowModal(false);
     };
 
+    const getPets = useCallback(async () => {
+        try {
+            const pets = await getYourPets();
+            setPets(pets);
+        } catch (error) {
+            toast.error(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
     const handleDelete = useCallback(
         async id => {
             try {
                 await deleteYourPet(id);
-                const filteredPets = pets.filter(pet => pet._id !== id);
-                setPets(filteredPets);
+                await getPets();
                 toast.success('Deleted successfully');
             } catch (error) {
                 toast.error(error.message);
             }
         },
-        [pets]
+        [getPets]
     );
 
     useEffect(() => {
-        const getPets = async () => {
-            try {
-                const pets = await getYourPets();
-                setPets(pets);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         getPets();
-    }, []);
+    }, [getPets]);
 
     return (
         <div className={styles.mainContainer}>
