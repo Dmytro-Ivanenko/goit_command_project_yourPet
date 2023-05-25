@@ -27,7 +27,7 @@ const AddPetForm = () => {
     const [step, setStep] = useState(1);
     const [data, setData] = useState({ option: 'pet' });
 
-    const onClick = e => {
+    const onClick = async e => {
         const btn = e.target.innerHTML;
         let allFields;
         if (btn.includes('Next')) {
@@ -74,7 +74,9 @@ const AddPetForm = () => {
                 input.classList.add('notValid');
             }
 
-            !Boolean(notCompletedFields.length) && serverRequestHandler(data, fileInputRef);
+            if (!Boolean(notCompletedFields.length)) {
+                await serverRequestHandler(data, fileInputRef);
+            }
 
             data.option === 'pet' ? navigate('/user') : navigate('/notices/sell');
 
