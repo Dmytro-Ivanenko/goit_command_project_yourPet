@@ -13,7 +13,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
 
         let input = document.querySelector('#photo');
         input.classList.contains('notValidPhoto') && input.classList.remove('notValidPhoto');
-    }, [fileInputRef.current]);
+    }, []);
 
     const handleChange = e => {
         const input = e.target.name;

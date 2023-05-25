@@ -90,6 +90,15 @@ const NoticesPage = () => {
                 limit: PER_PAGE,
                 age,
             });
+
+            if (pets.length === 0 && total) {
+                // for cases when there is no more cards for current page
+                // return and trigger next render
+                searchParams.set('page', page - 1);
+                setSearchParams(searchParams);
+                return;
+            }
+
             console.log(pets);
 
             if (total === 0) {

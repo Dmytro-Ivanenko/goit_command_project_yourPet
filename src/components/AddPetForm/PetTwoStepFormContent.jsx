@@ -1,12 +1,11 @@
 import styles from './addPetForm.module.scss';
 import React, { useState } from 'react';
-import { blurHandle, focushandle } from './blurAndFocus';
 
 // external libraries
 import clsx from 'clsx';
 
 const PetTwoStepFormContent = ({ data, setData }) => {
-    const [invalids, setInvalids] = useState([]);
+    const [invalids] = useState([]);
 
     const handleChange = e => {
         const input = e.target.name;
