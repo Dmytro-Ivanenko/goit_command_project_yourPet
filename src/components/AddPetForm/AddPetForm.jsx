@@ -29,21 +29,14 @@ const AddPetForm = () => {
     const onClick = e => {
         const btn = e.target.innerHTML;
         // console.log(e.target);
+        let allFields;
         if (btn.includes('Next')) {
             // console.log('clic');
             let fullFields = Object.keys(data);
             if (step === 1) return setStep(2);
-            let allFields;
-            if (step === 2) {
-                // console.log(data);
 
-                allFields = ['addTitle', 'name', 'birth', 'breed'];
-                data.option === 'pet' && allFields.shift('addTitle');
-            }
-            if (step === 3) {
-                allFields = ['sex', 'photo', 'location', 'price', 'comments'];
-                data.option === 'sell' && allFields.shift('price');
-            }
+            allFields = ['addTitle', 'name', 'birth', 'breed'];
+            data.option === 'pet' && allFields.shift('addTitle');
 
             let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
             console.log(notCompletedFields);
@@ -53,11 +46,22 @@ const AddPetForm = () => {
             }
 
             console.log(Boolean(notCompletedFields.length));
-            !Boolean(notCompletedFields.length) && step === 2 ? setStep(3) : setStep(2);
+            !Boolean(notCompletedFields.length) && setStep(3);
         } else if (btn.includes('Done')) {
             e.preventDefault();
             console.log('click on Done');
-            serverRequestHandler(data, fileInputRef);
+            let fullFields = Object.keys(data);
+            allFields = ['sex', 'photo', 'location', 'price', 'comments'];
+            data.option === 'sell' && allFields.shift('price');
+
+            let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
+            console.log(notCompletedFields);
+            for (const key of notCompletedFields) {
+                let input = document.querySelector(`#${key}`);
+                input.classList.add('notValid');
+            }
+
+            !Boolean(notCompletedFields.length) && serverRequestHandler(data, fileInputRef);
             return;
         } else if (btn.includes('Back')) {
             return setStep(prev => prev - 1);

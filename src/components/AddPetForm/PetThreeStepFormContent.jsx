@@ -1,7 +1,20 @@
 import styles from './addPetForm.module.scss';
 import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
+import { useRef, useEffect } from 'react';
 
 const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
+    const firstRender = useRef(true);
+
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        console.log('fileInputRef was changed');
+        let input = document.querySelector('#photo');
+        input.classList.contains('notValid') && input.classList.remove('notValid');
+    }, [fileInputRef.current]);
+
     const handleChange = e => {
         const input = e.target.name;
         const value = e.target.value;

@@ -1,16 +1,30 @@
 import styles from './addPetForm.module.scss';
+import { useEffect, useRef } from 'react';
 import { ReactComponent as MaleIcon } from 'images/icons/male.svg';
 import { ReactComponent as FemaleIcon } from 'images/icons/female.svg';
 import { ReactComponent as PlusIcon } from 'images/icons/photo-plus.svg';
 
 const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
+    const firstRender = useRef(true);
+
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        console.log('fileInputRef was changed');
+        let input = document.querySelector('#photo');
+        input.classList.contains('notValid') && input.classList.remove('notValid');
+    }, [fileInputRef.current]);
+
     // const photoInput = fileInputRef.current;
     const handleChange = e => {
         // console.log('fileInputRef', fileInputRef.current.files[0]);
         const input = e.target.name;
         const value = e.target.value;
+        console.log(value);
 
-        input ? setData(prev => ({ ...prev, [input]: value })) : setData(prev => ({ ...prev, sex: value }));
+        input !== 'sex' ? setData(prev => ({ ...prev, [input]: value })) : setData(prev => ({ ...prev, sex: value }));
     };
 
     const focusHandle = e => {
@@ -34,6 +48,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         style={{ stroke: '#F43F5E', fill: data.sex === 'female' ? '#F43F5E' : 'none' }}
                     />
                     <input
+                        name="sex"
                         type="radio"
                         checked={data.sex === 'female'}
                         value="female"
@@ -53,6 +68,7 @@ const NoticesThreeStepFormContent = ({ data, setData, fileInputRef }) => {
                         style={{ stroke: '#54ADFF', fill: data.sex === 'male' ? '#54ADFF' : 'none' }}
                     />
                     <input
+                        name="sex"
                         type="radio"
                         checked={data.sex === 'male'}
                         value="male"
