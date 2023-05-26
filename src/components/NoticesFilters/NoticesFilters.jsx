@@ -60,10 +60,10 @@ const NoticesFilters = ({ onFilter, filters }) => {
                                             className={styles.input}
                                             type="checkbox"
                                             name="age"
-                                            value="3-12 m"
-                                            checked={filters.includes('3-12 m')}
+                                            value="0-12 m"
+                                            checked={filters.includes('0-12 m')}
                                         />
-                                        3-12 m
+                                        0-12 m
                                     </label>
                                     <label className={styles.label}>
                                         <input
