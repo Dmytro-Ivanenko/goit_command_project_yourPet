@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { refreshUser } from 'redux/auth/operations';
 
-import ResponsiveAppBar from 'components/AppBar';
+import ResponsiveAppBar from '../AppBar/AppBar';
 import styles from './sharedLayout.module.scss';
 import UserRoutes from 'routes/UserRoutes';
 

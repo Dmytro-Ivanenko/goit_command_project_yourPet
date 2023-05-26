@@ -29,6 +29,13 @@
 
 .selectedIcon {
     stroke: var(--main-acc);
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        transform: scale(1.2);
+        stroke: var(--header-acc);
+    }
 }
 
 @media screen and (max-width: 767px) {

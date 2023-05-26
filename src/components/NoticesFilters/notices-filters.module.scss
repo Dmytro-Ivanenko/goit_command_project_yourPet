@@ -91,6 +91,16 @@
     padding-right: 22px;
     border-radius: 20px;
     background-color: var(--main-light);
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        background-color: #aed1f3;
+
+        & button {
+            background-color: #aed1f3;
+        }
+    }
 }
 
 .filterBtn {
@@ -101,6 +111,7 @@
     align-items: center;
     gap: 10px;
     background-color: var(--main-light);
+    transition: var(--timing);
 }
 
 .btnLabel {
@@ -166,6 +177,12 @@
     &:checked {
         &::before {
             transform: scale(1);
+        }
+
+        &:hover,
+        &:focus {
+            transform: scale(1.2);
+            box-shadow: inset 1em 1em var(--header-acc);
         }
     }
 }

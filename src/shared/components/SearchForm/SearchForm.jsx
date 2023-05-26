@@ -63,7 +63,7 @@ const SearchForm = ({ onSubmit, onClear }) => {
                 className={query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn}
                 aria-label="submit"
             >
-                <SearchIcon width={24} height={24} />
+                <SearchIcon className={styles.icon} width={24} height={24} />
             </button>
             {query && (
                 <button type="button" className={styles.clearBtn} onClick={handleClear} aria-label="clear">
