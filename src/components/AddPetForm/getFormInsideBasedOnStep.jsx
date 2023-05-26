@@ -3,7 +3,7 @@ import PetTwoStepFormContent from './PetTwoStepFormContent';
 import PetThreeStepFormContent from './PetThreeStepFormContent';
 import NoticesThreeStepFormContent from './NoticesThreeStepFormContent';
 
-const getFormInsideBasedOnStep = (step, data, setData, fileInputRef) => {
+const getFormInsideBasedOnStep = (step, data, setData, fileInputRef, fileRef) => {
     let formInsideBasedOnStep;
 
     switch (step) {
@@ -13,11 +13,21 @@ const getFormInsideBasedOnStep = (step, data, setData, fileInputRef) => {
         case 3:
             if (data.option !== 'pet') {
                 formInsideBasedOnStep = (
-                    <NoticesThreeStepFormContent fileInputRef={fileInputRef} data={data} setData={setData} />
+                    <NoticesThreeStepFormContent
+                        fileInputRef={fileInputRef}
+                        data={data}
+                        setData={setData}
+                        fileRef={fileRef}
+                    />
                 );
             } else {
                 formInsideBasedOnStep = (
-                    <PetThreeStepFormContent data={data} setData={setData} fileInputRef={fileInputRef} />
+                    <PetThreeStepFormContent
+                        data={data}
+                        setData={setData}
+                        fileInputRef={fileInputRef}
+                        fileRef={fileRef}
+                    />
                 );
             }
             break;
