@@ -8,18 +8,18 @@ export const getFavoriteNotices = async ({ query, gender, age }) => {
             age,
         },
     });
-    console.log(data);
+
     return data;
 };
 
 export const addFavoriteNotice = async id => {
     const { data } = await axios.post(`/notice/favorites/${id}`);
-    console.log(data);
+
     return data;
 };
 
 export const deleteFavoriteNotice = async id => {
     const { data } = await axios.delete(`/notice/favorites/${id}`);
-    console.log(data);
+
     return data;
 };

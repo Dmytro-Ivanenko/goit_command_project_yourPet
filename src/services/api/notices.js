@@ -2,13 +2,13 @@ import axios from 'axios';
 
 export const getNoticeById = async id => {
     const { data } = await axios.get(`/notice/${id}`);
-    console.log(data);
+
     return data;
 };
 
 export const deleteNoticeById = async id => {
     const res = await axios.delete(`/notice/${id}`);
-    console.log(res);
+
     return res;
 };
 
@@ -22,7 +22,7 @@ export const getSellNotices = async ({ page = 1, limit = 12, query, gender, age 
             age,
         },
     });
-    console.log(data);
+
     return data;
 };
 
@@ -36,7 +36,7 @@ export const getInGoodHandsNotices = async ({ page = 1, limit = 12, query, gende
             age,
         },
     });
-    console.log(data);
+
     return data;
 };
 
@@ -50,7 +50,7 @@ export const getLostNotices = async ({ page = 1, limit = 12, query, gender, age 
             age,
         },
     });
-    console.log(data);
+
     return data;
 };
 
@@ -64,6 +64,6 @@ export const getOwnNotices = async ({ page = 1, limit = 12, query, gender, age }
             age,
         },
     });
-    console.log(data);
+
     return data;
 };
