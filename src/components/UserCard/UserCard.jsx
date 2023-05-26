@@ -104,7 +104,6 @@ const UserCard = () => {
                 }
             });
 
-            // Check if form data is not empty to prevent unnecessary API calls
             const res = !formData.entries().next().done;
 
             setState({ ...initialState });
