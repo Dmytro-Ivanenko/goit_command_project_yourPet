@@ -114,7 +114,7 @@ const AddPetForm = () => {
 
             <div className={btnStyle.buttonsContainer}>
                 <button type={data.comments ? 'submit' : 'button'} className={btnStyle.btnLearn}>
-                    {step === 3 ? 'Done' : 'Next'}
+                    <span>{step === 3 ? 'Done' : 'Next'}</span>
                     <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} />
                 </button>
 

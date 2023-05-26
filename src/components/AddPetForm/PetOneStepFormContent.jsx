@@ -10,7 +10,9 @@ const PetOneStepFormContent = ({ data, setData }) => {
 
     return (
         <div className={styles.radios}>
-            <label className={styles.oneStepRadioLabel}>
+            <label
+                className={option === 'pet' ? `${styles.oneStepRadioLabel} ${styles.active}` : styles.oneStepRadioLabel}
+            >
                 your pet
                 <input
                     type="radio"
@@ -20,7 +22,11 @@ const PetOneStepFormContent = ({ data, setData }) => {
                     className={styles.oneStepRadioBtn}
                 />
             </label>
-            <label className={styles.oneStepRadioLabel}>
+            <label
+                className={
+                    option === 'sell' ? `${styles.oneStepRadioLabel} ${styles.active}` : styles.oneStepRadioLabel
+                }
+            >
                 sell
                 <input
                     type="radio"
@@ -30,7 +36,11 @@ const PetOneStepFormContent = ({ data, setData }) => {
                     className={styles.oneStepRadioBtn}
                 />
             </label>
-            <label className={styles.oneStepRadioLabel}>
+            <label
+                className={
+                    option === 'lostFound' ? `${styles.oneStepRadioLabel} ${styles.active}` : styles.oneStepRadioLabel
+                }
+            >
                 lost/found
                 <input
                     type="radio"
@@ -40,7 +50,11 @@ const PetOneStepFormContent = ({ data, setData }) => {
                     className={styles.oneStepRadioBtn}
                 />
             </label>
-            <label className={styles.oneStepRadioLabel}>
+            <label
+                className={
+                    option === 'hands' ? `${styles.oneStepRadioLabel} ${styles.active}` : styles.oneStepRadioLabel
+                }
+            >
                 in good hands{' '}
                 <input
                     type="radio"
