@@ -30,6 +30,13 @@
     letter-spacing: 0.04em;
 
     color: var(--main-acc);
+
+    transition: color var(--timing), background-color var(--timing);
+
+    &:hover {
+        background-color: var(--main-acc);
+        color: var(--main-back);
+    }
 }
 
 .active {
