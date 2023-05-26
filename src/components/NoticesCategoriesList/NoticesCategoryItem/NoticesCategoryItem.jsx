@@ -30,7 +30,7 @@ const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
         let paramValue = null;
 
         if (value.includes('m')) {
-            paramValue = '3-12 m';
+            paramValue = '0-12 m';
         } else if (value === '1 year') {
             paramValue = '1 year';
         } else if (value.includes('years')) {

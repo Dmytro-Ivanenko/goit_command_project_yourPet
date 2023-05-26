@@ -27,7 +27,7 @@ export const getNotices = async params => {
 
 const getAgeParam = age => {
     switch (age) {
-        case '3-12 m':
+        case '0-12 m':
             return 12;
 
         case '1 year':
