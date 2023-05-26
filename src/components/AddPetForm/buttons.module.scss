@@ -5,13 +5,12 @@
 }
 
 .btnLearn {
-    // position: relative;
-    // width: 248px;
-    // height: 38px;
-    padding: 9px 87px;
-    // margin: 0 auto;
-    border: none;
-    // border: 2px solid var(--main-acc);
+    position: relative;
+    width: 248px;
+    height: 38px;
+    padding: 6px 28px;
+    margin: 0 auto;
+    border: 2px solid var(--main-acc);
     border-radius: 40px;
 
     display: flex;
@@ -24,10 +23,61 @@
     line-height: 22px;
     letter-spacing: 0.04em;
 
-    background-color: var(--main-acc);
-    color: var(--main-back);
-    transition: background-color var(--timing);
-    margin-bottom: 13px;
+    background-color: transparent;
+    color: var(--main-acc);
+
+    transition: color var(--timing);
+
+    &:hover,
+    &:focus {
+        color: var(--main-back);
+        border: none;
+
+        &::before {
+            opacity: 1;
+        }
+
+        & > svg {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            opacity: 1;
+            pointer-events: default;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: var(--gradient);
+        opacity: 0;
+
+        transition: opacity var(--timing);
+    }
+
+    & span {
+        position: relative;
+        z-index: 5;
+    }
+}
+
+.btnLearnIcon {
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+    fill: currentColor;
+
+    transition: opacity var(--timing);
 }
 
 .backButton {
@@ -60,20 +110,11 @@
     pointer-events: none;
 }
 
-.btnLearnIcon {
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-}
 @media screen and (min-width: 768px) {
     .buttonsContainer {
         flex-direction: row-reverse;
         margin-bottom: 17px;
         justify-content: center;
-    }
-    .btnLearn {
-        margin-bottom: 0px;
-        margin-left: 32px;
     }
 }
 
