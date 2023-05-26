@@ -1,30 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageTitle from 'shared/components/PageTitle';
 import SearchForm from 'shared/components/SearchForm';
-import newsSource from '../../components/NewsList/newsSource.json';
+// import newsSource from '../../components/NewsList/newsSource.json';
 import NewsList from '../../components/NewsList';
 import styles from './news_page.module.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import sendRequest from 'components/NewsList/sendRequest';
 
 const NewsPage = () => {
     const [list, setList] = useState([]);
+    const [currentList, setCurrentList] = useState([]);
+    useEffect(() => {
+        const requestHandler = async () => {
+            const newsArray = await sendRequest();
+            setList(newsArray);
+        };
+        requestHandler();
+    }, []);
 
     const searchNewsByInputWord = ({ query }) => {
         const upperedWord = query[0].toUpperCase() + query.slice(1);
         const loweredWord = query[0].toLowerCase() + query.slice(1);
         let findOne = false;
-        for (const newsObj of newsSource) {
+        for (const newsObj of list) {
             const { title, text } = newsObj;
+            console.log(title);
             if (
                 title.includes(upperedWord) ||
                 title.includes(loweredWord) ||
                 text.includes(upperedWord) ||
                 text.includes(loweredWord)
             ) {
-                if (list.includes(newsObj)) return;
+                console.log('FOUND TITLE:', title);
+                // if (list.includes(newsObj)) return;
                 findOne = true;
-                return setList(prevState => [...prevState, newsObj]);
+                return setCurrentList(prev => [...prev, newsObj]);
+                // return setList(prevState => [...prevState, newsObj]);
             }
         }
         if (!findOne) {
@@ -34,13 +46,13 @@ const NewsPage = () => {
                 theme: 'colored',
             });
 
-            setList([]);
-            return;
+            // setList([]);
+            // return;
         }
     };
 
     const onClear = () => {
-        setList([]);
+        setCurrentList([]);
         return;
     };
 
@@ -51,7 +63,7 @@ const NewsPage = () => {
                 <SearchForm onSubmit={searchNewsByInputWord} onClear={onClear} />
             </div>
             <ToastContainer />
-            {<NewsList list={list} />}
+            {<NewsList list={Boolean(!currentList.length) ? list : currentList} />}
         </div>
     );
 };

@@ -9,63 +9,138 @@ import styles from './news_list.module.scss';
 const PER_PAGE = 12;
 
 const NewsList = ({ list }) => {
-    const [items, setItems] = useState(newsSource);
-    const [currentItems, setCurrentItems] = useState([]);
+    const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    const [itemOffset, setItemOffset] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    // const [currentItems, setCurrentItems] = useState([]);
+    // const [pageCount, setPageCount] = useState(0);
+    // const [itemOffset, setItemOffset] = useState(0);
 
     useEffect(() => {
-        if (list.length !== 0) {
-            setItems(list);
-            const endOffset = itemOffset + PER_PAGE;
+        setPageCount(Math.ceil(list.length / PER_PAGE));
+        const startOffset = (currentPage * PER_PAGE) % list.length;
+        const endOffset = startOffset + PER_PAGE;
+        const paginatedNews = list.slice(startOffset, endOffset);
 
-            setItemOffset(0);
-            setCurrentItems(items.slice(itemOffset, endOffset));
-            setPageCount(1);
-            return;
-        } else {
-            setItems(newsSource);
-        }
+        setItems(paginatedNews);
+        // const endOffset = itemOffset + PER_PAGE;
 
-        const endOffset = itemOffset + PER_PAGE;
-        setCurrentItems(items.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(items.length / PER_PAGE));
-    }, [itemOffset, items, list, pageCount]);
+        // setItemOffset(0);
+        // setCurrentItems(items.slice(itemOffset, endOffset));
+        // setPageCount(1);
+        // return;
 
-    const onPageClick = useCallback(
-        event => {
-            const newOffset = (event.selected * PER_PAGE) % items.length;
-            setItemOffset(newOffset);
-        },
-        [items.length]
-    );
+        // const endOffset = itemOffset + PER_PAGE;
+        // setCurrentItems(items.slice(itemOffset, endOffset));
+        // setPageCount(Math.ceil(items.length / PER_PAGE));
+    }, [currentPage]);
+
+    // const onPageClick = useCallback(
+    //     event => {
+    //         const newOffset = (event.selected * PER_PAGE) % items.length;
+    //         setItemOffset(newOffset);
+    //     },
+    //     [items.length]
+    // );
 
     return (
         <>
             <ul className={styles.list}>
-                {currentItems.map(item => (
-                    <NewsItem key={item.id} item={item} />
-                ))}
+                {Boolean(items.length)
+                    ? items.map(item => <NewsItem key={item.id} item={item} />)
+                    : list.map(item => <NewsItem key={item.id} item={item} />)}
             </ul>
-            {pageCount > 1 && <Pagination onPageClick={onPageClick} pageCount={pageCount} />}
+            {pageCount > 1 && <Pagination pageCount={pageCount} />}
         </>
     );
 };
 
-NewsList.defaultProps = {
-    list: [],
-};
+// NewsList.defaultProps = {
+//     list: [],
+// };
 
-NewsList.propTypes = {
-    list: PropTypes.arrayOf(
-        PropTypes.shape({
-            url: PropTypes.string,
-            text: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            imgUrl: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired,
-        }).isRequired
-    ),
-};
+// NewsList.propTypes = {
+//     list: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             url: PropTypes.string,
+//             text: PropTypes.string.isRequired,
+//             title: PropTypes.string.isRequired,
+//             imgUrl: PropTypes.string.isRequired,
+//             date: PropTypes.string.isRequired,
+//         }).isRequired
+//     ),
+// };
 
 export default NewsList;
+
+// import { useEffect, useState, useCallback } from 'react';
+// import PropTypes from 'prop-types';
+
+// import Pagination from '../../shared/components/Pagination';
+// import NewsItem from './NewsItem';
+// import newsSource from './newsSource';
+// import styles from './news_list.module.scss';
+
+// const PER_PAGE = 12;
+
+// const NewsList = ({ list }) => {
+//     const [items, setItems] = useState(newsSource);
+//     const [currentItems, setCurrentItems] = useState([]);
+//     const [pageCount, setPageCount] = useState(0);
+//     const [itemOffset, setItemOffset] = useState(0);
+
+//     useEffect(() => {
+//         if (list.length !== 0) {
+//             setItems(list);
+//             const endOffset = itemOffset + PER_PAGE;
+
+//             setItemOffset(0);
+//             setCurrentItems(items.slice(itemOffset, endOffset));
+//             setPageCount(1);
+//             return;
+//         } else {
+//             setItems(newsSource);
+//         }
+
+//         const endOffset = itemOffset + PER_PAGE;
+//         setCurrentItems(items.slice(itemOffset, endOffset));
+//         setPageCount(Math.ceil(items.length / PER_PAGE));
+//     }, [itemOffset, items, list, pageCount]);
+
+//     const onPageClick = useCallback(
+//         event => {
+//             const newOffset = (event.selected * PER_PAGE) % items.length;
+//             setItemOffset(newOffset);
+//         },
+//         [items.length]
+//     );
+
+//     return (
+//         <>
+//             <ul className={styles.list}>
+//                 {currentItems.map(item => (
+//                     <NewsItem key={item.id} item={item} />
+//                 ))}
+//             </ul>
+//             {pageCount > 1 && <Pagination onPageClick={onPageClick} pageCount={pageCount} />}
+//         </>
+//     );
+// };
+
+// NewsList.defaultProps = {
+//     list: [],
+// };
+
+// NewsList.propTypes = {
+//     list: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             url: PropTypes.string,
+//             text: PropTypes.string.isRequired,
+//             title: PropTypes.string.isRequired,
+//             imgUrl: PropTypes.string.isRequired,
+//             date: PropTypes.string.isRequired,
+//         }).isRequired
+//     ),
+// };
+
+// export default NewsList;
