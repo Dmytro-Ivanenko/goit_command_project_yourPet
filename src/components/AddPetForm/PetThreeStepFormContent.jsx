@@ -13,7 +13,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
 
         let input = document.querySelector('#photo');
         input.classList.contains('notValidPhoto') && input.classList.remove('notValidPhoto');
-    }, []);
+    }, [fileInputRef.current]);
 
     const handleChange = e => {
         const input = e.target.name;
@@ -27,6 +27,7 @@ const PetThreeStepFormContent = ({ data, setData, fileInputRef }) => {
     const focusHandle = e => {
         let input = document.querySelector(`#${e.target.name}`);
         input.classList.contains('notValid') && input.classList.remove('notValid');
+        input.classList.contains('notValidComment') && input.classList.remove('notValidComment');
     };
 
     return (
