@@ -110,13 +110,10 @@ const AddPetForm = () => {
                 <StepTitles step={step} />
             </div>
 
-            {getFormInsideBasedOnStep(step, data, setData, fileInputRef)}
+            {getFormInsideBasedOnStep(step, data, setData, fileInputRef, fileInputRef.current)}
 
             <div className={btnStyle.buttonsContainer}>
-                <button
-                    type={data.comments ? 'submit' : 'button'}
-                    className={btnStyle.btnLearn}
-                >
+                <button type={data.comments ? 'submit' : 'button'} className={btnStyle.btnLearn}>
                     {step === 3 ? 'Done' : 'Next'}
                     <PawprintIcon className={btnStyle.btnLearnIcon} width={24} height={24} />
                 </button>
