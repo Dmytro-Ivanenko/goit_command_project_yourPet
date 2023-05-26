@@ -8,9 +8,9 @@ import btnStyle from './buttons.module.scss';
 
 // helpers
 import getFormInsideBasedOnStep from './getFormInsideBasedOnStep';
-//import isBtnDisabled from './isBtnDisabled';
 import getFormTitle from './getFormTitle';
 import serverRequestHandler from './serverRequestHandler';
+import moment from 'moment';
 
 // Components
 import StepTitles from './StepTitles';
@@ -43,6 +43,13 @@ const AddPetForm = () => {
                 input.classList.add('notValid');
             }
 
+            let date = moment(data.birth, 'DD-MM-YYYY', true);
+            if (!date.isValid()) {
+                let input = document.querySelector('#birth');
+                input.classList.add('notValid');
+                return;
+            }
+
             !Boolean(notCompletedFields.length) && setStep(3);
         } else if (btn.includes('Done')) {
             e.preventDefault();
@@ -57,6 +64,9 @@ const AddPetForm = () => {
             let notCompletedFields = allFields.filter(key => !fullFields.includes(key));
             for (const key of notCompletedFields) {
                 let input = document.querySelector(`#${key}`);
+                if (key === 'birth') {
+                    input.classList.add('notValid');
+                }
                 if (key === 'photo') {
                     data.option !== 'pet' && input.classList.add('notValidNoticePhoto');
                     data.option === 'pet' && input.classList.add('notValidPhoto');
@@ -76,9 +86,11 @@ const AddPetForm = () => {
 
             if (!Boolean(notCompletedFields.length)) {
                 await serverRequestHandler(data, fileInputRef);
+                data.option === 'pet' && navigate('/user');
+                data.option === 'sell' && navigate('/notices/sell');
+                data.option === 'lostFound' && navigate('/notices/lost-found');
+                data.option === 'hands' && navigate('/notices/for-free');
             }
-
-            data.option === 'pet' ? navigate('/user') : navigate('/notices/sell');
 
             return;
         } else if (btn.includes('Back')) {
@@ -103,8 +115,6 @@ const AddPetForm = () => {
             <div className={btnStyle.buttonsContainer}>
                 <button
                     type={data.comments ? 'submit' : 'button'}
-                    // disabled={isBtnDisabled(step, data)}
-
                     className={btnStyle.btnLearn}
                 >
                     {step === 3 ? 'Done' : 'Next'}

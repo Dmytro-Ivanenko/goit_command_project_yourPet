@@ -148,10 +148,6 @@ textArea:focus {
     outline: var(--main-acc);
 }
 
-#go {
-    border-color: #a76060;
-}
-
 input::placeholder,
 textArea::placeholder {
     font-weight: 400;
@@ -262,7 +258,6 @@ textArea::placeholder {
     display: inline-block;
     position: relative;
     margin-top: 83px;
-    border: red;
 
     &::after {
         position: absolute;
