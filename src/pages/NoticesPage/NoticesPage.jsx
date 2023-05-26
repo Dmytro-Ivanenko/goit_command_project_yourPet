@@ -99,8 +99,6 @@ const NoticesPage = () => {
                 return;
             }
 
-            console.log(pets);
-
             if (total === 0) {
                 setItems([]);
                 resetPage();

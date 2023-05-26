@@ -61,7 +61,6 @@ const UserCard = () => {
     };
 
     const handleFileSelect = e => {
-        console.log(e.target.files);
         const file = e.target.files[0];
         const blob = new Blob([file], { type: file.type });
         setState(prevState => ({

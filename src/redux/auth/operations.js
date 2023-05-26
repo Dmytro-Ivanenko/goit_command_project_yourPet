@@ -90,7 +90,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
 export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI) => {
     try {
         const res = await axios.patch('/auth/update', data);
-        console.log(res.data);
+
         return res.data;
     } catch (error) {
         const { response } = error;

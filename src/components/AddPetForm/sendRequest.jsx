@@ -2,8 +2,7 @@ import axios from 'axios';
 
 const sendRequest = async (endpoint, objToSend) => {
     try {
-        let response = await axios.postForm(endpoint, objToSend);
-        console.log(response.data);
+        await axios.postForm(endpoint, objToSend);
     } catch (err) {
         console.log(err);
     }
