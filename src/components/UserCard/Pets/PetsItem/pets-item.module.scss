@@ -42,6 +42,20 @@
     line-height: 0;
     background-color: transparent;
     border: transparent;
+    border-radius: 50%;
+    fill: transparent;
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        background-color: var(--main-acc);
+        border-radius: 50%;
+        transform: scale(1.2);
+
+        & .icon {
+            stroke: white;
+        }
+    }
 }
 
 .photoPet {

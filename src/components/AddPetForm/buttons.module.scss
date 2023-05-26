@@ -84,7 +84,7 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
-    color: #54adff;
+    color: var(--main-acc);
     padding: 0px 0px;
     display: flex;
     border: none;
@@ -98,6 +98,16 @@
     display: block;
     margin: 0;
     padding: 0;
+    transition: var(--timing);
+
+    &:hover,
+    &:focus {
+        stroke: var(--header-acc);
+
+        & .backButton {
+            color: var(--header-acc);
+        }
+    }
 }
 
 .backIcon {
