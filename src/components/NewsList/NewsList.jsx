@@ -3,51 +3,36 @@ import PropTypes from 'prop-types';
 
 import Pagination from '../../shared/components/Pagination';
 import NewsItem from './NewsItem';
-import newsSource from './newsSource';
 import styles from './news_list.module.scss';
 
 const PER_PAGE = 12;
 
 const NewsList = ({ list }) => {
-    const [items, setItems] = useState(newsSource);
-    const [currentItems, setCurrentItems] = useState([]);
+    const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    const [itemOffset, setItemOffset] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        if (list.length !== 0) {
-            setItems(list);
-            const endOffset = itemOffset + PER_PAGE;
+        setPageCount(Math.ceil(list.length / PER_PAGE));
+        const startOffset = (currentPage * PER_PAGE) % list.length;
+        const endOffset = startOffset + PER_PAGE;
+        const paginatedNews = list.slice(startOffset, endOffset);
+        setItems(paginatedNews);
+    }, [currentPage, list]);
 
-            setItemOffset(0);
-            setCurrentItems(items.slice(itemOffset, endOffset));
-            setPageCount(1);
-            return;
-        } else {
-            setItems(newsSource);
-        }
-
-        const endOffset = itemOffset + PER_PAGE;
-        setCurrentItems(items.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(items.length / PER_PAGE));
-    }, [itemOffset, items, list, pageCount]);
-
-    const onPageClick = useCallback(
-        event => {
-            const newOffset = (event.selected * PER_PAGE) % items.length;
-            setItemOffset(newOffset);
-        },
-        [items.length]
-    );
-
+    const onPageClick = useCallback(event => {
+        setCurrentPage(event.selected + 1);
+    }, []);
     return (
         <>
-            <ul className={styles.list}>
-                {currentItems.map(item => (
-                    <NewsItem key={item.id} item={item} />
-                ))}
-            </ul>
-            {pageCount > 1 && <Pagination onPageClick={onPageClick} pageCount={pageCount} />}
+            {items.length > 0 && (
+                <ul className={styles.list}>
+                    {items.map(item => (
+                        <NewsItem key={item._id} item={item} />
+                    ))}
+                </ul>
+            )}
+            {pageCount > 1 && <Pagination pageCount={pageCount} onPageClick={onPageClick} currentPage={currentPage} />}
         </>
     );
 };
