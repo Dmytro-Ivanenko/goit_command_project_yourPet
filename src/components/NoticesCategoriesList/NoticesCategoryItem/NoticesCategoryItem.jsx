@@ -137,7 +137,7 @@ const NoticesCategoryItem = ({ item, onDelete, onFavorite }) => {
             {showDeleteModal && (
                 <ModalApproveAction onClose={() => setShowDeleteModal(false)}>
                     <ModalConfirmDelete
-                        title={title}
+                        name={title}
                         handleModal={() => setShowDeleteModal(false)}
                         handleDelete={() => onDelete(_id)}
                     />
