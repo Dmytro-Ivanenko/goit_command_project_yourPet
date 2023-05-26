@@ -61,15 +61,12 @@
     }
     .mainPageWrapper {
         display: flex;
-
-        margin-top: 10px;
-
         margin-bottom: 0;
         width: 100%;
     }
     .imgMainPage {
         width: auto;
-        height: 100%;
+        height: calc(100vh - 103px);
 
         left: auto;
         right: 0px;
