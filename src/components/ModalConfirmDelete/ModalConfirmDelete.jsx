@@ -4,12 +4,12 @@ import { ReactComponent as TrashIcon } from 'images/icons/trash.svg';
 
 import styles from './modal-confirm-delete.module.scss';
 
-const ModalConfirmDelete = ({ handleModal, handleDelete, title }) => {
+const ModalConfirmDelete = ({ handleModal, handleDelete, title = 'Delete advertisement?', name }) => {
     return (
         <div className={styles.modal}>
-            <h2 className={styles.titleModal}>Delete advertisement?</h2>
+            <h2 className={styles.titleModal}>{title}</h2>
             <p className={styles.text}>
-                Are you sure you want to delete <span>“{title}”</span>? You can`t undo this action.
+                Are you sure you want to delete <span>“{name}”</span>? You can`t undo this action.
             </p>
             <div className={styles.modalContent}>
                 <div className={styles.btnWrapper}>
